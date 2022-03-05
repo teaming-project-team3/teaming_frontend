@@ -4,7 +4,7 @@ import "./App.css";
 function App() {
   
 
-  return <div className="App">AWS CI/CD</div>;
+  return <div className="App">AWS CI/CD confirm auto deploy</div>;
 }
 
 export default App;
