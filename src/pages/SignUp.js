@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+//import styled from "styled-components";
 import Button from "../element/Button";
 import emailCheck from "../shared/common";
 import { useDispatch } from "react-redux";
@@ -12,7 +12,7 @@ function SignUp() {
   const [nickName, setNickName] = React.useState("");
   const [pwd, setPwd] = React.useState("");
   const [pwdCheck, setPwdCheck] = React.useState("");
-  const [user_name, setUserName] = React.useState("");
+ // const [user_name, setUserName] = React.useState("");
 
   const signUp = async (e) => {
     e.preventDefault();
@@ -33,7 +33,7 @@ function SignUp() {
     //const imgUrl = await getImgUrlFB(id, _profilePreview)
     const imgUrl = "";
 
-    dispatch(userActions.signUp(id, user_name, pwd, pwdCheck, imgUrl));
+    dispatch(userActions.signUp(id, pwd, pwdCheck, imgUrl));
   };
 
   return (
