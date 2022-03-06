@@ -10,6 +10,7 @@ function TempOAuth() {
 console.log(KAKAO_AUTH_URL)
 
 
+
 return (
 <a href={KAKAO_AUTH_URL}>
 	<img src={kakaoBtn}></img>
