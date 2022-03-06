@@ -9,6 +9,7 @@ function TempOAuth() {
 //let 변수명 = new URL(window.location.href).searchParams.get('code')
 console.log(KAKAO_AUTH_URL)
 
+
 return (
 <a href={KAKAO_AUTH_URL}>
 	<img src={kakaoBtn}></img>
