@@ -7,17 +7,17 @@ import { produce } from "immer";
 //import firebase from "firebase/app";
 
 // actions
-const LOG_IN = "LOG_IN";
-const KAKAO_LOG_IN = "KAKAO_LOG_IN"
+//const LOG_IN = "LOG_IN";
+//const KAKAO_LOG_IN = "KAKAO_LOG_IN"
 const LOG_OUT = "LOG_OUT";
-const SIGN_UP = "SIGN_UP";
+//const SIGN_UP = "SIGN_UP";
 const GET_USER = "GET_USER";
 const SET_USER = "SET_USER";
 
 // action creators
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const getUser = createAction(GET_USER, (user) => ({ user }));
-const setUser = createAction(SET_USER, (user) => ({ user }));
+//const setUser = createAction(SET_USER, (user) => ({ user }));
 
 // initialState
 const initialState = {

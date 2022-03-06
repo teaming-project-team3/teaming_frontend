@@ -1,7 +1,7 @@
 // Login.js
 
 import { KAKAO_AUTH_URL } from "../apis/kakao/kakao";
-import Button from "../element/Button";
+//import Button from "../element/Button";
 import kakaoBtn from "../static/kakaoBtn.png"
 
 
@@ -13,7 +13,7 @@ console.log(KAKAO_AUTH_URL)
 
 return (
 <a href={KAKAO_AUTH_URL}>
-	<img src={kakaoBtn}></img>
+	<img src={kakaoBtn} alt="카카오 버튼"></img>
 	<span>카카오계정 로그인</span>
 </a>
 );
