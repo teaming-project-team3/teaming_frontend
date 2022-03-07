@@ -7,6 +7,10 @@ const Wrapper = styled.div`
   margin-top: 100px;
 `;
 
+const Title = styled.h1`
+  font-size: 32px;
+`
+
 const Card = styled.div`
 `;
 
@@ -24,12 +28,13 @@ const Box = styled(motion.div)`
   height: 200px;
 `;
 
-function Main() {
+function FindProject() {
 
   return (
 
     <Wrapper>
       <Card>
+        <Title>👊 너! 내 동료가 돼라!</Title>
         <Row>
           <Box />
           <Box />
@@ -51,4 +56,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default FindProject;

@@ -66,7 +66,7 @@ function Header() {
             </Link>
           </Item>
           <Item>
-            <Link to="/" style={{
+            <Link to="/projectfind" style={{
               textDecoration: "none",
               color: "black",
             }}>
