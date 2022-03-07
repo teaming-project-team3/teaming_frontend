@@ -1,7 +1,7 @@
 import "./App.css";
 import SignUp from "./pages/SignUp";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import TempOAuth from "./pages/TempOAuth";
+// import TempOAuth from "./pages/TempOAuth";
 import KakaoRedirect from "./pages/KakaoRedirect";
 import Login from "./pages/Login";
 import Main from "./pages/Main"

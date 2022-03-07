@@ -20,16 +20,16 @@ const Col = styled.div`
   margin: auto;
 `;
 
-const Logo = styled.svg`
-  margin-right: 50px;
-  width: 95px;
-  height: 25px;
-  fill: black;
-  path {
-    stroke-width: 6px;
-    stroke: white;
-  }
-`;
+// const Logo = styled.svg`
+//   margin-right: 50px;
+//   width: 95px;
+//   height: 25px;
+//   fill: black;
+//   path {
+//     stroke-width: 6px;
+//     stroke: white;
+//   }
+// `;
 
 const Items = styled.ul`
   display: flex;
