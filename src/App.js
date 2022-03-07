@@ -6,13 +6,14 @@ import KakaoRedirect from "./pages/KakaoRedirect";
 import Login from "./pages/Login";
 import Main from "./pages/Main"
 import Header from "./Components/Header"
+import CreateProject from "./pages/CreateProject";
 
 function App() {
   return (
     <BrowserRouter>
       <Header />
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<CreateProject />} />
           {/*<Route path="/" element={<TempOAuth />} />*/}
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
