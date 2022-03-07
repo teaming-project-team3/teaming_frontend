@@ -37,6 +37,7 @@ function RadarChart() {
     }]
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const config = {
     type: 'radar',
     data: data,
@@ -56,7 +57,7 @@ function RadarChart() {
     console.log(ctx);
 
     new Chart(ctx, config);
-  }, []);
+  }, [config]);
 
   return (
     <div>
