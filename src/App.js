@@ -8,12 +8,16 @@ import Header from "./Components/Header"
 import Main from "./pages/Main";
 // import CreateProject from "./pages/CreateProject";
 
+
+import ProjectRoom from "./pages/ProjectRoom";
+
+
 function App() {
   return (
     <BrowserRouter>
       <Header />
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<ProjectRoom />} />
           {/*<Route path="/" element={<TempOAuth />} />*/}
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
