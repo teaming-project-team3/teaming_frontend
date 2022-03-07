@@ -5,7 +5,7 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 import KakaoRedirect from "./pages/KakaoRedirect";
 import Login from "./pages/Login"
 import Header from "./Components/Header"
-import Main from "./pages/Main";
+//import Main from "./pages/Main";
 // import CreateProject from "./pages/CreateProject";
 
 
