@@ -4,16 +4,20 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 import TempOAuth from "./pages/TempOAuth";
 import KakaoRedirect from "./pages/KakaoRedirect";
 import Login from "./pages/Login";
+import Main from "./pages/Main"
+import Header from "./Components/Header"
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<TempOAuth />} />
-        <Route path="/signUp" element={<SignUp />} />
-        <Route path="/login" element={<Login />} exact />
-        <Route path="/oauth/kakao/redirect" element={<KakaoRedirect />} />
-      </Routes>
+      <Header />
+        <Routes>
+          <Route path="/" element={<Main />} />
+          {/*<Route path="/" element={<TempOAuth />} />*/}
+          <Route path="/signUp" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/oauth/kakao/redirect" element={<KakaoRedirect />} />
+        </Routes>
     </BrowserRouter>
   );
 }

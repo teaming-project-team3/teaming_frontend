@@ -2,7 +2,10 @@ import React from "react";
 import {actionCreators as userActions} from "../redux/modules/users";
 import emailCheck from "../shared/common";
 import {useDispatch} from "react-redux";
+import {KAKAO_AUTH_URL} from "../apis/kakao/kakao";
 
+
+// 로그인 기능
 const Login = (props) => {
   const dispatch = useDispatch();
 
@@ -26,7 +29,7 @@ const Login = (props) => {
   };
 
   return (
-    <div>
+    <div style={{height: "200vh"}}>
       <div>
         <h2>로그인</h2>
         <p>
@@ -77,7 +80,7 @@ const Login = (props) => {
       <div>또는</div>
       <div className="">
         <button onClick={() => {
-          window.location.href = "https://github.com/";
+          window.location.href = KAKAO_AUTH_URL;
         }}>
           <img src="" alt=""/>
           <span className="">카카오 로그인</span>
