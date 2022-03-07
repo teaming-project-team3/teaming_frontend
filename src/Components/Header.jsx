@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import {Link} from "react-router-dom";
+import styled from "styled-components";
 
 const Nav = styled.div`
   display: flex;
@@ -36,6 +36,7 @@ const Items = styled.ul`
   align-items: center;
   color: black;
   list-style: none;
+  margin-left: 480px;
 `;
 
 const Item = styled.li`
@@ -57,22 +58,34 @@ function Header() {
         {/*</Logo>*/}
         <Items>
           <Item>
-            <Link to="/">
+            <Link to="/" style={{
+              textDecoration: "none",
+              color: "black",
+            }}>
               프로젝트 등록
             </Link>
           </Item>
           <Item>
-            <Link to="/">
+            <Link to="/" style={{
+              textDecoration: "none",
+              color: "black",
+            }}>
               프로젝트 찾기
             </Link>
           </Item>
           <Item>
-            <Link to="/" style={{textDecoration:"none"}}>
+            <Link to="/" style={{
+              textDecoration: "none",
+              color: "black",
+            }}>
               메이트 찾기
             </Link>
           </Item>
           <Item>
-            <Link to="/">
+            <Link to="/" style={{
+              textDecoration: "none",
+              color: "black",
+            }}>
               이용후기
             </Link>
           </Item>
