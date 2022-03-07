@@ -4,6 +4,7 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 import TempOAuth from "./pages/TempOAuth";
 import KakaoRedirect from "./pages/KakaoRedirect";
 import Login from "./pages/Login";
+import Survey from "./pages/Survey";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/login" element={<Login />} exact />
         <Route path="/oauth/kakao/redirect" element={<KakaoRedirect />} />
+        <Route path="/survey" element={<Survey />} exact />
       </Routes>
     </BrowserRouter>
   );
