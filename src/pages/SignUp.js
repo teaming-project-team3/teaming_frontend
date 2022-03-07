@@ -13,7 +13,6 @@ function SignUp() {
   const [pwd, setPwd] = React.useState("");
   const [pwdCheck, setPwdCheck] = React.useState("");
  // const [user_name, setUserName] = React.useState("");
- // 테스트
 
   const signUp = async (e) => {
     e.preventDefault();
