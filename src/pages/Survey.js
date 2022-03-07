@@ -11,10 +11,10 @@ import {proLangInit, skillsInit} from "../data/survey/SurveyData";
 const animatedComponents = makeAnimated();
 
 function Survey() {
-  const [value, setValue] = useState();
+  //const [value, setValue] = useState();
   const [modalIsOpen, setModalIsOpen] = useState(true);
   // selected values, initially it lists all options in order
-  const [selectedPosition, setSelectedPosition] = useState(null);
+  //const [selectedPosition, setSelectedPosition] = useState(null);
   
 
   const positions = useMemo(
@@ -81,7 +81,7 @@ function Survey() {
       setProLang([...proLang, newValue]);
       setSelProLang([...selProLang, newValue]);
     },
-    [proLang]
+    [proLang, selProLang]
   );
 
   return (
