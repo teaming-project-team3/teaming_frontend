@@ -10,7 +10,7 @@ import "react-datepicker/dist/react-datepicker.css"; // 스타일 맥이기
 function CreateProject() {
   const [startDate, setStartDate] = React.useState(new Date());
   const [endDate, setEndDate] = React.useState(new Date());
-
+  //dev
   return (
     <React.Fragment>
       <div>새로운 팀 만들기</div>
@@ -74,7 +74,7 @@ function CreateProject() {
           </div>
         </div>
       </div>
-
+      
       <Button>입력 완료</Button>
     </React.Fragment>
   );
