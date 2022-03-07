@@ -5,14 +5,19 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 import KakaoRedirect from "./pages/KakaoRedirect";
 import Login from "./pages/Login"
 import Header from "./Components/Header"
-import CreateProject from "./pages/CreateProject";
+//import Main from "./pages/Main";
+// import CreateProject from "./pages/CreateProject";
+
+
+import ProjectRoom from "./pages/ProjectRoom";
+
 
 function App() {
   return (
     <BrowserRouter>
       <Header />
         <Routes>
-          <Route path="/" element={<CreateProject />} />
+          <Route path="/" element={<ProjectRoom />} />
           {/*<Route path="/" element={<TempOAuth />} />*/}
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
