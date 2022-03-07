@@ -3,7 +3,7 @@ import {actionCreators as userActions} from "../redux/modules/users";
 import emailCheck from "../shared/common";
 import {useDispatch} from "react-redux";
 
-// 로그인
+// 로그인 기능
 const Login = (props) => {
   const dispatch = useDispatch();
 
