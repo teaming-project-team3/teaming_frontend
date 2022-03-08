@@ -53,13 +53,17 @@ function MyPage() {
         <div>
           claykr@gmail.com
         </div>
-        <button>내 정보 수정하기</button>
+        <button onClick={() => {
+          console.log("내 정보 수정하기");
+        }}>내 정보 수정하기</button>
         </div>
       <div>
         <h3>내가 참여한 프로젝트 n개</h3>
       </div>
       <div>
-        <button>로그이웃</button>
+        <button onClick={() => {
+          console.log("로그아웃");
+        }}>로그이웃</button>
       </div>
 
       <div>
@@ -67,7 +71,9 @@ function MyPage() {
           <Item>프로젝트</Item>
           <Item>쪽지</Item>
           <Item>좋아요</Item>
-          <Item><button>참여 프로젝트 목록</button></Item>
+          <Item><button onClick={() => {
+            console.log("참여 프로젝트 목록");
+          }}>참여 프로젝트 목록</button></Item>
         </Items>
       </div>
       <div>

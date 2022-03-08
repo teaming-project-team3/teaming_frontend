@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {motion} from "framer-motion"
+import {AnimatePresence, motion} from "framer-motion"
 
 const Wrapper = styled.div`
   background-color: whitesmoke;
@@ -8,6 +8,7 @@ const Wrapper = styled.div`
 `;
 
 const Card = styled.div`
+  margin-left: 640px;
 `;
 
 const Row = styled(motion.div)`
@@ -24,26 +25,84 @@ const Box = styled(motion.div)`
   height: 200px;
 `;
 
+const Info = styled(motion.div)`
+  padding: 50px;
+  background-color: #c3c3c3;
+`;
+
+const Title = styled.div`
+  padding: 10px;
+  font-size: 12px;
+`;
+
 function Main() {
+  const onBoxClicked = () => {
+    console.log("box1 클릭")
+  }
 
   return (
 
     <Wrapper>
       <Card>
         <Row>
-          <Box />
-          <Box />
-          <Box />
+          <Box
+            onClick={() => onBoxClicked()}
+          >
+            <Info />
+            <Title>자유로운 개발자 인원을 모집합니다.</Title>
+          </Box>
+          <Box
+            onClick={() => onBoxClicked()}
+          >
+            <Info />
+            <Title>자유로운 개발자 인원을 모집합니다.</Title>
+          </Box>
+          <Box
+            onClick={() => onBoxClicked()}
+          >
+            <Info />
+            <Title>자유로운 개발자 인원을 모집합니다.</Title>
+          </Box>
         </Row>
         <Row>
-          <Box />
-          <Box />
-          <Box />
+          <Box
+            onClick={() => onBoxClicked()}
+          >
+            <Info />
+            <Title>자유로운 개발자 인원을 모집합니다.</Title>
+          </Box>
+          <Box
+            onClick={() => onBoxClicked()}
+          >
+            <Info />
+            <Title>자유로운 개발자 인원을 모집합니다.</Title>
+          </Box>
+          <Box
+            onClick={() => onBoxClicked()}
+          >
+            <Info />
+            <Title>자유로운 개발자 인원을 모집합니다.</Title>
+          </Box>
         </Row>
         <Row>
-          <Box />
-          <Box />
-          <Box />
+          <Box
+            onClick={() => onBoxClicked()}
+          >
+            <Info />
+            <Title>자유로운 개발자 인원을 모집합니다.</Title>
+          </Box>
+          <Box
+            onClick={() => onBoxClicked()}
+          >
+            <Info />
+            <Title>자유로운 개발자 인원을 모집합니다.</Title>
+          </Box>
+          <Box
+            onClick={() => onBoxClicked()}
+          >
+            <Info />
+            <Title>자유로운 개발자 인원을 모집합니다.</Title>
+          </Box>
         </Row>
       </Card>
     </Wrapper>
