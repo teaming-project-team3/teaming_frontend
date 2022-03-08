@@ -4,8 +4,8 @@ import styled from "styled-components";
 // TOAST UI Editor import
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
-import DatePicker from "react-datepicker"; // DatePicker 라는 컴포넌트도 가져오깅
-import "react-datepicker/dist/react-datepicker.css"; // 스타일 맥이기
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function CreateProject() {
   const [startDate, setStartDate] = React.useState(new Date());
