@@ -80,6 +80,7 @@ function Survey() {
       const newValue = { value: inputValue.toLowerCase(), label: inputValue };
       setProLang([...proLang, newValue]);
       setSelProLang([...selProLang, newValue]);
+      //selProLang 배열에 들어있는 각 언어를 jsx로 추가할 수 있는가?
     },
     [proLang, selProLang]
   );
@@ -123,6 +124,8 @@ function Survey() {
         />
 
       <div style={{width: '300px'}} display='flex' >
+        
+        언어명 : proLang index로 접근
         <Select>
           사용기간
         </Select>

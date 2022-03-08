@@ -17,10 +17,11 @@ now Working On..
 로그인
   - init view
   - kakao rest api, init
+  - *소셜 로그인
   
 회원가입
   - init view
-
+  - 
 설문조사
   -init view
   
