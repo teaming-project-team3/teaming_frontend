@@ -1,13 +1,38 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import CloseButton from "../../element/CloseButton";
 
-function Modal({ className, visible, children }) {
+function Modal({
+                 className,
+                 onClose,
+                 maskClosable,
+                 closable,
+                 visible,
+                 children,
+               }) {
+  const onMaskClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose(e)
+    }
+  }
+
+  const close = (e) => {
+    if (onClose) {
+      onClose(e)
+    }
+  }
   return (
     <>
       <ModalOverlay visible={visible} />
-      <ModalWrapper className={className} tabIndex="-1" visible={visible}>
+      <ModalWrapper
+        className={className}
+        onClick={maskClosable ? onMaskClick : null}
+        tabIndex="-1"
+        visible={visible}
+      >
         <ModalInner tabIndex="0" className="modal-inner">
+          {closable && <CloseButton className="modal-close" onClick={close} />}
           {children}
         </ModalInner>
       </ModalWrapper>
@@ -58,4 +83,4 @@ const ModalInner = styled.div`
   padding: 40px 20px;
 `
 
-export default Modal;
+export default Modal
