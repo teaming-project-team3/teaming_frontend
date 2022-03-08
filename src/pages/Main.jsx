@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import {motion} from "framer-motion"
+import Modal from "../Components/Modals/Modal";
+import {useState} from "react";
 
 const Wrapper = styled.div`
   background-color: whitesmoke;
@@ -8,6 +10,7 @@ const Wrapper = styled.div`
 `;
 
 const Card = styled.div`
+  margin-left: 640px;
 `;
 
 const Row = styled(motion.div)`
@@ -24,26 +27,167 @@ const Box = styled(motion.div)`
   height: 200px;
 `;
 
+const Info = styled(motion.div)`
+  padding: 50px;
+  background-color: #c3c3c3;
+`;
+
+const ProFile = styled.div`
+  padding: 5px;
+`;
+
+const Title = styled.div`
+  font-size: 12px;
+`;
+
+const SubTitle = styled.div`
+  font-size: 8px;
+`;
+
+const User = styled.div`
+  font-size: 6px;
+`;
+
+const Like = styled.div`
+  font-size: 6px;
+`
+
 function Main() {
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const openModal = () => {
+    setModalVisible(true)
+  }
+  const closeModal = () => {
+    setModalVisible(false)
+  }
+
+  const onBoxClicked = () => {
+    console.log("box1 클릭")
+
+  }
 
   return (
 
     <Wrapper>
       <Card>
         <Row>
-          <Box />
-          <Box />
-          <Box />
+          <Box
+            onClick={openModal}
+          >
+            <>
+              {
+                modalVisible &&
+                <Modal
+                  visible={modalVisible}
+                  closable={true}
+                  maskClosable={true}
+                  onClose={closeModal}
+                >
+                  Hello
+                </Modal>
+              }
+            </>
+            <Info />
+            <ProFile>
+              <Title>개발자 인원을 모집합니다.</Title>
+              <SubTitle>개발 / 초기 개발 단계 / 현재 구성원 4명 / 전체 모집시까지</SubTitle>
+              <User>우아한 형제들</User>
+              <Like>좋아요 10개</Like>
+            </ProFile>
+          </Box>
+          <Box
+            onClick={() => onBoxClicked()}
+          >
+            <Info />
+            <ProFile>
+              <Title>개발자 인원을 모집합니다.</Title>
+              <SubTitle>개발 / 초기 개발 단계 / 현재 구성원 4명 / 전체 모집시까지</SubTitle>
+              <User>우아한 형제들</User>
+              <Like>좋아요 10개</Like>
+            </ProFile>
+          </Box>
+          <Box
+            onClick={() => onBoxClicked()}
+          >
+            <Info />
+            <ProFile>
+              <Title>개발자 인원을 모집합니다.</Title>
+              <SubTitle>개발 / 초기 개발 단계 / 현재 구성원 4명 / 전체 모집시까지</SubTitle>
+              <User>우아한 형제들</User>
+              <Like>좋아요 10개</Like>
+            </ProFile>
+          </Box>
         </Row>
         <Row>
-          <Box />
-          <Box />
-          <Box />
+          <Box
+            onClick={() => onBoxClicked()}
+          >
+            <Info />
+            <ProFile>
+              <Title>개발자 인원을 모집합니다.</Title>
+              <SubTitle>개발 / 초기 개발 단계 / 현재 구성원 4명 / 전체 모집시까지</SubTitle>
+              <User>우아한 형제들</User>
+              <Like>좋아요 10개</Like>
+            </ProFile>
+          </Box>
+          <Box
+            onClick={() => onBoxClicked()}
+          >
+            <Info />
+            <ProFile>
+              <Title>개발자 인원을 모집합니다.</Title>
+              <SubTitle>개발 / 초기 개발 단계 / 현재 구성원 4명 / 전체 모집시까지</SubTitle>
+              <User>우아한 형제들</User>
+              <Like>좋아요 10개</Like>
+            </ProFile>
+          </Box>
+          <Box
+            onClick={() => onBoxClicked()}
+          >
+            <Info />
+            <ProFile>
+              <Title>개발자 인원을 모집합니다.</Title>
+              <SubTitle>개발 / 초기 개발 단계 / 현재 구성원 4명 / 전체 모집시까지</SubTitle>
+              <User>우아한 형제들</User>
+              <Like>좋아요 10개</Like>
+            </ProFile>
+          </Box>
         </Row>
         <Row>
-          <Box />
-          <Box />
-          <Box />
+          <Box
+            onClick={() => onBoxClicked()}
+          >
+            <Info />
+            <ProFile>
+              <Title>개발자 인원을 모집합니다.</Title>
+              <SubTitle>개발 / 초기 개발 단계 / 현재 구성원 4명 / 전체 모집시까지</SubTitle>
+              <User>우아한 형제들</User>
+              <Like>좋아요 10개</Like>
+            </ProFile>
+          </Box>
+          <Box
+            onClick={() => onBoxClicked()}
+          >
+            <Info />
+            <ProFile>
+              <Title>개발자 인원을 모집합니다.</Title>
+              <SubTitle>개발 / 초기 개발 단계 / 현재 구성원 4명 / 전체 모집시까지</SubTitle>
+              <User>우아한 형제들</User>
+              <Like>좋아요 10개</Like>
+            </ProFile>
+          </Box>
+          <Box
+            onClick={() => onBoxClicked()}
+          >
+            <Info />
+            <ProFile>
+              <Title>개발자 인원을 모집합니다.</Title>
+              <SubTitle>개발 / 초기 개발 단계 / 현재 구성원 4명 / 전체 모집시까지</SubTitle>
+              <User>우아한 형제들</User>
+              <Like>좋아요 10개</Like>
+            </ProFile>
+          </Box>
         </Row>
       </Card>
     </Wrapper>
