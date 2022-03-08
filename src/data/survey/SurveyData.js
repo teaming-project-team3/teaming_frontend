@@ -32,3 +32,19 @@ export const skillsInit =
     { value: "Ruby on Rails", label: "Ruby on Rails" },
     { value: "Laravel", label: "Laravel" },
   ]
+
+  export const periodOfUse = 
+  [
+  { value: "1", label: "1년 미만" },
+  { value: "2", label: "1~2년" },
+  { value: "3", label: "2~5년" },
+  { value: "4", label: "5년 이상" },
+]
+
+export const proficiency = 
+[
+{ value: "1", label: "초심" },
+{ value: "2", label: "하" },
+{ value: "3", label: "중" },
+{ value: "4", label: "상" },
+]

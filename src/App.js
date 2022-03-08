@@ -5,13 +5,14 @@ import KakaoRedirect from "./pages/KakaoRedirect";
 import Login from "./pages/Login"
 import Header from "./Components/Header"
 import Main from "./pages/Main";
+import Survey from "./pages/Survey"
 
 function App() {
   return (
     <BrowserRouter>
       <Header />
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<Survey />} />
           {/*<Route path="/" element={<TempOAuth />} />*/}
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
