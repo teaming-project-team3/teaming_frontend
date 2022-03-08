@@ -4,6 +4,7 @@ import Button from "../element/Button";
 import emailCheck from "../shared/common";
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/users";
+import S3Upload from "../Components/Organisms/upload/S3Upload";
 
 function SignUp() {
   const dispatch = useDispatch();
@@ -38,6 +39,12 @@ function SignUp() {
 
   return (
     <div className="App">
+
+      <div>
+        이미지 업로드 : 
+        <S3Upload/>
+      </div>
+
       <div>
         아이디 :{" "}
         <input
