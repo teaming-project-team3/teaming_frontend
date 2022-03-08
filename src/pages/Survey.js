@@ -124,6 +124,7 @@ function Survey() {
         />
 
       <div style={{width: '300px'}} display='flex' >
+        
         언어명 : proLang index로 접근
         <Select>
           사용기간
