@@ -2,9 +2,10 @@ import React from "react";
 //import styled from "styled-components";
 import Button from "../element/Button";
 import emailCheck from "../shared/common";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/users";
 import S3Upload from "../Components/Organisms/upload/S3Upload";
+import Image from "../Components/Atoms/Image";
 
 function SignUp() {
   const dispatch = useDispatch();
@@ -14,7 +15,8 @@ function SignUp() {
   const [pwd, setPwd] = React.useState("");
   const [pwdCheck, setPwdCheck] = React.useState("");
  // const [user_name, setUserName] = React.useState("");
-
+  const preview = useSelector((state) => state.image.preview);
+  
   const signUp = async (e) => {
     e.preventDefault();
 
@@ -43,6 +45,18 @@ function SignUp() {
       <div>
         이미지 업로드 : 
         <S3Upload/>
+
+      </div>
+
+      <div style={{ width: "300px" }}>
+      <Image
+        shape="circle"
+        src={
+          preview
+            ? preview
+            : "http://via.placeholder.com/400x300"
+        }
+        ></Image>
       </div>
 
       <div>

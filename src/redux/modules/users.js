@@ -13,16 +13,19 @@ const LOG_OUT = "LOG_OUT";
 //const SIGN_UP = "SIGN_UP";
 const GET_USER = "GET_USER";
 const SET_USER = "SET_USER";
+const SET_PROFILE_IMG = "SET_PROFILE_IMG";
 
 // action creators
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const getUser = createAction(GET_USER, (user) => ({ user }));
+//const setProfileImg = createAction(SET_PROFILE_IMG, (imgUrl) => ({imgUrl}));
 //const setUser = createAction(SET_USER, (user) => ({ user }));
 
 // initialState
 const initialState = {
   user: null,
   is_login: false,
+  profileImage:null,
 };
 
 // middleware actions
@@ -182,6 +185,13 @@ const logoutFB = () => {
 // reducer
 export default handleActions(
   {
+    [SET_PROFILE_IMG]:(state, action) => 
+      produce(state, (draft) => {
+
+        draft.profileImage = action.payload.imgUrl;
+        console.log("image save")
+    })
+    ,
     [SET_USER]: (state, action) =>
       produce(state, (draft) => {
 
