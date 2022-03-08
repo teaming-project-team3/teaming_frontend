@@ -2,9 +2,12 @@ import './S3Upload.css';
 import {useState} from "react";
 import AWS from 'aws-sdk';
 import { Row, Col, Button, Input, Alert } from 'reactstrap';
+import { useDispatch } from 'react-redux';
+import {actionCreators as imageActions} from "../../../redux/modules/image";
+
 
 export default function S3Upload(){
-
+    const dispatch = useDispatch();
     const [progress , setProgress] = useState(0);
     const [selectedFile, setSelectedFile] = useState(null);
     const [showAlert, setShowAlert] = useState(false);
@@ -33,6 +36,7 @@ export default function S3Upload(){
         }
         setProgress(0);
         setSelectedFile(e.target.files[0]);
+        setPreview(e.target.files[0])
       }
 
       const uploadFile = (file) => {
@@ -61,6 +65,18 @@ export default function S3Upload(){
           })
 
         
+      }
+
+
+      const setPreview = (file) => {
+
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        reader.onloadend = () => {
+            dispatch(imageActions.setPreview(reader.result));
+        }
+
       }
 
 
