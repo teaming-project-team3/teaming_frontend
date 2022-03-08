@@ -1,10 +1,10 @@
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState, useCallback, useMemo, useEffect } from "react";
 import Modal from "react-modal";
 import Button from "../element/Button";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import CreatableSelect from "react-select/creatable";
-import {proLangInit, skillsInit} from "../data/survey/SurveyData";
+import { proLangInit, skillsInit, periodOfUse, proficiency } from "../data/survey/SurveyData";
 
 // makeAnimated creates animated wrappers around components passed in as arguments.
 // If no arguments are passed, builtin components are wrapped instead.
@@ -15,7 +15,7 @@ function Survey() {
   const [modalIsOpen, setModalIsOpen] = useState(true);
   // selected values, initially it lists all options in order
   //const [selectedPosition, setSelectedPosition] = useState(null);
-  
+  const [langState, setLangState] = useState([]);
 
   const positions = useMemo(
     () => [
@@ -70,10 +70,18 @@ function Survey() {
           return;
         default:
       }
+      // if 이미 있으면 삭제하고,
+      // console.log("selected : ", inputValue, langState, selProLang);
+      // setLangState(inputValue);
+
       setSelProLang(inputValue);
     },
     [proLang, orderOptions]
   );
+
+  useEffect(() => {
+    console.log("changed : ", langState);
+  }, [langState]);
 
   const handleCreate = useCallback(
     (inputValue) => {
@@ -86,9 +94,10 @@ function Survey() {
   );
 
   return (
-    <Modal isOpen={modalIsOpen} 
-    onRequestClose={() => setModalIsOpen(false)}
-    ariaHideApp={false}
+    <Modal
+      isOpen={modalIsOpen}
+      onRequestClose={() => setModalIsOpen(false)}
+      ariaHideApp={false}
     >
       <div className="App">
         <div>설문조사</div>
@@ -97,8 +106,7 @@ function Survey() {
         <Select options={positions} />
 
         <div>
-        깃허브 URL : 
-        <input></input>
+          깃허브 URL :<input></input>
         </div>
 
         <CreatableSelect
@@ -106,7 +114,7 @@ function Survey() {
           isClearable={proLang.some((v) => !v.isFixed)} // clear button shows conditionally
           value={selProLang}
           options={proLang}
-          styles={styles}// styles that do not show 'x' for fixed options
+          styles={styles} // styles that do not show 'x' for fixed options
           onChange={handleChange}
           onCreateOption={handleCreate}
           components={animatedComponents} // animate builtin components
@@ -117,38 +125,46 @@ function Survey() {
           isClearable={proLang.some((v) => !v.isFixed)} // clear button shows conditionally
           value={selProLang}
           options={skillsInit}
-          styles={styles}// styles that do not show 'x' for fixed options
+          styles={styles} // styles that do not show 'x' for fixed options
           onChange={handleChange}
           onCreateOption={handleCreate}
           components={animatedComponents} // animate builtin components
         />
 
-      <div style={{width: '300px'}} display='flex' >
-        
-        언어명 : proLang index로 접근
-        <Select>
-          사용기간
-        </Select>
-        <Select>
-          능숙도
-        </Select>
-      </div>
+        {selProLang &&
+          selProLang.map((lang, idx) => (
+            <>
+            <div display="flex">
+              <div key={idx} style={{ width: "300px" }}>
+                value: {lang.value},{idx}
+              </div>
+              <div style={{ width: "300px" }}>
+              <Select options={periodOfUse}>사용기간</Select>
+              </div>
+              <div style={{ width: "300px" }}>
+              <Select options={proficiency}>능숙도</Select>
+              </div>
+            </div>
+            </>
+          ))}
 
-        <div>
-        대표 프로젝트 #1 URL : 
-        <input></input>
+        <div style={{ width: "300px" }} display="flex">
+          언어명 : proLang index로 접근
+          <Select>사용기간</Select>
+          <Select>능숙도</Select>
         </div>
 
         <div>
-        대표 프로젝트 #2 URL : 
-        <input></input>
+          대표 프로젝트 #1 URL :<input></input>
         </div>
 
         <div>
-        대표 프로젝트 #3 URL : 
-        <input></input>
+          대표 프로젝트 #2 URL :<input></input>
         </div>
 
+        <div>
+          대표 프로젝트 #3 URL :<input></input>
+        </div>
 
         {/* <div className="category">Loading Select</div>
       <Select options={options} isLoading />
