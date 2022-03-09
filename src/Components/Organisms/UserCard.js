@@ -5,7 +5,9 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import dummyImg from '../../static/dummy_user.jpg'
 
-export default function UserCard() {
+export default function UserCard(props) {
+  const userId = props.userId;
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
@@ -17,7 +19,7 @@ export default function UserCard() {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            유저명
+            유저명 : {userId}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Position : FrontEnd
