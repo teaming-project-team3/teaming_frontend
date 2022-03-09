@@ -67,7 +67,6 @@ function Main() {
   }
 
   return (
-
     <Wrapper>
       <Card>
         <Row>
@@ -106,98 +105,41 @@ function Main() {
               </Modal>
             }
           </>
-          <Box
-            onClick={() => onBoxClicked()}
-          >
-            <Info />
-            <ProFile>
-              <Title>개발자 인원을 모집합니다.</Title>
-              <SubTitle>개발 / 초기 개발 단계 / 현재 구성원 4명 / 전체 모집시까지</SubTitle>
-              <User>우아한 형제들</User>
-              <Like>좋아요 10개</Like>
-            </ProFile>
-          </Box>
-          <Box
-            onClick={() => onBoxClicked()}
-          >
-            <Info />
-            <ProFile>
-              <Title>개발자 인원을 모집합니다.</Title>
-              <SubTitle>개발 / 초기 개발 단계 / 현재 구성원 4명 / 전체 모집시까지</SubTitle>
-              <User>우아한 형제들</User>
-              <Like>좋아요 10개</Like>
-            </ProFile>
-          </Box>
-        </Row>
-        <Row>
-          <Box
-            onClick={() => onBoxClicked()}
-          >
-            <Info />
-            <ProFile>
-              <Title>개발자 인원을 모집합니다.</Title>
-              <SubTitle>개발 / 초기 개발 단계 / 현재 구성원 4명 / 전체 모집시까지</SubTitle>
-              <User>우아한 형제들</User>
-              <Like>좋아요 10개</Like>
-            </ProFile>
-          </Box>
-          <Box
-            onClick={() => onBoxClicked()}
-          >
-            <Info />
-            <ProFile>
-              <Title>개발자 인원을 모집합니다.</Title>
-              <SubTitle>개발 / 초기 개발 단계 / 현재 구성원 4명 / 전체 모집시까지</SubTitle>
-              <User>우아한 형제들</User>
-              <Like>좋아요 10개</Like>
-            </ProFile>
-          </Box>
-          <Box
-            onClick={() => onBoxClicked()}
-          >
-            <Info />
-            <ProFile>
-              <Title>개발자 인원을 모집합니다.</Title>
-              <SubTitle>개발 / 초기 개발 단계 / 현재 구성원 4명 / 전체 모집시까지</SubTitle>
-              <User>우아한 형제들</User>
-              <Like>좋아요 10개</Like>
-            </ProFile>
-          </Box>
-        </Row>
-        <Row>
-          <Box
-            onClick={() => onBoxClicked()}
-          >
-            <Info />
-            <ProFile>
-              <Title>개발자 인원을 모집합니다.</Title>
-              <SubTitle>개발 / 초기 개발 단계 / 현재 구성원 4명 / 전체 모집시까지</SubTitle>
-              <User>우아한 형제들</User>
-              <Like>좋아요 10개</Like>
-            </ProFile>
-          </Box>
-          <Box
-            onClick={() => onBoxClicked()}
-          >
-            <Info />
-            <ProFile>
-              <Title>개발자 인원을 모집합니다.</Title>
-              <SubTitle>개발 / 초기 개발 단계 / 현재 구성원 4명 / 전체 모집시까지</SubTitle>
-              <User>우아한 형제들</User>
-              <Like>좋아요 10개</Like>
-            </ProFile>
-          </Box>
-          <Box
-            onClick={() => onBoxClicked()}
-          >
-            <Info />
-            <ProFile>
-              <Title>개발자 인원을 모집합니다.</Title>
-              <SubTitle>개발 / 초기 개발 단계 / 현재 구성원 4명 / 전체 모집시까지</SubTitle>
-              <User>우아한 형제들</User>
-              <Like>좋아요 10개</Like>
-            </ProFile>
-          </Box>
+          <>
+            <Box onClick={() => setModalVisible(true)}>
+              <Info />
+              <ProFile>
+                <Title>개발자 인원을 모집합니다.</Title>
+                <SubTitle>개발 / 초기 개발 단계 / 현재 구성원 4명 / 전체 모집시까지</SubTitle>
+                <User>우아한 형제들</User>
+                <Like>좋아요 10개</Like>
+              </ProFile>
+            </Box>
+            {
+              modalVisible &&
+              <Modal
+                visible={modalVisible}
+                closable={true}
+                maskClosable={true}
+                onClose={closeModal}>
+                <h1>
+                  프로젝트명
+                </h1>
+                <h5>
+                  프로젝트 내용: 블라블라
+                </h5>
+                <div>
+                  현재인원: 프론트2, 백앤드2, 디자이너1
+                </div>
+                <div>
+                  요구인원: 프론트2, 백앤드2, 디자이너2
+                </div>
+                <div>
+                  요구 기술 스택: React, Node.js, Figma
+                </div>
+              </Modal>
+            }
+          </>
         </Row>
       </Card>
     </Wrapper>
