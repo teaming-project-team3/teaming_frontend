@@ -9,16 +9,16 @@ export default function RoomChat() {
         <div id="roomList">
           <div id="roomHeader">채팅 방 목록</div>
           <div id="roomSelect">
-            <div class="roomEl active" data-id="1">
+            <div className="roomEl active" data-id="1">
               Everyone
             </div>
-            <div class="roomEl" data-id="2">
+            <div className="roomEl" data-id="2">
               VueJS
             </div>
-            <div class="roomEl" data-id="3">
+            <div className="roomEl" data-id="3">
               ReactJS
             </div>
-            <div class="roomEl" data-id="4">
+            <div className="roomEl" data-id="4">
               AngularJS
             </div>
           </div>
@@ -27,19 +27,19 @@ export default function RoomChat() {
       <div id="chatWrap">
         <div id="chatHeader">Everyone</div>
         <div id="chatLog">
-          <div class="anotherMsg">
-            <span class="anotherName">Jo</span>
-            <span class="msg">Hello, Nice to meet you.</span>
+          <div className="anotherMsg">
+            <span className="anotherName">Jo</span>
+            <span className="msg">Hello, Nice to meet you.</span>
           </div>
-          <div class="myMsg">
-            <span class="msg">Nice to meet you, too.</span>
+          <div className="myMsg">
+            <span className="msg">Nice to meet you, too.</span>
           </div>
         </div>
 
         <form id="chatForm">
           <input
             type="text"
-            autocomplete="off"
+            autoComplete="off"
             size="30"
             id="message"
             placeholder="메시지를 입력하세요"

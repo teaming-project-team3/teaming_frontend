@@ -1,7 +1,7 @@
+import { motion } from "framer-motion";
+import { useState } from "react";
 import styled from "styled-components";
-import {motion} from "framer-motion"
 import Modal from "../Components/Modals/Modal";
-import {useState} from "react";
 
 const Wrapper = styled.div`
   background-color: whitesmoke;
