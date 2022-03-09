@@ -6,6 +6,10 @@ import Login from "./pages/Login"
 import Header from "./Components/Header"
 import Main from "./pages/Main";
 
+// Import css files
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 
 function App() {
   return (
