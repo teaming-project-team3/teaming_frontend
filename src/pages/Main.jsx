@@ -62,6 +62,7 @@ function Main() {
     setModalVisible(false)
   }
 
+  // eslint-disable-next-line no-unused-vars
   const onBoxClicked = () => {
     console.log("box1 클릭")
   }
