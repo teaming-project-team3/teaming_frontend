@@ -15,7 +15,6 @@ function Survey() {
   const [modalIsOpen, setModalIsOpen] = useState(true);
   // selected values, initially it lists all options in order
   //const [selectedPosition, setSelectedPosition] = useState(null);
-  const [langState, setLangState] = useState([]);
 
   const positions = useMemo(
     () => [
@@ -78,10 +77,6 @@ function Survey() {
     },
     [proLang, orderOptions]
   );
-
-  useEffect(() => {
-    console.log("changed : ", langState);
-  }, [langState]);
 
   const handleCreate = useCallback(
     (inputValue) => {
