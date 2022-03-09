@@ -5,6 +5,7 @@ import UserCard from "../Components/Organisms/UserCard";
 import Button from "../element/Button";
 import Pagination from "react-js-pagination";
 import styled from "styled-components";
+import Slider from "react-slick";
 
 export default function ProjectRoom() {
   const [isLeader, setIsLeader] = React.useState(false);
@@ -21,6 +22,14 @@ export default function ProjectRoom() {
     }
   }, [isLeader]);
 
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
   return (
     <>
       <div>
@@ -30,36 +39,72 @@ export default function ProjectRoom() {
 
         {isLeader && <Button>프로젝트 시작!</Button>}
 
-        
         <div style={{ width: "300px" }} display="flex">
           <RadarChart curr={curr}></RadarChart>
         </div>
 
-        <div style={{display: "flex"}}>
-        <div style={{ width: "300px", margin: "auto" }}>
-          <UserCard userId={"userA"} />
-        </div>
+        <Slider {...sliderSettings}>
+          <div>
+          <div style={{ display: "flex" }}>
+            <div style={{ width: "300px", margin: "auto" }}>
+              <UserCard userId={"userA"} />
+            </div>
 
-        <div style={{ width: "300px", margin: "auto" }} onMouseOver={()=>setCurrUser("userB")} onMouseOut={()=>{setCurrUser("userA")}}>
-          <UserCard userId={"userB"}/>
-        </div>
+            <div
+              style={{ width: "300px", margin: "auto" }}
+              onMouseOver={() => setCurrUser("userB")}
+              onMouseOut={() => {
+                setCurrUser("userA");
+              }}
+            >
+              <UserCard userId={"userB"} />
+            </div>
 
-        <div style={{ width: "300px", margin: "auto" }} onMouseOver={()=>setCurrUser("userC")} onMouseOut={()=>{setCurrUser("userA")}}>
-          <UserCard userId={"userC"}/>
-        </div>
+            <div
+              style={{ width: "300px", margin: "auto" }}
+              onMouseOver={() => setCurrUser("userC")}
+              onMouseOut={() => {
+                setCurrUser("userA");
+              }}
+            >
+              <UserCard userId={"userC"} />
+            </div>
+          </div>
+          </div>
+          <div>
+          <div style={{ display: "flex" }}>
+            <div
+              style={{ width: "300px", margin: "auto" }}
+              onMouseOver={() => setCurrUser("userC")}
+              onMouseOut={() => {
+                setCurrUser("userA");
+              }}
+            >
+              <UserCard userId={"userC"} />
+            </div>
 
-        <div style={{ width: "300px", margin: "auto" }} onMouseOver={()=>setCurrUser("userC")} onMouseOut={()=>{setCurrUser("userA")}}>
-          <UserCard userId={"userC"}/>
-        </div>
+            <div
+              style={{ width: "300px", margin: "auto" }}
+              onMouseOver={() => setCurrUser("userC")}
+              onMouseOut={() => {
+                setCurrUser("userA");
+              }}
+            >
+              <UserCard userId={"userC"} />
+            </div>
 
-        <div style={{ width: "300px", margin: "auto" }} onMouseOver={()=>setCurrUser("userC")} onMouseOut={()=>{setCurrUser("userA")}}>
-          <UserCard userId={"userC"}/>
-        </div>
-
-        <div style={{ width: "300px", margin: "auto" }} onMouseOver={()=>setCurrUser("userC")} onMouseOut={()=>{setCurrUser("userA")}}>
-          <UserCard userId={"userC"}/>
-        </div>
-        </div>
+            <div
+              style={{ width: "300px", margin: "auto" }}
+              onMouseOver={() => setCurrUser("userC")}
+              onMouseOut={() => {
+                setCurrUser("userA");
+              }}
+            >
+              <UserCard userId={"userC"} />
+            </div>
+          </div>
+          </div>
+        </Slider>
 
         <div>
           <RoomChat></RoomChat>
@@ -78,7 +123,12 @@ export default function ProjectRoom() {
       </div>
     </>
   );
-
 }
 
-const PaginationHorizontal = styled.div`& ul li {list-style-type: none; float: left; margin-right:4px;}`
+const PaginationHorizontal = styled.div`
+  & ul li {
+    list-style-type: none;
+    float: left;
+    margin-right: 4px;
+  }
+`;
