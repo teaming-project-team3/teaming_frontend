@@ -1,13 +1,14 @@
 import React from "react";
-import {actionCreators as userActions} from "../redux/modules/users";
+//import {actionCreators as userActions} from "../redux/modules/users";
 import emailCheck from "../shared/common";
-import {useDispatch} from "react-redux";
+//import {useDispatch} from "react-redux";
 import {KAKAO_AUTH_URL} from "../apis/kakao/kakao";
+import {apis} from "./../apis/apis"
 
 
 // 로그인 기능
 const Login = (props) => {
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
 
   const [id, setId] = React.useState("");
   const [pwd, setPwd] = React.useState("");
@@ -25,7 +26,23 @@ const Login = (props) => {
       return;
     }
 
-    dispatch(userActions.loginFB(id, pwd));
+    //dispatch(userActions.loginFB(id, pwd));
+  
+    const data = {
+      email : "test@test.com",
+      password : "1q2w3e4r",
+      }
+
+
+    apis
+      .login(data)
+      .then((res) => {
+        console.log("login completed", res)
+      })
+      .catch((err) => {
+        console.log("login err : ", err)
+      })
+
   };
 
   return (

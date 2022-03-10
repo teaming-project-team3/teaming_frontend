@@ -34,7 +34,7 @@ function App() {
           <Route path="/projectFind" element={<ProjectFind/>} />
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/oauth/kakao/redirect" element={<KakaoRedirect />} />
+          <Route path="/auth/kakao/redirect" element={<KakaoRedirect />} />
         </Routes>
     </BrowserRouter>
   );

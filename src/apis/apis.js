@@ -2,7 +2,7 @@ import axios from "axios";
 import { getCookie } from "../shared/Cookie";
 
 const api = axios.create({
-  baseURL: "서버 BASE URL 문자열"
+  baseURL: "http://3.36.75.239"
 });
 
 // Teaming Server : http://???
@@ -37,7 +37,9 @@ export const apis = {
   cancelLike: (postId) => api.delete(`/api/post/${postId}/like`),
 
   // user
-  signup: (data) => api.post("/api/register", data),
-  login: (data) => api.post("/api/login", data ),
+  kakaoSend: (data) => api.get(`/auth/kakao/redirect?code=${data}`),
+  signup: (data) => api.post("/auth/signup", data),
+  login: (data) => api.post("/auth/signin", data ),
+
   getLoginUserInfo: () => api.get("/api/loginUser.json"),
 };
