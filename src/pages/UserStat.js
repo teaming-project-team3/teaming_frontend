@@ -37,7 +37,7 @@ export default function UserStat() {
         <div>
           <div>유저명 : </div>
 
-          <img src="https://ghchart.rshah.org/jamesujeon" />
+          <img src="https://ghchart.rshah.org/jamesujeon" alt="" />
           {/* <img src="https://ghchart.rshah.org/219138/jamesujeon"/> */}
 
           <div style={{ display: "flex" }}>

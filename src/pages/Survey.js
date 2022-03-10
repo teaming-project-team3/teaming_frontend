@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo, useEffect } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import Modal from "react-modal";
 import Button from "../element/Button";
 import Select from "react-select";
