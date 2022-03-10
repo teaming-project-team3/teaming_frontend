@@ -1,14 +1,31 @@
-package<FrontEnd>
+<각 페이지별 url>
 
-react : 
+소셜로그인 : 
+http://reactproject2.s3-website.ap-northeast-2.amazonaws.com/oauth
 
-styled-components
+메인 : 
+http://reactproject2.s3-website.ap-northeast-2.amazonaws.com/main
 
-둘 다 설치
-redux
-react-redux
+마이페이지 : 
+http://reactproject2.s3-website.ap-northeast-2.amazonaws.com/myPage
 
-axios
+설문조사 : 
+http://reactproject2.s3-website.ap-northeast-2.amazonaws.com/survey
+
+유저정보 : 
+http://reactproject2.s3-website.ap-northeast-2.amazonaws.com/userStats
+
+프로젝트생성 : 
+http://reactproject2.s3-website.ap-northeast-2.amazonaws.com/createProject
+
+프로젝트상세 : 
+http://reactproject2.s3-website.ap-northeast-2.amazonaws.com/projectDetail
+
+회원가입 : 
+http://reactproject2.s3-website.ap-northeast-2.amazonaws.com/signUp
+
+로그인 : 
+http://reactproject2.s3-website.ap-northeast-2.amazonaws.com/login
 
 배포 URL : http://reactproject2.s3-website.ap-northeast-2.amazonaws.com/
 
