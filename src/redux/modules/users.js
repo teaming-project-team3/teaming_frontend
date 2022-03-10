@@ -1,5 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
+import { apis } from "../../apis/apis";
+
 
 //import { setCookie, getCookie, deleteCookie } from "../../shared/Cookie";
 
@@ -36,6 +38,20 @@ const loginFB = (id, pwd) => {
 
     //로그인 API 구현부
 
+    const data = {
+      email : "test@test.com",
+      password : "1q2w3e4r",
+      }
+
+
+    apis
+      .login(data)
+      .then((res) => {
+        console.log("login completed", res)
+      })
+      .catch((err) => {
+        console.log("login err : ", err)
+      })
 
     // auth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then((res) => {
     //   auth
@@ -93,48 +109,27 @@ const loginFB = (id, pwd) => {
 //     }
 // };
 
-const signUp = (id, user_name, pwd, pwdCheck, imgUrl) => {
-  return function (dispatch, getState, { history }) {
+const signUp = () => {
+  return function () {
     
+    const data = {
+      email : "test@test.com",
+      password : "1q2w3e4r",
+      passwordCheck : "1q2w3e4r",
+      nickname : "test",
+      kakao: "test"
+      }
+
 
     //회원가입 API 구현부
-
-
-
-    // auth
-    //   .createUserWithEmailAndPassword(id, pwd)
-    //   .then((user) => {
-    //     console.log(user);
-
-    //     auth.currentUser
-    //       .updateProfile({
-    //         displayName: user_name,
-    //       })
-    //       .then(() => {
-    //         dispatch(
-    //           setUser({
-    //             user_name: user_name,
-    //             id: id,
-    //             user_profile: "",
-    //             uid: user.user.uid,
-    //           })
-    //         );
-    //         history.push("/");
-    //       })
-    //       .catch((error) => {
-    //         console.log(error);
-    //       });
-
-    //     // Signed in
-    //     // ...
-    //   })
-    //   .catch((error) => {
-    //     var errorCode = error.code;
-    //     var errorMessage = error.message;
-
-    //     console.log(errorCode, errorMessage);
-    //     // ..
-    //   });
+    apis
+      .signup(data)
+      .then((res) => {
+        console.log("signup completed", res)
+      })
+      .catch((err) => {
+        console.log("signup err : ", err)
+      })
 
 
   };

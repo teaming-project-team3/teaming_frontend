@@ -2,13 +2,14 @@ import React from "react";
 //import styled from "styled-components";
 import Button from "../element/Button";
 import emailCheck from "../shared/common";
-import { useDispatch, useSelector } from "react-redux";
-import { actionCreators as userActions } from "../redux/modules/users";
+import { useSelector } from "react-redux";
+//import { actionCreators as userActions } from "../redux/modules/users";
 import S3Upload from "../Components/Organisms/upload/S3Upload";
 import Image from "../Components/Atoms/Image";
+import {apis} from "../apis/apis"
 
 function SignUp() {
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
 
   const [id, setId] = React.useState("");
   const [nickName, setNickName] = React.useState("");
@@ -17,10 +18,10 @@ function SignUp() {
  // const [user_name, setUserName] = React.useState("");
   const preview = useSelector((state) => state.image.preview);
   
-  const signUp = async (e) => {
+  const signUp = (e) => {
     e.preventDefault();
 
-    if (id === "" || pwd === "" || nickName === "") {
+    if (id === "" || pwd === "" || nickName === "" || pwdCheck === "") {
       window.alert("아이디, 패스워드, 닉네임을 모두 입력해주세요!");
       return;
     }
@@ -34,9 +35,30 @@ function SignUp() {
     //img url FB
 
     //const imgUrl = await getImgUrlFB(id, _profilePreview)
-    const imgUrl = "";
+    //const imgUrl = "";
 
-    dispatch(userActions.signUp(id, pwd, pwdCheck, imgUrl));
+    //dispatch(userActions.signUp());
+
+    const data = {
+      email : "test@test2.com",
+      password : "1q2w3e4r",
+      passwordCheck : "1q2w3e4r",
+      nickname : "test2",
+      kakao: "test2"
+      }
+
+
+    //회원가입 API 구현부
+    //redux middlewear로 옮길 것. 오류발생하여 못함
+    apis
+      .signup(data)
+      .then((res) => {
+        console.log("signup completed", res)
+      })
+      .catch((err) => {
+        console.log("signup err : ", err)
+      })
+
   };
 
   return (
