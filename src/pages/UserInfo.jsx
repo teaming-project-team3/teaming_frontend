@@ -1,5 +1,18 @@
 import styled from "styled-components";
 import {useState} from "react";
+// import {Link} from "react-router-dom"
+
+const User = styled.div`
+  margin-left: 800px;
+  margin-top: 100px;
+`
+
+const Profile = styled.div`
+  width : 50px;
+  height : 50px;
+  border-radius: 50%;
+  background-color: grey;
+`
 
 const Skill1 = styled.h1`
   margin-top: 500px;
@@ -33,6 +46,7 @@ const Skill6 = styled.h1`
 
 
 function UserInfo() {
+
   const [skill1, setSkill1] = useState(1);
   const [skill2, setSkill2] = useState(1);
   const [skill3, setSkill3] = useState(1);
@@ -102,6 +116,15 @@ function UserInfo() {
 
   return (
     <div>
+      <div>
+        <User>
+          <h1><Profile/>박영승</h1>
+          <h5>프론트앤드 개발자</h5>
+          <button>
+            메세지 보내기
+          </button>
+        </User>
+      </div>
       <Skill1>
         <div>
           <img src="https://img.shields.io/badge/React-3776AB?style=for-the-badge&logo=React&logoColor=#61DAFB" alt=""/>
