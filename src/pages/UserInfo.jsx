@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {useState} from "react";
-import {Link} from "react-router-dom"
+// import {Link} from "react-router-dom"
 
 const User = styled.div`
   margin-left: 800px;
@@ -46,7 +46,6 @@ const Skill6 = styled.h1`
 
 
 function UserInfo() {
-  const [room, setRoom] = useState('')
 
   const [skill1, setSkill1] = useState(1);
   const [skill2, setSkill2] = useState(1);
