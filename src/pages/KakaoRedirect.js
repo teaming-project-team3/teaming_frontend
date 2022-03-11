@@ -1,8 +1,10 @@
 // 리다이렉트될 화면
 
-import React from "react";
+import React, {useEffect} from "react";
 import Button from "../element/Button";
-import {apis} from "../apis/apis"
+import {api, apis} from "../apis/apis"
+import { CodeDeploy } from "aws-sdk";
+
 //import { actionCreators as userActions } from "../redux/modules/user";
 //import Spinner from "./Spinner";
 
@@ -12,9 +14,7 @@ const KakaoRedirect = (props) => {
   let code = new URL(window.location.href).searchParams.get("code");
   console.log("code : ", code);
 
-  // const data = {
-  //   user: code
-  // }
+
 
   function sendKakao(){
     
@@ -28,20 +28,18 @@ const KakaoRedirect = (props) => {
           console.log(err);
         })
 
-    
   }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  React.useEffect(async () => {
-    
+  useEffect(() => {
+        // const abc = async () => {
+        //     const response = await api.get(`/auth/kakao/redirect?code=${code}`);
+        //     console.log("in redirect : ", response)
+        //     return response;
+        // };
+    });
 
-
-
-  }, []);
-
-  return <div>
-      카카오 코드 : {code}
-      <Button _onClick={sendKakao}>백엔드로 전송</Button>
+  return <div>kakao login box
+  <Button _onClick={sendKakao}>버튼</Button>
   </div>;
 };
 
