@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Button = (props) => {
+export const Button = (props) => {
   const { text, _onClick, is_float, children, margin, width, padding, disabled } = props;
 
   if (is_float) {
