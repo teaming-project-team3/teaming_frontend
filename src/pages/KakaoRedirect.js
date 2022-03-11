@@ -2,8 +2,7 @@
 
 import React, {useEffect} from "react";
 import Button from "../element/Button";
-import {api, apis} from "../apis/apis"
-import { CodeDeploy } from "aws-sdk";
+import {apis} from "../apis/apis"
 
 //import { actionCreators as userActions } from "../redux/modules/user";
 //import Spinner from "./Spinner";
