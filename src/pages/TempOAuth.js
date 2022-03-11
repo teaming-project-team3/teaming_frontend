@@ -3,8 +3,6 @@
 import { KAKAO_AUTH_URL } from "../apis/kakao/kakao";
 //import Button from "../element/Button";
 import kakaoBtn from "../static/kakaoBtn.png";
-import { apis } from "../apis/apis";
-import { Button } from "../element/Button";
 
 function TempOAuth() {
   //let 변수명 = new URL(window.location.href).searchParams.get('code')
