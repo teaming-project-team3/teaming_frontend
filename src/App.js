@@ -16,6 +16,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ProjectRoom from "./pages/ProjectRoom";
 import TempOAuth from "./pages/TempOAuth";
+import DMJoin from "./Components/Organisms/DMJoin/DMJoin";
+import DMChat from "./Components/Organisms/DMChat/DMChat";
+
 
 
 function App() {
@@ -35,6 +38,8 @@ function App() {
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/auth/kakao/redirect" element={<KakaoRedirect />} />
+          <Route path="/chat/join" element={<DMJoin/>}/>
+          <Route path="/chat/dm" element={<DMChat/>}/>
         </Routes>
     </BrowserRouter>
   );
