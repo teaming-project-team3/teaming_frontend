@@ -8,7 +8,7 @@ const DMJoin = () => {
   return (
     <div className='joinOuterContainer'>
       <div className='joinInnerContainer'>
-        <h1 className='heading'></h1>
+        <h1 className='heading'>채팅</h1>
         <div>
           <input
             placeholder='이름'
