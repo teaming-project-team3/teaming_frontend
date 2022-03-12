@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import {useState} from "react";
+import React, {useState} from "react";
+import {Link} from "react-router-dom";
 // import {Link} from "react-router-dom"
 
 const User = styled.div`
@@ -46,6 +47,8 @@ const Skill6 = styled.h1`
 
 
 function UserInfo() {
+  const [name, setName] = useState('');
+  const [room, setRoom] = useState('');
 
   const [skill1, setSkill1] = useState(1);
   const [skill2, setSkill2] = useState(1);
@@ -120,9 +123,28 @@ function UserInfo() {
         <User>
           <h1><Profile/>박영승</h1>
           <h5>프론트앤드 개발자</h5>
-          <button>
-            메세지 보내기
-          </button>
+              <div>
+                <input
+                  placeholder='이름'
+                  type='text'
+                  onChange={(event) => setName(event.target.value)}
+                />
+              </div>
+              <div>
+                <input
+                  placeholder='채팅방'
+                  type='text'
+                  onChange={(event) => setRoom(event.target.value)}
+                />
+              </div>
+              <Link
+                onClick={(e) => (!name || !room ? e.preventDefault() : null)}
+                to={`/chat/dm?name=${name}&room=${room}`}
+              >
+                <button type='submit'>
+                  메세지 보내기
+                </button>
+              </Link>
         </User>
       </div>
       <Skill1>
