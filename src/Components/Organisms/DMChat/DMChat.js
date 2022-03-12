@@ -10,7 +10,7 @@ import Input from '../../Atoms/Input/Input'
 
 import './Chat.css'
 //서버 주소
-const ENDPOINT = 'http://localhost:4000'
+const ENDPOINT = 'http://localhost:5000'
 
 let socket
 
