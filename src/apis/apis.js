@@ -2,7 +2,7 @@ import axios from "axios";
 import { getCookie } from "../shared/Cookie";
 
 export const api = axios.create({
-  baseURL: "http://3.36.75.239"
+  baseURL: "http://175.204.78.166:3000"
 });
 
 // Teaming Server : http://???
@@ -18,6 +18,9 @@ api.interceptors.request.use(function (config) {
 });
 
 export const apis = {
+
+  //createProject
+  createProject: (data) => api.post("/boards", data),
 
   // post
   post: (lastpost, number) => api.get(`/api/post?lastpost=${lastpost}&number=${number}`),
