@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import Button from "../element/Button";
-import ReactMarkdown from "react-markdown";
 import { Viewer } from "@toast-ui/react-editor";
 
 function Survey() {
