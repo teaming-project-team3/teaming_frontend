@@ -55,7 +55,7 @@ export default function UserStat() {
         </div>
         <div>
           <div style={{ width: "300px" }} display="flex">
-            <RadarChart></RadarChart>
+            <RadarChart curr={"userA"}></RadarChart>
           </div>
 
           <div>
