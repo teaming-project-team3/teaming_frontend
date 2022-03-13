@@ -1,8 +1,8 @@
 import axios from "axios";
 import { getCookie } from "../shared/Cookie";
 
-const api = axios.create({
-  baseURL: "서버 BASE URL 문자열"
+export const api = axios.create({
+  baseURL: "http://175.204.78.166:3000"
 });
 
 // Teaming Server : http://???
@@ -18,6 +18,9 @@ api.interceptors.request.use(function (config) {
 });
 
 export const apis = {
+
+  //createProject
+  createProject: (data) => api.post("/boards", data),
 
   // post
   post: (lastpost, number) => api.get(`/api/post?lastpost=${lastpost}&number=${number}`),
@@ -37,7 +40,9 @@ export const apis = {
   cancelLike: (postId) => api.delete(`/api/post/${postId}/like`),
 
   // user
-  signup: (data) => api.post("/api/register", data),
-  login: (data) => api.post("/api/login", data ),
+  kakaoSend: (code) => api.get(`/auth/kakao/redirect?code=${code}`),
+  signup: (data) => api.post("/auth/signup", data),
+  login: (data) => api.post("/auth/signin", data ),
+
   getLoginUserInfo: () => api.get("/api/loginUser.json"),
 };

@@ -37,7 +37,7 @@ export default function UserStat() {
         <div>
           <div>유저명 : </div>
 
-          <img src="https://ghchart.rshah.org/jamesujeon" />
+          <img src="https://ghchart.rshah.org/jamesujeon" alt="" />
           {/* <img src="https://ghchart.rshah.org/219138/jamesujeon"/> */}
 
           <div style={{ display: "flex" }}>
@@ -55,7 +55,7 @@ export default function UserStat() {
         </div>
         <div>
           <div style={{ width: "300px" }} display="flex">
-            <RadarChart></RadarChart>
+            <RadarChart curr={"userA"}></RadarChart>
           </div>
 
           <div>
