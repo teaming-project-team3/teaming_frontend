@@ -1,4 +1,4 @@
-import React, { useCallback, useState, createRef, useEffect } from "react";
+import React, { useCallback, useState, createRef } from "react";
 import Button from "../element/Button";
 import styled from "styled-components";
 // TOAST UI Editor import
@@ -102,27 +102,27 @@ function CreateProject() {
 
   function handleNums(id, job, event) {
     console.log(id);
-    if (job == "back") {
+    if (job === "back") {
       const newSel = selNum.map((num, idx) => {
-        if (idx == 2) {
+        if (idx === 2) {
           return event.value;
         } else {
           return num;
         }
       });
       setSelNum(newSel);
-    } else if (job == "front") {
+    } else if (job === "front") {
       const newSel = selNum.map((num, idx) => {
-        if (idx == 1) {
+        if (idx === 1) {
           return event.value;
         } else {
           return num;
         }
       });
       setSelNum(newSel);
-    } else if (job == "designer") {
+    } else if (job === "designer") {
       const newSel = selNum.map((num, idx) => {
-        if (idx == 0) {
+        if (idx === 0) {
           return event.value;
         } else {
           return num;
