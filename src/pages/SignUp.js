@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/users";
 import S3Upload from "../Components/Organisms/upload/S3Upload";
 import Image from "../Components/Atoms/Image";
-import {apis} from "../apis/apis"
+//import {apis} from "../apis/apis"
 
 function SignUp() {
   const dispatch = useDispatch();
