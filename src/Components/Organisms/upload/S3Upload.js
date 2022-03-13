@@ -16,6 +16,8 @@ export default function S3Upload(){
     const SECRET_ACCESS_KEY = '7jjTg8szVysVFfCrlBdoeCah6Nemh6/b0Ffv+yQ/';
     const REGION = "ap-northeast-2";
     const S3_BUCKET = 'reactproject2';
+
+    const userId = "temp"
     
     AWS.config.update({
       accessKeyId: ACCESS_KEY,
@@ -40,11 +42,12 @@ export default function S3Upload(){
       }
 
       const uploadFile = (file) => {
+        const imgName = `${userId}_${new Date().getTime()}`
         const params = {
           ACL: 'public-read',
           Body: file,
           Bucket: S3_BUCKET,
-          Key: "upload/" + file.name
+          Key: "upload/" + file.name + imgName
         };
         
         myBucket.putObject(params)
@@ -54,6 +57,8 @@ export default function S3Upload(){
             let imgUrl = "http://reactproject2.s3-website.ap-northeast-2.amazonaws.com/"+res.request.httpRequest.path
 
             console.log("uploaded S3 ImgUrl : ", imgUrl);
+
+            dispatch(imageActions.uploadImage(imgUrl))
 
             setTimeout(() => {
               setShowAlert(false);
