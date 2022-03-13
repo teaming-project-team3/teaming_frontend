@@ -97,7 +97,7 @@ function RadarChart(props) {
       config.data.datasets.push(selectedData[0])
 
       console.log("check Chart : ", config.data.datasets)
-    } 
+    }
 
     const ctx = canvasDom.current.getContext("2d");
     console.log(ctx);
