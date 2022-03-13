@@ -120,6 +120,7 @@
                 <li>apply design</li>
                 <li>api link with min-su zzang</li>
                 <li>DM alarm on the header</li>
+                <li>Infinity Scroll</li>
             </ul>
             <h5>rejected</h5>
             <ul>
@@ -266,6 +267,7 @@
                 <li>apply projects the user clicked 'like'</li>
                 <li>button click, link to the personal detail page</li>
                 <li>number of projects involved</li>
+                <li>Infinity Scroll, Optional</li>
             </ul>
             <h5>rejected</h5>
             <ul>
