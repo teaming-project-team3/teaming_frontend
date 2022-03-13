@@ -48,7 +48,7 @@ function CreateProject() {
       title: projectTitle,
       imgUrl: S3ImgUrl,
       contents: projectContents,
-      stack: selNum,
+      stack: [["designer",selNum[0]],["front",selNum[1]],["back",selNum[2]]],
       period: toStringByFormatting(endDate),
     };
 
