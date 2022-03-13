@@ -109,16 +109,16 @@ const loginFB = (id, pwd) => {
 //     }
 // };
 
-const signUp = () => {
+const signUp = (data) => {
   return function () {
     
-    const data = {
-      email : "test@test.com",
-      password : "1q2w3e4r",
-      passwordCheck : "1q2w3e4r",
-      nickname : "test",
-      kakao: "test"
-      }
+    // const data = {
+    //   email : "test@test.com",
+    //   password : "1q2w3e4r",
+    //   passwordCheck : "1q2w3e4r",
+    //   nickname : "test",
+    //   kakao: "test"
+    //   }
 
 
     //회원가입 API 구현부
