@@ -2,14 +2,14 @@ import React from "react";
 //import styled from "styled-components";
 import Button from "../element/Button";
 import emailCheck from "../shared/common";
-import { useSelector } from "react-redux";
-//import { actionCreators as userActions } from "../redux/modules/users";
+import { useSelector, useDispatch } from "react-redux";
+import { actionCreators as userActions } from "../redux/modules/users";
 import S3Upload from "../Components/Organisms/upload/S3Upload";
 import Image from "../Components/Atoms/Image";
 import {apis} from "../apis/apis"
 
 function SignUp() {
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const [id, setId] = React.useState("");
   const [nickName, setNickName] = React.useState("");
@@ -37,9 +37,7 @@ function SignUp() {
     //const imgUrl = await getImgUrlFB(id, _profilePreview)
     //const imgUrl = "";
 
-    //dispatch(userActions.signUp());
-
-    const data = {
+      const data = {
       email : "test@test2.com",
       password : "1q2w3e4r",
       passwordCheck : "1q2w3e4r",
@@ -47,17 +45,21 @@ function SignUp() {
       kakao: "test2"
       }
 
+    dispatch(userActions.signUp(data));
+
+
+
 
     //회원가입 API 구현부
     //redux middlewear로 옮길 것. 오류발생하여 못함
-    apis
-      .signup(data)
-      .then((res) => {
-        console.log("signup completed", res)
-      })
-      .catch((err) => {
-        console.log("signup err : ", err)
-      })
+    // apis
+    //   .signup(data)
+    //   .then((res) => {
+    //     console.log("signup completed", res)
+    //   })
+    //   .catch((err) => {
+    //     console.log("signup err : ", err)
+    //   })
 
   };
 
