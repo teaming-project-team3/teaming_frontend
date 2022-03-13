@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, createRef, useEffect } from "react";
 import Button from "../element/Button";
 import styled from "styled-components";
 // TOAST UI Editor import
@@ -9,10 +9,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { apis } from "../apis/apis";
 import Select from "react-select";
-import { jobs, numberOfPeople } from "../data/createProject/CreateProjectData"
+import { jobs, numberOfPeople } from "../data/createProject/CreateProjectData";
 import S3Upload from "../Components/Organisms/upload/S3Upload";
 import Image from "../Components/Atoms/Image";
-
 
 function CreateProject() {
   const [startDate, setStartDate] = useState(new Date());
@@ -23,29 +22,46 @@ function CreateProject() {
   const preview = useSelector((state) => state.image.preview);
   const S3ImgUrl = useSelector((state) => state.image.image_url);
 
+  const editorRef = createRef();
 
-  function createProjectFunc () {
-    
+  function leftPad(value) {
+    if (value >= 10) {
+      return value;
+    }
+    return `0${value}`;
+  }
+
+  function toStringByFormatting(source, delimiter = "-") {
+    const year = source.getFullYear();
+    const month = leftPad(source.getMonth() + 1);
+    const day = leftPad(source.getDate());
+    return [year, month, day].join(delimiter);
+  }
+
+  function onChangeMD() {
+    console.log(editorRef.current.getInstance().getMarkdown());
+    setProjectContents(editorRef.current.getInstance().getMarkdown());
+  }
+
+  function createProjectFunc() {
     const data = {
       title: projectTitle,
       imgUrl: S3ImgUrl,
       contents: projectContents,
-      stack: [ ["design", 2], ["front", 2], ["back", 2]],
-      period : endDate,
-    }
+      stack: selNum,
+      period: toStringByFormatting(endDate),
+    };
 
     apis
       .createProject(data)
-      .then((res)=>{
-        console.log("res : ",res)
+      .then((res) => {
+        console.log("res : ", res);
       })
-      .catch((err)=>{
-        console.log("err : ",err)
-      })
-
+      .catch((err) => {
+        console.log("err : ", err);
+      });
   }
 
-  
   const orderByLabel = useCallback(
     (a, b) => a.label.localeCompare(b.label),
     []
@@ -82,16 +98,51 @@ function CreateProject() {
     [orderOptions]
   );
 
+  const [selNum, setSelNum] = useState([0, 0, 0]);
+
+  function handleNums(id, job, event) {
+    console.log(id);
+    if (job == "back") {
+      const newSel = selNum.map((num, idx) => {
+        if (idx == 2) {
+          return event.value;
+        } else {
+          return num;
+        }
+      });
+      setSelNum(newSel);
+    } else if (job == "front") {
+      const newSel = selNum.map((num, idx) => {
+        if (idx == 1) {
+          return event.value;
+        } else {
+          return num;
+        }
+      });
+      setSelNum(newSel);
+    } else if (job == "designer") {
+      const newSel = selNum.map((num, idx) => {
+        if (idx == 0) {
+          return event.value;
+        } else {
+          return num;
+        }
+      });
+      setSelNum(newSel);
+    }
+  }
+
   //dev
   return (
     <React.Fragment>
       <div>새로운 팀 만들기</div>
 
       <div className="title">
-        프로젝트 제목 :<input onChange={(event) => setProjectTitle(event.target.value)}></input>
+        프로젝트 제목 :
+        <input
+          onChange={(event) => setProjectTitle(event.target.value)}
+        ></input>
       </div>
-
-      
 
       <div>
         <img alt="null"></img>
@@ -99,22 +150,28 @@ function CreateProject() {
       </div>
 
       <div>구하는 직무 : 프론트 2명, 백 2명, 디자이너 2명</div>
-      <Select options={jobs} value={selJobs} isMulti onChange={handleChange}/>
+      <Select options={jobs} value={selJobs} isMulti onChange={handleChange} />
 
       {selJobs &&
-          selJobs.map((lang, idx) => (
-            <>
-            <div display="flex">
-              <div key={idx} style={{ width: "300px" }}>
+        selJobs.map((lang, idx) => (
+          <>
+            <div key={idx} display="flex">
+              <div style={{ width: "300px" }}>
                 value: {lang.value},{idx}
               </div>
               <div style={{ width: "300px" }}>
-              <Select options={numberOfPeople}>필요인원</Select>
+                <Select
+                  options={numberOfPeople}
+                  onChange={(e) => {
+                    handleNums(idx, lang.value, e);
+                  }}
+                >
+                  필요인원
+                </Select>
               </div>
             </div>
-            </>
-      ))}
-
+          </>
+        ))}
 
       <div>
         직무별 필요조건
@@ -133,24 +190,20 @@ function CreateProject() {
           height="79vh"
           initialEditType="markdown"
           initialValue="마크다운으로 내용을 입력하세요."
-          onChange={(event) => setProjectContents(event.target.value)}
+          ref={editorRef}
+          onChange={onChangeMD}
         ></Editor>
       </div>
 
       <div>
-        이미지 업로드 : 
-        <S3Upload/>
-
+        이미지 업로드 :
+        <S3Upload />
       </div>
 
       <div style={{ width: "300px" }}>
-      <Image
-        shape="rectangle"
-        src={
-          preview
-            ? preview
-            : "http://via.placeholder.com/400x300"
-        }
+        <Image
+          shape="rectangle"
+          src={preview ? preview : "http://via.placeholder.com/400x300"}
         ></Image>
       </div>
 
@@ -160,7 +213,13 @@ function CreateProject() {
         <div className="calender-container">
           <div className="calender-box">
             <div className="date">시작날짜</div>
-            <div style={{backgroundColor:"#FF6347", border: "1px", width: "150px"}}>
+            <div
+              style={{
+                backgroundColor: "#FF6347",
+                border: "1px",
+                width: "150px",
+              }}
+            >
               <MyDatePicker
                 selected={startDate}
                 dateFormat="yyyy-MM-dd" // 날짜 형식
@@ -170,7 +229,13 @@ function CreateProject() {
           </div>
           <div className="calender-box">
             <div className="date">종료날짜</div>
-            <div style={{backgroundColor:"#FF6347", border: "1px", width: "150px"}}>
+            <div
+              style={{
+                backgroundColor: "#FF6347",
+                border: "1px",
+                width: "150px",
+              }}
+            >
               <MyDatePicker
                 selected={endDate}
                 dateFormat="yyyy-MM-dd" // 날짜 형식
@@ -180,7 +245,7 @@ function CreateProject() {
           </div>
         </div>
       </div>
-      
+
       <Button _onClick={createProjectFunc}>입력 완료</Button>
     </React.Fragment>
   );
@@ -192,7 +257,7 @@ const MyDatePicker = styled(DatePicker)`
   font-size: 1.6rem;
   font-weight: bold;
   background-color: transparent;
-  color: #00BFFF;
+  color: #00bfff;
   border: 1px solid;
 `; // styled-components 이용 스타일륑
 
