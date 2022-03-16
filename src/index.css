@@ -1,3 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 폰트 추가하는 법 1. 이렇게 구글폰트 임포트, 폰트파일을 스태틱에 넣기 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap');
+
+/* 로컬폰트 추가 */
+@font-face {
+  font-family: "NotoSans-Bold";
+  src: url("./static/font/otf/NotoSansKR-Bold.otf")
+  format('truetype');
+}
+
+@font-face {
+  font-family: "NotoSans-Medium";
+  src: url("./static/font/otf/NotoSansKR-Medium.otf")
+  format('truetype');
+}
+
+@font-face {
+  font-family: "NotoSans-Regular";
+  src: url("./static/font/otf/NotoSansKR-Regular.otf")
+  format('truetype');
+}
+
+@font-face {
+  font-family: "NotoSans-Light";
+  src: url("./static/font/otf/NotoSansKR-Light.otf")
+  format('truetype');
+}
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
