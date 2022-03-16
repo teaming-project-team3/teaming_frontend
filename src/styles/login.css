@@ -1,0 +1,29 @@
+.login_container {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    flex:1;
+  }
+
+.login_left_bx {
+    position: relative;
+    flex:0.5;
+    background: #486bff;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 0 50px 50px 0;
+    padding: 5vw;
+    box-sizing: border-box;
+  }
+
+.login_left_bx .login_left_teaming {
+    width: 25vw;
+    height: 25vw;
+    background-color: green;
+    background-size: contain;
+    background-repeat: no-repeat;
+    mix-blend-mode: multiply;
+    position: absolute;
+    bottom: 47px;
+    left: 60px;
+  }

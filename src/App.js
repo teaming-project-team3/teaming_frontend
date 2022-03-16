@@ -3,7 +3,7 @@ import SignUp from "./pages/SignUp";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import KakaoRedirect from "./pages/KakaoRedirect";
 import Login from "./pages/Login"
-//import Header from "./Components/Header"
+import Header from "./Components/Header"
 import Main from "./pages/Main";
 import Survey from "./pages/Survey"
 import UserStat from "./pages/UserStat"
@@ -25,7 +25,7 @@ import UserInfo from "./pages/UserInfo";
 function App() {
   return (
     <BrowserRouter>
-      {/* <Header /> */}
+      <Header />
         <Routes>
           <Route path="/" element={<ProjectRoom />} />
           <Route path="/userinfo" element={<UserInfo />} />
