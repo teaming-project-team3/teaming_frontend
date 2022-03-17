@@ -37,16 +37,14 @@ Button.defaultProps = {
 };
 
 const ElButton = styled.button`
+  margin-top: 14px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 12px 172px;
-  position: absolute;
   width: 384px;
   height: 45px;
-  left: 528px;
-  top: 692px;
   background: #593CE5;
   box-shadow: 0px 1px 8px 3px rgba(0, 0, 0, 0.04);
   border-radius: 4px;

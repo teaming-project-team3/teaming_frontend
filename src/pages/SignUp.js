@@ -8,22 +8,27 @@ import S3Upload from "../Components/Organisms/upload/S3Upload";
 import Image from "../Components/Atoms/Image";
 //import {apis} from "../apis/apis"
 import styled from "styled-components";
+import tw from "tailwind-styled-components";
+import KakaoSignupBtn from "../static/KakaoSignupBtn.png";
 
 const Wrap = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 100%;
 `
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 1024px;
 `
 
 const Title = styled.h1`
-  position: absolute;
+  padding-top: 111px;
+  padding-bottom: 8px;
   width: 96px;
   height: 34px;
   left: 527px;
@@ -37,27 +42,18 @@ const Title = styled.h1`
 `;
 
 const SubTitle = styled.h5`
-  position: absolute;
-  width: 291px;
-  height: 21px;
-  left: 529px;
-  top: 234px;
-
+  padding-top: 42px;
+  padding-bottom: 46px;
   font-family: 'Noto Sans CJK KR';
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
-
   color: #5D6669;
 `;
 
 const EmailTitle = styled.div`
-  position: absolute;
   width: 69px;
-  height: 21px;
-  left: 528px;
-  top: 301px;
   font-family: 'Noto Sans CJK KR';
   font-style: normal;
   font-weight: 400;
@@ -68,11 +64,10 @@ const EmailTitle = styled.div`
 `
 
 const EmailInput = styled.input`
-  display: flex;
+  margin-top: 6px;
   flex-direction: row;
   align-items: center;
   padding: 16px;
-  position: absolute;
   width: 384px;
   height: 46px;
   background: #FFFFFF;
@@ -82,11 +77,8 @@ const EmailInput = styled.input`
 `;
 
 const NameTitle = styled.div`
-  position: absolute;
+  padding-top: 24px;
   width: 79px;
-  height: 21px;
-  left: 529px;
-  top: 398px;
   font-family: 'Noto Sans CJK KR';
   font-style: normal;
   font-weight: 400;
@@ -97,11 +89,11 @@ const NameTitle = styled.div`
 `;
 
 const NameInput = styled.input`
+  margin-top: 6px;
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 16px;
-  position: absolute;
   width: 384px;
   height: 46px;
   background: #FFFFFF;
@@ -111,11 +103,8 @@ const NameInput = styled.input`
 `;
 
 const PwTitle = styled.div`
-  position: absolute;
+  padding-top: 25px;
   width: 59px;
-  height: 21px;
-  left: 528px;
-  top: 496px;
   font-family: 'Noto Sans CJK KR';
   font-style: normal;
   font-weight: 400;
@@ -126,11 +115,11 @@ const PwTitle = styled.div`
 `
 
 const PwInput = styled.input`
+  margin-top: 6px;
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 16px;
-  position: absolute;
   width: 384px;
   height: 46px;
   background: #FFFFFF;
@@ -140,15 +129,13 @@ const PwInput = styled.input`
 `
 
 const PwInput2 = styled.input`
+  margin-top: 6px;
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 16px;
-  position: absolute;
   width: 384px;
   height: 46px;
-  left: 528px;
-  top: 575px;
   background: #FFFFFF;
   border: 1px solid #E4E8EB;
   box-sizing: border-box;
@@ -164,19 +151,14 @@ const SignupBtn = styled.button`
   position: absolute;
   width: 384px;
   height: 45px;
-  left: 528px;
-  top: 692px;
   background: #593CE5;
   box-shadow: 0px 1px 8px 3px rgba(0, 0, 0, 0.04);
   border-radius: 4px;
 `
 
 const SignupTitle = styled.div`
-  position: static;
   width: 52px;
   height: 21px;
-  left: 166px;
-  top: 12px;
   font-family: 'Noto Sans CJK KR';
   font-style: normal;
   font-weight: 400;
@@ -190,11 +172,9 @@ const SignupTitle = styled.div`
 `
 
 const CheckBox = styled.input`
-  position: absolute;
+  margin-top: 15px;
   width: 16px;
   height: 16px;
-  left: 528px;
-  top: 636px;
   background: #FFFFFF;
   border: 1px solid #E4E8EB;
   box-sizing: border-box;
@@ -202,24 +182,27 @@ const CheckBox = styled.input`
 `
 
 const CheckTitle = styled.div`
-  position: absolute;
+  position: static;
   width: 78px;
   height: 18px;
-  left: 564px;
-  top: 635px;
+  left: 0px;
+  top: 0px;
+  
   font-family: 'Noto Sans';
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 150%;
+
   color: #121414;
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: -23px 32px;
 `
 const Look = styled.a`
-  position: absolute;
-  width: 23px;
-  height: 18px;
-  left: 0px;
-  top: 0px; 
+  margin-top: 15px;
   font-family: 'Noto Sans CJK KR';
   font-style: normal;
   font-weight: 400;
@@ -230,15 +213,12 @@ const Look = styled.a`
   flex: none;
   order: 1;
   flex-grow: 0;
-  margin: 635px 530px 371px 887px;
 `
 
 const CheckBox2 = styled.input`
-  position: absolute;
+  margin-top: 9px;
   width: 16px;
   height: 16px;
-  left: 528px;
-  top: 661px;
   background: #FFFFFF;
   border: 1px solid #E4E8EB;
   box-sizing: border-box;
@@ -246,24 +226,27 @@ const CheckBox2 = styled.input`
 `
 
 const CheckTitle2 = styled.div`
-  position: absolute;
+  position: static;
   width: 161px;
-  height: 18px; 
-  left: 564px;
-  top: 660px;
+  height: 18px;
+  left: 0px;
+  top: 0px;
+
   font-family: 'Noto Sans';
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 150%;
+
   color: #121414;
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: -23px 32px;
 `
 const Look2 = styled.a`
-  position: absolute;
-  width: 23px;
-  height: 18px;
-  left: 0px;
-  top: 0px; 
+  margin-top: 7px;
   font-family: 'Noto Sans CJK KR';
   font-style: normal;
   font-weight: 400;
@@ -274,15 +257,13 @@ const Look2 = styled.a`
   flex: none;
   order: 1;
   flex-grow: 0;
-  margin: 660px 530px 371px 887px;
 `
 
 const Or = styled.div`
-  position: absolute;
+  margin-top: 14px;
+  margin-: 122px;
   width: 26px;
   height: 21px;
-  left: 707px;
-  top: 751px;
   font-family: 'Noto Sans CJK KR';
   font-style: normal;
   font-weight: 400;
@@ -292,33 +273,36 @@ const Or = styled.div`
   flex: none;
   order: 1;
   flex-grow: 0;
-  margin: 0px 9px;
 `
 
-const UnderscoreLeft = styled.div`
-  position: absolute;
+const UnderscoreLeft = styled.hr`
+  position: static;
   width: 170px;
   height: 1px;
-  left: 528px;
-  top: 761px;
+  left: 0px;
+  top: 18px;
+
   background: #E4E8EB;
+
   flex: none;
   order: 0;
   flex-grow: 0;
-  margin: 0px 9px;
+  margin: 24px 9px;
 `
 
-const UnderscoreRight = styled.div`
-  position: absolute;
+const UnderscoreRight = styled.hr`
+  position: static;
   width: 170px;
   height: 1px;
-  left: 742px;
-  top: 761px;
+  left: 214px;
+  top: 18px;
+
   background: #E4E8EB;
+
   flex: none;
-  order: 0;
+  order: 2;
   flex-grow: 0;
-  margin: 0px 9px;
+  margin: 24px 9px;
 `
 
 const KakaoBtn = styled.button`
@@ -327,22 +311,30 @@ const KakaoBtn = styled.button`
   justify-content: center;
   align-items: center;
   padding: 12px 172px;
-  position: absolute;
   width: 384px;
   height: 46px;
-  left: 528px;
-  top: 786px;
   background: #FEE500;
   border-radius: 4px;
 `
 
+const KakaoLogo = styled.div`
+  margin-top: 9.62px;
+  background-image: url(${KakaoSignupBtn});
+  background-repeat: no-repeat;
+  position: static;
+  width: 30px;
+  height: 30px;
+  left: 130px;
+  top: 8px;
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+`
 
 const KakaoTitle = styled.div`
-  position: absolute;
   width: 94px;
   height: 21px;
-  left: 160px;
-  top: 12.5px;
   font-family: 'Noto Sans CJK KR';
   font-style: normal;
   font-weight: 400;
@@ -356,20 +348,17 @@ const KakaoTitle = styled.div`
 `
 
 const UnderscoreBottom = styled.div`
-  position: absolute;
+  margin-top: 98px;
   width: 1108px;
   height: 0px;
-  left: 166px;
-  top: 930px;
   border: 1px solid #EBEEF1;
 `
 
 const BottomLogo = styled.div`
-  position: absolute;
+  margin-top: 32px;
+  margin-bottom: 32px;
   width: 87px;
   height: 29px;
-  left: 677px;
-  top: 963px;
   font-family: 'Noto Sans CJK KR';
   font-style: normal;
   font-weight: 700;
@@ -377,6 +366,7 @@ const BottomLogo = styled.div`
   line-height: 29px;
   color: #593CE5;
 `
+
 
 
 function SignUp() {
@@ -451,53 +441,82 @@ function SignUp() {
         {/*  }*/}
         {/*  ></Image>*/}
         {/*</div>*/}
-        <Title>회원가입</Title>
-        <SubTitle>티밍과 함께 프로젝트에 함께할 동료를 찾아보세요!</SubTitle>
-        <EmailTitle>
-          이메일(ID) *{" "}
-          <EmailInput
-            placeholder="아이디 입력"
-            onChange={(e) => {
-              setId(e.target.value);
-            }}
-          />
-        </EmailTitle>
-        <NameTitle>
-          이름/ 기업명 *{" "}
-          <NameInput
-            placeholder="이름/ 기업명 입력"
-            onChange={(e) => {
-              console.log(e.target.value);
-              setNickName(e.target.value);
-            }}
-          />
-        </NameTitle>
-        <PwTitle>
-          비밀번호 *{" "}
-          <PwInput
-            placeholder="비밀번호 입력"
-            onChange={(e) => {
-              setPwd(e.target.value);
-            }}
-          />
-        </PwTitle>
-        <PwInput2
-          placeholder="비밀번호 확인"
-          onChange={(e) => {
-            setPwdCheck(e.target.value);
-          }}
-        />
-        <CheckBox type="checkbox" />
-        <CheckTitle>[필수] 이용약관</CheckTitle>
-        <Look>보기</Look>
-        <CheckBox2 type="checkbox"/>
-        <CheckTitle2>[필수] 개인동의 수집 이용동의서</CheckTitle2>
-        <Look2>보기</Look2>
-        <Button _onClick={signUp}><SignupTitle>회원가입</SignupTitle></Button>
-        <UnderscoreLeft /><Or>또는</Or><UnderscoreRight/>
-        <KakaoBtn><KakaoTitle>카카오 회원가입</KakaoTitle></KakaoBtn>
-        <UnderscoreBottom />
-        <BottomLogo>Teaming</BottomLogo>
+        <div style={{width: "384px"}}>
+          <div>
+            <Title>회원가입</Title>
+            <SubTitle>티밍과 함께 프로젝트에 함께할 동료를 찾아보세요!</SubTitle>
+          </div>
+          <div>
+            <EmailTitle>
+              이메일(ID) *{" "}
+              <EmailInput
+                placeholder="아이디 입력"
+                onChange={(e) => {
+                  setId(e.target.value);
+                }}
+              />
+            </EmailTitle>
+          </div>
+          <div>
+            <NameTitle>
+              이름/ 기업명 *{" "}
+              <NameInput
+                placeholder="이름/ 기업명 입력"
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  setNickName(e.target.value);
+                }}
+              />
+            </NameTitle>
+          </div>
+          <div>
+            <PwTitle>
+              비밀번호 *{" "}
+              <PwInput
+                placeholder="비밀번호 입력"
+                onChange={(e) => {
+                  setPwd(e.target.value);
+                }}
+              />
+              <PwInput2
+                placeholder="비밀번호 확인"
+                onChange={(e) => {
+                  setPwdCheck(e.target.value);
+                }}
+              />
+            </PwTitle>
+          </div>
+
+          <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+            <div>
+              <CheckBox type="checkbox" />
+              <CheckTitle>[필수] 이용약관</CheckTitle>
+            </div>
+            <Look>보기</Look>
+          </div>
+          <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+            <div>
+              <CheckBox2 type="checkbox"/>
+              <CheckTitle2>[필수] 개인동의 수집 이용동의서</CheckTitle2>
+            </div>
+            <Look2>보기</Look2>
+          </div>
+          <div>
+            <Button _onClick={signUp}><SignupTitle>회원가입</SignupTitle></Button>
+          </div>
+          <div style={{display: "flex", justifyContent: "center"}}>
+            <UnderscoreLeft /><Or>또는</Or><UnderscoreRight/>
+          </div>
+          <div style={{display: "flex", justifyContent: "center"}}>
+            <KakaoBtn>
+             <KakaoLogo /><KakaoTitle>카카오 회원가입</KakaoTitle>
+            </KakaoBtn>
+          </div>
+          </div>
+        <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+          <UnderscoreBottom />
+          <BottomLogo>Teaming</BottomLogo>
+        </div>
       </Container>
     </Wrap>
   );

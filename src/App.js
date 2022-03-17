@@ -25,7 +25,7 @@ import UserInfo from "./pages/UserInfo";
 function App() {
   return (
     <BrowserRouter>
-      {/*<Header />*/}
+      <Header />
         <Routes>
           <Route path="/" element={<ProjectRoom />} />
           <Route path="/userinfo" element={<UserInfo />} />
