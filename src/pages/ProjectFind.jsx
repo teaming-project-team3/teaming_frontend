@@ -18,7 +18,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 1440px; 
+  width: 1440px;
 `
 
 const Title = styled.h1`
@@ -511,7 +511,6 @@ const CardUsername3 = styled.div`
 `
 
 function FindProject() {
-
 
   return (
     <Wrap>
