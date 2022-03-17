@@ -68,7 +68,7 @@ const AllBtn = styled.button`
 
 const AllTitle = styled.div`
   position: static;
-  width: 50px;
+  width: 60px;
   height: 50px;
   left: 28px;
   top: -3px;
@@ -109,7 +109,7 @@ const DevBtn = styled.button`
 
 const DevTitle = styled.div`
   position: static;
-  width: 64px;
+  width: 74px;
   height: 50px;
   left: 28px;
   top: -3px;
@@ -149,7 +149,7 @@ const DesignBtn = styled.button`
 
 const DesignTitle = styled.div`
   position: static;
-  width: 79px;
+  width: 89px;
   height: 50px;
   left: 28px;
   top: -3px;
