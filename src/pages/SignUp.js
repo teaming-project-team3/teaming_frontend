@@ -2,13 +2,13 @@ import React from "react";
 //import styled from "styled-components";
 import Button from "../element/Button";
 import emailCheck from "../shared/common";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/users";
-import S3Upload from "../Components/Organisms/upload/S3Upload";
-import Image from "../Components/Atoms/Image";
+// import S3Upload from "../Components/Organisms/upload/S3Upload";
+// import Image from "../Components/Atoms/Image";
 //import {apis} from "../apis/apis"
 import styled from "styled-components";
-import tw from "tailwind-styled-components";
+// import tw from "tailwind-styled-components";
 import KakaoSignupBtn from "../static/KakaoSignupBtn.png";
 
 const Wrap = styled.div`
@@ -139,20 +139,6 @@ const PwInput2 = styled.input`
   background: #FFFFFF;
   border: 1px solid #E4E8EB;
   box-sizing: border-box;
-  border-radius: 4px;
-`
-
-const SignupBtn = styled.button`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 12px 172px;
-  position: absolute;
-  width: 384px;
-  height: 45px;
-  background: #593CE5;
-  box-shadow: 0px 1px 8px 3px rgba(0, 0, 0, 0.04);
   border-radius: 4px;
 `
 
@@ -377,7 +363,7 @@ function SignUp() {
   const [pwd, setPwd] = React.useState("");
   const [pwdCheck, setPwdCheck] = React.useState("");
  // const [user_name, setUserName] = React.useState("");
-  const preview = useSelector((state) => state.image.preview);
+ //  const preview = useSelector((state) => state.image.preview);
   
   const signUp = (e) => {
     e.preventDefault();
