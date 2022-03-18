@@ -1,18 +1,18 @@
-import { motion } from "framer-motion";
-import { useState } from "react";
 import styled from "styled-components";
-import Modal from "../Components/Modals/Modal";
 import BannerImg from "../static/BannerImg.png";
 import RightCursor from "../static/RightCursor.png";
 import Pic from "../static/Pic.png"
 import Pic2 from "../static/Pic2.png"
 import pngwing from "../static/pngwing.png"
+import monocle from "../static/monocle.png";
+import Badge from  "../static/Badge.png"
 
 const Wrap = styled.div`
   width: 100%;
-  height: 100%;
+  height: 2964px;
   display: flex;
   justify-content: center;
+  background-color: #F7F7F7;
 `
 
 const Container = styled.div`
@@ -22,6 +22,8 @@ const Container = styled.div`
   align-items: center;
   width: 1440px;
   height: 2964px;
+  background-color: #F7F7F7;
+
 `
 
 const Banner = styled.div`
@@ -180,23 +182,6 @@ const SubBanner2 = styled.div`
   border-radius: 12px;
 `
 
-// const SubBannerTitle = styled.div`
-//   margin-right: 48px;
-//   margin-top: 28px;
-//   margin-bottom: 76px;
-//   width: 160px;
-//   height: 64px;
-//   font-family: 'Noto Sans CJK KR';
-//   font-style: normal;
-//   font-weight: 700;
-//   font-size: 20.3691px;
-//   line-height: 150%;
-//   color: #FFFFFF;
-//   flex: none;
-//   order: 0;
-//   flex-grow: 0;
-// `
-
 const SubBannerTitle2 = styled.div`
   margin-left: 50px;
   position: static;
@@ -252,15 +237,15 @@ const SubBannerBtnTitle2 = styled.div`
   margin: auto;
 `
 
-const Cursor2 = styled.div`
-  //background-image: url(${RightCursor});
-  background-repeat: no-repeat;
-  position: absolute;
-  width: 13.73px;
-  height: 12.02px;
-  border: 0px solid #000000;
-  margin: 0px 65px;
-`
+// const Cursor2 = styled.div`
+//   //background-image: url(${RightCursor});
+//   background-repeat: no-repeat;
+//   position: absolute;
+//   width: 13.73px;
+//   height: 12.02px;
+//   border: 0px solid #000000;
+//   margin: 0px 65px;
+// `
 
 const CharImg2 = styled.div`
   background-image: url(${Pic2});
@@ -761,7 +746,337 @@ const LiveCardUser4 = styled.div`
   margin: 262.11px 7px;
 `
 
+const ProjectFindDesignerTitle = styled.div`
+  position: absolute;
+  width: 304px;
+  height: 38px;
+  left: 0px;
+  top: 0px;
+  font-family: 'Noto Sans CJK KR';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 160%;
+  color: #000000;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 1413px 330px 2021px;
+`
 
+const LovelyImg = styled.div`
+  background-image: url(${monocle});
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  left: 290px;
+  top: 0px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  margin: 0px 6px;
+`
+
+const ProjectFindDesignerSubTitle = styled.div`
+  position: absolute;
+  width: 300px;
+  height: 24px;
+  left: 0px;
+  top: 42px;
+  font-family: 'Noto Sans CJK KR';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #000000;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  margin: 1413px 330px 2021px;
+`
+
+const DesignerCard = styled.div`
+  position: absolute;
+  width: 550px;
+  height: 138px;
+  left: 166px;
+  top: 1513px;
+
+  background: #FFFFFF;
+  border-radius: 12px;
+  margin: 0px 161px 2021px;
+`
+
+const ProfileImg = styled.div`
+  position: static;
+  width: 68px;
+  height: 68px;
+  left: 0px;
+  top: 0px;
+
+  //background: url(image.png);
+  
+  border: 1.32164px solid #EBEBEB;
+  box-sizing: border-box;
+  border-radius: 105.731px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 10px 14px;
+`
+
+const StarBadge = styled.div`
+  background-image: url(${Badge});
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  left: 0px;
+  top: 0px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 12px 94px;
+`
+
+const DesignerName = styled.div`
+  position: absolute;
+  left: 17.75%;
+  right: 55.01%;
+  top: 3.46%;
+  bottom: 3.46%;
+  font-family: 'Noto Sans CJK KR';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 150%;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  margin: 12.9px 4px 0px 30px;
+`
+
+const UXUITitle = styled.div`
+  position: absolute;
+  width: 83px;
+  height: 18px;
+  left: 150.06px;
+  top: 4px;
+  font-family: 'Noto Sans CJK KR';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 150% ;
+  color: #593CE5;
+  flex: none;
+  order: 3;
+  flex-grow: 0;
+  margin: 16px 4px 0px 30px;
+`
+
+const DesignerBtn = styled.button`
+  position: absolute;
+  width: 168px;
+  height: 32px;
+  left: 94px;
+  top: 40px;
+  background: #593CE5;
+  box-shadow: 0px 1px 8px 3px rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  margin: 14px 0px;
+`
+
+const DesignerBtnTitle = styled.div`
+  position: absolute;
+  width: 58px;
+  height: 18px;
+  left: 55px;
+  top: 7px;
+  font-family: 'Noto Sans CJK KR';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 150%;
+  color: #FFFFFF;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 0px 0px;
+`
+
+const PortfolioOne = styled.div`
+  position: absolute; 
+  width: 110px;
+  height: 114px;
+  left: 300px;
+  top: 12px;
+  background: url(image.png);
+  box-shadow: 0px 1px 8px 3px rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 0px 8px;
+`
+
+const PortfolioTwo = styled.div`
+  position: absolute; 
+  width: 110px;
+  height: 114px;
+  left: 418px;
+  top: 12px;
+  background: url(image.png);
+  box-shadow: 0px 1px 8px 3px rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 0px 8px;
+`
+
+const DesignerCard2 = styled.div`
+  position: absolute;
+  width: 550px;
+  height: 138px;
+  left: 737px;
+  top: 1513px;
+
+  background: #FFFFFF;
+  border-radius: 12px;
+  margin: 0px 161px 2021px;
+`
+// const ProfileImg2 = styled.div`
+//   position: static;
+//   width: 68px;
+//   height: 68px;
+//   left: 0px;
+//   top: 0px;
+//
+//   //background: url(image.png);
+//
+//   border: 1.32164px solid #EBEBEB;
+//   box-sizing: border-box;
+//   border-radius: 105.731px;
+//   flex: none;
+//   order: 0;
+//   flex-grow: 0;
+//   margin: 10px 14px;
+// `
+
+const StarBadge2 = styled.div`
+  background-image: url(${Badge});
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  left: 0px;
+  top: 0px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 12px 94px;
+`
+
+const DesignerName2 = styled.div`
+  position: absolute;
+  left: 17.75%;
+  right: 55.01%;
+  top: 3.46%;
+  bottom: 3.46%;
+  font-family: 'Noto Sans CJK KR';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 150%;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  margin: 12.9px 4px 0px 30px;
+`
+
+const UXUITitle2 = styled.div`
+  position: absolute;
+  width: 83px;
+  height: 18px;
+  left: 150.06px;
+  top: 4px;
+  font-family: 'Noto Sans CJK KR';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 150% ;
+  color: #593CE5;
+  flex: none;
+  order: 3;
+  flex-grow: 0;
+  margin: 16px 4px 0px 30px;
+`
+
+const DesignerBtn2 = styled.button`
+  position: absolute;
+  width: 168px;
+  height: 32px;
+  left: 94px;
+  top: 40px;
+  background: #593CE5;
+  box-shadow: 0px 1px 8px 3px rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  margin: 14px 0px;
+`
+
+const DesignerBtnTitle2 = styled.div`
+  position: absolute;
+  width: 58px;
+  height: 18px;
+  left: 55px;
+  top: 7px;
+  font-family: 'Noto Sans CJK KR';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 150%;
+  color: #FFFFFF;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 0px 0px;
+`
+
+const PortfolioOne2 = styled.div`
+  position: absolute; 
+  width: 110px;
+  height: 114px;
+  left: 300px;
+  top: 12px;
+  background: url(image.png);
+  box-shadow: 0px 1px 8px 3px rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 0px 8px;
+`
+
+// const PortfolioTwo2 = styled.div`
+//   position: absolute;
+//   width: 110px;
+//   height: 114px;
+//   left: 418px;
+//   top: 12px;
+//   background: url(image.png);
+//   box-shadow: 0px 1px 8px 3px rgba(0, 0, 0, 0.04);
+//   border-radius: 10px;
+//   flex: none;
+//   order: 0;
+//   flex-grow: 0;
+//   margin: 0px 8px;
+// `
 
 
 
@@ -788,7 +1103,7 @@ function Main() {
             </SubBanner2>
           </div>
           <div>
-            <FirstTitle><FirecrackerImg />실시간 인기 프로젝트</FirstTitle>
+            <FirstTitle>실시간 인기 프로젝트<FirecrackerImg /></FirstTitle>
             <FirstSubTitle>티밍에서 인기 높은 프로젝트를 구경해보세요!</FirstSubTitle>
             <LiveCard>
               <LiveCardImg /><LiveCardJobBtn><LiveCardJobTitle>백엔드 개발자</LiveCardJobTitle></LiveCardJobBtn>
@@ -826,6 +1141,22 @@ function Main() {
                 <LiveCardUser4>우아한형제</LiveCardUser4>
               </div>
             </LiveCard4>
+          </div>
+          <div>
+            <ProjectFindDesignerTitle>프로젝트를 찾는 중인 디자이너<LovelyImg/></ProjectFindDesignerTitle>
+            <ProjectFindDesignerSubTitle>함께 프로젝트를 진행할 개발자를 찾아보세요!</ProjectFindDesignerSubTitle>
+            <DesignerCard>
+              <ProfileImg />
+              <StarBadge /><DesignerName>김기진 · </DesignerName><UXUITitle>UX/ UI 디자이너</UXUITitle>
+              <DesignerBtn><DesignerBtnTitle>프로필 보기</DesignerBtnTitle></DesignerBtn>
+              <PortfolioOne /><PortfolioTwo />
+            </DesignerCard>
+            <DesignerCard2>
+              <ProfileImg />
+              <StarBadge2 /><DesignerName2>김기진 · </DesignerName2><UXUITitle2>UX/ UI 디자이너</UXUITitle2>
+              <DesignerBtn2><DesignerBtnTitle2>프로필 보기</DesignerBtnTitle2></DesignerBtn2>
+              <PortfolioOne2 /><PortfolioTwo />
+            </DesignerCard2>
           </div>
         </>
       </Container>
