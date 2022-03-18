@@ -1,13 +1,12 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from "react";
-//import {actionCreators as userActions} from "../redux/modules/users";
+import {actionCreators as userActions} from "../redux/modules/users";
 import emailCheck from "../shared/common";
-//import {useDispatch} from "react-redux";
+import {useDispatch} from "react-redux";
 import { KAKAO_AUTH_URL } from "../apis/kakao/kakao";
-import { apis } from "./../apis/apis";
 import loginImg from "../static/loginImg.png";
 import tw from "tailwind-styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import HorizonLine from "../Components/Atoms/HorizonLine";
 
 const LoginImage = tw.div`
@@ -20,7 +19,8 @@ const LoginImage = tw.div`
 
 // 로그인 기능
 const Login = (props) => {
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [id, setId] = React.useState("");
   const [pwd, setPwd] = React.useState("");
@@ -38,31 +38,14 @@ const Login = (props) => {
       return;
     }
 
-    //dispatch(userActions.loginFB(id, pwd));
+    dispatch(userActions.loginAPI(id, pwd,(surveyChecker)=>
+      navigate('/', {state: surveyChecker}
+    )))
 
-    const data = {
-      email: "test@test.com",
-      password: "1q2w3e4r",
-    };
-
-    apis
-      .login(data)
-      .then((res) => {
-        console.log("login completed", res);
-      })
-      .catch((err) => {
-        console.log("login err : ", err);
-      });
   };
 
   return (
     <LoginImage>
-      {/* <Container>
-        <div>Use the Container as any other React Component</div>
-      </Container>
-      <h1 className="text-3xl font-bold text-red-400 underline">
-        Hello world!
-      </h1> */}
       <img
         src={loginImg}
         alt="로그인이미지"
