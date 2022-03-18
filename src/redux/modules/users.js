@@ -1,11 +1,11 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../apis/apis";
+import { setCookie } from "../../shared/Cookie";
+import { history } from "../../redux/configStore";
+import { useNavigate } from "react-router";
 
-//import { setCookie, getCookie, deleteCookie } from "../../shared/Cookie";
 
-//import { auth } from "../../shared/firebase";
-//import firebase from "firebase/app";
 
 // actions
 //const LOG_IN = "LOG_IN";
@@ -38,6 +38,7 @@ const deleteSkillsAction = createAction(DELETE_SKILLS, (data)=>({ data }))
 const initialState = {
   user: null,
   is_login: false,
+  surveyChecker: false,
   profileImage: null,
   abilityFront: [],
   skillsFront: [],
@@ -100,48 +101,31 @@ export const updateAbilityAPI = (data, idx) => {
 };
 
 // middleware actions
-const loginFB = (id, pwd) => {
-  return function (dispatch, getState, { history }) {
+const loginAPI = (id, pwd, callback) => {
+  return function ({history}) {
     //로그인 API 구현부
 
     const data = {
-      email: "test@test.com",
-      password: "1q2w3e4r",
+      email: id,
+      password: pwd,
     };
 
     apis
       .login(data)
       .then((res) => {
+        localStorage.setItem("userId", id);
+        setCookie("token", res.data.data.Authorization, 1);
         console.log("login completed", res);
+
+        //surveyChecker 받아서 넘기기
+        callback(true);
       })
       .catch((err) => {
         console.log("login err : ", err);
+        window.alert("로그인 실패!", err);
       });
 
-    // auth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then((res) => {
-    //   auth
-    //     .signInWithEmailAndPassword(id, pwd)
-    //     .then((user) => {
-    //       console.log("loginFB : ",user);
-
-    //       dispatch(
-    //         setUser({
-    //           user_name: user.user.displayName,
-    //           id: id,
-    //           user_profile: "",
-    //           uid: user.user.uid,
-    //         })
-    //       );
-
-    //       history.push("/");
-    //     })
-    //     .catch((error) => {
-    //       var errorCode = error.code;
-    //       var errorMessage = error.message;
-
-    //       console.log(errorCode, errorMessage);
-    //     });
-    // });
+      return;
   };
 };
 
@@ -402,7 +386,7 @@ const actionCreators = {
   logOut,
   getUser,
   signUp,
-  loginFB,
+  loginAPI,
   loginCheckFB,
   logoutFB,
   resetAbilityAction,

@@ -14,7 +14,6 @@ import CreateProject from "./pages/CreateProject"
 // Import css files
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import ProjectRoom from "./pages/ProjectRoom";
 import TempOAuth from "./pages/TempOAuth";
 import DMJoin from "./Components/Organisms/DMJoin/DMJoin";
 import DMChat from "./Components/Organisms/DMChat/DMChat";

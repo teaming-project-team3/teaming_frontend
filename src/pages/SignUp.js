@@ -1,9 +1,12 @@
 import React from "react";
-//import styled from "styled-components";
 import Button from "../element/Button";
 import emailCheck from "../shared/common";
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/users";
+<<<<<<< HEAD
+import S3Upload from "../Components/Organisms/upload/S3Upload";
+import Image from "../Components/Atoms/Image";
+=======
 // import S3Upload from "../Components/Organisms/upload/S3Upload";
 // import Image from "../Components/Atoms/Image";
 //import {apis} from "../apis/apis"
@@ -354,6 +357,7 @@ const BottomLogo = styled.div`
 `
 
 
+>>>>>>> c247ecbc335ca7f5b1f8c72ae8b38d54c1338e6a
 
 function SignUp() {
   const dispatch = useDispatch();
@@ -362,8 +366,12 @@ function SignUp() {
   const [nickName, setNickName] = React.useState("");
   const [pwd, setPwd] = React.useState("");
   const [pwdCheck, setPwdCheck] = React.useState("");
+<<<<<<< HEAD
+  const preview = useSelector((state) => state.image.preview);
+=======
  // const [user_name, setUserName] = React.useState("");
  //  const preview = useSelector((state) => state.image.preview);
+>>>>>>> c247ecbc335ca7f5b1f8c72ae8b38d54c1338e6a
   
   const signUp = (e) => {
     e.preventDefault();
