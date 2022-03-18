@@ -1,12 +1,10 @@
 import React from "react";
-//import styled from "styled-components";
 import Button from "../element/Button";
 import emailCheck from "../shared/common";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/users";
 import S3Upload from "../Components/Organisms/upload/S3Upload";
 import Image from "../Components/Atoms/Image";
-//import {apis} from "../apis/apis"
 
 function SignUp() {
   const dispatch = useDispatch();
@@ -15,7 +13,6 @@ function SignUp() {
   const [nickName, setNickName] = React.useState("");
   const [pwd, setPwd] = React.useState("");
   const [pwdCheck, setPwdCheck] = React.useState("");
- // const [user_name, setUserName] = React.useState("");
   const preview = useSelector((state) => state.image.preview);
   
   const signUp = (e) => {

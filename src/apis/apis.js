@@ -2,10 +2,12 @@ import axios from "axios";
 import { getCookie } from "../shared/Cookie";
 
 export const api = axios.create({
-  baseURL: "http://175.204.78.166:3000"
+  baseURL: process.env.REACT_APP_BASE_URL_WJ
 });
 
 // Teaming Server : http://???
+//원진님 http://3.36.75.239
+//민수님 http://175.204.78.166:3000
 
 // Alter defaults after instance has been created
 //api.defaults.headers.common['Authorization'] = AUTH_TOKEN;
