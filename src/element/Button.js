@@ -37,18 +37,17 @@ Button.defaultProps = {
 };
 
 const ElButton = styled.button`
-  width: ${(props) => props.width};
-  background-color: #00FF7F;
-  color: #ffffff;   
-  padding: ${(props) => props.padding};
-  box-sizing: border-box;
-  border: none;
-  ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
-  ${(props) => (props.disabled ? `  &:disabled {
-    cursor: default;
-    opacity: 0.5;
-    background: var(--button-bg-color, #e4e6eb);
-  };` : "")}
+  margin-top: 14px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 172px;
+  width: 384px;
+  height: 45px;
+  background: #593CE5;
+  box-shadow: 0px 1px 8px 3px rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
 `;
 
 const FloatButton = styled.button`
