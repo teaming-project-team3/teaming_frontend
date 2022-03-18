@@ -37,6 +37,7 @@ function App() {
           <Route path="/survey" element={<Survey/>} />
           <Route path="/userStats" element={<UserStat />} />
           <Route path="/createProject" element={<CreateProject/>} />
+          <Route path="/ProjectRoom" element={<ProjectRoom/>} />
           <Route path="/projectDetail" element={<ProjectDetailModal/>} />
           <Route path="/projectFind" element={<ProjectFind/>} />
           <Route path="/signUp" element={<SignUp />} />
