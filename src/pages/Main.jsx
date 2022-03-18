@@ -2,149 +2,126 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import styled from "styled-components";
 import Modal from "../Components/Modals/Modal";
+import BannerImg from "../static/BannerImg.png";
 
-const Wrapper = styled.div`
-  background-color: whitesmoke;
-  height: 200vh;
-  margin-top: 100px;
-`;
-
-const Card = styled.div`
-  margin-left: 640px;
-`;
-
-const Row = styled(motion.div)`
-  display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(6, 1fr);
-  margin-bottom: 5px;
-`;
-
-const Box = styled(motion.div)`
-  margin-top: 50px;
-  margin-left: 20px;
-  background-color: white;
-  height: 200px;
-`;
-
-const Info = styled(motion.div)`
-  padding: 50px;
-  background-color: #c3c3c3;
-`;
-
-const ProFile = styled.div`
-  padding: 5px;
-`;
-
-const Title = styled.div`
-  font-size: 12px;
-`;
-
-const SubTitle = styled.div`
-  font-size: 8px;
-`;
-
-const User = styled.div`
-  font-size: 6px;
-`;
-
-const Like = styled.div`
-  font-size: 6px;
+const Wrap = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
 `
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 1440px;
+  height: 2964px;
+`
+
+const Banner = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 499px;
+  left: 0px;
+  top: 74px;
+  background: #010101;
+`
+
+const BannerTitle = styled.div`
+  margin-left: 332px;
+  padding-top: 169px;
+  width: 315px;
+  height: 94px;
+  font-family: 'Noto Sans CJK KR';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 130%;
+  color: #FFFFFF;
+`
+
+const BannerLogo = styled.div`
+  background-image: url(${BannerImg});
+  background-repeat: no-repeat;
+
+  margin-left: 836.6px;
+  margin-top: -200px;
+  
+  width: 636.97px;
+  height: 367.23px;
+`
+
+const BannerSubTitle = styled.div`
+  margin-left: 332px;
+  padding-top: 116px;
+  width: 228px;
+  height: 46px;
+  left: 166px;
+  top: 279px;
+  font-family: 'Noto Sans CJK KR';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 130%;
+  color: #FFFFFF;
+`
+const SubBanner = styled.div`
+  margin-left: 166px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 48px;
+  position: absolute;
+  width: 540px;
+  height: 168px;
+  left: 166px;
+  top: 629px;
+  background: #7545F2;
+  border-radius: 12px;
+`
+
+const SubBanner2 = styled.div`
+  margin-left: 166px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 48px;
+  position: absolute;
+  width: 540px;
+  height: 168px;
+  left: 734px;
+  top: 629px;
+  background: #0C42C1;
+  border-radius: 12px;
+`
+
+
 function Main() {
-  const [modalVisible, setModalVisible] = useState(false);
-
-  // const openModal = () => {
-  //   setModalVisible(true)
-  // }
-  const closeModal = () => {
-    setModalVisible(false)
-  }
-
-  // eslint-disable-next-line no-unused-vars
-  const onBoxClicked = () => {
-    console.log("box1 클릭")
-  }
-
   return (
-    <Wrapper>
-      <Card>
-        <Row>
-          <>
-            <Box onClick={() => setModalVisible(true)}>
-              <Info />
-              <ProFile>
-                <Title>개발자 인원을 모집합니다.</Title>
-                <SubTitle>개발 / 초기 개발 단계 / 현재 구성원 4명 / 전체 모집시까지</SubTitle>
-                <User>우아한 형제들</User>
-                <Like>좋아요 10개</Like>
-              </ProFile>
-            </Box>
-            {
-              modalVisible &&
-              <Modal
-                visible={modalVisible}
-                closable={true}
-                maskClosable={true}
-                onClose={closeModal}>
-                <h1>
-                  프로젝트명
-                </h1>
-                <h5>
-                  프로젝트 내용: 블라블라
-                </h5>
-                <div>
-                  현재인원: 프론트2, 백앤드2, 디자이너1
-                </div>
-                <div>
-                  요구인원: 프론트2, 백앤드2, 디자이너2
-                </div>
-                <div>
-                  요구 기술 스택: React, Node.js, Figma
-                </div>
-              </Modal>
-            }
-          </>
-          <>
-            <Box onClick={() => setModalVisible(true)}>
-              <Info />
-              <ProFile>
-                <Title>개발자 인원을 모집합니다.</Title>
-                <SubTitle>개발 / 초기 개발 단계 / 현재 구성원 4명 / 전체 모집시까지</SubTitle>
-                <User>우아한 형제들</User>
-                <Like>좋아요 10개</Like>
-              </ProFile>
-            </Box>
-            {
-              modalVisible &&
-              <Modal
-                visible={modalVisible}
-                closable={true}
-                maskClosable={true}
-                onClose={closeModal}>
-                <h1>
-                  프로젝트명
-                </h1>
-                <h5>
-                  프로젝트 내용: 블라블라
-                </h5>
-                <div>
-                  현재인원: 프론트2, 백앤드2, 디자이너1
-                </div>
-                <div>
-                  요구인원: 프론트2, 백앤드2, 디자이너2
-                </div>
-                <div>
-                  요구 기술 스택: React, Node.js, Figma
-                </div>
-              </Modal>
-            }
-          </>
-        </Row>
-      </Card>
-    </Wrapper>
+    <Wrap>
+      <Container>
+        <>
+          <Banner>
+            <BannerTitle>프로젝트에 즐거움을 모두에게 성장을</BannerTitle>
+            <BannerSubTitle>개발자와 디자이너라면 누구나 참여할 수 있는 티밍 !</BannerSubTitle>
+            <BannerLogo />
+          </Banner>
+          <div>
+            <SubBanner>
 
+            </SubBanner>
+            <SubBanner2>
+
+            </SubBanner2>
+          </div>
+
+        </>
+      </Container>
+    </Wrap>
   );
 }
 
