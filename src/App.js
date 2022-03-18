@@ -23,11 +23,13 @@ import UserInfo from "./pages/UserInfo";
 
 
 function App() {
+
+
   return (
     <BrowserRouter>
       <Header />
         <Routes>
-          <Route path="/" element={<ProjectRoom />} />
+          <Route path="/" element={<Survey />} />
           <Route path="/userinfo" element={<UserInfo />} />
           <Route path="/oauth" element={<TempOAuth />} />
           <Route path="/main" element={<Main/>} />
