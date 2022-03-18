@@ -19,5 +19,7 @@ module.exports = {
       'noto3' : ['NotoSans-Light', 'NotoSans-Light'],
     },
   },
-  plugins: [],
+  plugins: [
+    require('tw-elements/dist/plugin')
+  ],
 }
