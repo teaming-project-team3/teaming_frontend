@@ -34,7 +34,7 @@ jobs:
           echo "REACT_APP_BASE_URL_WJ=$REACT_APP_BASE_URL_WJ" >> .env.production
         env:
           REACT_APP_BASE_URL_MS: ${{ secrets.REACT_APP_BASE_URL_MS }}
-          RREACT_APP_BASE_URL_WJ: ${{ secrets.REACT_APP_BASE_URL_WJ }}
+          REACT_APP_BASE_URL_WJ: ${{ secrets.REACT_APP_BASE_URL_WJ }}
       
       - name: Install Dependencies   
         run: npm install
