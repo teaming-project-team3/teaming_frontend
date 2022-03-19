@@ -15,7 +15,7 @@ export default function S3Upload(){
     const ACCESS_KEY = process.env.REACT_APP_BASE_ACCESS_KEY;
     const SECRET_ACCESS_KEY = process.env.REACT_APP_SECRET_ACCESS_KEY;
     const REGION = "ap-northeast-2";
-    const S3_BUCKET = 'reactproject2';
+    const S3_BUCKET = 'teamingdeploy';
 
     const userId = "temp"
     
@@ -54,7 +54,7 @@ export default function S3Upload(){
           .on('httpUploadProgress', (evt, res) => {
             setProgress(Math.round((evt.loaded / evt.total) * 100))
             setShowAlert(true);
-            let imgUrl = "http://reactproject2.s3-website.ap-northeast-2.amazonaws.com/"+res.request.httpRequest.path
+            let imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/"+res.request.httpRequest.path
 
             console.log("uploaded S3 ImgUrl : ", imgUrl);
 

@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../element/Button";
 import emailCheck from "../shared/common";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/users";
 // import S3Upload from "../Components/Organisms/upload/S3Upload";
 // import Image from "../Components/Atoms/Image";
@@ -9,6 +9,9 @@ import { actionCreators as userActions } from "../redux/modules/users";
 import styled from "styled-components";
 // import tw from "tailwind-styled-components";
 import KakaoSignupBtn from "../static/KakaoSignupBtn.png";
+import S3Upload from "../Components/Organisms/upload/S3Upload";
+import Image from "../Components/Atoms/Image";
+
 
 const Wrap = styled.div`
   width: 100%;
@@ -360,9 +363,9 @@ function SignUp() {
   const [pwd, setPwd] = React.useState("");
   const [pwdCheck, setPwdCheck] = React.useState("");
  // const [user_name, setUserName] = React.useState("");
- //  const preview = useSelector((state) => state.image.preview);
+  const preview = useSelector((state) => state.image.preview);
   
-  const signUp = (e) => {
+  const signUp = async (e) => {
     e.preventDefault();
 
     if (id === "" || pwd === "" || nickName === "" || pwdCheck === "") {
@@ -379,7 +382,6 @@ function SignUp() {
     //img url FB
 
     //const imgUrl = await getImgUrlFB(id, _profilePreview)
-    //const imgUrl = "";
 
       const data = {
       email : "test@test2.com",
@@ -410,20 +412,20 @@ function SignUp() {
   return (
     <Wrap>
       <Container>
-        {/*<div>*/}
-        {/*  이미지 업로드 :*/}
-        {/*  <S3Upload/>*/}
-        {/*</div>*/}
-        {/*<div>*/}
-        {/*<Image*/}
-        {/*  shape="circle"*/}
-        {/*  src={*/}
-        {/*    preview*/}
-        {/*      ? preview*/}
-        {/*      : "http://via.placeholder.com/400x300"*/}
-        {/*  }*/}
-        {/*  ></Image>*/}
-        {/*</div>*/}
+        <div>
+         이미지 업로드 :
+         <S3Upload/>
+        </div>
+        <div>
+        <Image
+          shape="circle"
+          src={
+            preview
+             ? preview
+              : "http://via.placeholder.com/400x300"
+          }
+          ></Image>
+        </div>
         <div style={{width: "384px"}}>
           <div>
             <Title>회원가입</Title>
