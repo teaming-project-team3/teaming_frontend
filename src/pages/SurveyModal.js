@@ -7,6 +7,7 @@ export const SurveyModal = (props) => {
   useEffect(() => {
     setShow(props.checker);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

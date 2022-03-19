@@ -4,10 +4,8 @@ import Input from "../Components/Atoms/Input";
 import { SurveyModal } from "./SurveyModal";
 import ModalSelect from "./ModalSelect";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router";
 
 function Survey(props) {
-  const location = useLocation();
   const modalIsOpen = props.modalIsOpen;
 
   const [url, setUrl] = useState("");
