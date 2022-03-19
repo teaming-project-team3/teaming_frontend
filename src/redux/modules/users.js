@@ -2,7 +2,6 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../apis/apis";
 import { setCookie } from "../../shared/Cookie";
-import { Navigate } from "react-router";
 
 // actions
 //const LOG_IN = "LOG_IN";
@@ -173,6 +172,26 @@ const logoutFB = () => {
     // })
   };
 };
+
+const surveyAPI = (data, callback) => {
+  return function () {
+
+    apis
+      .survey(data)
+      .then((res)=>{
+
+        console.log("success", res)
+        callback();
+      })
+      .catch((err)=>{
+        console.log("err",err)
+      })
+
+
+
+
+  }
+}
 
 // reducer
 export default handleActions(
@@ -355,6 +374,7 @@ const actionCreators = {
   getUser,
   signUp,
   loginAPI,
+  surveyAPI,
   loginCheckFB,
   logoutFB,
   resetAbilityAction,
