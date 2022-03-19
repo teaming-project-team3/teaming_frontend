@@ -331,30 +331,31 @@
 <각 페이지별 url>
 
 소셜로그인 : 
-http://reactproject2.s3-website.ap-northeast-2.amazonaws.com/oauth
+http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/oauth  
 
 메인 : 
-http://reactproject2.s3-website.ap-northeast-2.amazonaws.com/main
+http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/
 
 마이페이지 : 
-http://reactproject2.s3-website.ap-northeast-2.amazonaws.com/myPage
+http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/myPage
 
 설문조사 : 
-http://reactproject2.s3-website.ap-northeast-2.amazonaws.com/survey
+로그인 -> test@test.com // 1q2w3e4r 로그인시 메인에서 보임
+http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/login
 
 유저정보 : 
-http://reactproject2.s3-website.ap-northeast-2.amazonaws.com/userStats
+http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/userStats
 
 프로젝트생성 : 
-http://reactproject2.s3-website.ap-northeast-2.amazonaws.com/createProject
+http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.comcreateProject
 
 프로젝트상세 : 
-http://reactproject2.s3-website.ap-northeast-2.amazonaws.com/projectDetail
+http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/projectDetail
 
 회원가입 : 
-http://reactproject2.s3-website.ap-northeast-2.amazonaws.com/signUp
+http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/signUp
 
 로그인 : 
-http://reactproject2.s3-website.ap-northeast-2.amazonaws.com/login
+http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/login
 
-배포 URL : http://reactproject2.s3-website.ap-northeast-2.amazonaws.com/
+배포 URL : http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/
