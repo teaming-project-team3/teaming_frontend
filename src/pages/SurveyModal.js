@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export const SurveyModal = (props) => {
-  const isDisplay = true;
 
   const [show, setShow] = useState(props.checker);
 

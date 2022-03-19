@@ -1,13 +1,6 @@
-import { Link } from "react-router-dom";
-import tw from "tailwind-styled-components";
 import Image from "../Atoms/Image";
 import project1 from "../../static/images/userStats/exProject01.png"
-import urlClip from "../../static/images/userStats/urlClip.png"
-const Nav = tw.div`
-  pt-5
-  pb-5
-  border-b-black
-`;
+import urlClip from "../../static/images/userStats/urlClip.png";
 
 function FortFolioCard() {
   return (

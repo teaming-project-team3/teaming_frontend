@@ -1,9 +1,5 @@
+import React from "react";
 import styled from "styled-components";
-import React, {useState} from "react";
-
-const Waraper = styled.div`
-  margin-left: 1000px;
-`
 
 const Wrap = styled.div`
   width: 100%;

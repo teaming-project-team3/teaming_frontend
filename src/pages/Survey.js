@@ -1,13 +1,12 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import Select from "react-select";
 import Input from "../Components/Atoms/Input";
 import { SurveyModal } from "./SurveyModal";
 import ModalSelect from "./ModalSelect";
 import { useSelector } from "react-redux";
-import { useLocation, useParams } from "react-router";
+import { useLocation } from "react-router";
 
-function Survey(props) {
-  const params = useParams();
+function Survey() {
   const location = useLocation();
   const modalIsOpen = location.state;
   const [url, setUrl] = useState("");
@@ -19,11 +18,11 @@ function Survey(props) {
   const abilityDesigner = useSelector((state) => state.users.abilityDesigner);
   const skillsDesigner = useSelector((state) => state.users.skillsDesigner);
 
-  useEffect(()=>{
+  // useEffect(()=>{
     
-    console.log("Parents! ability", skillsFront)
-    console.log("params", modalIsOpen)
-  },[abilityFront])
+  //   console.log("Parents! ability", skillsFront)
+  //   console.log("params", modalIsOpen)
+  // },[abilityFront, modalIsOpen, skillsFront])
   
   const positions = useMemo(
     () => [
@@ -35,11 +34,11 @@ function Survey(props) {
   );
 
   const checkType = (e) => {
-    if (e.target.value == "1") {
+    if (e.target.value === "1") {
       setType("1");
-    } else if (e.target.value == "2") {
+    } else if (e.target.value === "2") {
       setType("2");
-    } else if (e.target.value == "3") {
+    } else if (e.target.value === "3") {
       setType("3");
     }
   };
@@ -73,7 +72,7 @@ function Survey(props) {
             type="radio"
             id="type1"
             value="1"
-            checked={type_num == "1"}
+            checked={type_num === "1"}
             onChange={checkType}
           />
           <label htmlFor="1">FrontEnd</label>
@@ -83,7 +82,7 @@ function Survey(props) {
             type="radio"
             id="type2"
             value="2"
-            checked={type_num == "2"}
+            checked={type_num === "2"}
             onChange={checkType}
           />
           <label htmlFor="2">BackEnd</label>
@@ -93,7 +92,7 @@ function Survey(props) {
             type="radio"
             id="type3"
             value="3"
-            checked={type_num == "3"}
+            checked={type_num === "3"}
             onChange={checkType}
           />
           <label htmlFor="3">Designer</label>
