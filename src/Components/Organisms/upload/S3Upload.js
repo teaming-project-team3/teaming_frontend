@@ -12,8 +12,8 @@ export default function S3Upload(){
     const [selectedFile, setSelectedFile] = useState(null);
     const [showAlert, setShowAlert] = useState(false);
 
-    const ACCESS_KEY = 'AKIAXJITDNTPF75I4C6T';
-    const SECRET_ACCESS_KEY = '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';
+    const ACCESS_KEY = process.env.REACT_APP_BASE_ACCESS_KEY;
+    const SECRET_ACCESS_KEY = process.env.REACT_APP_SECRET_ACCESS_KEY;
     const REGION = "ap-northeast-2";
     const S3_BUCKET = 'reactproject2';
 
