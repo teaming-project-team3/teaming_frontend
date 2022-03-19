@@ -9,7 +9,7 @@ function SkillBadge(props) {
     w-fit
     mb-[0.859rem] mr-[0.523rem]
     ">
-      <img src={src} className="h-[0.914rem] font-noto2 mr-[0.563rem]"></img>
+      <img src={src} alt="img" className="h-[0.914rem] font-noto2 mr-[0.563rem]"></img>
       <div className="text-xs">{name}</div>
     </div>
   );

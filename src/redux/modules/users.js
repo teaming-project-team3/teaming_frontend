@@ -2,10 +2,6 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../apis/apis";
 import { setCookie } from "../../shared/Cookie";
-import { history } from "../../redux/configStore";
-import { useNavigate } from "react-router";
-
-
 
 // actions
 //const LOG_IN = "LOG_IN";

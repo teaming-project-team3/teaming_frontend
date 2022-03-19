@@ -1,5 +1,4 @@
-import React, { useCallback, useState, useMemo, useEffect } from "react";
-import tw from "tailwind-styled-components";
+import React, { useCallback, useState, useMemo } from "react";
 import {
   proLangInit,
   skillsInit,
@@ -9,7 +8,7 @@ import {
 import makeAnimated from "react-select/animated";
 import CreatableSelect from "react-select/creatable";
 import Select from "react-select";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
     deleteAbility,
   deleteSkills,
@@ -24,7 +23,7 @@ const animatedComponents = makeAnimated();
 function ModalSelect(props) {
   // styles that do not show 'x' for fixed options
   const dispatch = useDispatch();
-  const [position, setPosition] = useState(props.position);
+  const position = props.position;
   const ability = props.ability? props.ability : null;
   const skill = props.skills? props.skills : null;
   console.log("props!!!!", props.ability);
@@ -98,6 +97,7 @@ function ModalSelect(props) {
 
       
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [proLang, orderOptions]
   );
 
@@ -144,6 +144,7 @@ function ModalSelect(props) {
         dispatch(resetSkills(inputValue[inputValue.length-1], position));
         }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [frameWorks, orderOptions]
   );
 
