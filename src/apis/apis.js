@@ -2,7 +2,7 @@ import axios from "axios";
 import { getCookie } from "../shared/Cookie";
 
 export const api = axios.create({
-  baseURL: "http://3.36.75.239"
+  baseURL: process.env.REACT_APP_BASE_URL_WJ
 });
 
 // Teaming Server : http://???

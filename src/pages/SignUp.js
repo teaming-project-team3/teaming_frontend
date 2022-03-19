@@ -10,7 +10,6 @@ import Image from "../Components/Atoms/Image";
 import HorizonLine from "../Components/Atoms/HorizonLine";
 import { useNavigate } from "react-router";
 import AWS from 'aws-sdk';
-import { actionCreators } from "../redux/modules/image";
 
 const Title = styled.h1`
   font-family: "Noto Sans CJK KR";
@@ -268,7 +267,6 @@ function SignUp() {
     region: REGION,
   });
 
-
   const uploadFile = (file, data) => {
     const imgName = `${id}_${new Date().getTime()}`
     const params = {
@@ -283,10 +281,10 @@ function SignUp() {
         let imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/"+res.request.httpRequest.path
 
         console.log("uploaded S3 ImgUrl : ", imgUrl);
-        dispatch(actionCreators.uploadImage(imgUrl))
+        //dispatch(actionCreators.uploadImage(imgUrl))
         data = {...data, profileUrl: imgUrl};
+        
         setTimeout(() => {
-          window.alert("잠시 후 다시 시도해주세요!(이미지 업로드 문제)")
         }, 3000)
         
       dispatch(userActions.signUp(data, () => {navigate('/login')}));
