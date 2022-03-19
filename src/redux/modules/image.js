@@ -6,15 +6,18 @@ import produce from "immer";
 const UPLOADING = "UPLOADING";
 const UPLOAD_IMAGE = "UPLOAD_IMAGE";
 const SET_PREVIEW = "SET_PREVIEW";
+const SET_FILE = "SET_FILE";
 
 //const uploading = createAction(UPLOADING, (uploading) => ({uploading}));
 const uploadImage = createAction(UPLOAD_IMAGE, (image_url) => ({image_url}));
 const setPreview = createAction(SET_PREVIEW, (preview) => ({preview}));
+const setFile = createAction(SET_FILE, (file) => ({file}));
 
 const initialState = {
     image_url: '',
     uploading: false,
     preview: null,
+    image_file: null,
 }
 
 const uploadImageFB = (image) => {
@@ -46,13 +49,17 @@ export default handleActions({
     }),
     [SET_PREVIEW]: (state, action) => produce(state, (draft) => {
       draft.preview = action.payload.preview;
-    })
+    }),
+    [SET_FILE]: (state, action) => produce(state, (draft) => {
+        draft.image_file = action.payload.file;
+      })
 }, initialState);
 
 const actionCreators = {
   uploadImage,
   uploadImageFB,
   setPreview,
+  setFile,
 };
 
 export {actionCreators};

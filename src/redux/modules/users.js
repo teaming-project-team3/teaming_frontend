@@ -127,24 +127,19 @@ const loginAPI = (id, pwd, callback) => {
 };
 
 
-const signUp = (data) => {
+const signUp = (data, callback) => {
   return function () {
-    // const data = {
-    //   email : "test@test.com",
-    //   password : "1q2w3e4r",
-    //   passwordCheck : "1q2w3e4r",
-    //   nickname : "test",
-    //   kakao: "test"
-    //   }
 
     //회원가입 API 구현부
     apis
       .signup(data)
       .then((res) => {
         console.log("signup completed", res);
+        callback();
       })
       .catch((err) => {
         console.log("signup err : ", err);
+        window.alert("잠시 후 다시 시도해주세요!")
       });
   };
 };
