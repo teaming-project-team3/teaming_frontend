@@ -57,6 +57,7 @@ export const SurveyModal = (props) => {
                   class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1"
                   onClick={()=>{
                     //설문데이터 전송 api 구현부
+                    props.sendData(()=>{setShow(false)});
                   }}
                 >
                   Save changes

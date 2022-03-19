@@ -3,12 +3,17 @@ import Select from "react-select";
 import Input from "../Components/Atoms/Input";
 import { SurveyModal } from "./SurveyModal";
 import ModalSelect from "./ModalSelect";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as userActions } from "../redux/modules/users";
 
 function Survey(props) {
   const modalIsOpen = props.modalIsOpen;
-
+  const dispatch = useDispatch();
+  const [position, setPosition] = useState("");
   const [url, setUrl] = useState("");
+  const [url1, setUrl1] = useState("");
+  const [url2, setUrl2] = useState("");
+  const [url3, setUrl3] = useState("");
   const [type_num, setType] = useState("1");
   const abilityFront = useSelector((state) => state.users.abilityFront);
   const skillsFront = useSelector((state) => state.users.skillsFront);
@@ -42,9 +47,33 @@ function Survey(props) {
     }
   };
 
+  const sendSurveyData = (callback) => {
+
+    const data={
+      position : position,
+      front : {
+      ability: abilityFront,
+      skills : skillsFront,
+      },
+      back: {
+      ability: abilityBack,
+      skills : skillsBack,
+      },
+      design : {
+      ability: abilityDesigner,
+      skills : skillsDesigner,
+      },
+      portfolioUrl : [url,url1,url2,url3],
+      }
+
+
+    dispatch(userActions.surveyAPI(data, callback));
+
+  }
+
   return (
     <div className="overflow-scroll">
-    <SurveyModal checker={modalIsOpen}>
+    <SurveyModal checker={modalIsOpen} sendData={sendSurveyData}>
 
       <div className="flex justify-center m-5 text-base font-noto2">
         프로필을 완성하기 위한 다음 정보를 입력해주세요!
@@ -52,7 +81,9 @@ function Survey(props) {
 
       <div className="mb-2 ml-5 text-base font-noto1">포지션</div>
 
-      <Select className="ml-5 mr-5" options={positions} />
+      <Select className="ml-5 mr-5" options={positions} placeholder={position} onChange={(e)=>{
+        setPosition(e.value)
+      }}/>
 
       <div className="mb-2 ml-5 text-base mt-7 font-noto1">깃허브 URL : </div>
 
@@ -110,7 +141,7 @@ function Survey(props) {
         value={url}
         placeholder="Project Url #1"
         _onChange={(e) => {
-          setUrl(e.target.value);
+          setUrl1(e.target.value);
         }}
       ></Input>
      
@@ -119,7 +150,7 @@ function Survey(props) {
         value={url}
         placeholder="Project Url #2"
         _onChange={(e) => {
-          setUrl(e.target.value);
+          setUrl2(e.target.value);
         }}
       ></Input>
      
@@ -128,7 +159,7 @@ function Survey(props) {
         value={url}
         placeholder="Project Url #3"
         _onChange={(e) => {
-          setUrl(e.target.value);
+          setUrl3(e.target.value);
         }}
       ></Input>
       </div>
