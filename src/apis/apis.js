@@ -14,7 +14,7 @@ export const api = axios.create({
 
 api.interceptors.request.use(function (config) {
   const accessToken = getCookie("token");
-  config.headers.common["token"] = `${accessToken}`;
+  config.headers.common["Authorization"] = `${accessToken}`;
   //config.headers.common["authorization"] = `Bearer ${accessToken}`;
   return config;
 });
@@ -45,6 +45,7 @@ export const apis = {
   kakaoSend: (code) => api.get(`/auth/kakao/redirect?code=${code}`),
   signup: (data) => api.post("/auth/signup", data),
   login: (data) => api.post("/auth/signin", data ),
+  survey: (data) => api.post("/users/suvey", data),
 
   getLoginUserInfo: () => api.get("/api/loginUser.json"),
 };

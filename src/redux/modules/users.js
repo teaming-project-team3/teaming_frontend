@@ -174,6 +174,26 @@ const logoutFB = () => {
   };
 };
 
+const surveyAPI = (data, callback) => {
+  return function () {
+
+    apis
+      .survey(data)
+      .then((res)=>{
+
+        console.log("success", res)
+        callback();
+      })
+      .catch((err)=>{
+        console.log("err",err)
+      })
+
+
+
+
+  }
+}
+
 // reducer
 export default handleActions(
   {
@@ -355,6 +375,7 @@ const actionCreators = {
   getUser,
   signUp,
   loginAPI,
+  surveyAPI,
   loginCheckFB,
   logoutFB,
   resetAbilityAction,
