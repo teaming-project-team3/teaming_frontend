@@ -1,12 +1,14 @@
+import { useLocation } from "react-router";
 import styled from "styled-components";
+import Badge from "../static/Badge.png";
 import BannerImg from "../static/BannerImg.png";
-import RightCursor from "../static/RightCursor.png";
-import Pic from "../static/Pic.png"
-import Pic2 from "../static/Pic2.png"
-import pngwing from "../static/pngwing.png"
-import monocle from "../static/monocle.png";
-import Badge from  "../static/Badge.png"
 import emoji from "../static/emoji.png";
+import monocle from "../static/monocle.png";
+import Pic from "../static/Pic.png";
+import Pic2 from "../static/Pic2.png";
+import pngwing from "../static/pngwing.png";
+import RightCursor from "../static/RightCursor.png";
+import Survey from "./Survey";
 
 const Wrap = styled.div`
   width: 100%;
@@ -1935,8 +1937,13 @@ const DevPortfolioOne2 = styled.div`
 `
 
 function Main() {
+
+  const location = useLocation();
+  const modalIsOpen = location.state;
+  
   return (
     <Wrap>
+      <Survey modalIsOpen={modalIsOpen}></Survey>
       <Container>
         <>
           <Banner>
