@@ -6,9 +6,10 @@ import ModalSelect from "./ModalSelect";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
 
-function Survey() {
+function Survey(props) {
   const location = useLocation();
-  const modalIsOpen = location.state;
+  const modalIsOpen = props.modalIsOpen;
+
   const [url, setUrl] = useState("");
   const [type_num, setType] = useState("1");
   const abilityFront = useSelector((state) => state.users.abilityFront);
