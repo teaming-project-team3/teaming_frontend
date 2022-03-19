@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 
 export const SurveyModal = (props) => {
 
-  const [show, setShow] = useState(props.checker);
+  const [show, setShow] = useState(false);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setShow(props.checker);
+
+  }, []);
 
   return (
     <div>
