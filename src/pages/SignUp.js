@@ -3,39 +3,17 @@ import Button from "../element/Button";
 import emailCheck from "../shared/common";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/users";
-// import S3Upload from "../Components/Organisms/upload/S3Upload";
-// import Image from "../Components/Atoms/Image";
-//import {apis} from "../apis/apis"
 import styled from "styled-components";
-// import tw from "tailwind-styled-components";
 import KakaoSignupBtn from "../static/KakaoSignupBtn.png";
 import S3Upload from "../Components/Organisms/upload/S3Upload";
 import Image from "../Components/Atoms/Image";
-
-
-const Wrap = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-`
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 1024px;
-`
+import HorizonLine from "../Components/Atoms/HorizonLine";
+import { useNavigate } from "react-router";
+import AWS from 'aws-sdk';
+import { actionCreators } from "../redux/modules/image";
 
 const Title = styled.h1`
-  padding-top: 111px;
-  padding-bottom: 8px;
-  width: 96px;
-  height: 34px;
-  left: 527px;
-  top: 192px;
-  font-family: 'Noto Sans CJK KR';
+  font-family: "Noto Sans CJK KR";
   font-style: normal;
   font-weight: 700;
   font-size: 26px;
@@ -44,26 +22,23 @@ const Title = styled.h1`
 `;
 
 const SubTitle = styled.h5`
-  padding-top: 42px;
-  padding-bottom: 46px;
-  font-family: 'Noto Sans CJK KR';
+  font-family: "Noto Sans CJK KR";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
-  color: #5D6669;
+  color: #5d6669;
 `;
 
 const EmailTitle = styled.div`
-  width: 69px;
-  font-family: 'Noto Sans CJK KR';
+  font-family: "Noto Sans CJK KR";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
   letter-spacing: -0.04em;
   color: #121414;
-`
+`;
 
 const EmailInput = styled.input`
   margin-top: 6px;
@@ -72,16 +47,14 @@ const EmailInput = styled.input`
   padding: 16px;
   width: 384px;
   height: 46px;
-  background: #FFFFFF;
-  border: 1px solid #E4E8EB;
+  background: #ffffff;
+  border: 1px solid #e4e8eb;
   box-sizing: border-box;
   border-radius: 4px;
 `;
 
 const NameTitle = styled.div`
-  padding-top: 24px;
-  width: 79px;
-  font-family: 'Noto Sans CJK KR';
+  font-family: "Noto Sans CJK KR";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -98,23 +71,21 @@ const NameInput = styled.input`
   padding: 16px;
   width: 384px;
   height: 46px;
-  background: #FFFFFF;
-  border: 1px solid #E4E8EB;
+  background: #ffffff;
+  border: 1px solid #e4e8eb;
   box-sizing: border-box;
   border-radius: 4px;
 `;
 
 const PwTitle = styled.div`
-  padding-top: 25px;
-  width: 59px;
-  font-family: 'Noto Sans CJK KR';
+  font-family: "Noto Sans CJK KR";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
   letter-spacing: -0.04em;
   color: #121414;
-`
+`;
 
 const PwInput = styled.input`
   margin-top: 6px;
@@ -124,11 +95,11 @@ const PwInput = styled.input`
   padding: 16px;
   width: 384px;
   height: 46px;
-  background: #FFFFFF;
-  border: 1px solid #E4E8EB;
+  background: #ffffff;
+  border: 1px solid #e4e8eb;
   box-sizing: border-box;
   border-radius: 4px;
-`
+`;
 
 const PwInput2 = styled.input`
   margin-top: 6px;
@@ -138,160 +109,46 @@ const PwInput2 = styled.input`
   padding: 16px;
   width: 384px;
   height: 46px;
-  background: #FFFFFF;
-  border: 1px solid #E4E8EB;
+  background: #ffffff;
+  border: 1px solid #e4e8eb;
   box-sizing: border-box;
   border-radius: 4px;
-`
+`;
 
 const SignupTitle = styled.div`
-  width: 52px;
-  height: 21px;
-  font-family: 'Noto Sans CJK KR';
+  font-family: "Noto Sans CJK KR";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
-  color: #FFFFFF;
+  color: #ffffff;
   flex: none;
   order: 0;
   flex-grow: 0;
   margin: 0px 0px;
-`
-
-const CheckBox = styled.input`
-  margin-top: 15px;
-  width: 16px;
-  height: 16px;
-  background: #FFFFFF;
-  border: 1px solid #E4E8EB;
-  box-sizing: border-box;
-  border-radius: 4px;
-`
+`;
 
 const CheckTitle = styled.div`
   position: static;
-  width: 78px;
-  height: 18px;
-  left: 0px;
-  top: 0px;
-  
-  font-family: 'Noto Sans';
+  font-family: "Noto Sans";
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 150%;
-
   color: #121414;
-
   flex: none;
   order: 0;
   flex-grow: 0;
-  margin: -23px 32px;
-`
+`;
 const Look = styled.a`
-  margin-top: 15px;
-  font-family: 'Noto Sans CJK KR';
+  font-family: "Noto Sans CJK KR";
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
-  line-height: 150%;
   text-decoration-line: underline;
-  color: #5C3FBF;
-  flex: none;
+  color: #5c3fbf;
   order: 1;
-  flex-grow: 0;
-`
-
-const CheckBox2 = styled.input`
-  margin-top: 9px;
-  width: 16px;
-  height: 16px;
-  background: #FFFFFF;
-  border: 1px solid #E4E8EB;
-  box-sizing: border-box;
-  border-radius: 4px;
-`
-
-const CheckTitle2 = styled.div`
-  position: static;
-  width: 161px;
-  height: 18px;
-  left: 0px;
-  top: 0px;
-
-  font-family: 'Noto Sans';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 150%;
-
-  color: #121414;
-
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-  margin: -23px 32px;
-`
-const Look2 = styled.a`
-  margin-top: 7px;
-  font-family: 'Noto Sans CJK KR';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 150%;
-  text-decoration-line: underline;
-  color: #5C3FBF;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
-`
-
-const Or = styled.div`
-  margin-top: 14px;
-  margin-: 122px;
-  width: 26px;
-  height: 21px;
-  font-family: 'Noto Sans CJK KR';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 150%;
-  color: #A7AAAB;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
-`
-
-const UnderscoreLeft = styled.hr`
-  position: static;
-  width: 170px;
-  height: 1px;
-  left: 0px;
-  top: 18px;
-
-  background: #E4E8EB;
-
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-  margin: 24px 9px;
-`
-
-const UnderscoreRight = styled.hr`
-  position: static;
-  width: 170px;
-  height: 1px;
-  left: 214px;
-  top: 18px;
-
-  background: #E4E8EB;
-
-  flex: none;
-  order: 2;
-  flex-grow: 0;
-  margin: 24px 9px;
-`
+`;
 
 const KakaoBtn = styled.button`
   display: flex;
@@ -301,9 +158,9 @@ const KakaoBtn = styled.button`
   padding: 12px 172px;
   width: 384px;
   height: 46px;
-  background: #FEE500;
+  background: #fee500;
   border-radius: 4px;
-`
+`;
 
 const KakaoLogo = styled.div`
   margin-top: 9.62px;
@@ -318,52 +175,53 @@ const KakaoLogo = styled.div`
   flex: none;
   order: 0;
   flex-grow: 0;
-`
+`;
 
 const KakaoTitle = styled.div`
-  width: 94px;
-  height: 21px;
-  font-family: 'Noto Sans CJK KR';
+  font-family: "Noto Sans CJK KR";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
-  color: #3E4849;
+  color: #3e4849;
   flex: none;
   order: 1;
   flex-grow: 0;
   margin: 0px 0px;
-`
+`;
 
 const UnderscoreBottom = styled.div`
   margin-top: 98px;
   width: 1108px;
   height: 0px;
-  border: 1px solid #EBEEF1;
-`
+  border: 1px solid #ebeef1;
+`;
 
 const BottomLogo = styled.div`
   margin-top: 32px;
   margin-bottom: 32px;
   width: 87px;
   height: 29px;
-  font-family: 'Noto Sans CJK KR';
+  font-family: "Noto Sans CJK KR";
   font-style: normal;
   font-weight: 700;
   font-size: 20.5645px;
   line-height: 29px;
-  color: #593CE5;
-`
+  color: #593ce5;
+`;
 
 function SignUp() {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+  
   const [id, setId] = React.useState("");
   const [nickName, setNickName] = React.useState("");
   const [pwd, setPwd] = React.useState("");
   const [pwdCheck, setPwdCheck] = React.useState("");
- // const [user_name, setUserName] = React.useState("");
+  // const [user_name, setUserName] = React.useState("");
   const preview = useSelector((state) => state.image.preview);
+  const imgUrl = useSelector((state) => state.image.image_url);
+  const imgFile = useSelector((state) => state.image.image_file);
   
   const signUp = async (e) => {
     e.preventDefault();
@@ -378,132 +236,179 @@ function SignUp() {
       return;
     }
 
-    //redux & apis
-    //img url FB
+    if (pwd!==pwdCheck){
+      window.alert("암호가 일치하지 않습니다!")
+      return;
+    }
 
-    //const imgUrl = await getImgUrlFB(id, _profilePreview)
+    const data = {
+      email: id,
+      password: pwd,
+      passwordCheck: pwdCheck,
+      nickname: nickName,
+      profileUrl: imgUrl,
+    };
 
-      const data = {
-      email : "test@test2.com",
-      password : "1q2w3e4r",
-      passwordCheck : "1q2w3e4r",
-      nickname : "test2",
-      kakao: "test2"
-      }
-
-    dispatch(userActions.signUp(data));
-
-
-
-
-    //회원가입 API 구현부
-    //redux middlewear로 옮길 것. 오류발생하여 못함
-    // apis
-    //   .signup(data)
-    //   .then((res) => {
-    //     console.log("signup completed", res)
-    //   })
-    //   .catch((err) => {
-    //     console.log("signup err : ", err)
-    //   })
+    uploadFile(imgFile, data);
 
   };
 
+  const ACCESS_KEY = process.env.REACT_APP_BASE_ACCESS_KEY;
+  const SECRET_ACCESS_KEY = process.env.REACT_APP_SECRET_ACCESS_KEY;
+  const REGION = "ap-northeast-2";
+  const S3_BUCKET = 'teamingdeploy';
+
+  AWS.config.update({
+    accessKeyId: ACCESS_KEY,
+    secretAccessKey: SECRET_ACCESS_KEY
+  });
+  
+  const myBucket = new AWS.S3({
+    params: { Bucket: S3_BUCKET},
+    region: REGION,
+  });
+
+
+  const uploadFile = (file, data) => {
+    const imgName = `${id}_${new Date().getTime()}`
+    const params = {
+      ACL: 'public-read',
+      Body: file,
+      Bucket: S3_BUCKET,
+      Key: "upload/" + file.name + imgName
+    };
+    
+    myBucket.putObject(params)
+      .on('httpUploadProgress', (evt, res) => {
+        let imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/"+res.request.httpRequest.path
+
+        console.log("uploaded S3 ImgUrl : ", imgUrl);
+        dispatch(actionCreators.uploadImage(imgUrl))
+        data = {...data, profileUrl: imgUrl};
+        setTimeout(() => {
+          window.alert("잠시 후 다시 시도해주세요!(이미지 업로드 문제)")
+        }, 3000)
+        
+      dispatch(userActions.signUp(data, () => {navigate('/login')}));
+
+      })
+      .send((err) => {
+        if (err) window.alert("잠시 후 다시 시도해주세요.")
+      })
+    
+  }
+
   return (
-    <Wrap>
-      <Container>
+    <div className="flex justify-center w-screen mt-3">
+      <div className="flex flex-col items-center justify-center w-1/2 gap-3">
+        <Title>회원가입</Title>
+
+        <SubTitle>티밍과 함께 프로젝트에 함께할 동료를 찾아보세요!</SubTitle>
+
         <div>
-         이미지 업로드 :
-         <S3Upload/>
+          <EmailTitle>이메일(ID) * </EmailTitle>
+          <EmailInput
+            placeholder="아이디 입력"
+            onChange={(e) => {
+              setId(e.target.value);
+            }}
+          />
         </div>
-        <div>
-        <Image
-          shape="circle"
-          src={
-            preview
-             ? preview
-              : "http://via.placeholder.com/400x300"
-          }
-          ></Image>
+
+        <div className="grid grid-cols-4">
+          <EmailTitle className="grid-start-1 grid-span-1">Profile Image * </EmailTitle>
         </div>
-        <div style={{width: "384px"}}>
-          <div>
-            <Title>회원가입</Title>
-            <SubTitle>티밍과 함께 프로젝트에 함께할 동료를 찾아보세요!</SubTitle>
-          </div>
-          <div>
-            <EmailTitle>
-              이메일(ID) *{" "}
-              <EmailInput
-                placeholder="아이디 입력"
-                onChange={(e) => {
-                  setId(e.target.value);
-                }}
-              />
-            </EmailTitle>
-          </div>
-          <div>
-            <NameTitle>
-              이름/ 기업명 *{" "}
-              <NameInput
-                placeholder="이름/ 기업명 입력"
-                onChange={(e) => {
-                  console.log(e.target.value);
-                  setNickName(e.target.value);
-                }}
-              />
-            </NameTitle>
-          </div>
-          <div>
-            <PwTitle>
-              비밀번호 *{" "}
-              <PwInput
-                placeholder="비밀번호 입력"
-                onChange={(e) => {
-                  setPwd(e.target.value);
-                }}
-              />
-              <PwInput2
-                placeholder="비밀번호 확인"
-                onChange={(e) => {
-                  setPwdCheck(e.target.value);
-                }}
-              />
-            </PwTitle>
+
+        <div className="flex">
+          <div className="justify-center border-2">
+            <S3Upload />
           </div>
 
-          <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-            <div>
-              <CheckBox type="checkbox" />
-              <CheckTitle>[필수] 이용약관</CheckTitle>
-            </div>
-            <Look>보기</Look>
-          </div>
-          <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-            <div>
-              <CheckBox2 type="checkbox"/>
-              <CheckTitle2>[필수] 개인동의 수집 이용동의서</CheckTitle2>
-            </div>
-            <Look2>보기</Look2>
-          </div>
           <div>
-            <Button _onClick={signUp}><SignupTitle>회원가입</SignupTitle></Button>
+            <Image
+              shape="circle"
+              size={70}
+              src={preview ? preview : "http://via.placeholder.com/400x300"}
+            ></Image>
           </div>
-          <div style={{display: "flex", justifyContent: "center"}}>
-            <UnderscoreLeft /><Or>또는</Or><UnderscoreRight/>
-          </div>
-          <div style={{display: "flex", justifyContent: "center"}}>
-            <KakaoBtn>
-             <KakaoLogo /><KakaoTitle>카카오 회원가입</KakaoTitle>
-            </KakaoBtn>
-          </div>
-          </div>
-        <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+        </div>
+
+        <div>
+          <NameTitle>이름/ 기업명 * </NameTitle>
+          <NameInput
+            placeholder="이름/ 기업명 입력"
+            onChange={(e) => {
+              console.log(e.target.value);
+              setNickName(e.target.value);
+            }}
+          />
+        </div>
+
+        <div className="mb-3">
+          <PwTitle>비밀번호 * </PwTitle>
+          <PwInput
+            type="password"
+            placeholder="비밀번호 입력"
+            onChange={(e) => {
+              setPwd(e.target.value);
+            }}
+          />
+          <PwInput2
+            type="password"
+            placeholder="비밀번호 확인"
+            onChange={(e) => {
+              setPwdCheck(e.target.value);
+            }}
+          />
+        </div>
+
+        <div className="grid grid-cols-12 w-[384px] p-1 items-center place-content-center mx-auto">
+          
+          <input className="col-span-1 col-start-1" type="checkbox"/>
+          <CheckTitle className="col-span-10 col-start-2">[필수] 이용약관</CheckTitle>
+          <Look className="col-span-1 col-start-12">보기</Look>
+          
+        </div>
+
+        <div
+          className="grid grid-cols-12 w-[384px] p-1 items-center place-content-center mx-auto"
+        >
+          
+          <input className="col-span-1 col-start-1" type="checkbox"/>
+          <CheckTitle className="col-span-10 col-start-2">[필수] 개인동의 수집 이용동의서</CheckTitle>
+          <Look className="col-span-1 col-start-12">보기</Look>
+        </div>
+
+        <div>
+          <Button _onClick={signUp}>
+            <SignupTitle>회원가입</SignupTitle>
+          </Button>
+        </div>
+
+        <div className="w-1/2">
+          <HorizonLine text={"또는"}></HorizonLine>
+        </div>
+
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <KakaoBtn>
+            <KakaoLogo />
+            <KakaoTitle>카카오 회원가입</KakaoTitle>
+          </KakaoBtn>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <UnderscoreBottom />
           <BottomLogo>Teaming</BottomLogo>
         </div>
-      </Container>
-    </Wrap>
+      </div>
+    </div>
   );
 }
 

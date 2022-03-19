@@ -19,6 +19,7 @@ import DMJoin from "./Components/Organisms/DMJoin/DMJoin";
 import DMChat from "./Components/Organisms/DMChat/DMChat";
 import UserInfo from "./pages/UserInfo";
 import ProjectRoom from "./pages/ProjectRoom";
+import Prac from "./pages/Prac";
 
 
 function App() {
