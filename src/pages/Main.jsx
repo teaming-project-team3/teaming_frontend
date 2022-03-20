@@ -1,5 +1,9 @@
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import styled from "styled-components";
+import Survey from "../pages/Survey";
+import { actionCreators } from "../redux/modules/projects";
 import Badge from "../static/Badge.png";
 import BannerImg from "../static/BannerImg.png";
 import emoji from "../static/emoji.png";
@@ -8,7 +12,7 @@ import Pic from "../static/Pic.png";
 import Pic2 from "../static/Pic2.png";
 import pngwing from "../static/pngwing.png";
 import RightCursor from "../static/RightCursor.png";
-import Survey from "./Survey";
+import ProjectDetailModal from "./ProjectDetailModal";
 
 const Wrap = styled.div`
   width: 100%;
@@ -1939,11 +1943,39 @@ const DevPortfolioOne2 = styled.div`
 function Main() {
 
   const location = useLocation();
+  const dispatch = useDispatch();
+  const projectsData = useSelector((state)=> state.projects.projectsMain)
+  //const projectDetail = useSelector((state)=> state.projects.projectDetail)
   const modalIsOpen = location.state;
+  const [showDetail, setShowDetail] = useState(false);
+
+  console.log("main, projectsData : ",projectsData)
+
+  useEffect(()=>{
+
+    dispatch(actionCreators.loadProjectsMainAPI())    
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
+
+  const detailShow = (e) => {
+
+    console.log("project card clicked");
+
+    dispatch(actionCreators.getProjectDetailAPI(e.value));
+
+    setShowDetail(true);
+
+    return;
+
+  }
   
   return (
     <Wrap>
       <Survey modalIsOpen={modalIsOpen}></Survey>
+      <ProjectDetailModal showDetail={showDetail} callBackSetShowFalse={()=>{
+        console.log("setShowDetailFalse")
+        return setShowDetail(false)}}></ProjectDetailModal>
       <Container>
         <>
           <Banner>
@@ -1966,7 +1998,7 @@ function Main() {
           <div>
             <FirstTitle>실시간 인기 프로젝트<FirecrackerImg /></FirstTitle>
             <FirstSubTitle>티밍에서 인기 높은 프로젝트를 구경해보세요!</FirstSubTitle>
-            <LiveCard>
+            <LiveCard onClick={detailShow} value={"boardId"}>
               <LiveCardImg /><LiveCardJobBtn><LiveCardJobTitle>백엔드 개발자</LiveCardJobTitle></LiveCardJobBtn>
               <LiveCardTitle>파이썬으로 배우는 금융공학/퀀트</LiveCardTitle>
               <LiveCardUnderscore />

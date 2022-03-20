@@ -6,8 +6,10 @@ import Button from "../element/Button";
 import Pagination from "react-js-pagination";
 import styled from "styled-components";
 import Slider from "react-slick";
+import { useNavigate } from "react-router";
 
 export default function ProjectRoom() {
+  const navigate = useNavigate();
   const [isLeader, setIsLeader] = React.useState(false);
   const [curr, setCurrUser] = React.useState("userA");
 
@@ -56,6 +58,7 @@ export default function ProjectRoom() {
               onMouseOut={() => {
                 setCurrUser("userA");
               }}
+              onClick={()=>{navigate('/userStats')}}
             >
               <UserCard userId={"userB"} />
             </div>
