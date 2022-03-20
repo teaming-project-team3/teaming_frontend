@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from "react";
 import Select from "react-select";
 import Input from "../Components/Atoms/Input";
-import { SurveyModal } from "./SurveyModal";
+import { ModalCustom } from "./ModalCustom";
 import ModalSelect from "./ModalSelect";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/users";
@@ -73,7 +73,7 @@ function Survey(props) {
 
   return (
     <div className="overflow-scroll">
-    <SurveyModal checker={modalIsOpen} sendData={sendSurveyData}>
+    <ModalCustom checker={modalIsOpen} confirm={sendSurveyData}>
 
       <div className="flex justify-center m-5 text-base font-noto2">
         프로필을 완성하기 위한 다음 정보를 입력해주세요!
@@ -166,7 +166,7 @@ function Survey(props) {
       
 
 
-      </SurveyModal>
+      </ModalCustom>
     </div>
   );
 }

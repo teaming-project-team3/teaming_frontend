@@ -15,6 +15,10 @@ export default function UserStat() {
     if (isLeader === localStorage.getItem("userId")) {
       setIsLeader(true);
     }
+
+    //userStatsAPI연동할것
+    //dispatch();
+
   }, [isLeader]);
 
   return (

@@ -42,6 +42,7 @@ const initialState = {
   skillsBack: [],
   abilityDesigner: [],
   skillsDesigner: [],
+  myProjects: [],
 };
 
 export function resetAbility(item, position) {
