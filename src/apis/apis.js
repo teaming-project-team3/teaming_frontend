@@ -5,12 +5,9 @@ export const api = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL_WJ
 });
 
-// Teaming Server : http://???
-//원진님 http://3.36.75.239
-//민수님 http://175.204.78.166:3000
-
-// Alter defaults after instance has been created
-//api.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+export const apiMS = axios.create({
+  baseURL: process.env.REACT_APP_BASE_URL_MS
+})
 
 api.interceptors.request.use(function (config) {
   const accessToken = getCookie("token");
@@ -18,6 +15,20 @@ api.interceptors.request.use(function (config) {
   //config.headers.common["authorization"] = `Bearer ${accessToken}`;
   return config;
 });
+
+apiMS.interceptors.request.use(function (config) {
+  const accessToken = getCookie("token");
+  config.headers.common["Authorization"] = `${accessToken}`;
+  //config.headers.common["authorization"] = `Bearer ${accessToken}`;
+  return config;
+});
+
+export const apisMS = {
+  
+  loadProjectsMain: () => apiMS.get("/boards"),
+  getProjectDetailAPI: (boardId) => apiMS.get(`/boards/${boardId}`),
+
+}
 
 export const apis = {
 

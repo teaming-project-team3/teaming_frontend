@@ -2,18 +2,21 @@ import React, { useCallback, useState, createRef } from "react";
 import Button from "../element/Button";
 import styled from "styled-components";
 // TOAST UI Editor import
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { apis } from "../apis/apis";
 import Select from "react-select";
 import { jobs, numberOfPeople } from "../data/createProject/CreateProjectData";
 import S3Upload from "../Components/Organisms/upload/S3Upload";
 import Image from "../Components/Atoms/Image";
+import { actionCreators } from "../redux/modules/projects";
 
 function CreateProject() {
+
+  const dispatch = useDispatch();
+
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
@@ -52,14 +55,8 @@ function CreateProject() {
       period: toStringByFormatting(endDate),
     };
 
-    apis
-      .createProject(data)
-      .then((res) => {
-        console.log("res : ", res);
-      })
-      .catch((err) => {
-        console.log("err : ", err);
-      });
+    dispatch(actionCreators.createProjectAPI(data));
+
   }
 
   const orderByLabel = useCallback(
