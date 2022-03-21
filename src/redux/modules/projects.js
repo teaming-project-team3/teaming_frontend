@@ -109,7 +109,7 @@ export default handleActions(
     [SET_PROJECT_DETAIL]: (state, action) =>
     produce(state, (draft) => {
 
-      draft.projectDetail = action.payload.data;
+      draft.projectDetail = action.data;
       console.log("SET_PROJECT_DETAIL REDUCER : ")
 
     }),

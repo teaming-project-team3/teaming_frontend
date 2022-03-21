@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-export const ModalCustom = (props) => {
+export const ProjectDetailModalCustom = (props) => {
 
   const [show, setShow] = useState(props.checker);
 
   useEffect(() => {
+    console.log("useEffect, setShow", props.checker);
     setShow(props.checker);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -20,7 +21,7 @@ export const ModalCustom = (props) => {
           aria-labelledby="exampleModalScrollableLabel"
           aria-hidden="true"
         >
-          <div class="modal-dialog modal-dialog-scrollable relative w-auto pointer-events-none">
+          <div class="modal-dialog modal-xl modal-dialog-scrollable relative w-auto pointer-events-none">
             <div class="modal-content border-none shadow-lg relative flex flex-col items-center justify-center content-center w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
               <div class="modal-header p-4 border-b border-gray-200 w-[100%] flex items-center justify-center content-center text-[#593CE5]">
                 <div className="grid grid-cols-9 text-[#593CE5] p-5 w-[100%]">
@@ -39,8 +40,10 @@ export const ModalCustom = (props) => {
                   ></button>
                 </div>
               </div>
-              <div class="modal-body relative p-4">
+              <div className="relative p-4 modal-body">
+                <div className="flex flex-col justify-center bg-[#E5E5E5]">
                 {props.children}
+                </div>
               </div>
               <div class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
                 <button
@@ -49,7 +52,7 @@ export const ModalCustom = (props) => {
                   data-bs-dismiss="modal"
                   onClick={()=>{
                     setShow(false)
-                    
+                    props.callback();
                   }}
                 >
                   Close
@@ -62,7 +65,7 @@ export const ModalCustom = (props) => {
                     props.confirm(()=>{setShow(false)});
                   }}
                 >
-                  입력 완료
+                  Join Project
                 </button>
               </div>
             </div>
