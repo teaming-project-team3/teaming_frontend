@@ -25,7 +25,7 @@ const Login = (props) => {
   const [id, setId] = React.useState("");
   const [pwd, setPwd] = React.useState("");
 
-  const signUp = async (e) => {
+  const signIn = async (e) => {
     e.preventDefault();
 
     if (id === "" || pwd === "") {
@@ -90,7 +90,7 @@ const Login = (props) => {
             setPwd(e.target.value);
             // console.log(e.target.value);
           }}
-          onSubmit={signUp}
+          onSubmit={signIn}
         />
         <Link
           to="signUp"
@@ -100,7 +100,7 @@ const Login = (props) => {
         </Link>
 
         <button
-          onClick={signUp}
+          onClick={signIn}
           className="w-[24rem] h-[2.875rem] bg-[#593CE5] text-white text-sm shadow-login rounded"
         >
           로그인

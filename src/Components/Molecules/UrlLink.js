@@ -9,7 +9,7 @@ function UrlLink(props) {
             "
       >
         <img src={logo} alt="logo"></img>
-        <div className="text-sm text-[#593CE5] font-noto2 ml-[1.375rem]">
+        <div className="text-sm text-[#593CE5] font-noto2 ml-[1.375rem] text-ellipsis">
           {url}
         </div>
       </div>
