@@ -7,8 +7,9 @@ import Pagination from "react-js-pagination";
 import styled from "styled-components";
 import Slider from "react-slick";
 import { useNavigate } from "react-router";
+import backArrow from "../static/images/projectRoom/backPress.svg";
 
-export default function ProjectRoom() {
+export default function Prac() {
   const navigate = useNavigate();
   const [isLeader, setIsLeader] = React.useState(false);
   const [curr, setCurrUser] = React.useState("userA");
@@ -34,95 +35,92 @@ export default function ProjectRoom() {
 
   return (
     <>
-      <div>
-        <div>방제목 :</div>
+      <div className="bg-[#E5E5E5]">
+        <div className="flex h-[15vh] w-screen items-center">
+          <div className="flex items-center justify-center h-full aspect-square">
+            <img src={backArrow} alt={""}></img>
+          </div>
 
-        <Button>프로젝트 상세 내용</Button>
-
-        {isLeader && <Button>프로젝트 시작!</Button>}
-
-        <div style={{ width: "300px" }} display="flex">
-          <RadarChart curr={curr}></RadarChart>
+          <div className="text-2xl text-black font-noto2">
+            동물운동 플랫폼 아임펫뿜뿜
+          </div>
         </div>
 
         <Slider {...sliderSettings}>
           <div>
-          <div style={{ display: "flex" }}>
-            <div style={{ width: "300px", margin: "auto" }}>
-              <UserCard userId={"userA"} />
-            </div>
+            <div style={{ display: "flex" }}>
+              <div style={{ width: "300px", margin: "auto" }}>
+                <UserCard userId={"userA"} />
+              </div>
 
-            <div
-              style={{ width: "300px", margin: "auto" }}
-              onMouseOver={() => setCurrUser("userB")}
-              onMouseOut={() => {
-                setCurrUser("userA");
-              }}
-              onClick={()=>{navigate('/userStats')}}
-            >
-              <UserCard userId={"userB"} />
-            </div>
+              <div
+                style={{ width: "300px", margin: "auto" }}
+                onMouseOver={() => setCurrUser("userB")}
+                onMouseOut={() => {
+                  setCurrUser("userA");
+                }}
+                onClick={() => {
+                  navigate("/userStats");
+                }}
+              >
+                <UserCard userId={"userB"} />
+              </div>
 
-            <div
-              style={{ width: "300px", margin: "auto" }}
-              onMouseOver={() => setCurrUser("userC")}
-              onMouseOut={() => {
-                setCurrUser("userA");
-              }}
-            >
-              <UserCard userId={"userC"} />
+              <div
+                style={{ width: "300px", margin: "auto" }}
+                onMouseOver={() => setCurrUser("userC")}
+                onMouseOut={() => {
+                  setCurrUser("userA");
+                }}
+              >
+                <UserCard userId={"userC"} />
+              </div>
             </div>
-          </div>
           </div>
           <div>
-          <div style={{ display: "flex" }}>
-            <div
-              style={{ width: "300px", margin: "auto" }}
-              onMouseOver={() => setCurrUser("userC")}
-              onMouseOut={() => {
-                setCurrUser("userA");
-              }}
-            >
-              <UserCard userId={"userC"} />
-            </div>
+            <div style={{ display: "flex" }}>
+              <div
+                style={{ width: "300px", margin: "auto" }}
+                onMouseOver={() => setCurrUser("userC")}
+                onMouseOut={() => {
+                  setCurrUser("userA");
+                }}
+              >
+                <UserCard userId={"userC"} />
+              </div>
 
-            <div
-              style={{ width: "300px", margin: "auto" }}
-              onMouseOver={() => setCurrUser("userC")}
-              onMouseOut={() => {
-                setCurrUser("userA");
-              }}
-            >
-              <UserCard userId={"userC"} />
-            </div>
+              <div
+                style={{ width: "300px", margin: "auto" }}
+                onMouseOver={() => setCurrUser("userC")}
+                onMouseOut={() => {
+                  setCurrUser("userA");
+                }}
+              >
+                <UserCard userId={"userC"} />
+              </div>
 
-            <div
-              style={{ width: "300px", margin: "auto" }}
-              onMouseOver={() => setCurrUser("userC")}
-              onMouseOut={() => {
-                setCurrUser("userA");
-              }}
-            >
-              <UserCard userId={"userC"} />
+              <div
+                style={{ width: "300px", margin: "auto" }}
+                onMouseOver={() => setCurrUser("userC")}
+                onMouseOut={() => {
+                  setCurrUser("userA");
+                }}
+              >
+                <UserCard userId={"userC"} />
+              </div>
             </div>
-          </div>
           </div>
         </Slider>
 
         <div>
           <RoomChat></RoomChat>
         </div>
-        <PaginationHorizontal>
-          <Pagination
-            activePage={page}
-            itemsCountPerPage={10}
-            totalItemsCount={50}
-            pageRangeDisplayed={5}
-            prevPageText="‹"
-            nextPageText="›"
-            onChange={handlePageChange}
-          ></Pagination>
-        </PaginationHorizontal>
+
+        {/* <div style={{ width: "300px" }} display="flex">
+          <RadarChart curr={curr}></RadarChart>
+        </div> */}
+
+        {isLeader && <Button>프로젝트 시작!</Button>}
       </div>
     </>
   );
