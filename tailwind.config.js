@@ -10,6 +10,10 @@ module.exports = {
         'login': '0 1px 8px 3px rgba(0, 0, 0, 0.04)',
       },
     },
+    backgroundImage: {
+      'jumboDetail': "url('../public/img/detailExJumbo.svg')",
+      'bannerImg': "url('../public/img/BannerImg.png')"
+    },
     fontFamily: {
       'sanss': ['Festive', 'Noto Sans KR'],
       'sanss2': ['NotoSans-Bold', 'NotoSans-Regular'],
