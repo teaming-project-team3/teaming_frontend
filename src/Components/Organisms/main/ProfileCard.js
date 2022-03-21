@@ -26,8 +26,8 @@ function ProfileCard(props) {
             </div>
             
             <div className="flex w-2/5">
-                <img src={props.project1} alt={""} className="h-full rounded-[0.625rem]"></img>
-                <img src={props.project2} alt={""} className="h-full rounded-[0.625rem]"></img>
+                <img src={props.project1} alt={""} className="rounded-[0.625rem]"></img>
+                <img src={props.project2} alt={""} className="rounded-[0.625rem]"></img>
             </div>
           
           

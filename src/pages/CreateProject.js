@@ -12,6 +12,7 @@ import { jobs, numberOfPeople } from "../data/createProject/CreateProjectData";
 import S3Upload from "../Components/Organisms/upload/S3Upload";
 import Image from "../Components/Atoms/Image";
 import { actionCreators } from "../redux/modules/projects";
+import Input from "../Components/Atoms/Input";
 
 function CreateProject() {
 
@@ -131,8 +132,15 @@ function CreateProject() {
 
   //dev
   return (
-    <React.Fragment>
-      <div>새로운 팀 만들기</div>
+    <div className="flex flex-col items-center justify-center p-10">
+      
+      <div className="w-3/4 text-[2.5rem] text-black font-notoB">프로젝트 등록</div>
+
+      <div className="w-3/4 text-[2.5rem] text-black font-notoB rounded-lg">
+        <Input>
+        </Input>
+      </div>
+
 
       <div className="title">
         프로젝트 제목 :
@@ -244,7 +252,7 @@ function CreateProject() {
       </div>
 
       <Button _onClick={createProjectFunc}>입력 완료</Button>
-    </React.Fragment>
+    </div>
   );
 }
 
