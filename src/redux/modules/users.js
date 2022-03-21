@@ -111,7 +111,7 @@ const loginAPI = (id, pwd, callback) => {
       .login(data)
       .then((res) => {
         localStorage.setItem("userId", id);
-        setCookie("token", res.data.data.Authorization, 1);
+        setCookie("token", res.data.Authorization, 1);
         console.log("login completed", res);
 
         //surveyChecker 받아서 넘기기
