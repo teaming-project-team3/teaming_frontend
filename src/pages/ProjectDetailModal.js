@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
-import Button from "../element/Button";
 import { Viewer } from "@toast-ui/react-editor";
 import { ModalCustom } from "./ModalCustom";
 import { useNavigate } from "react-router";
 import Image from "../Components/Atoms/Image";
 import circleImg from "../static/images/projectDetail/detailCircle01.svg"
-import jumboImg from "../static/images/projectDetail/detailExJumbo.svg"
 
 function ProjectDetailModal(props) {
   const modalIsOpen = props.showDetail;
