@@ -17,6 +17,7 @@ import ProjectImage from "../static/project.jpg";
 import ProjectDetailModal from "./ProjectDetailModal";
 
 const Wrap = styled.div`
+  max-width: 1920px;
   width: 100%;
   display: flex;
   justify-content: center;

@@ -19,6 +19,7 @@ import DMJoin from "./Components/Organisms/DMJoin/DMJoin";
 import DMChat from "./Components/Organisms/DMChat/DMChat";
 import UserInfo from "./pages/UserInfo";
 import ProjectRoom from "./pages/ProjectRoom";
+import Prac from "./pages/Prac";
 
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
     <BrowserRouter>
       <Header />
         <Routes>
-          <Route path="/" element={<Main/>} />
+          <Route path="/" element={<Prac/>} />
           <Route path="/survey" element={<Survey />} />
           <Route path="/userinfo" element={<UserInfo />} />
           <Route path="/oauth" element={<TempOAuth />} />

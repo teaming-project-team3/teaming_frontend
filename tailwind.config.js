@@ -12,7 +12,8 @@ module.exports = {
     },
     backgroundImage: {
       'jumboDetail': "url('../public/img/detailExJumbo.svg')",
-      'bannerImg': "url('../public/img/BannerImg.png')"
+      'bannerImg': "url('../public/img/BannerImg.png')",
+      "sendBtn" : "url('../public/img/sendRound.svg')",
     },
     fontFamily: {
       'sanss': ['Festive', 'Noto Sans KR'],
