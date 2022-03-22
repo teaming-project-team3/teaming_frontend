@@ -23,7 +23,7 @@ http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/login
             </ul>
             <h5>Pending</h5>
             <ul>
-                
+                <li>null</li>
             </ul>
             <h5>rejected</h5>
             <ul>
@@ -48,7 +48,6 @@ http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/login
             <h5>Pending</h5>
             <ul>
                 <li>apply design</li>
-                <li>kakao signup</li>
             </ul>
             <h5>rejected</h5>
             <ul>
@@ -70,10 +69,10 @@ http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/login
                 <li>init view</li>
                 <li>dynamic selector view for the skills and the programming languages inputs</li>
                 <li>multi creatable selector view to select the skills and the programming languages.</li>
+                <li>apply the view conditionally between login and main view</li>
             </ul>
             <h5>Pending</h5>
             <ul>
-                <li>apply the view conditionally between login and main view</li>
                 <li>apply design</li>
             </ul>
             <h5>rejected</h5>
@@ -203,6 +202,7 @@ http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/login
                 <li>apply Radar Chart, Chart.js</li>
                 <li>Other users info view, Radar chart Mouse Hover Event</li>
                 <li>slider, react-slick</li>
+                <li>socket.io only or socket.io with webRTC data channel N:N chat</li>
             </ul>
             <h5>Pending</h5>
             <ul>
@@ -211,7 +211,6 @@ http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/login
                 <li>exit room button, using socket</li>
                 <li>start project button, change the chatting to saving data</li>
                 <li>webRTC N:N Video call</li>
-                <li>socket.io only or socket.io with webRTC data channel N:N chat</li>
             </ul>
             <h5>rejected</h5>
             <ul>
