@@ -1,10 +1,7 @@
 import * as React from "react";
-import RadarChart from "../Components/Molecules/RadarChart";
 import RoomChat from "../Components/Organisms/RoomChat";
 import UserCard from "../Components/Organisms/UserCard";
 import Button from "../element/Button";
-import Pagination from "react-js-pagination";
-import styled from "styled-components";
 import Slider from "react-slick";
 import { useNavigate } from "react-router";
 import backArrow from "../static/images/projectRoom/backPress.svg";
@@ -14,10 +11,8 @@ export default function Prac() {
   const [isLeader, setIsLeader] = React.useState(false);
   const [curr, setCurrUser] = React.useState("userA");
 
-  const [page, setPage] = React.useState(1);
-  const handlePageChange = (page) => {
-    setPage(page);
-  };
+
+  console.log(curr)
 
   React.useEffect(() => {
     if (isLeader === localStorage.getItem("userId")) {
@@ -125,11 +120,3 @@ export default function Prac() {
     </>
   );
 }
-
-const PaginationHorizontal = styled.div`
-  & ul li {
-    list-style-type: none;
-    float: left;
-    margin-right: 4px;
-  }
-`;
