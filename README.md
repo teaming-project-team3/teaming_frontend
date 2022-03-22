@@ -16,13 +16,14 @@ http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/login
             <h5>Fulfilled</h5>
             <ul>
                 <li>init view</li>
+                <li>apply design</li>
                 <li>kakao rest api</li>
                 <li>login api with wonjin</li>
+                <li>setCookie and keep up, should't disappear when going to next Page</li>
             </ul>
             <h5>Pending</h5>
             <ul>
-                <li>apply design</li>
-                <li>setCookie and keep up, should't disappear when going to next Page</li>
+                
             </ul>
             <h5>rejected</h5>
             <ul>
