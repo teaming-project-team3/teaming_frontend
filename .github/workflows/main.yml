@@ -32,9 +32,13 @@ jobs:
         run: |
           echo "REACT_APP_BASE_URL_MS=$REACT_APP_BASE_URL_MS" >> .env.production
           echo "REACT_APP_BASE_URL_WJ=$REACT_APP_BASE_URL_WJ" >> .env.production
+          echo "REACT_APP_REST_API_KEY=$REACT_APP_REST_API_KEY" >> .env.production
+          echo "REACT_APP_REDIRECT_URI=$REACT_APP_REDIRECT_URI" >> .env.production
         env:
           REACT_APP_BASE_URL_MS: ${{ secrets.REACT_APP_BASE_URL_MS }}
           REACT_APP_BASE_URL_WJ: ${{ secrets.REACT_APP_BASE_URL_WJ }}
+          REACT_APP_REST_API_KEY: ${{ secrets.REACT_APP_REST_API_KEY }}
+          REACT_APP_REDIRECT_URI: ${{ secrets.REACT_APP_REDIRECT_URI }}
       
       - name: Install Dependencies   
         run: npm install
