@@ -10,10 +10,13 @@ const Nav = tw.div`
 
 
 function Header() {
+  
 
   const isLogin = useSelector((state)=>state.users.is_login)
   const dispatch = useDispatch();
-
+  
+  if (window.location.pathname === '/projectRoom') return null;
+  
   return (
     <div className="border-b-2">
     <Nav className="grid items-center grid-cols-12 justify-items-center">

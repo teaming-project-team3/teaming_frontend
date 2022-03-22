@@ -3,7 +3,7 @@ import Image from "../../Atoms/Image";
 function ProfileCard(props) {
   return (
 <div
-            className={`flex w-1/3 h-3/4 bg-white rounded-xl p-[1rem] m-[1rem]`}
+            className={`flex w-1/3 h-3/4 bg-white rounded-xl p-[1rem] m-[1rem] cursor-pointer`}
           >
             <div className="w-1/5">
             <Image shape={"circle"} src={props.profile}></Image>

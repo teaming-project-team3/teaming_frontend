@@ -28,7 +28,7 @@ function App() {
 
   return (
     <BrowserRouter>
-    <main className="max-w-[1224px] mx-[auto] pt-[100px]">
+    <main className="max-w-[1440px] mx-[auto]">
       <Header />
       <ScrollToTop/>
         <Routes>
