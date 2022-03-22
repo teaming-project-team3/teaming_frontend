@@ -20,6 +20,7 @@ import DMChat from "./Components/Organisms/DMChat/DMChat";
 import UserInfo from "./pages/UserInfo";
 import ProjectRoom from "./pages/ProjectRoom";
 import Prac from "./pages/Prac";
+import ScrollToTop from "./shared/ScrollToTop"
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
+      <ScrollToTop/>
         <Routes>
           <Route path="/" element={<Main/>} />
           <Route path="/survey" element={<Survey />} />

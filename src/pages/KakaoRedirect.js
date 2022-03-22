@@ -1,8 +1,11 @@
 // 리다이렉트될 화면
 
 import React, {useEffect} from "react";
-import Button from "../element/Button";
 import {apis} from "../apis/apis"
+import { useNavigate } from "react-router";
+import { setCookie } from "../shared/Cookie";
+import { useDispatch } from "react-redux";
+import { setIsLogIn } from "../redux/modules/users";
 
 //import { actionCreators as userActions } from "../redux/modules/user";
 //import Spinner from "./Spinner";
@@ -12,34 +15,27 @@ const KakaoRedirect = (props) => {
   // 인가코드
   let code = new URL(window.location.href).searchParams.get("code");
   console.log("code : ", code);
-
-
-
-  function sendKakao(){
-    
-    //await dispatch(userActions.kakaoLogin(code));
-    apis
-      .kakaoSend(code)
-        .then((res) => {
-          console.log("kakao res : " , res);
-        })
-        .catch((err) => {
-          console.log("kakao err : " , err);
-        })
-
-  }
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-        // const abc = async () => {
-        //     const response = await api.get(`/auth/kakao/redirect?code=${code}`);
-        //     console.log("in redirect : ", response)
-        //     return response;
-        // };
+    apis
+    .kakaoSend(code)
+      .then((res) => {
+        console.log("kakao res : " , res);
+        localStorage.setItem("userId", res.data.nickname);
+        setCookie("token", res.data.Authorization, 1);
+        console.log("login completed", res);
+        
+        dispatch(setIsLogIn());
+        navigate("/")
+      })
+      .catch((err) => {
+        console.log("kakao err : " , err);
+      })
     });
 
-  return <div>kakao login box
-  <Button _onClick={sendKakao}>버튼</Button>
-  </div>;
+  return <div>Loading...</div>;
 };
 
 export default KakaoRedirect;

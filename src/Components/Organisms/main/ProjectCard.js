@@ -3,8 +3,8 @@ function ProjectCard(props) {
   return (
     <div onClick={props._onClick} className="flex flex-col w-1/6 ml-3 bg-white border-2 rounded-xl">
                 
-        <div className="h-2/3">
-        <img src={props.img} alt="projectImage"></img>
+        <div className="h-2/3 rounded-xl">
+        <img src={props.img} alt="projectImage" className="object-fill rounded-xl"></img>
         </div>
 
         <div className="flex flex-col items-stretch h-1/3">
