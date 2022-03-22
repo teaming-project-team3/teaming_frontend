@@ -1,8 +1,8 @@
 export const jobs = 
     [
-    { value: "designer", label: "designer" },
-    { value: "front", label: "frontEnd" },
-    { value: "back", label: "backEnd" },
+    { value: "designer", label: "디자이너" },
+    { value: "front", label: "프론트엔드" },
+    { value: "back", label: "백엔드" },
   ]
 
 

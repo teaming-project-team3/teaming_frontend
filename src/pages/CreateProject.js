@@ -1,5 +1,4 @@
 import React, { useCallback, useState, createRef } from "react";
-import Button from "../element/Button";
 import styled from "styled-components";
 // TOAST UI Editor import
 import { useDispatch, useSelector } from "react-redux";
@@ -10,15 +9,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
 import { jobs, numberOfPeople } from "../data/createProject/CreateProjectData";
 import S3Upload from "../Components/Organisms/upload/S3Upload";
-import Image from "../Components/Atoms/Image";
 import { actionCreators } from "../redux/modules/projects";
-import Input from "../Components/Atoms/Input";
 
 function CreateProject() {
-
   const dispatch = useDispatch();
 
-  const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
   const [projectTitle, setProjectTitle] = useState("");
@@ -52,12 +47,15 @@ function CreateProject() {
       title: projectTitle,
       imgUrl: S3ImgUrl,
       contents: projectContents,
-      stack: [["designer",selNum[0]],["front",selNum[1]],["back",selNum[2]]],
+      stack: [
+        ["designer", selNum[0]],
+        ["front", selNum[1]],
+        ["back", selNum[2]],
+      ],
       period: toStringByFormatting(endDate),
     };
 
     dispatch(actionCreators.createProjectAPI(data));
-
   }
 
   const orderByLabel = useCallback(
@@ -132,138 +130,128 @@ function CreateProject() {
 
   //dev
   return (
-    <div className="flex flex-col items-center justify-center p-10">
-      
-      <div className="w-3/4 text-[2.5rem] text-black font-notoB">프로젝트 등록</div>
+    <div className="flex justify-center w-screen bg-[#F2F3F7] h-fit">
+      <div className="flex flex-col items-center justify-center p-10">
+        <div className="w-full text-[2.5rem] text-black font-notoB">
+          프로젝트 등록
+        </div>
 
-      <div className="w-3/4 text-[2.5rem] text-black font-notoB rounded-lg">
-        <Input>
-        </Input>
-      </div>
+        <div className="w-5/6 m-10 bg-white h-fit rounded-2xl">
+          <div className="w-full text-[1.5rem] text-black font-notoB p-8 border-b-2">
+            프로젝트 정보
+          </div>
 
+          <div className="flex w-full text-[1rem] justify-between text-black font-noto2 pt-8 pr-8 pb-8 ml-8 border-b-2">
+            프로젝트 제목
+            <input
+              className="w-1/2 ml-3 mr-10 border-2 rounded"
+              placeholder="프로젝트 제목을 입력해주세요."
+              onChange={(event) => setProjectTitle(event.target.value)}
+            ></input>
+          </div>
 
-      <div className="title">
-        프로젝트 제목 :
-        <input
-          onChange={(event) => setProjectTitle(event.target.value)}
-        ></input>
-      </div>
-
-      <div>
-        <img alt="null"></img>
-        작성자 이름 : 홍길동
-      </div>
-
-      <div>구하는 직무 : 프론트 2명, 백 2명, 디자이너 2명</div>
-      <Select options={jobs} value={selJobs} isMulti onChange={handleChange} />
-
-      {selJobs &&
-        selJobs.map((lang, idx) => (
-          <>
-            <div key={idx} display="flex">
-              <div style={{ width: "300px" }}>
-                value: {lang.value},{idx}
-              </div>
-              <div style={{ width: "300px" }}>
-                <Select
-                  options={numberOfPeople}
-                  onChange={(e) => {
-                    handleNums(idx, lang.value, e);
-                  }}
-                >
-                  필요인원
-                </Select>
-              </div>
+          <div className="flex w-full text-[1rem] justify-between text-black font-noto2 pt-8 pr-8 pb-8 ml-8 border-b-2">
+            프로젝트 사진
+            <div className="w-1/4">
+              <S3Upload />
             </div>
-          </>
-        ))}
-
-      <div>
-        직무별 필요조건
-        {/* 이 부분을 넣을까 말까 */}
-      </div>
-
-      <div>
-        <img alt="null"></img>
-        프로젝트 관련 이미지 업로드 및 프리뷰
-      </div>
-
-      <div>
-        프로젝트 상세설명 :{/* 마크다운 적용? */}
-        <Editor
-          previewStyle="vertical"
-          height="79vh"
-          initialEditType="markdown"
-          initialValue="마크다운으로 내용을 입력하세요."
-          ref={editorRef}
-          onChange={onChangeMD}
-        ></Editor>
-      </div>
-
-      <div>
-        이미지 업로드 :
-        <S3Upload />
-      </div>
-
-      <div style={{ width: "300px" }}>
-        <Image
-          shape="rectangle"
-          src={preview ? preview : "http://via.placeholder.com/400x300"}
-        ></Image>
-      </div>
-
-      <div>
-        모집기간 2022.03.05~2022.03.31
-        {/* 달력을 이용하여 날짜 선택 */}
-        <div className="calender-container">
-          <div className="calender-box">
-            <div className="date">시작날짜</div>
-            <div
-              style={{
-                backgroundColor: "#FF6347",
-                border: "1px",
-                width: "150px",
-              }}
-            >
-              <MyDatePicker
-                selected={startDate}
-                dateFormat="yyyy-MM-dd" // 날짜 형식
-                onChange={(date) => setStartDate(date)}
-              ></MyDatePicker>
+            <div className="w-1/2 mr-10">
+              <img
+                className="object-fill aspect-square"
+                src={preview ? preview : "http://via.placeholder.com/400x300"}
+                alt={""}
+              ></img>
             </div>
           </div>
-          <div className="calender-box">
-            <div className="date">종료날짜</div>
-            <div
-              style={{
-                backgroundColor: "#FF6347",
-                border: "1px",
-                width: "150px",
-              }}
-            >
-              <MyDatePicker
-                selected={endDate}
-                dateFormat="yyyy-MM-dd" // 날짜 형식
-                onChange={(date) => setEndDate(date)}
+
+          <div className="w-full text-[1rem] text-black font-noto2 p-6">
+            <div className="p-2 mb-3">프로젝트 상세설명</div>
+            {/* 마크다운 적용? */}
+            <Editor
+              className="m-[-2rem]"
+              previewStyle="vertical"
+              height="80vh"
+              initialEditType="markdown"
+              initialValue="마크다운으로 내용을 입력하세요."
+              ref={editorRef}
+              onChange={onChangeMD}
+            ></Editor>
+          </div>
+        </div>
+
+        <div className="w-5/6 m-10 bg-white h-fit rounded-2xl">
+          <div className="w-full text-[1.5rem] text-black font-notoB p-8 border-b-2">
+            모집 정보
+          </div>
+
+          <div className="flex w-full text-[1rem] justify-between text-black font-noto2 pt-8 pr-8 pb-8 ml-8 border-b-2">
+            <div className="w-1/3">모집 인원</div>
+
+            <div className="flex flex-col w-2/3">
+            <div className="m-2">
+              <Select
+                options={jobs}
+                value={selJobs}
+                isMulti
+                onChange={handleChange}
               />
+            </div>
+
+            {selJobs &&
+              selJobs.map((lang, idx) => (
+                <>
+                  <div key={idx} className="flex m-2">
+                    <div className="flex items-center justify-center w-1/3 text-base text-center border-2 font-noto2">
+                      {lang.label}
+                    </div>
+                    <div className="w-1/3">
+                      <Select
+                        options={numberOfPeople}
+                        onChange={(e) => {
+                          handleNums(idx, lang.value, e);
+                        }}
+                      >
+                      </Select>
+                    </div>
+                  </div>
+                </>
+              ))}
+              </div>
+          </div>
+
+          <div className="flex w-full text-[1rem] justify-between text-black font-noto2 pt-8 pr-8 pb-8 ml-8">
+          모집 기간
+          {/* 달력을 이용하여 날짜 선택 */}
+          <div className="calender-container">
+            <div className="flex calender-box">
+              <div className="mr-2 date">마감일</div>
+              <div className="ml-2">
+                <MyDatePicker
+                  selected={endDate}
+                  dateFormat="yyyy-MM-dd" // 날짜 형식
+                  onChange={(date) => setEndDate(date)}
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+        </div>
 
-      <Button _onClick={createProjectFunc}>입력 완료</Button>
+        <div className="rounded bg-[#593CE5] w-1/3 p-3 text-white font-noto2 text-center">
+        <button _onClick={createProjectFunc}>프로젝트 등록하기</button>
+        </div>
+
+      </div>
     </div>
   );
 }
 
 const MyDatePicker = styled(DatePicker)`
   width: 90%;
-  height: 3rem;
-  font-size: 1.6rem;
+  font-size: 1rem;
   font-weight: bold;
   background-color: transparent;
-  color: #00bfff;
-  border: 1px solid;
+  color: #000000;
 `; // styled-components 이용 스타일륑
 
 export default CreateProject;
