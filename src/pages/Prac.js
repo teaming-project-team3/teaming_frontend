@@ -12,7 +12,7 @@ import ChatPrac from "../Components/Organisms/DMChat/ChatPrac";
 import { useSelector } from "react-redux";
 import onlineIcon from '../icons/onlineIcon.png'
 
-export default function ProjectRoom() {
+export default function Prac() {
   const [isLeader, setIsLeader] = React.useState(false);
   const users = useSelector((state)=>state.users.nowProjectUser)
 
