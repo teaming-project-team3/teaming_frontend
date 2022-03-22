@@ -75,6 +75,10 @@ const DMChat = ( ) => {
       console.log("before SendMessage", message)
       let sendData = {sender: name, message: message, room: room}
       socket.emit('sendMessage', sendData, () => setMessage(''))
+      
+      let data = {user: "curr", test: message}
+      setMessages((messages) => [...messages, data])
+
       console.log("after SendMessage", message)
     }
   }

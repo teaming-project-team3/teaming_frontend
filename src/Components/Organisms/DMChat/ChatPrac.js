@@ -88,7 +88,7 @@ const ChatPrac = ( props ) => {
       
       <div className="flex flex-col justify-between w-full h-full bg-white">
         <InfoBar room={room} />
-        <Messages messages={messages} name={name} />
+        <Messages messages={messages} name={"curr"} />
         <Input
           message={message}
           setMessage={setMessage}
