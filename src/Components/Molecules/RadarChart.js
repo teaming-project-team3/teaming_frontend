@@ -113,9 +113,9 @@ function RadarChart(props) {
 
 
   return (
-    <div>
+    
       <canvas ref={canvasDom}></canvas>
-    </div>
+    
   );
 }
 
