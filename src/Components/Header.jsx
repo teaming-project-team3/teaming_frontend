@@ -17,7 +17,7 @@ function Header() {
   return (
     <div className="border-b-2">
     <Nav className="grid items-center grid-cols-12 justify-items-center">
-      <div className="col-span-1 col-start-2 text-xl text-[#593CE5] font-notoB">Teaming</div>
+      <Link to="/" className="col-span-1 col-start-2 text-xl text-[#593CE5] font-notoB">Teaming</Link>
       
       {isLogin&&
       <Link to="/createProject" className="col-start-5 col-end-6 text-base font-noto3">프로젝트 등록</Link>

@@ -1,4 +1,4 @@
-import React, { useCallback, useState, createRef } from "react";
+import React, { useCallback, useState, createRef, useEffect } from "react";
 import styled from "styled-components";
 // TOAST UI Editor import
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +10,7 @@ import Select from "react-select";
 import { jobs, numberOfPeople } from "../data/createProject/CreateProjectData";
 import S3Upload from "../Components/Organisms/upload/S3Upload";
 import { actionCreators } from "../redux/modules/projects";
+import { useLocation } from "react-router";
 
 function CreateProject() {
   const dispatch = useDispatch();
@@ -22,6 +23,12 @@ function CreateProject() {
   const S3ImgUrl = useSelector((state) => state.image.image_url);
 
   const editorRef = createRef();
+
+  const location = useLocation();
+
+  useEffect(() => {
+    document.documentElement.scrollTo(0, 0);
+  }, [location.pathname]);
 
   function leftPad(value) {
     if (value >= 10) {
@@ -238,7 +245,7 @@ function CreateProject() {
         </div>
 
         <div className="rounded bg-[#593CE5] w-1/3 p-3 text-white font-noto2 text-center">
-        <button _onClick={createProjectFunc}>프로젝트 등록하기</button>
+        <button onClick={createProjectFunc}>프로젝트 등록하기</button>
         </div>
 
       </div>
