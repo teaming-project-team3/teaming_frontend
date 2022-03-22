@@ -11,7 +11,7 @@ import { setNowUsers } from '../../../redux/modules/users';
 //서버 주소
 //const ENDPOINT = 'http://localhost:5000'
 //const ENDPOINT = 'http://80e1-49-142-123-104.ngrok.io'
-const ENDPOINT = "http://3.36.75.239/waitroom"
+const ENDPOINT = process.env.REACT_APP_BASE_URL_WJ + "/waitroom"
 let socket
 
 const ChatPrac = ( props ) => {
