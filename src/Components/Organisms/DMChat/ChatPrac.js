@@ -78,7 +78,9 @@ const ChatPrac = ( props ) => {
       socket.emit('sendMessage', sendData, () => setMessage(''))
       let data = {user: "curr", text: message}
       setMessages((messages) => [...messages, data])
+      setMessage("")
       console.log("after SendMessage", sendData)
+
     }
   }
 

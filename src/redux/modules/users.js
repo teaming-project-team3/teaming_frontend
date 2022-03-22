@@ -1,7 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../apis/apis";
-import { setCookie } from "../../shared/Cookie";
+import { deleteCookie, setCookie } from "../../shared/Cookie";
 
 // actions
 //const LOG_IN = "LOG_IN";
@@ -9,7 +9,6 @@ import { setCookie } from "../../shared/Cookie";
 const LOG_OUT = "LOG_OUT";
 //const SIGN_UP = "SIGN_UP";
 const GET_USER = "GET_USER";
-const SET_USER = "SET_USER";
 const SET_PROFILE_IMG = "SET_PROFILE_IMG";
 const RESET_ABILITY = "reset/Ability";
 const UPDATE_ABILITY = "update/Ability";
@@ -17,7 +16,8 @@ const RESET_SKILLS = "reset/Skills";
 const UPDATE_SKILLS = "update/Skills";
 const DELETE_ABILITY = "delete/Ability";
 const DELETE_SKILLS = "delete/Skills";
-const SET_NOW_PROJECT_USERS = "set/project/Users"
+const SET_NOW_PROJECT_USERS = "set/project/Users";
+const SET_IS_LOG_IN = "SET_IS_LOG_IN"
 
 // action creators
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
@@ -83,6 +83,15 @@ export function setNowUsers(users) {
   return { type: SET_NOW_PROJECT_USERS, users };
 }
 
+function setIsLogIn() {
+  console.log("redux, setIsLogin")
+  return { type: SET_IS_LOG_IN, true: true};
+}
+
+export function setLogOut(){
+  return { type:LOG_OUT }
+}
+
 //middleWare
 export const resetAbilityAPI = (arrAbility) => {
   return async function (dispatch) {
@@ -100,7 +109,6 @@ export const setNowProjectUsers = (users) => {
 
     dispatch(setNowUsers(users))
 
-
   };
 };
 
@@ -117,7 +125,7 @@ export const updateAbilityAPI = (data, idx) => {
 
 // middleware actions
 const loginAPI = (id, pwd, callback) => {
-  return function ({history}) {
+  return function (dispatch) {
     //로그인 API 구현부
 
     const data = {
@@ -128,12 +136,15 @@ const loginAPI = (id, pwd, callback) => {
     apis
       .login(data)
       .then((res) => {
-        localStorage.setItem("userId", id);
+        if(res.data.success){
+        localStorage.setItem("userId", res.data.nickname);
         setCookie("token", res.data.Authorization, 1);
         console.log("login completed", res);
-
+        
+        dispatch(setIsLogIn());
         //surveyChecker 받아서 넘기기
-        callback(true);
+        callback(res.data.suveyCheck);
+        }
       })
       .catch((err) => {
         console.log("login err : ", err);
@@ -199,11 +210,11 @@ const surveyAPI = (data, callback) => {
       .survey(data)
       .then((res)=>{
 
-        console.log("success", res)
+        console.log("survey API success", res)
         callback();
       })
       .catch((err)=>{
-        console.log("err",err)
+        console.log("survey API err",err)
       })
 
 
@@ -220,17 +231,15 @@ export default handleActions(
         draft.profileImage = action.payload.imgUrl;
         console.log("image save");
       }),
-    [SET_USER]: (state, action) =>
+    [SET_IS_LOG_IN]: (state, action) =>
       produce(state, (draft) => {
-        // setCookie("is_login", "success");
-        // draft.user = action.payload.user;
-        // draft.is_login = true;
+        draft.is_login = true;
       }),
     [LOG_OUT]: (state, action) =>
       produce(state, (draft) => {
-        // deleteCookie("is_login");
-        // draft.user = null;
-        // draft.is_login = false;
+        draft.is_login = false;
+        deleteCookie("token");
+        localStorage.removeItem("userId");
       }),
     [GET_USER]: (state, action) => produce(state, (draft) => {}),
 

@@ -21,10 +21,10 @@ const KakaoRedirect = (props) => {
     apis
       .kakaoSend(code)
         .then((res) => {
-          console.log(res);
+          console.log("kakao res : " , res);
         })
         .catch((err) => {
-          console.log(err);
+          console.log("kakao err : " , err);
         })
 
   }
