@@ -7,7 +7,7 @@ import './InfoBar.css'
 const InfoBar = (props) => {
 
   const room = props.room;
-  
+
   return(
   <div className='infoBar'>
     <div className='leftInnerContainer'>

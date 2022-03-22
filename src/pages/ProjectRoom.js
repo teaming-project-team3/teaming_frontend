@@ -11,9 +11,13 @@ import exUser from "../static/images/userStats/example_user.png";
 import ChatPrac from "../Components/Organisms/DMChat/ChatPrac";
 import { useSelector } from "react-redux";
 import onlineIcon from '../icons/onlineIcon.png'
+import RadarChart from "../Components/Molecules/RadarChart";
+import clip from "../static/images/projectRoom/clip.png"
 
 export default function ProjectRoom() {
   const [isLeader, setIsLeader] = React.useState(false);
+  const [mode, setMode] = React.useState(true);
+  const [curr, setCurr] = React.useState("userA");
   const users = useSelector((state)=>state.users.nowProjectUser)
 
   console.log("users", users)
@@ -39,38 +43,39 @@ export default function ProjectRoom() {
   };
 
   return (
-    <>
-      <div className="bg-[#E5E5E5]">
-        <div className="flex h-[15vh] w-screen items-center">
+    
+      <div className="bg-[#F2F3F7]">
+        <div className="flex h-[10vh] w-screen items-center">
+          
           <div className="flex items-center justify-center h-full aspect-square">
             <img src={backArrow} alt={""}></img>
           </div>
 
-          <div className="text-2xl text-black font-noto2">
+          <div className="w-[60vw] text-xl text-black font-noto2">
             동물운동 플랫폼 아임펫뿜뿜
           </div>
-
+          
+          
           {isLeader && <Button>프로젝트 시작!</Button>}
 
-            <div>
-              {users ? (
-                <div>
-                  <h1>현재 채팅중인 사람들 : </h1>
-                  <div className='activeContainer'>
-                    <h2>
-                      {users.map((name) => {
-                        console.log("in users.map usersData", users)
-                        return (
-                        <div key={name} className='activeItem'>
-                          {name}
-                          <img alt='Online Icon' src={onlineIcon} />
-                        </div>
-                      )})}
-                    </h2>
-                  </div>
+          <div className="flex m-10 font-noto2 justify-items-center">
+            {users ? (
+              <div>
+                <div className='activeContainer'>
+                  <h2>
+                    {users.map((name) => {
+                      console.log("in users.map usersData", users)
+                      return (
+                      <div key={name} className='activeItem'>
+                        {name}
+                        <img alt='Online Icon' src={onlineIcon} />
+                      </div>
+                    )})}
+                  </h2>
                 </div>
-               ) : null}
-            </div>
+              </div>
+              ) : null}
+          </div>
 
 
         </div>
@@ -78,13 +83,25 @@ export default function ProjectRoom() {
         <div className="flex w-screen">
           <div className="w-[65vw] bg-red-400 mr-10">
             <Slider {...sliderSettings}>
-              <div className="w-fit h-[100vh] bg-[#F2F3F7]">
+              <div className="w-fit h-[80vh] bg-[#F2F3F7]">
                 <div className="flex">
-                  <UserCard profile={exUser}></UserCard>
 
                   <UserCard profile={exUser}></UserCard>
+                  
+                  <UserCard 
+                  _onMouseOver={() => setCurr("userB")}
+                  _onMouseOut={() => {
+                    console.log("MouseOver!!")
+                    setCurr("userA");
+                  }}
+                  profile={exUser}></UserCard>
 
-                  <UserCard profile={exUser}></UserCard>
+                  <UserCard 
+                  _onMouseOver={() => setCurr("userC")}
+                  _onMouseOut={() => {
+                    setCurr("userA");
+                  }}
+                  profile={exUser}></UserCard>
                 </div>
                 <div className="flex">
                   <UserCard profile={exUser}></UserCard>
@@ -94,7 +111,7 @@ export default function ProjectRoom() {
                   <UserCard profile={exUser}></UserCard>
                 </div>
               </div>
-              <div className="w-fit h-[100vh] bg-[#F2F3F7]">
+              <div className="w-fit h-[80vh] bg-[#F2F3F7]">
                 <div className="flex">
                   <UserCard profile={exUser}></UserCard>
 
@@ -112,17 +129,34 @@ export default function ProjectRoom() {
               </div>
             </Slider>
           </div>
-
-          {/* <div style={{ width: "300px" }} display="flex">
-          <RadarChart curr={curr}></RadarChart>
-          </div> */}
-          <div className="w-full h-[100vh] bg-green-300 rounded-xl mr-5">
+          
+          {mode &&
+          <div className="relative w-full h-[80vh] rounded-xl mr-10 pr-10 border-2 p-2 bg-white pb-7">
+            <div className="top-0 flex justify-end w-full h-[3vh]">
+              <img onClick={()=>{setMode(false)}} src={clip} alt={""}></img>
+            </div>
             
             <ChatPrac name={"testID"} room={"testRoom"}></ChatPrac>
+          
+          </div>
+          }
+
+          {!mode &&
+          <div className="w-full h-[80vh] rounded-xl mr-10 pr-10 border-2 p-2">
+            <div className="flex justify-end w-full h-[3vh]">
+              <img onClick={()=>{setMode(true)}} src={clip} alt={""}></img>
+            </div>
+            
+            <div className="h-[95vh] ml-11 mr-11">
+              <RadarChart curr={curr}></RadarChart>
+            </div>  
             
           </div>
+          }
+          
+        
         </div>
       </div>
-    </>
+    
   );
 }
