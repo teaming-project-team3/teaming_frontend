@@ -29,7 +29,7 @@ function App() {
     <BrowserRouter>
       <Header />
         <Routes>
-          <Route path="/" element={<Prac/>} />
+          <Route path="/" element={<Main/>} />
           <Route path="/survey" element={<Survey />} />
           <Route path="/userinfo" element={<UserInfo />} />
           <Route path="/oauth" element={<TempOAuth />} />
