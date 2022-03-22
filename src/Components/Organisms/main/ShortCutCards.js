@@ -1,7 +1,15 @@
 function ShortCutCards(props) {
+
+  const { _onClick } = props
+
+  ShortCutCards.defaultProps = {
+    _onClick: ()=>{},
+  }
+
   return (
     <div
       className={`flex w-1/3 h-3/4 bg-[${props.bg}] rounded-xl p-[1rem] m-[1rem]`}
+      onClick={_onClick}
     >
       <div className="flex flex-col flex-wrap w-3/4">
         <div className="text-base text-white h-1/2">{props.text}</div>

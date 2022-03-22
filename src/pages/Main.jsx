@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import styled from "styled-components";
 import JumboTron from "../Components/Organisms/main/JumboTron";
 import ProfileCard from "../Components/Organisms/main/ProfileCard";
@@ -27,6 +27,7 @@ function Main() {
 
   const location = useLocation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const projectsData = useSelector((state) => state.projects.projectsMain)
   //const projectDetail = useSelector((state)=> state.projects.projectDetail)
   const modalIsOpen = location.state;
@@ -66,9 +67,9 @@ function Main() {
 
         <div className="flex justify-center w-screen h-[30vh] p-[1rem]">
 
-          <ShortCutCards img={Pic} bg={"#7545F2"} text={"사이드 프로젝트를 찾는 분이라면?"}></ShortCutCards>
+          <ShortCutCards _onClick={()=>{navigate("/")}} img={Pic} bg={"#7545F2"} text={"사이드 프로젝트를 찾는 분이라면?"}></ShortCutCards>
 
-          <ShortCutCards img={Pic2} bg={"#0C42C1"} text={"사이드 프로젝트 아이디어가 있으신 분이라면?"}></ShortCutCards>
+          <ShortCutCards _onClick={()=>{navigate("/createProject")}} img={Pic2} bg={"#0C42C1"} text={"사이드 프로젝트 아이디어가 있으신 분이라면?"}></ShortCutCards>
 
         </div>
 

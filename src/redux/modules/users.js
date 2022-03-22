@@ -83,7 +83,7 @@ export function setNowUsers(users) {
   return { type: SET_NOW_PROJECT_USERS, users };
 }
 
-function setIsLogIn() {
+export function setIsLogIn() {
   console.log("redux, setIsLogin")
   return { type: SET_IS_LOG_IN, true: true};
 }
