@@ -17,6 +17,7 @@ const RESET_SKILLS = "reset/Skills";
 const UPDATE_SKILLS = "update/Skills";
 const DELETE_ABILITY = "delete/Ability";
 const DELETE_SKILLS = "delete/Skills";
+const SET_NOW_PROJECT_USERS = "set/project/Users"
 
 // action creators
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
@@ -29,6 +30,7 @@ const resetSkillsAction = createAction(RESET_SKILLS, (item) => ({ item }));
 const updateSkillsAction = createAction(UPDATE_SKILLS, (data) => ({ data }));
 const deleteAbilityAction = createAction(DELETE_ABILITY, (data) => ({ data }));
 const deleteSkillsAction = createAction(DELETE_SKILLS, (data)=>({ data }))
+
 
 // initialState
 const initialState = {
@@ -43,6 +45,7 @@ const initialState = {
   abilityDesigner: [],
   skillsDesigner: [],
   myProjects: [],
+  nowProjectUser: [],
 };
 
 export function resetAbility(item, position) {
@@ -75,6 +78,12 @@ export function deleteSkills(data, position) {
   return { type: DELETE_SKILLS, data: data, position: position };
 }
 
+export function setNowUsers(users) {
+  console.log("redux, setNowUsers")
+  return { type: SET_NOW_PROJECT_USERS, users };
+}
+
+//middleWare
 export const resetAbilityAPI = (arrAbility) => {
   return async function (dispatch) {
     //dispatch(isLoaded(false));
@@ -83,6 +92,15 @@ export const resetAbilityAPI = (arrAbility) => {
 
     console.log("addAbility : ", arrAbility);
     dispatch(resetAbility(arrAbility));
+  };
+};
+
+export const setNowProjectUsers = (users) => {
+  return async function (dispatch){
+
+    dispatch(setNowUsers(users))
+
+
   };
 };
 
@@ -364,6 +382,10 @@ export default handleActions(
 
       }),
 
+      [SET_NOW_PROJECT_USERS]: (state, action) =>
+      produce(state, (draft) => {
+        draft.nowProjectUser = action.users;
+      }),
 
   },
   initialState

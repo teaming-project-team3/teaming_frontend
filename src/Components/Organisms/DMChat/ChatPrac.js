@@ -1,25 +1,25 @@
 import React, { useState, useEffect } from 'react'
-import queryString from 'query-string'
 import io from 'socket.io-client'
 import { useLocation } from 'react-router-dom';
 
-import TextContainer from '../../Atoms/TextContainer/TextContainer'
 import Messages from '../../Atoms/Messages/Messages'
 import InfoBar from '../../Atoms/InfoBar/InfoBar'
 import Input from '../../Atoms/Input/Input'
+import { useDispatch } from 'react-redux';
+import { setNowUsers } from '../../../redux/modules/users';
 
-import './Chat.css'
 //서버 주소
 //const ENDPOINT = 'http://localhost:5000'
-//const ENDPOINT = 'http://21dd-49-142-123-104.ngrok.io/waitroom'
+//const ENDPOINT = 'http://80e1-49-142-123-104.ngrok.io'
 const ENDPOINT = "http://3.36.75.239/waitroom"
-
 let socket
 
-const DMChat = ( ) => {
+const ChatPrac = ( props ) => {
+
+  const dispatch = useDispatch();
+
   const [name, setName] = useState('')
   const [room, setRoom] = useState('')
-  const [users, setUsers] = useState('')
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState([])
 
@@ -27,7 +27,9 @@ const DMChat = ( ) => {
   console.log(location)
 
   useEffect(() => {
-    const { name, room } = queryString.parse(location.search)
+    //const { name, room } = queryString.parse(location.search)
+
+    const { name, room } = props;
 
     console.log("start", name, room)
 
@@ -60,12 +62,10 @@ const DMChat = ( ) => {
 
     socket.on('roomData', ({ users }) => {
       console.log("roomData", users)
-      setUsers(users)
+      //setUsers(users)
+      dispatch(setNowUsers(users));
     })
-
-    return (()=>{
-      console.log("willunmount")
-      socket.disconnect()});
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const sendMessage = (event) => {
@@ -73,15 +73,18 @@ const DMChat = ( ) => {
 
     if (message) {
       console.log("before SendMessage", message)
-      let sendData = {sender: name, message: message, room: room}
-      socket.emit('sendMessage', sendData, () => setMessage(''))
+      socket.emit('sendMessage', message, () => setMessage(''))
       console.log("after SendMessage", message)
     }
   }
 
   return (
-    <div className='outerContainer'>
-      <div className='container'>
+    <div className="w-full h-[100vh] bg-green-300 rounded-xl">
+      
+      {/* 실시간 접속유저 정보
+      <TextContainer users={users} /> */}
+      
+      <div className="flex flex-col justify-between w-full h-full bg-white">
         <InfoBar room={room} />
         <Messages messages={messages} name={name} />
         <Input
@@ -90,9 +93,8 @@ const DMChat = ( ) => {
           sendMessage={sendMessage}
         />
       </div>
-      <TextContainer users={users} />
     </div>
   )
 }
 
-export default DMChat
+export default ChatPrac
