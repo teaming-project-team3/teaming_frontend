@@ -7,6 +7,7 @@ import InfoBar from '../../Atoms/InfoBar/InfoBar'
 import Input from '../../Atoms/Input/Input'
 import { useDispatch } from 'react-redux';
 import { setNowUsers } from '../../../redux/modules/users';
+//import { send } from 'process';
 
 //서버 주소
 //const ENDPOINT = 'http://localhost:5000'
@@ -73,8 +74,11 @@ const ChatPrac = ( props ) => {
 
     if (message) {
       console.log("before SendMessage", message)
-      socket.emit('sendMessage', message, () => setMessage(''))
-      console.log("after SendMessage", message)
+      let sendData = {sender: name, message: message, room: room}
+      socket.emit('sendMessage', sendData, () => setMessage(''))
+      let data = {user: "curr", text: message}
+      setMessages((messages) => [...messages, data])
+      console.log("after SendMessage", sendData)
     }
   }
 
@@ -86,7 +90,7 @@ const ChatPrac = ( props ) => {
       
       <div className="flex flex-col justify-between w-full h-full bg-white">
         <InfoBar room={room} />
-        <Messages messages={messages} name={name} />
+        <Messages messages={messages} name={"curr"} />
         <Input
           message={message}
           setMessage={setMessage}
