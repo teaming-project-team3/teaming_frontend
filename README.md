@@ -363,5 +363,8 @@ http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/signUp
 로그인 : 
 http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/login
 
+*테스트채팅 페이지 : 
+http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/testChat
+
 배포 URL : http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/
 
