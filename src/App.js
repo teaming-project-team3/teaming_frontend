@@ -45,6 +45,8 @@ function App() {
           <Route path="/auth/kakao/redirect" element={<KakaoRedirect />} />
           <Route path="/chat/join" element={<DMJoin/>}/>
           <Route path="/chat/dm" element={<DMChat/>}/>
+          <Route path="/chat/dm" element={<DMChat/>}/>
+          <Route path="/testChat" element={<Prac/>}/>
         </Routes>
     </BrowserRouter>
   );
