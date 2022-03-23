@@ -28,7 +28,6 @@ function App() {
 
   return (
     <BrowserRouter>
-    <main className="max-w-[1440px] mx-[auto]">
       <Header />
       <ScrollToTop/>
         <Routes>
@@ -51,7 +50,6 @@ function App() {
           <Route path="/chat/dm" element={<DMChat/>}/>
           <Route path="/testChat" element={<Prac/>}/>
         </Routes>
-        </main>
     </BrowserRouter>
   );
 }
