@@ -21,6 +21,7 @@ import UserInfo from "./pages/UserInfo";
 import ProjectRoom from "./pages/ProjectRoom";
 import Prac from "./pages/Prac";
 import ScrollToTop from "./shared/ScrollToTop"
+import UserEdit from "./pages/UserEdit";
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
           <Route path="/myPage" element={<MyPage/>} />
           <Route path="/survey" element={<Survey/>} />
           <Route path="/userStats" element={<UserStat />} />
+          <Route path="/userEdit" element={<UserEdit />} />
           <Route path="/createProject" element={<CreateProject/>} />
           <Route path="/ProjectRoom" element={<ProjectRoom/>} />
           <Route path="/projectDetail" element={<ProjectDetailModal/>} />
