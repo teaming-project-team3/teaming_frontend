@@ -273,12 +273,12 @@ function SignUp() {
       ACL: 'public-read',
       Body: file,
       Bucket: S3_BUCKET,
-      Key: "upload/" + file.name + imgName
+      Key: "upload/" + imgName + file.name
     };
     
     myBucket.putObject(params)
       .on('httpUploadProgress', (evt, res) => {
-        let imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/"+res.request.httpRequest.path
+        let imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+res.request.httpRequest.path
 
         console.log("uploaded S3 ImgUrl : ", imgUrl);
         //dispatch(actionCreators.uploadImage(imgUrl))
