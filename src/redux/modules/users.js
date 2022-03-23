@@ -17,7 +17,8 @@ const UPDATE_SKILLS = "update/Skills";
 const DELETE_ABILITY = "delete/Ability";
 const DELETE_SKILLS = "delete/Skills";
 const SET_NOW_PROJECT_USERS = "set/project/Users";
-const SET_IS_LOG_IN = "SET_IS_LOG_IN"
+const SET_IS_LOG_IN = "SET_IS_LOG_IN";
+const SET_MY_STATS = "SET_MY_STATS";
 
 // action creators
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
@@ -29,7 +30,7 @@ const updateAbilityAction = createAction(UPDATE_ABILITY, (data) => ({ data }));
 const resetSkillsAction = createAction(RESET_SKILLS, (item) => ({ item }));
 const updateSkillsAction = createAction(UPDATE_SKILLS, (data) => ({ data }));
 const deleteAbilityAction = createAction(DELETE_ABILITY, (data) => ({ data }));
-const deleteSkillsAction = createAction(DELETE_SKILLS, (data)=>({ data }))
+const deleteSkillsAction = createAction(DELETE_SKILLS, (data)=>({ data }));
 
 
 // initialState
@@ -46,6 +47,7 @@ const initialState = {
   skillsDesigner: [],
   myProjects: [],
   nowProjectUser: [],
+  myStats: [],
 };
 
 export function resetAbility(item, position) {
@@ -92,6 +94,10 @@ export function setLogOut(){
   return { type:LOG_OUT }
 }
 
+export function setMyUserStats(data){
+  return { type: SET_MY_STATS, data }
+}
+
 //middleWare
 export const resetAbilityAPI = (arrAbility) => {
   return async function (dispatch) {
@@ -124,7 +130,7 @@ export const updateAbilityAPI = (data, idx) => {
 };
 
 // middleware actions
-const loginAPI = (id, pwd, callback) => {
+const loginAPI = (id, pwd, callback) => { 
   return function (dispatch) {
     //로그인 API 구현부
 
@@ -173,36 +179,6 @@ const signUp = (data, callback) => {
   };
 };
 
-const loginCheckFB = () => {
-  return function (dispatch, getState, { history }) {
-    //로그인 체크 구현부
-    // auth.onAuthStateChanged((user) => {
-    //   if(user){
-    //     dispatch(
-    //       setUser({
-    //         user_name: user.displayName,
-    //         user_profile: "",
-    //         id: user.email,
-    //         uid: user.uid,
-    //       })
-    //     );
-    //   }else{
-    //     dispatch(logOut());
-    //   }
-    // })
-  };
-};
-
-const logoutFB = () => {
-  return function (dispatch, getState, { history }) {
-    //로그아웃 구현부 - 로그아웃에 있어 서버와 처리해야할 부분이 있는지 확인
-    // auth.signOut().then(() => {
-    //   dispatch(logOut());
-    //   history.replace('/');
-    // })
-  };
-};
-
 const surveyAPI = (data, callback) => {
   return function () {
 
@@ -219,6 +195,26 @@ const surveyAPI = (data, callback) => {
 
 
 
+
+  };
+};
+
+const getMyStats = () => {
+  return function(dispatch){
+
+    apis
+      .getMyStatsAPI()
+        .then((res)=>{
+
+          console.log("My Stats res : ", res)
+          dispatch(setMyUserStats(res.data.userInfo))
+
+        })
+        .catch((err)=>{
+
+          console.log("myStats Err : ", err)
+
+        })
 
   }
 }
@@ -396,6 +392,12 @@ export default handleActions(
         draft.nowProjectUser = action.users;
       }),
 
+      [SET_MY_STATS]: (state, action) => 
+      produce(state, (draft) => {
+
+        draft.myStats = action.data;
+
+      }),
   },
   initialState
 );
@@ -407,14 +409,13 @@ const actionCreators = {
   signUp,
   loginAPI,
   surveyAPI,
-  loginCheckFB,
-  logoutFB,
   resetAbilityAction,
   resetSkillsAction,
   updateAbilityAction,
   updateSkillsAction,
   deleteAbilityAction,
   deleteSkillsAction,
+  getMyStats,
 };
 
 export { actionCreators };

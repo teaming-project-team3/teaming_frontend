@@ -39,7 +39,7 @@ const Login = (props) => {
     }
 
     dispatch(userActions.loginAPI(id, pwd, (surveyChecker)=>
-      navigate('/', {state: surveyChecker}
+      navigate('/', {state: !surveyChecker}
     )))
 
   };

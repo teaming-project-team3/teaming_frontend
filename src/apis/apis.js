@@ -58,8 +58,9 @@ export const apis = {
   login: (data) => api.post("/auth/signin", data ),
   survey: (data) => api.post("/users/suvey", data),
 
-  loadProjectsMain: () => apiMS.get("/boards"),
-  getProjectDetailAPI: (boardId) => apiMS.get(`/boards/${boardId}`),
+  loadProjectsMain: () => api.get("/boards"),
+  getProjectDetailAPI: (boardId) => api.get(`/boards/${boardId}`),
 
-  getLoginUserInfo: () => api.get("/api/loginUser.json"),
+
+  getMyStatsAPI: () => api.get("/users/mypage"),
 };
