@@ -42,7 +42,7 @@ function Header() {
       {isLogin && (
       <>
       <Link to="/login" onClick={()=>{dispatch(setLogOut())}} className="col-start-10 col-end-11 text-base font-noto3">로그아웃</Link>
-      <Link to="/" className="col-start-11 col-end-12 bg-[#7545F2] rounded pl-5 pr-5 pt-1.5 pb-1.5 text-white font-notoB">마이페이지</Link>
+      <Link to="/userStats" className="col-start-11 col-end-12 bg-[#7545F2] rounded pl-5 pr-5 pt-1.5 pb-1.5 text-white font-notoB">마이페이지</Link>
       </>
       )}
       </Nav>

@@ -11,10 +11,12 @@ export default function S3Upload(){
     const handleFileInput = (e) => {
         const file = e.target.files[0];
         const fileExt = file.name.split('.').pop();
-        if(file.type !== 'image/jpeg' || fileExt !=='jpg' || fileExt !=='png'){
+        console.log("fileExt", fileExt)
+        if(fileExt !== 'png' && fileExt !=='jpg' ){
           alert('jpg/jpeg, png 파일만 Upload 가능합니다.');
           return;
         }
+
         dispatch(imageActions.setFile(file));
         setPreview(e.target.files[0])
         dispatch()
