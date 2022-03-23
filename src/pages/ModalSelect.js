@@ -160,7 +160,7 @@ function ModalSelect(props) {
 
   return (
     <div>
-      <div className="mt-5 mb-2 ml-5 text-base font-noto1">사용 언어</div>
+      <div className="flex mt-5 mb-2 ml-5 text-base font-noto1">사용 언어</div>
       <CreatableSelect
         className="ml-5 mr-5"
         isMulti // show multiple options
