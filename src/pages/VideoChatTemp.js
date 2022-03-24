@@ -1,30 +1,26 @@
-import React, { useEffect, useState } from "react";
-import Select from "react-select";
-import { useLocation } from "react-router-dom";
-import io from "socket.io-client";
-import queryString from "query-string";
-import { useRef } from "react";
-import Messages from "../Components/Atoms/Messages/Messages"
+import React from "react";
+import video from "../static/images/projectRoom/video.png"
+import mic from "../static/images/projectRoom/mic.png"
 
-const ENDPOINT = "http://localhost:5000";
-let socket;
-
-const VideoChat = (props) => {
+const VideoChatTemp = (props) => {
   
 
   return (
     <div className="streams">
-        <div className="myStream" ref={videoGrid}>
+        <div className="myStream" ref={props.videoGrid}>
           <video
-            ref={myVideo}
+            ref={props.myVideo}
             autoPlay
             playsInline
             className="myFace"
           ></video>
-          <h3>userNickName</h3>
+        </div>
+        <div className="flex items-center justify-center w-full">
+          <img src={video} alt={"video"} className="w-1/4 p-3 cursor-pointer" onClick={props.videoToggle}/>
+          <img src={mic} alt={"mic"} className="w-1/4 p-3 cursor-pointer" onClick={props.audioToggle}/>
         </div>
       </div>
   );
 };
 
-export default VideoChat;
+export default VideoChatTemp;

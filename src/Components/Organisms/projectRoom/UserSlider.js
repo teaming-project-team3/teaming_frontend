@@ -5,43 +5,60 @@ import Slider from "react-slick";
 import VideoChat from "../../../pages/VideoChat";
 import UserCard from "./UserCard";
 import io from "socket.io-client";
+import VideoChatTemp from "../../../pages/VideoChatTemp";
+import tw from "tailwind-styled-components";
+import video from "../../../static/images/projectRoom/video.png"
+import mic from "../../../static/images/projectRoom/mic.png"
 
+
+const VideoCard = tw.div`
+flex w-1/4 h-[35vh] items-center 
+ml-10 mr-10 mt-5 mb-5 rounded-xl
+${(props) => (props.isShow ? "" :`hidden`)};
+`;
+
+const UserCardTw = tw.div`
+w-1/4 h-[35vh] ml-10 mr-10 
+mt-5 mb-5 rounded-xl
+`
 
 const ENDPOINT = "http://localhost:5000";
 let socket;
 
 function UserSlider(props) {
-    
-    const {exUser, _onMouseOut, _onMouseOver, videoMode, audioMode} = props;
+  const { exUser, _onMouseOut, _onMouseOver, videoMode, audioMode } = props;
 
-    const sliderSettings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-      };
-    
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+  let checker = true;
 
   const location = useLocation();
+  //const query = queryString.parse(location.search);
   const name = "testName";
   const room = "testRoom";
   console.log("Rtcview : ", name, room);
-  let myStream; 
-  //const MYCHAT_CN = "myChat";
+  let myStream;
+  const MYCHAT_CN = "myChat";
   const NOTICE_CN = "noticeChat";
   const [cameraOptions, setCameraOptions] = useState([]);
-  const [messages, setMessage] = useState([])
+  const [messages, setMessage] = useState([]);
   let peopleInRoom = 1;
   let pcObj = {};
   const videoGrid = useRef();
   const myVideo = useRef();
-  //const peerVideoTemp = useRef();
+  const video2Ref = useRef();
+  const video3Ref = useRef();
+  const peerVideoTemp = useRef();
   const [users, setUsers] = useState(1);
-  // const [videoMode, setVideoMode] = useState(false);
-  // const [audioMode, setAudioMode] = useState(false);
-    //const camerasSelect = document.getElementsByClassName("cameras");
-      console.log(users);
+  const [cameraOn, setCameraOn] = useState(true);
+  const [audioOn, setAudioOn] = useState(false);
+  //const camerasSelect = document.getElementsByClassName("cameras");
+
   useEffect(() => {
     socket = io(ENDPOINT, {
       //withCredentials: true,
@@ -81,11 +98,10 @@ function UserSlider(props) {
         }
       }
       writeChat("방에 있습니다.", NOTICE_CN);
-      return (socket.disconnect())
     });
 
     socket.on("offer", async (offer, remoteSocketId, remoteNickname) => {
-      console.log("client on.offer : ", remoteNickname)
+      console.log("client on.offer : ", remoteNickname);
       try {
         const newPC = createConnection(remoteSocketId, remoteNickname);
         await newPC.setRemoteDescription(offer);
@@ -97,30 +113,28 @@ function UserSlider(props) {
         console.error(err);
       }
     });
-  
+
     socket.on("answer", async (answer, remoteSocketId) => {
       await pcObj[remoteSocketId].setRemoteDescription(answer);
     });
-  
+
     socket.on("ice", async (ice, remoteSocketId) => {
       await pcObj[remoteSocketId].addIceCandidate(ice);
     });
 
     socket.on("leave_room", (leavedSocketId, nickname) => {
+      console.log("leave_room");
       removeVideo(leavedSocketId);
       writeChat(`notice! ${nickname} leaved the room.`, NOTICE_CN);
       --peopleInRoom;
       //sortStreams();
     });
-  
-    // return (socket.disconnect());
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
 
   function writeChat(message, className = null) {
-
-    setMessage([...messages, message])
+    setMessage([...messages, message]);
   }
 
   async function getCameras() {
@@ -165,12 +179,11 @@ function UserSlider(props) {
       myStream = await navigator.mediaDevices.getUserMedia(
         deviceId ? cameraConstraints : initialConstraints
       );
-      
+
       // stream을 mute하는 것이 아니라 HTML video element를 mute한다.
-      console.log("myVideo : ", myStream, myVideo)
+      console.log("myVideo : ", myStream, myVideo);
       addVideoStream(myVideo.current, myStream);
       //videoGrid.current.append(myVideo.current);
-
 
       if (!deviceId) {
         // mute default
@@ -188,8 +201,6 @@ function UserSlider(props) {
   async function initCall() {
     await getMedia();
   }
-
-
 
   function createConnection(remoteSocketId, remoteNickname) {
     const myPeerConnection = new RTCPeerConnection({
@@ -218,9 +229,9 @@ function UserSlider(props) {
     myStream //
       .getTracks()
       .forEach((track) => myPeerConnection.addTrack(track, myStream));
-  
+
     pcObj[remoteSocketId] = myPeerConnection;
-  
+
     ++peopleInRoom;
     //sortStreams();
     return myPeerConnection;
@@ -236,33 +247,26 @@ function UserSlider(props) {
     const peerStream = event.stream;
     paintPeerFace(peerStream, remoteSocketId, remoteNickname);
   }
-  
-  function paintPeerFace(peerStream, id, remoteNickname) {
 
+  function paintPeerFace(peerStream, id, remoteNickname) {
     console.log("peerStream : ", peerStream, id, remoteNickname);
 
-    const peerVideo = document.createElement("video");
-    console.log("const peerVideo : ", peerVideo)
-    peerVideo.setAttribute("autoplay", "playsinline");
-    // peerVideo.autoplay = true;
-    // peerVideo.playsInline = true;
-    peerVideo.width = "400";
-    peerVideo.height = "400";
-    peerVideo.className = id;
-
-    console.log("const peerVideo : ", peerVideo);
-    
-    addVideoStream(peerVideo, peerStream);
-
-    videoGrid.current.append(peerVideo);
-    setUsers(videoGrid.current.childElementCount);
+    if (checker) {
+      addVideoStream(video3Ref.current, peerStream);
+      checker = false;
+    } else {
+      addVideoStream(video2Ref.current, peerStream);
+    }
+    //videoGrid.current.append(peerVideo);
+    //setUsers(videoGrid.current.childElementCount);
 
     //sortStreams();
   }
 
   function addVideoStream(video, stream) {
-    console.log("addVideoStream : ", stream)
+    console.log("addVideoStream : ", stream);
     video.srcObject = stream;
+
     video.addEventListener("loadedmetadata", () => {
       video.play();
     });
@@ -276,72 +280,104 @@ function UserSlider(props) {
 
   function removeVideo(leavedSocketId) {
     const video = document.querySelectorAll("video");
-    console.log("removeVideo : ", leavedSocketId, video)
-   let removeVideo;
-      for (let i = 0; i < video.length; i++) {
-        if (video[i].className === leavedSocketId) {
-          removeVideo = video[i];
-        }
+    console.log("removeVideo : ", leavedSocketId, video);
+    let removeVideo;
+    for (let i = 0; i < video.length; i++) {
+      if (video[i].className === leavedSocketId) {
+        removeVideo = video[i];
       }
+    }
 
-      removeVideo.remove();
+    removeVideo.remove();
   }
 
+  const handleCamera = async () => {
+    setCameraOn((prev) => !prev);
 
-  
-    return (
-        
-          <div className="w-[65vw] bg-red-400 mr-10">
-            <Slider {...sliderSettings}>
-              <div className="w-fit h-[80vh] bg-[#F2F3F7]">
-                <div className="flex">
+    if (cameraOn) {
+      console.log("videoOn->off");
+      let video = myVideo.current.srcObject.getVideoTracks();
+      video[0].enabled = false;
 
-                {videoMode &&
-                <div className="w-1/4 h-[35vh] ml-10 mr-10 mt-5 mb-5 rounded-xl">
-                    <VideoChat videoMode={videoMode} audioMode={audioMode}/>
-                </div>
-                }
-                {!videoMode &&
-                    <UserCard profile={exUser}></UserCard>
-                }
-                  
-                  <UserCard 
-                  _onMouseOver={_onMouseOver}
-                  _onMouseOut={_onMouseOut}
-                  profile={exUser}></UserCard>
+    } else {
+      console.log("videoOff->on");
+      let video = myVideo.current.srcObject.getVideoTracks();
+      video[0].enabled = true;
+    }
+  };
 
-                  <UserCard 
-                  _onMouseOver={_onMouseOver}
-                  _onMouseOut={_onMouseOut}
-                  profile={exUser}></UserCard>
-                </div>
-                <div className="flex">
-                  <UserCard profile={exUser}></UserCard>
+  const handleAudio = () => {
+    setAudioOn((prev) => !prev);
+    if (audioOn) {
+      console.log("audioOn->off");
+      let video = myVideo.current.srcObject.getAudioTracks();
+      video[0].enabled = false;
+    } else {
+      console.log("audioOff->On");
+      let video = myVideo.current.srcObject.getAudioTracks();
+      video[0].enabled = true;
+    }
+  };
 
-                  <UserCard profile={exUser}></UserCard>
+  return (
+    <div className="w-[65vw] bg-red-400 mr-10">
+      <Slider {...sliderSettings}>
+        <div className="w-fit h-[80vh] bg-[#F2F3F7]">
+          <div className="flex">
+            
+            <VideoCard isShow={cameraOn} className="videoCard">
+              <VideoChatTemp
+                id="videoChat1"
+                myVideo={myVideo}
+                videoToggle={handleCamera}
+                audioToggle={handleAudio}
+              ></VideoChatTemp>
 
-                  <UserCard profile={exUser}></UserCard>
-                </div>
-              </div>
-              <div className="w-fit h-[80vh] bg-[#F2F3F7]">
-                <div className="flex">
-                  <UserCard profile={exUser}></UserCard>
+            </VideoCard>
 
-                  <UserCard profile={exUser}></UserCard>
+            <UserCard isShow={!cameraOn} id="userCard1" profile={exUser} videoToggle={handleCamera} audioToggle={handleAudio}/>
 
-                  <UserCard profile={exUser}></UserCard>
-                </div>
-                <div className="flex">
-                  <UserCard profile={exUser}></UserCard>
 
-                  <UserCard profile={exUser}></UserCard>
+            <div className="flex w-1/4 h-[35vh] items-center ml-10 mr-10 mt-5 mb-5 rounded-xl">
+              <VideoChatTemp myVideo={video2Ref} value={"LWJ"}></VideoChatTemp>
+            </div>
 
-                  <UserCard profile={exUser}></UserCard>
-                </div>
-              </div>
-            </Slider>
+            <div className="flex w-1/4 h-[35vh] items-center ml-10 mr-10 mt-5 mb-5 rounded-xl">
+              <VideoChatTemp myVideo={video3Ref} value={"JMS"}></VideoChatTemp>
+            </div>
           </div>
-    );
-  }
-  
-  export default UserSlider;
+
+          <div className="flex">
+            <UserCard
+              _onMouseOver={_onMouseOver}
+              _onMouseOut={_onMouseOut}
+              profile={exUser}
+            ></UserCard>
+
+            <UserCard profile={exUser}></UserCard>
+
+            <UserCard profile={exUser}></UserCard>
+          </div>
+        </div>
+        {/* <div className="w-fit h-[80vh] bg-[#F2F3F7]">
+                <div className="flex">
+                  <UserCard profile={exUser}></UserCard>
+
+                  <UserCard profile={exUser}></UserCard>
+
+                  <UserCard profile={exUser}></UserCard>
+                </div>
+                <div className="flex">
+                  <UserCard profile={exUser}></UserCard>
+
+                  <UserCard profile={exUser}></UserCard>
+
+                  <UserCard profile={exUser}></UserCard>
+                </div>
+              </div> */}
+      </Slider>
+    </div>
+  );
+}
+
+export default UserSlider;
