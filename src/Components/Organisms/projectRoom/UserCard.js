@@ -10,6 +10,8 @@ ${(props) => (props.isShow ? "" : `hidden`)};
 
 function UserCard(props) {
 
+  console.log("userCard props isShow",props.isShow);
+
   return (
     <UserCardTw
     isShow={props.isShow}
