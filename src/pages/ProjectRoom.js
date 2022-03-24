@@ -76,18 +76,18 @@ export default function ProjectRoom() {
         <UserSlider videoMode={toggleVideo} audioMode={toggleAudio} exUser={exUser} _onMouseOut={()=>{setCurr("userA");}} _onMouseOver={()=>{setCurr("userB")}}></UserSlider>
           
           {mode &&
-          <div className="relative w-full h-[80vh] rounded-xl mr-10 pr-10 border-2 p-2 bg-white pb-7">
+          <div className="relative w-[25vw] h-[80vh] rounded-xl mr-10 pr-10 border-2 p-2 bg-white pb-7">
             <div className="top-0 flex justify-end w-full h-[3vh] cursor-pointer">
               <img onClick={()=>{setMode(false)}} src={clip} alt={""}></img>
             </div>
             
-            <ChatPrac name={"testID"} room={"testRoom"}></ChatPrac>
+            {/* <ChatPrac name={"testID"} room={"testRoom"}></ChatPrac> */}
           
           </div>
           }
 
           {!mode &&
-          <div className="w-full h-[80vh] rounded-xl mr-10 pr-10 border-2 p-2">
+          <div className="w-[25vw] h-[80vh] rounded-xl mr-10 pr-10 border-2 p-2">
             <div className="flex justify-end w-full h-[3vh] cursor-pointer">
               <img onClick={()=>{setMode(true)}} src={clip} alt={""}></img>
             </div>
