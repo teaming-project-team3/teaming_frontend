@@ -12,8 +12,8 @@ let socket;
 const VideoChat = (props) => {
   const location = useLocation();
   const query = queryString.parse(location.search);
-  const name = query.name;
-  const room = query.room;
+  const name = "testName";
+  const room = "testRoom";
   console.log("Rtcview : ", name, room);
   let myStream; 
   //const MYCHAT_CN = "myChat";
@@ -26,25 +26,13 @@ const VideoChat = (props) => {
   const myVideo = useRef();
   const peerVideoTemp = useRef();
   const [users, setUsers] = useState(1);
+  const [videoMode, setVideoMode] = useState(false);
+  const [audioMode, setAudioMode] = useState(false);
     //const camerasSelect = document.getElementsByClassName("cameras");
-
-    if (props.videoMode) {
-        myStream //
-          .getAudioTracks()
-          .forEach((track) => (track.enabled = !track.enabled));
-        
-      }
-      
-    if (props.audioMode) {
-        myStream //
-          .getVideoTracks()
-          .forEach((track) => (track.enabled = !track.enabled));
-        
-      }
 
   useEffect(() => {
     socket = io(ENDPOINT, {
-      withCredentials: true,
+      //withCredentials: true,
       extraHeaders: {
         "my-custom-header": "abcd",
       },
@@ -113,9 +101,31 @@ const VideoChat = (props) => {
       //sortStreams();
     });
   
-
+    // return (socket.disconnect());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // useEffect(()=>{
+
+  //   if (props.videoMode!==videoMode) {
+  //     console.log("videoMode", props.videoMode, videoMode);
+  //       myStream //
+  //         .getAudioTracks()
+  //         .forEach((track) => (track.enabled = !track.enabled));
+  //       setVideoMode(props.videoMode);
+  //     }
+      
+  //   if (props.audioMode!==audioMode) {
+  //       myStream //
+  //         .getVideoTracks()
+  //         .forEach((track) => (track.enabled = !track.enabled));
+  //       setAudioMode(props.audioMode);
+  //     }
+  
+
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // },[props.videoMode, props.AudioMode])
+  
 
   function writeChat(message, className = null) {
 
