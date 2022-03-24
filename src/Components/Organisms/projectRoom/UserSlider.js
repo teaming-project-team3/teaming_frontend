@@ -40,7 +40,8 @@ function UserSlider(props) {
 
   const location = useLocation();
   //const query = queryString.parse(location.search);
-  const name = "testName";
+  //const name = "testName";
+  const name = localStorage.getItem("userId");
   const room = "testRoom";
   console.log("Rtcview : ", name, room);
   let myStream;
@@ -76,7 +77,7 @@ function UserSlider(props) {
     //   socket.connect();
     // }
     console.log("before joinroom")
-    socket.emit("join_room", room, name);
+    socket.emit("join_room", { roomName : room, nickName : name });
     console.log("after joinroom")
 
     socket.on("accept_join", async (userObjArr) => {
@@ -97,7 +98,7 @@ function UserSlider(props) {
           );
           const offer = await newPC.createOffer();
           await newPC.setLocalDescription(offer);
-          socket.emit("offer", offer, userObjArr[i].socketId, name);
+          socket.emit("offer", {offer : offer, localNickName: name, remoteSocketId: userObjArr[i].socketId});
           writeChat(`__${userObjArr[i].nickname}__`, NOTICE_CN);
         } catch (err) {
           console.error(err);
@@ -113,7 +114,7 @@ function UserSlider(props) {
         await newPC.setRemoteDescription(offer);
         const answer = await newPC.createAnswer();
         await newPC.setLocalDescription(answer);
-        socket.emit("answer", answer, remoteSocketId);
+        socket.emit("answer", { answer : answer, remoteSocketId : remoteSocketId});
         writeChat(`notice! __${remoteNickname}__ joined the room`, NOTICE_CN);
       } catch (err) {
         console.error(err);
@@ -126,6 +127,14 @@ function UserSlider(props) {
 
     socket.on("ice", async (ice, remoteSocketId) => {
       await pcObj[remoteSocketId].addIceCandidate(ice);
+    });
+
+    socket.on("videoON", async (userId) => {
+      setUser1(true)
+    });
+
+    socket.on("videoOFF", async (userId) => {
+      setUser1(false)
     });
 
     socket.on("leave_room", (leavedSocketId, nickname) => {
@@ -245,7 +254,7 @@ function UserSlider(props) {
 
   function handleIce(event, remoteSocketId) {
     if (event.candidate) {
-      socket.emit("ice", event.candidate, remoteSocketId);
+      socket.emit("ice", {ice : event.candidate, remoteSocketId : remoteSocketId});
     }
   }
 
@@ -308,11 +317,13 @@ function UserSlider(props) {
       console.log("videoOn->off");
       let video = myVideo.current.srcObject.getVideoTracks();
       video[0].enabled = false;
-
+      socket.emit("videoON", {userId : localStorage.getItem("userId")});
+      
     } else {
       console.log("videoOff->on");
       let video = myVideo.current.srcObject.getVideoTracks();
       video[0].enabled = true;
+      socket.emit("videoOFF", {userId : localStorage.getItem("userId")});
     }
   };
 
@@ -322,10 +333,12 @@ function UserSlider(props) {
       console.log("audioOn->off");
       let video = myVideo.current.srcObject.getAudioTracks();
       video[0].enabled = false;
+      socket.emit("audioON", {userId : localStorage.getItem("userId")});
     } else {
       console.log("audioOff->On");
       let video = myVideo.current.srcObject.getAudioTracks();
       video[0].enabled = true;
+      socket.emit("audioOFF", {userId : localStorage.getItem("userId")});
     }
   };
 
