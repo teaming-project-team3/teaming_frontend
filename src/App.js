@@ -19,7 +19,6 @@ import DMJoin from "./Components/Organisms/DMJoin/DMJoin";
 import DMChat from "./Components/Organisms/DMChat/DMChat";
 import UserInfo from "./pages/UserInfo";
 import ProjectRoom from "./pages/ProjectRoom";
-import Prac from "./pages/Prac";
 import ScrollToTop from "./shared/ScrollToTop"
 import UserEdit from "./pages/UserEdit";
 import VideoChat from "./pages/VideoChat";
