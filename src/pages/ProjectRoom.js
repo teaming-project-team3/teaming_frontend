@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import * as React from "react";
 import { useEffect } from "react";
 import exUser from "../static/images/userStats/example_user.png";
@@ -19,10 +20,22 @@ export default function ProjectRoom() {
   const [curr, setCurr] = React.useState("userA");
   const users = useSelector((state)=>state.users.nowProjectUser)
   const [toggleVideo, setToggleVideo] = React.useState(false);
+  const [toggleAudio, setToggleAudio] = React.useState(false);
+
 
   console.log("users", users)
 
   const toggleVideoFunc = () => {
+    
+    if(toggleVideo){
+      setToggleVideo(false);
+    }else{
+      setToggleVideo(true);
+    }
+
+  }
+
+  const toggleAudioFunc = () => {
     
     if(toggleVideo){
       setToggleVideo(false);
@@ -60,7 +73,7 @@ export default function ProjectRoom() {
 
         <div className="flex w-screen">
           
-        <UserSlider videoMode={toggleVideo} exUser={exUser} _onMouseOut={()=>{setCurr("userA");}} _onMouseOver={()=>{setCurr("userB")}}></UserSlider>
+        <UserSlider videoMode={toggleVideo} audioMode={toggleAudio} exUser={exUser} _onMouseOut={()=>{setCurr("userA");}} _onMouseOver={()=>{setCurr("userB")}}></UserSlider>
           
           {mode &&
           <div className="relative w-full h-[80vh] rounded-xl mr-10 pr-10 border-2 p-2 bg-white pb-7">
@@ -90,7 +103,7 @@ export default function ProjectRoom() {
         </div>
 
           <div className="flex justify-center w-screen h-fit">
-            <img src={mic} alt={"mic"} className="mr-2"></img>
+            <img src={mic} alt={"mic"} className="mr-2"  onClick={()=>{toggleAudioFunc()}}></img>
             <img src={video} alt={"video"} className="ml-2" onClick={()=>{toggleVideoFunc()}}></img>
           </div>
 
