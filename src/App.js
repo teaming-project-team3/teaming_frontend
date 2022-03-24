@@ -22,6 +22,7 @@ import ProjectRoom from "./pages/ProjectRoom";
 import Prac from "./pages/Prac";
 import ScrollToTop from "./shared/ScrollToTop"
 import UserEdit from "./pages/UserEdit";
+import VideoChat from "./pages/VideoChat";
 
 
 function App() {
@@ -50,7 +51,7 @@ function App() {
           <Route path="/chat/join" element={<DMJoin/>}/>
           <Route path="/chat/dm" element={<DMChat/>}/>
           <Route path="/chat/dm" element={<DMChat/>}/>
-          <Route path="/testChat" element={<Prac/>}/>
+          <Route path="/testChat" element={<VideoChat/>}/>
         </Routes>
     </BrowserRouter>
   );
