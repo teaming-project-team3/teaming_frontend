@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import * as React from "react";
 import { useEffect } from "react";
 import exUser from "../static/images/userStats/example_user.png";
@@ -80,7 +81,7 @@ export default function ProjectRoom() {
               <img onClick={()=>{setMode(false)}} src={clip} alt={""}></img>
             </div>
             
-            {/* <ChatPrac name={"testID"} room={"testRoom"}></ChatPrac> */}
+            <ChatPrac name={"testID"} room={"testRoom"}></ChatPrac>
           
           </div>
           }
