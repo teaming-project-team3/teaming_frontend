@@ -424,7 +424,7 @@ function UserSlider(props) {
   };
 
   return (
-    <div className="w-[65vw] bg-red-400 mr-10">
+    <div className="w-[70vw] bg-red-400 mr-10">
       <Slider {...sliderSettings}>
         <div className="w-fit h-[80vh] bg-[#F2F3F7]">
           <div className="flex flex-wrap">
