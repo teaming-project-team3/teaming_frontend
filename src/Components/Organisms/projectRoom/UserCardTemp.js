@@ -6,7 +6,6 @@ ${(props) => (props.isShow ? "" : `hidden`)};
 `;
 
 function UserCardTemp(props) {
-  console.log("userCard props isShow", props.isShow);
 
   return (
     <UserCardTw isShow={props.isShow} className="w-full h-full">
@@ -19,7 +18,7 @@ function UserCardTemp(props) {
       </div>
       <div className="flex flex-col items-center justify-center bg-white h-5/6 rounded-xl">
         <div className="flex text-base text-center font-notoB text-[1.5rem]">
-          조민혁
+          {localStorage.getItem("userId")}
         </div>
 
         <div className="flex text-base text-center font-noto3 text-[1rem]">

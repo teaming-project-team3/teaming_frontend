@@ -20,14 +20,14 @@ const DMJoin = () => {
         <div>
           <input
             placeholder='채팅방'
-            className='joinInput mt-20'
+            className='mt-20 joinInput'
             type='text'
             onChange={(event) => setRoom(event.target.value)}
           />
         </div>
         <Link
           onClick={(e) => (!name || !room ? e.preventDefault() : null)}
-          to={`/chat/dm?name=${name}&room=${room}`}
+          to={`/projectRoom?name=${name}&room=${room}`}
         >
           <button className={'button mt-20'} type='submit'>
             가입
