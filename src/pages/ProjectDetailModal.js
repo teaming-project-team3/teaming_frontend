@@ -22,7 +22,7 @@ function ProjectDetailModal(props) {
   useEffect(() => {}, []);
 
   return (
-    <div className="flex w-[50vh] bg-slate-400 items-center justify-center content-center overflow-scroll">
+    <div className="flex w-[50vh] bg-slate-400 items-center justify-center content-center overflow-y-scroll">
       <ProjectDetailModalCustom
         checker={modalIsOpen}
         callback={props.callBackSetShowFalse}
@@ -78,94 +78,97 @@ function ProjectDetailModal(props) {
             <div className="text-xl font-bold font-noto2 mt-7 ml-[1.8rem] pl-[1.8rem] pb-6 border-b-2">
               모집요건
             </div>
-            
+
             <div className="flex w-[100%] justify-center mt-10 mb-10">
-            <table className = "w-5/6 text-base border border-collapse table-fixed border-slate-400 font-noto2">
-              <thead className="text-black">
-                <tr>
-                  <th className = "border border-slate-300">모집부문</th>
-                  <th className = "border border-slate-300">담당업무</th>
-                  <th className = "border border-slate-300">우대사항</th>
-                </tr>
-              </thead>
-              <tbody className="text-gray-500">
-                <tr>
-                  <td className = "border border-slate-300">디자이너</td>
-                  <td className = "border border-slate-300">ㆍ Traddly 앱 서비스 UI/UX 디자인
-ㆍ홍보 활동에 필요한 디자인 작업 진행
-ㆍTraddly 커스텀 굿즈 상품의 브랜딩</td>
-                  <td className = "border border-slate-300">ㆍ 피그마 사용 가능자
-ㆍ 애완 서비스</td>
-                </tr>
-                <tr>
-                  <td className = "border border-slate-300">프론트엔드 개발자</td>
-                  <td className = "border border-slate-300">ㆍ Traddly 앱 서비스 UI/UX 디자인
-ㆍ홍보 활동에 필요한 디자인 작업 진행
-ㆍTraddly 커스텀 굿즈 상품의 브랜딩</td>
-                  <td className = "border border-slate-300">ㆍ 피그마 사용 가능자
-ㆍ 애완 서비스</td>
-                </tr>
-                <tr>
-                  <td className = "border border-slate-300">백엔드 개발자</td>
-                  <td className = "border border-slate-300">ㆍ Traddly 앱 서비스 UI/UX 디자인
-ㆍ홍보 활동에 필요한 디자인 작업 진행
-ㆍTraddly 커스텀 굿즈 상품의 브랜딩</td>
-                  <td className = "border border-slate-300">ㆍ 피그마 사용 가능자
-ㆍ 애완 서비스</td>
-                </tr>
-              </tbody>
-            </table>
+              <table className="w-5/6 text-base border border-collapse table-fixed border-slate-400 font-noto2">
+                <thead className="text-black">
+                  <tr>
+                    <th className="border border-slate-300">모집부문</th>
+                    <th className="border border-slate-300">담당업무</th>
+                    <th className="border border-slate-300">우대사항</th>
+                  </tr>
+                </thead>
+                <tbody className="text-gray-500">
+                  <tr>
+                    <td className="border border-slate-300">디자이너</td>
+                    <td className="border border-slate-300">
+                      ㆍ Traddly 앱 서비스 UI/UX 디자인 ㆍ홍보 활동에 필요한
+                      디자인 작업 진행 ㆍTraddly 커스텀 굿즈 상품의 브랜딩
+                    </td>
+                    <td className="border border-slate-300">
+                      ㆍ 피그마 사용 가능자 ㆍ 애완 서비스
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="border border-slate-300">
+                      프론트엔드 개발자
+                    </td>
+                    <td className="border border-slate-300">
+                      ㆍ Traddly 앱 서비스 UI/UX 디자인 ㆍ홍보 활동에 필요한
+                      디자인 작업 진행 ㆍTraddly 커스텀 굿즈 상품의 브랜딩
+                    </td>
+                    <td className="border border-slate-300">
+                      ㆍ 피그마 사용 가능자 ㆍ 애완 서비스
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="border border-slate-300">백엔드 개발자</td>
+                    <td className="border border-slate-300">
+                      ㆍ Traddly 앱 서비스 UI/UX 디자인 ㆍ홍보 활동에 필요한
+                      디자인 작업 진행 ㆍTraddly 커스텀 굿즈 상품의 브랜딩
+                    </td>
+                    <td className="border border-slate-300">
+                      ㆍ 피그마 사용 가능자 ㆍ 애완 서비스
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            
           </div>
         </div>
-        
 
         <div className="flex justify-center bg-[#E5E5E5]">
+          <div className="flex justify-center w-[25vw]">
+            <div className="w-[54.688rem] bg-white box-border rounded-[0.625rem]">
+              <div className="text-xl font-bold font-noto2 mt-7 ml-[1.8rem] pl-[1.8rem] pb-6 border-b-2 border-gray-900">
+                사용기술
+              </div>
 
-        <div className="flex justify-center w-[25vw]">
-          <div className="w-[54.688rem] bg-white box-border rounded-[0.625rem]">
-            <div className="text-xl font-bold font-noto2 mt-7 ml-[1.8rem] pl-[1.8rem] pb-6 border-b-2 border-gray-900">
-              사용기술
-            </div>
-
-            <div className="flex m-10">
-              <div className="flex flex-wrap">
-                <SkillBadge src={figma} name={"Figma"}></SkillBadge>
-                <SkillBadge src={figma} name={"Figma"}></SkillBadge>
-                <SkillBadge src={figma} name={"Figma"}></SkillBadge>
-                <SkillBadge src={figma} name={"Figma"}></SkillBadge>
-                <SkillBadge src={figma} name={"Figma"}></SkillBadge>
+              <div className="flex m-10">
+                <div className="flex flex-wrap">
+                  <SkillBadge src={figma} name={"Figma"}></SkillBadge>
+                  <SkillBadge src={figma} name={"Figma"}></SkillBadge>
+                  <SkillBadge src={figma} name={"Figma"}></SkillBadge>
+                  <SkillBadge src={figma} name={"Figma"}></SkillBadge>
+                  <SkillBadge src={figma} name={"Figma"}></SkillBadge>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="flex justify-start w-[25vw]">
-          <div className="bg-white box-border rounded-[0.625rem]">
-            <div className="text-xl font-bold font-noto2 mt-7 ml-[1.8rem] pl-[1.8rem] pb-6 border-b-2 border-gray-900">
-              URL
+          <div className="flex justify-start w-[25vw]">
+            <div className="bg-white box-border rounded-[0.625rem]">
+              <div className="text-xl font-bold font-noto2 mt-7 ml-[1.8rem] pl-[1.8rem] pb-6 border-b-2 border-gray-900">
+                URL
+              </div>
+
+              <UrlLink
+                logo={GitHubLogo}
+                url={"https://Behance.com/heeyeon9578"}
+              ></UrlLink>
+
+              <UrlLink
+                logo={GitHubLogo}
+                url={"https://Behance.com/heeyeon9578"}
+              ></UrlLink>
+
+              <UrlLink
+                logo={GitHubLogo}
+                url={"https://Behance.com/heeyeon9578"}
+              ></UrlLink>
             </div>
-
-            <UrlLink
-              logo={GitHubLogo}
-              url={"https://Behance.com/heeyeon9578"}
-            ></UrlLink>
-
-            <UrlLink
-              logo={GitHubLogo}
-              url={"https://Behance.com/heeyeon9578"}
-            ></UrlLink>
-
-            <UrlLink
-              logo={GitHubLogo}
-              url={"https://Behance.com/heeyeon9578"}
-            ></UrlLink>
           </div>
         </div>
-      
-        </div>
-      
       </ProjectDetailModalCustom>
     </div>
   );
