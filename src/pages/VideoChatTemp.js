@@ -2,7 +2,7 @@ import React from "react";
 import tw from "tailwind-styled-components";
 
 const VideoChatGrid = tw.div`
-bg-green-500
+bg-green-300
 h-full
 ${(props) => (props.isShow ? "" : `hidden`)};
 `
@@ -15,7 +15,7 @@ const VideoChatTemp = (props) => {
     <VideoChatGrid isShow={props.isShow}>
         <div className="myStream" ref={props.videoGrid}>
           <video
-            ref={props.myVideo}
+            ref={props.idx===-1 ? props.myVideo :(el) => props.myVideo.current[props.idx] = el}
             autoPlay
             playsInline
             className="myFace"
