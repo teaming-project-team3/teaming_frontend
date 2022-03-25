@@ -28,8 +28,8 @@ function ProjectRoomHeader(props) {
                   {users.map((name) => {
                     console.log("in users.map usersData", users)
                     return (
-                    <div key={name} className='activeItem'>
-                      {name}
+                    <div key={name.nickName} className='activeItem'>
+                      {name.nickName}
                       <img alt='Online Icon' src={onlineIcon} />
                     </div>
                   )})}

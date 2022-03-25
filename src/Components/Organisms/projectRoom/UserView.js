@@ -5,6 +5,7 @@ import micX from "../../../static/images/projectRoom/micCancel.png";
 import tw from "tailwind-styled-components";
 import VideoChatTemp from "../../../pages/VideoChatTemp";
 import UserCardTemp from "./UserCardTemp";
+import { forwardRef } from "react";
 
 const VideoCard = tw.div`
 flex flex-col w-1/4 h-[35vh] items-center 
@@ -14,12 +15,12 @@ ml-10 mr-10 mt-5 mb-5 rounded-xl
 const ButtonsCard = tw.div`
 flex items-center justify-center 
 w-full h-1/4
-${(props) => (props.isMe ? "" : `hidden`)};
+${(props) => (props.$isMee ? "" : `hidden`)};
 `
 
-function UserView(props) {
+const UserView = forwardRef((props, ref) => {
 
-    const {cameraOn, myVideo, profile, handleCamera, handleAudio, cameraStatus, audioStatus, isMe, user, idx} = props;
+    const {cameraOn, myVideo, profile, handleCamera, handleAudio, cameraStatus, audioStatus, $isMee, user, idx} = props;
 
   console.log("userView Index, VideoRef", myVideo, idx);
 
@@ -29,14 +30,14 @@ function UserView(props) {
         <VideoChatTemp
         idx={props.idx}
         user={user}
-        isShow={cameraOn}
+        $shows={cameraOn}
         id="videoChat1"
         myVideo={myVideo}
         ></VideoChatTemp>
 
-        <UserCardTemp user={user} isShow={!cameraOn} id="userCard1" profile={profile}/>
+        <UserCardTemp user={user} $shows={!cameraOn} id="userCard1" profile={profile}/>
 
-        <ButtonsCard isMe={isMe}>
+        <ButtonsCard $isMee={$isMee}>
         <img
             src={cameraStatus? video : videoX}
             alt={"video"}
@@ -52,6 +53,6 @@ function UserView(props) {
         </ButtonsCard>
   </VideoCard>
   );
-}
+});
 
 export default UserView;

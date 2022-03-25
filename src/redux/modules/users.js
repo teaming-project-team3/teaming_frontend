@@ -19,6 +19,7 @@ const DELETE_SKILLS = "delete/Skills";
 const SET_NOW_PROJECT_USERS = "set/project/Users";
 const SET_IS_LOG_IN = "SET_IS_LOG_IN";
 const SET_MY_STATS = "SET_MY_STATS";
+const ADD_NOW_PROJECT_USER = "ADD_NOW_PROJECT_USER";
 
 // action creators
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
@@ -98,6 +99,11 @@ export function setMyUserStats(data){
   return { type: SET_MY_STATS, data }
 }
 
+export function addNowProjectUserAC(user){
+  return { type: ADD_NOW_PROJECT_USER, user }
+}
+
+
 //middleWare
 export const resetAbilityAPI = (arrAbility) => {
   return async function (dispatch) {
@@ -114,6 +120,14 @@ export const setNowProjectUsers = (users) => {
   return async function (dispatch){
 
     dispatch(setNowUsers(users))
+
+  };
+};
+
+export const addNowProjectUsers = (user) => {
+  return async function (dispatch){
+
+    dispatch(addNowProjectUserAC(user))
 
   };
 };
@@ -389,7 +403,14 @@ export default handleActions(
 
       [SET_NOW_PROJECT_USERS]: (state, action) =>
       produce(state, (draft) => {
+        console.log("SET_NOW_PROJECT_USERS", action.users);
         draft.nowProjectUser = action.users;
+      }),
+      
+      [ADD_NOW_PROJECT_USER]: (state, action) =>
+      produce(state, (draft) => {
+        console.log("ADD_NOW_PROJECT_USER", action.user);
+        draft.nowProjectUser = [...draft.nowProjectUser, action.user];
       }),
 
       [SET_MY_STATS]: (state, action) => 
