@@ -1,18 +1,18 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import tw from "tailwind-styled-components";
 
 const VideoChatGrid = tw.div`
 bg-green-300
 h-full
-${(props) => (props.isShow ? "" : `hidden`)};
+${(props) => (props.$shows ? "" : `hidden`)};
 `
 
-const VideoChatTemp = (props) => {
+const VideoChatTemp = forwardRef((props, ref) => {
 
   console.log("VideoChatTemp props : ", props);
   
   return (
-    <VideoChatGrid isShow={props.isShow}>
+    <VideoChatGrid $shows={props.$shows}>
         <div className="myStream" ref={props.videoGrid}>
           <video
             ref={props.idx===-1 ? props.myVideo :(el) => props.myVideo.current[props.idx] = el}
@@ -23,6 +23,6 @@ const VideoChatTemp = (props) => {
         </div>
     </VideoChatGrid>
   );
-};
+});
 
 export default VideoChatTemp;

@@ -65,6 +65,10 @@ const ChatPrac = (props) => {
       //setUsers(users)
       dispatch(setNowUsers(users));
     });
+
+    return (()=>{
+      socket.disconnect()
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

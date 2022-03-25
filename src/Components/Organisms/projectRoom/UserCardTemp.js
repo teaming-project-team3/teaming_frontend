@@ -2,13 +2,13 @@ import tw from "tailwind-styled-components";
 
 const UserCardTw = tw.div`
 w-full h-full
-${(props) => (props.isShow ? "" : `hidden`)};
+${(props) => (props.$shows ? "" : `hidden`)};
 `;
 
 function UserCardTemp(props) {
 
   return (
-    <UserCardTw isShow={props.isShow} className="w-full h-full">
+    <UserCardTw $shows={props.$shows} className="w-full h-full">
       <div className="flex justify-center h-1/3 mb-[-6vh]">
         <img
           src={props.profile}
