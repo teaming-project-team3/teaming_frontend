@@ -7,23 +7,23 @@ import UserCard from "./UserCard";
 import io from "socket.io-client";
 import VideoChatTemp from "../../../pages/VideoChatTemp";
 import tw from "tailwind-styled-components";
-import video from "../../../static/images/projectRoom/video.png"
-import mic from "../../../static/images/projectRoom/mic.png"
-
+import video from "../../../static/images/projectRoom/video.png";
+import mic from "../../../static/images/projectRoom/mic.png";
+import UserCardTemp from "./UserCardTemp";
+import UserView from "./UserView";
 
 const VideoCard = tw.div`
-flex w-1/4 h-[35vh] items-center 
+flex flex-col w-1/4 h-[35vh] items-center 
 ml-10 mr-10 mt-5 mb-5 rounded-xl
-${(props) => (props.isShow ? "" :`hidden`)};
 `;
 
 const UserCardTw = tw.div`
 w-1/4 h-[35vh] ml-10 mr-10 
 mt-5 mb-5 rounded-xl
-`
+`;
 
 //const ENDPOINT = "http://localhost:5000";
-const ENDPOINT = process.env.REACT_APP_BASE_URL_WJ+"/webrtc";
+const ENDPOINT = process.env.REACT_APP_BASE_URL_WJ + "/webrtc";
 let socket;
 
 function UserSlider(props) {
@@ -57,15 +57,16 @@ function UserSlider(props) {
   const video3Ref = useRef();
   const peerVideoTemp = useRef();
   const [users, setUsers] = useState(1);
-  const [cameraOn, setCameraOn] = useState(true);
+  const [cameraOn, setCameraOn] = useState(false);
   const [audioOn, setAudioOn] = useState(false);
   const [user1, setUser1] = useState(true);
   const user1Stream = useRef();
-
+  const [userList, setUserList] = useState([]);
+  console.log("userList", userList);
   //const camerasSelect = document.getElementsByClassName("cameras");
 
   useEffect(() => {
-    console.log("useEffect start")
+    console.log("useEffect start");
     socket = io(ENDPOINT, {
       //withCredentials: true,
       extraHeaders: {
@@ -76,12 +77,13 @@ function UserSlider(props) {
     // if (socket.disconnected) {
     //   socket.connect();
     // }
-    console.log("before joinroom")
-    socket.emit("join_room", { roomName : room, nickName : name });
-    console.log("after joinroom")
+    console.log("before joinroom");
+    socket.emit("join_room", { roomName: room, nickName: name });
+    console.log("after joinroom");
 
     socket.on("accept_join", async (userObjArr) => {
       console.log("accept_join", userObjArr);
+      setUserList(userObjArr);
       await initCall();
 
       const length = userObjArr.length;
@@ -98,7 +100,11 @@ function UserSlider(props) {
           );
           const offer = await newPC.createOffer();
           await newPC.setLocalDescription(offer);
-          socket.emit("offer", {offer : offer, localNickName: name, remoteSocketId: userObjArr[i].socketId});
+          socket.emit("offer", {
+            offer: offer,
+            localNickName: name,
+            remoteSocketId: userObjArr[i].socketId,
+          });
           writeChat(`__${userObjArr[i].nickname}__`, NOTICE_CN);
         } catch (err) {
           console.error(err);
@@ -114,7 +120,10 @@ function UserSlider(props) {
         await newPC.setRemoteDescription(offer);
         const answer = await newPC.createAnswer();
         await newPC.setLocalDescription(answer);
-        socket.emit("answer", { answer : answer, remoteSocketId : remoteSocketId});
+        socket.emit("answer", {
+          answer: answer,
+          remoteSocketId: remoteSocketId,
+        });
         writeChat(`notice! __${remoteNickname}__ joined the room`, NOTICE_CN);
       } catch (err) {
         console.error(err);
@@ -130,11 +139,11 @@ function UserSlider(props) {
     });
 
     socket.on("videoON", async (userId) => {
-      setUser1(true)
+      setUser1(true);
     });
 
     socket.on("videoOFF", async (userId) => {
-      setUser1(false)
+      setUser1(false);
     });
 
     socket.on("leave_room", (leavedSocketId, nickname) => {
@@ -254,7 +263,10 @@ function UserSlider(props) {
 
   function handleIce(event, remoteSocketId) {
     if (event.candidate) {
-      socket.emit("ice", {ice : event.candidate, remoteSocketId : remoteSocketId});
+      socket.emit("ice", {
+        ice: event.candidate,
+        remoteSocketId: remoteSocketId,
+      });
     }
   }
 
@@ -268,13 +280,12 @@ function UserSlider(props) {
 
     if (checker) {
       addVideoStream(video2Ref.current, peerStream);
-      console.log("video on/off?", peerStream.getVideoTracks()[0].enabled)
+      console.log("video on/off?", peerStream.getVideoTracks()[0].enabled);
       setUser1(peerStream.getVideoTracks()[0].enabled);
       user1Stream.current = peerStream;
       checker = false;
     } else {
       addVideoStream(video3Ref.current, peerStream);
-      
     }
     //videoGrid.current.append(peerVideo);
     //setUsers(videoGrid.current.childElementCount);
@@ -300,6 +311,7 @@ function UserSlider(props) {
   function removeVideo(leavedSocketId) {
     const video = document.querySelectorAll("video");
     console.log("removeVideo : ", leavedSocketId, video);
+
     let removeVideo;
     for (let i = 0; i < video.length; i++) {
       if (video[i].className === leavedSocketId) {
@@ -317,13 +329,12 @@ function UserSlider(props) {
       console.log("videoOn->off");
       let video = myVideo.current.srcObject.getVideoTracks();
       video[0].enabled = false;
-      socket.emit("videoON", {userId : localStorage.getItem("userId")});
-      
+      socket.emit("videoON", { userId: localStorage.getItem("userId") });
     } else {
       console.log("videoOff->on");
       let video = myVideo.current.srcObject.getVideoTracks();
       video[0].enabled = true;
-      socket.emit("videoOFF", {userId : localStorage.getItem("userId")});
+      socket.emit("videoOFF", { userId: localStorage.getItem("userId") });
     }
   };
 
@@ -333,12 +344,12 @@ function UserSlider(props) {
       console.log("audioOn->off");
       let video = myVideo.current.srcObject.getAudioTracks();
       video[0].enabled = false;
-      socket.emit("audioON", {userId : localStorage.getItem("userId")});
+      socket.emit("audioON", { userId: localStorage.getItem("userId") });
     } else {
       console.log("audioOff->On");
       let video = myVideo.current.srcObject.getAudioTracks();
       video[0].enabled = true;
-      socket.emit("audioOFF", {userId : localStorage.getItem("userId")});
+      socket.emit("audioOFF", { userId: localStorage.getItem("userId") });
     }
   };
 
@@ -347,28 +358,26 @@ function UserSlider(props) {
       <Slider {...sliderSettings}>
         <div className="w-fit h-[80vh] bg-[#F2F3F7]">
           <div className="flex">
-            
-            {/* 본인 */}
-            <VideoCard isShow={cameraOn} className="videoCard">
-              <VideoChatTemp
-                id="videoChat1"
-                myVideo={myVideo}
-                videoToggle={handleCamera}
-                audioToggle={handleAudio}
-              ></VideoChatTemp>
-            </VideoCard>
-
-            <UserCard isShow={!cameraOn} id="userCard1" profile={exUser} videoToggle={handleCamera} audioToggle={handleAudio}/>
-
+            <UserView
+              cameraOn={cameraOn}
+              myVideo={myVideo}
+              profile={exUser}
+              handleCamera={handleCamera}
+              handleAudio={handleAudio}
+            ></UserView>
 
             {/* 유저1 */}
             <VideoCard isShow={user1} className="videoCard">
               <VideoChatTemp myVideo={video2Ref} value={"LWJ"}></VideoChatTemp>
             </VideoCard>
 
-            <UserCard isShow={!user1} id="userCard1" profile={exUser} videoToggle={handleCamera} audioToggle={handleAudio}/>
-
-
+            <UserCard
+              isShow={!user1}
+              id="userCard1"
+              profile={exUser}
+              videoToggle={handleCamera}
+              audioToggle={handleAudio}
+            />
 
             <div className="flex w-1/4 h-[35vh] items-center ml-10 mr-10 mt-5 mb-5 rounded-xl">
               <VideoChatTemp myVideo={video3Ref} value={"JMS"}></VideoChatTemp>
