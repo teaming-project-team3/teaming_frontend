@@ -13,6 +13,8 @@ import ProjectRoomHeader from "../Components/Molecules/ProjectRoomHeader";
 import UserSlider from "../Components/Organisms/projectRoom/UserSlider";
 import video from "../static/images/projectRoom/video.png"
 import mic from "../static/images/projectRoom/mic.png"
+import queryString from 'query-string'
+import { useLocation } from "react-router";
 
 export default function ProjectRoom() {
   const [isLeader, setIsLeader] = React.useState(false);
@@ -22,6 +24,9 @@ export default function ProjectRoom() {
   const [toggleVideo, setToggleVideo] = React.useState(false);
   const [toggleAudio, setToggleAudio] = React.useState(false);
 
+  const location = useLocation();
+
+  const { name, room } = queryString.parse(location.search)
 
   console.log("users", users)
 
@@ -73,7 +78,7 @@ export default function ProjectRoom() {
 
         <div className="flex w-screen">
           
-        <UserSlider videoMode={toggleVideo} audioMode={toggleAudio} exUser={exUser} _onMouseOut={()=>{setCurr("userA");}} _onMouseOver={()=>{setCurr("userB")}}></UserSlider>
+        <UserSlider name={name} room={room} videoMode={toggleVideo} audioMode={toggleAudio} exUser={exUser} _onMouseOut={()=>{setCurr("userA");}} _onMouseOver={()=>{setCurr("userB")}}></UserSlider>
           
           {mode &&
           <div className="relative w-[25vw] h-[80vh] rounded-xl mr-10 pr-10 border-2 p-2 bg-white pb-7">
@@ -81,7 +86,7 @@ export default function ProjectRoom() {
               <img onClick={()=>{setMode(false)}} src={clip} alt={""}></img>
             </div>
             
-            {/* <ChatPrac name={"testID"} room={"testRoom"}></ChatPrac> */}
+            <ChatPrac name={name} room={room}></ChatPrac>
           
           </div>
           }
@@ -101,11 +106,6 @@ export default function ProjectRoom() {
           
         
         </div>
-
-          <div className="flex justify-center w-screen h-fit">
-            <img src={mic} alt={"mic"} className="mr-2"  onClick={()=>{toggleAudioFunc()}}></img>
-            <img src={video} alt={"video"} className="ml-2" onClick={()=>{toggleVideoFunc()}}></img>
-          </div>
 
       </div>
     
