@@ -12,6 +12,8 @@ import mic from "../../../static/images/projectRoom/mic.png";
 import UserCardTemp from "./UserCardTemp";
 import UserView from "./UserView";
 import { Endpoint } from "aws-sdk";
+import { useDispatch, useSelector } from "react-redux";
+import { addNowProjectUsers, setNowProjectUsers } from "../../../redux/modules/users";
 
 const VideoCard = tw.div`
 flex flex-col w-1/4 h-[35vh] items-center 
@@ -38,7 +40,7 @@ function UserSlider(props) {
     slidesToScroll: 1,
   };
   let checker = true;
-  const history = useNavigate();
+  const dispatch = useDispatch();
 
   const location = useLocation();
   //const query = queryString.parse(location.search);
@@ -52,7 +54,7 @@ function UserSlider(props) {
   const [cameraOptions, setCameraOptions] = useState([]);
   const [messages, setMessage] = useState([]);
   let peopleInRoom = 1;
-  let pcObj = {};
+  let pcObj = [];
   const videoGrid = useRef();
   const myVideo = useRef();
   const videoRef = useRef([]);
@@ -62,21 +64,28 @@ function UserSlider(props) {
   const [audioOn, setAudioOn] = useState(false);
   const [user1, setUser1] = useState(true);
   const [userList, setUserList] = useState([]);
+  //const initList = [1,2,3,4,5,6];
+  const userListRedux = props.users;
+  localStorage.setItem("count",0);
+  
+  let userInfo = [];
 
-  console.log("userList", userList);
+  console.log("userList", userList, userListRedux);
   //const videoRef = useRef(userList.map(() => createRef()));
+
+
+
 
   //const camerasSelect = document.getElementsByClassName("cameras");
 
-  
   useEffect(() => {
 
-    socket = io(ENDPOINT, {
-      //withCredentials: true,
-      extraHeaders: {
-        "my-custom-header": "abcd",
-      },
-    });
+  socket = io(ENDPOINT, {
+    //withCredentials: true,
+    extraHeaders: {
+      "my-custom-header": "abcd",
+    },
+  });
 
     if (socket.disconnected) {
       socket.connect();
@@ -85,8 +94,15 @@ function UserSlider(props) {
     socket.emit("join_room", { roomName: room, nickName: name });
 
     socket.on("accept_join", async (userObjArr) => {
-      console.log("accept_join", userObjArr);
+      console.log("----------------accept_join---------------------------------------", userObjArr);
       setUserList(userObjArr);
+      dispatch(setNowProjectUsers(userObjArr));
+      localStorage.setItem("count", userObjArr.length);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      userInfo=[...userInfo, ...userObjArr];
+
+      console.log("check local Storage", userInfo);
+
       await initCall();
 
       const length = userObjArr.length;
@@ -118,7 +134,16 @@ function UserSlider(props) {
     });
 
     socket.on("offer", async (offer, remoteSocketId, remoteNickname) => {
-      console.log("client on.offer : ", remoteNickname);
+      console.log("--------------------------client on.offer-----------------------------", remoteNickname, peopleInRoom);
+      const data = {socketId: remoteSocketId, nickName: remoteNickname, video: true, audio: false};
+      setUserList((prev)=>[...prev, data])
+      dispatch(addNowProjectUsers(data))
+      userInfo=[...userInfo, data];
+      console.log("offer userInfo", userInfo);
+      
+      const temp = localStorage.getItem("count");
+      localStorage.setItem("count", temp+1);
+
       try {
         const newPC = createConnection(remoteSocketId, remoteNickname);
         await newPC.setRemoteDescription(offer);
@@ -143,41 +168,28 @@ function UserSlider(props) {
     });
 
     socket.on("videoON", async (nickName, videoStatus) => {
-      console.log("videoON", nickName)
-    const newList = userList.filter((user) => {
-      if(user.nickName===nickName){
-        return {...user, video : true};
-      }else return user;
-    })  
-    
-    setUserList(newList);
+      
+      videoToggleExceptMe(nickName, videoStatus);
     
     });
 
     socket.on("videoOFF", async (nickName, videoStatus) => {
-      console.log("videoOFF", nickName, videoStatus)
-      const newList = userList.filter((user) => {
-        if(user.nickName===nickName){
-          return {...user, video : false};
-        }else return user;
-      })  
-      
-      setUserList(newList);
+
+        videoToggleExceptMe(nickName, videoStatus);
     
     });
 
-    socket.on("leave_room", (leavedSocketId, nickName) => {
-      console.log("leave_room");
-      removeVideo(nickName);
-      writeChat(`notice! ${nickName} leaved the room.`, NOTICE_CN);
+    socket.on("leaveRoom", (leavedSocketId) => {
+      console.log("leaveRoom");
+      removeVideo(leavedSocketId);
+      //writeChat(`notice! ${nickName} leaved the room.`, NOTICE_CN);
       --peopleInRoom;
       //sortStreams();
     });
 
     return (()=>{
       console.log("새로고침 할 때 불러지나?");
-      socket.emit("leaveRoom", {roomName: room});
-      socket.disconnect(true);
+      socket.disconnect();
       }
       )
 
@@ -253,6 +265,25 @@ function UserSlider(props) {
     await getMedia();
   }
 
+  function videoToggleExceptMe(nickName, status){
+    
+    console.log("videoOFF UserInfo",userInfo, nickName);
+
+    const newList = userInfo.map((user) => {
+      if(user.nickName===nickName){
+        console.log("nickName! same!")
+        return {...user, video : status};
+      }else return user;
+    })  
+    console.log("videoToggleExceptMe", nickName, newList, userList)
+
+    userInfo = newList;
+    setUserList(newList);
+
+    return;
+    
+  }
+
   function createConnection(remoteSocketId, remoteNickname, idx) {
     const myPeerConnection = new RTCPeerConnection({
       iceServers: [
@@ -270,9 +301,11 @@ function UserSlider(props) {
     myPeerConnection.addEventListener("icecandidate", (event) => {
       handleIce(event, remoteSocketId);
     });
+    
     myPeerConnection.addEventListener("addstream", (event) => {
       handleAddStream(event, remoteSocketId, remoteNickname, idx);
     });
+
     // myPeerConnection.addEventListener(
     //   "iceconnectionstatechange",
     //   handleConnectionStateChange
@@ -282,6 +315,7 @@ function UserSlider(props) {
       .forEach((track) => myPeerConnection.addTrack(track, myStream));
 
     pcObj[remoteSocketId] = myPeerConnection;
+    //pcObj = [...pcObj, {socketId:remoteSocketId, stream: myPeerConnection}];
 
     ++peopleInRoom;
     //sortStreams();
@@ -303,21 +337,18 @@ function UserSlider(props) {
   }
 
   function paintPeerFace(peerStream, id, remoteNickname, idx) {
-    console.log("peerStream : ", peerStream, userList, idx, remoteNickname);
+    console.log("peerStream : ", peerStream, userList, idx, remoteNickname, userListRedux, peopleInRoom);
 
+    //새로 참여한 유저의 index가 항상 length+1이 될까??
+    if(idx===undefined||idx===null){
     
-    if(idx===null){
-      //[{nickname:dd. asdf:asdf},{nickname:cc. asdf:asdf}]
-    //List에 있는 index number에 따라 배치
+      idx = peopleInRoom-1;
 
-      for(let i=0;i<userList.length;i++){
-        if(userList[i].nickName===remoteNickname){
-          idx = i
-        }
-      }
-
-      console.log("userList", idx)
+      
+      //idx=userList.length+1
+      console.log("paintPeerFace, get idx of newbie", idx)
     }
+
 
       console.log("addVideoStream in idx", userList, idx, videoRef);
 
@@ -342,13 +373,19 @@ function UserSlider(props) {
   //   streamArr.forEach((stream) => (stream.className = `people${peopleInRoom}`));
   // }
 
-  function removeVideo(leavedName) {
-    console.log("removeVideo : ", leavedName, video);
+  function removeVideo(leavedSocketId) {
+    console.log("leavedSocketId : ", leavedSocketId);
 
-    const newList = userList.filter((item)=>{
-      return item.nickName !== leavedName
+    console.log("before Filter : ", userInfo, pcObj);
+
+    const newList = userInfo.filter((item)=>{
+      return item.socketId !== leavedSocketId;
     })
 
+    delete pcObj.socketId;
+
+    userInfo = newList;
+    console.log("after Filter : ", newList, pcObj);
     setUserList(newList);
   }
 
@@ -398,8 +435,9 @@ function UserSlider(props) {
               //본인만 버튼 뜨도록
               if(user.nickName===name){
               return(<UserView
+              key={user.nickName}
               idx={-1}
-              isMe
+              $isMee
               user={user}
               cameraOn={cameraOn}
               myVideo={myVideo}
@@ -412,44 +450,18 @@ function UserSlider(props) {
               }else{
               //타인
               return(<UserView
+              key={user.nickName}
               idx={idx}
               user={user}
-              cameraOn={cameraOn}
+              cameraOn={user.video}
               myVideo={videoRef}
               profile={exUser}
-              handleCamera={handleCamera}
-              handleAudio={handleAudio}
               ></UserView>)
               }
             })
             }
 
-            {/* <UserView
-              isMe
-              cameraOn={cameraOn}
-              myVideo={myVideo}
-              profile={exUser}
-              handleCamera={handleCamera}
-              handleAudio={handleAudio}
-              cameraStatus={cameraOn}
-              audioStatus={audioOn}
-            ></UserView>
-
-            <UserView
-              cameraOn={cameraOn}
-              myVideo={video2Ref}
-              profile={exUser}
-              handleCamera={handleCamera}
-              handleAudio={handleAudio}
-            ></UserView>
-
-            <UserView
-              cameraOn={cameraOn}
-              myVideo={video3Ref}
-              profile={exUser}
-              handleCamera={handleCamera}
-              handleAudio={handleAudio}
-            ></UserView> */}
+            
 
           </div>
         </div>

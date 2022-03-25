@@ -78,7 +78,7 @@ export default function ProjectRoom() {
 
         <div className="flex w-screen">
           
-        <UserSlider name={name} room={room} videoMode={toggleVideo} audioMode={toggleAudio} exUser={exUser} _onMouseOut={()=>{setCurr("userA");}} _onMouseOver={()=>{setCurr("userB")}}></UserSlider>
+        <UserSlider users={users} name={name} room={room} videoMode={toggleVideo} audioMode={toggleAudio} exUser={exUser} _onMouseOut={()=>{setCurr("userA");}} _onMouseOver={()=>{setCurr("userB")}}></UserSlider>
           
           {mode &&
           <div className="relative w-[25vw] h-[80vh] rounded-xl mr-10 pr-10 border-2 p-2 bg-white pb-7">
