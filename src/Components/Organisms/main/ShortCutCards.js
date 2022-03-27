@@ -1,3 +1,5 @@
+import "../../../pages/color.css";
+
 function ShortCutCards(props) {
   const { _onClick } = props;
 
@@ -7,7 +9,7 @@ function ShortCutCards(props) {
 
   return (
     <div
-      className={`flex w-[33.75rem] h-[10.5rem] mx-[0.875rem] bg-[${props.bg}] rounded-xl p-[1.75rem] cursor-pointer`}
+      className={`flex w-[33.75rem] h-[10.5rem] mx-[0.875rem] bg-[${props.bg}] rounded-xl p-[1.75rem] cursor-pointer shadow-lg cc`}
       onClick={_onClick}
     >
       <div className="flex flex-col flex-wrap w-3/4 ml-[1.25rem]">
