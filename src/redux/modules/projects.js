@@ -35,7 +35,7 @@ export const loadProjectsMainAPI = () => {
   return async function (dispatch) {
 
 
-    apis
+    apisMS
         .loadProjectsMain()
             .then((res)=>{
                 console.log("PROJECT_MAIN_API RES : ", res)
@@ -59,7 +59,7 @@ export const createProjectAPI = (data) => {
             .then((res)=>{
                 console.log("PROJECT_CREATE_API RES : ", res)
 
-                dispatch(setProjectsMain(res));
+                //dispatch(setProjectsMain(res));
             })
             .catch((err)=>{
                 console.log("PROJECT_CREATE_API ERR : ", err)
