@@ -2,7 +2,7 @@ function ProjectCard(props) {
   return (
     <div
       onClick={props._onClick}
-      className="flex flex-col max-w-[15.625em] max-h-[18.750em] ml-[2.250em] bg-white border-2 cursor-pointer rounded-[0.333em] shadow-lg"
+      className="flex flex-col max-w-[15.625em] max-h-[18.750em] ml-[2.250em] bg-white border-2 cursor-pointer rounded-[0.333em] shadow-lg m-2"
     >
       <div className="h-2/3 rounded-[0.333em]">
         <img
