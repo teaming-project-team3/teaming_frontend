@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import * as React from "react";
 import { useEffect } from "react";
 import exUser from "../static/images/userStats/example_user.png";
@@ -11,64 +10,32 @@ import RadarChart from "../Components/Molecules/RadarChart";
 import clip from "../static/images/projectRoom/clip.png"
 import ProjectRoomHeader from "../Components/Molecules/ProjectRoomHeader";
 import UserSlider from "../Components/Organisms/projectRoom/UserSlider";
-import video from "../static/images/projectRoom/video.png"
-import mic from "../static/images/projectRoom/mic.png"
-import queryString from 'query-string'
-import { useLocation } from "react-router";
+// import queryString from 'query-string'
+// import { useLocation } from "react-router";
 
 export default function ProjectRoom() {
   const [isLeader, setIsLeader] = React.useState(false);
   const [mode, setMode] = React.useState(true);
   const [curr, setCurr] = React.useState("userA");
   const users = useSelector((state)=>state.users.nowProjectUser)
-  const [toggleVideo, setToggleVideo] = React.useState(false);
-  const [toggleAudio, setToggleAudio] = React.useState(false);
 
-  const location = useLocation();
+  //const location = useLocation();
 
-  const { name, room } = queryString.parse(location.search)
+  //const { name, room } = queryString.parse(location.search)
 
   console.log("users", users)
-
-  const toggleVideoFunc = () => {
-    
-    if(toggleVideo){
-      setToggleVideo(false);
-    }else{
-      setToggleVideo(true);
-    }
-
-  }
-
-  const toggleAudioFunc = () => {
-    
-    if(toggleVideo){
-      setToggleVideo(false);
-    }else{
-      setToggleVideo(true);
-    }
-
-  }
 
 
   //프로젝트ID 및 userID 구현부
   // const room = useSelector((state)=>state.users.nowProject)
-
-  // const name = localStorage.getItem("userId")
+  const room = "testRoom";
+  const name = localStorage.getItem("userId")
 
   useEffect(() => {
     if (isLeader === localStorage.getItem("userId")) {
       setIsLeader(true);
     }
   }, [isLeader]);
-
-  const sliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
 
   return (
     
@@ -78,7 +45,7 @@ export default function ProjectRoom() {
 
         <div className="flex w-screen">
           
-        <UserSlider users={users} name={name} room={room} videoMode={toggleVideo} audioMode={toggleAudio} exUser={exUser} _onMouseOut={()=>{setCurr("userA");}} _onMouseOver={()=>{setCurr("userB")}}></UserSlider>
+        <UserSlider users={users} name={name} room={room} exUser={exUser} _onMouseOut={()=>{setCurr("userA");}} _onMouseOver={()=>{setCurr("userB")}}></UserSlider>
           
           {mode &&
           <div className="relative w-[25vw] h-[80vh] rounded-xl mr-10 pr-10 border-2 p-2 bg-white pb-7">

@@ -1,8 +1,8 @@
 {
   "name": "teaming_project",
   "version": "0.1.0",
-  "homepage": ".",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
