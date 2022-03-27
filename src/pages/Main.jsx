@@ -76,7 +76,7 @@ function Main() {
               navigate("/createProject");
             }}
             img={Pic2}
-            bg={"#3B82F6"}
+            bg={""}
             text={"사이드 프로젝트 아이디어가 있으신 분이라면?"}
           ></ShortCutCards>
         </div>
