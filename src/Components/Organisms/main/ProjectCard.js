@@ -24,6 +24,7 @@ function ProjectCard(props) {
       <div className="flex pl-[0.813em] pb-[1.250em] text-gray-600 text-[0.75em] font-noto2 w-full">
         <img
           src={props.profileUrl}
+          alt={"project card"}
           className="flex-initial w-[1.250em] h-[1.250em] rounded-full"
         ></img>
         <p className="flex-initial pl-[0.438em]">{props.nickName}</p>
