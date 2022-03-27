@@ -1,36 +1,17 @@
-/* eslint-disable no-unused-vars */
-import { createRef, useEffect, useMemo, useRef, useState } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router";
 import Slider from "react-slick";
-import VideoChat from "../../../pages/VideoChat";
-import UserCard from "./UserCard";
 import io from "socket.io-client";
-import VideoChatTemp from "../../../pages/VideoChatTemp";
-import tw from "tailwind-styled-components";
-import video from "../../../static/images/projectRoom/video.png";
-import mic from "../../../static/images/projectRoom/mic.png";
-import UserCardTemp from "./UserCardTemp";
 import UserView from "./UserView";
-import { Endpoint } from "aws-sdk";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addNowProjectUsers, setNowProjectUsers } from "../../../redux/modules/users";
-
-const VideoCard = tw.div`
-flex flex-col w-1/4 h-[35vh] items-center 
-ml-10 mr-10 mt-5 mb-5 rounded-xl
-`;
-
-const UserCardTw = tw.div`
-w-1/4 h-[35vh] ml-10 mr-10 
-mt-5 mb-5 rounded-xl
-`;
 
 //const ENDPOINT = "http://localhost:5000";
 const ENDPOINT = process.env.REACT_APP_BASE_URL_WJ + "/webrtc";
 let socket;
 
 function UserSlider(props) {
-  const { exUser, _onMouseOut, _onMouseOver, videoMode, audioMode } = props;
+  const { exUser } = props;
 
   const sliderSettings = {
     dots: true,
@@ -39,7 +20,7 @@ function UserSlider(props) {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  let checker = true;
+
   const dispatch = useDispatch();
 
   const location = useLocation();
@@ -49,20 +30,18 @@ function UserSlider(props) {
   const room = props.room;
   console.log("Rtcview : ", name, room);
   let myStream;
-  const MYCHAT_CN = "myChat";
+
   const NOTICE_CN = "noticeChat";
   const [cameraOptions, setCameraOptions] = useState([]);
   const [messages, setMessage] = useState([]);
   let peopleInRoom = 1;
   let pcObj = [];
-  const videoGrid = useRef();
+
   const myVideo = useRef();
   const videoRef = useRef([]);
-  const peerVideoTemp = useRef();
-  const [users, setUsers] = useState(1);
+  
   const [cameraOn, setCameraOn] = useState(true);
   const [audioOn, setAudioOn] = useState(false);
-  const [user1, setUser1] = useState(true);
   const [userList, setUserList] = useState([]);
   //const initList = [1,2,3,4,5,6];
   const userListRedux = props.users;
@@ -354,8 +333,7 @@ function UserSlider(props) {
 
       addVideoStream(videoRef.current[idx], peerStream);
       console.log("video on/off?", peerStream.getVideoTracks()[0].enabled);
-      setUser1(peerStream.getVideoTracks()[0].enabled);
-
+      
   }
 
   function addVideoStream(video, stream) {
