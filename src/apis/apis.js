@@ -27,6 +27,8 @@ export const apisMS = {
   
   loadProjectsMain: () => apiMS.get("/boards"),
   getProjectDetailAPI: (boardId) => apiMS.get(`/boards/${boardId}`),
+  //createProject
+  createProjectAPI: (data) => apiMS.post("/boards", data),
 
 }
 

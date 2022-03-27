@@ -9,7 +9,6 @@ import Survey from "./pages/Survey"
 import UserStat from "./pages/UserStat"
 import MyPage from "./pages/MyPage"
 import ProjectDetailModal from "./pages/ProjectDetailModal"
-import ProjectFind from "./pages/ProjectFind"
 import CreateProject from "./pages/CreateProject"
 // Import css files
 import "slick-carousel/slick/slick.css";
@@ -22,6 +21,7 @@ import ProjectRoom from "./pages/ProjectRoom";
 import ScrollToTop from "./shared/ScrollToTop"
 import UserEdit from "./pages/UserEdit";
 import VideoChat from "./pages/VideoChat";
+import ProjectSearch from "./pages/ProjectSearch";
 
 
 function App() {
@@ -43,7 +43,7 @@ function App() {
           <Route path="/createProject" element={<CreateProject/>} />
           <Route path="/ProjectRoom" element={<ProjectRoom/>} />
           <Route path="/projectDetail" element={<ProjectDetailModal/>} />
-          <Route path="/projectFind" element={<ProjectFind/>} />
+          <Route path="/projectFind" element={<ProjectSearch/>} />
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/auth/kakao/redirect" element={<KakaoRedirect />} />
