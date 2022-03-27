@@ -14,8 +14,14 @@ const SET_PROJECT_DETAIL = "SET_PROJECT_DETAIL";
 // initialState
 const initialState = {
     projectsMain:[],
+    projectsRank:[],
+    projectsDeadline:[],
     projectDetail:[],
     preview:null,
+    projectsDev:[],
+    projectsDesigner:[],
+    matesDev:[],
+    matesDesigner:[],
 };
 
 export function setProjectsMain(projects) {
@@ -94,7 +100,18 @@ export default handleActions(
     [SET_MAIN_PROJECTS]: (state, action) =>
       produce(state, (draft) => {
 
-        draft.projectsMain = action.payload.projects;
+        draft.projectsRank = action.payload.projects.rankBoards;
+        draft.projectsDeadline = action.payload.projects.projectsDeadline;
+        
+        draft.projectsDesigner = action.payload.projects.designBoards;
+        draft.projectsDev = action.payload.projects.frontBoards;
+        //백엔드 처리할것
+        //draft.projectsDev = action.payload.projects.backBoards;
+
+        draft.matesDesigner = action.payload.projects.designMates;
+        draft.matesDev = action.payload.projects.frontMates;
+        //draft.matesDev = action.payload.projects.backMates;
+        
         console.log("projects save");
 
       }),

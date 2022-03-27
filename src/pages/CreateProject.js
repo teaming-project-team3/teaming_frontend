@@ -142,22 +142,28 @@ function CreateProject() {
         <div className="w-full text-[2.5rem] text-black font-notoB">
           프로젝트 등록
         </div>
+        <div className="w-full text-[1rem] text-gray-500 font-noto2">
+        팀원을 구하는 프로젝트 정보를 입력해주세요!
+        </div>
 
-        <div className="w-5/6 m-10 bg-white h-fit rounded-2xl">
+
+        <div className="w-full m-10 bg-white h-fit rounded-2xl pr-8">
           <div className="w-full text-[1.5rem] text-black font-notoB p-8 border-b-2">
             프로젝트 정보
           </div>
 
-          <div className="flex w-full text-[1rem] justify-between text-black font-noto2 pt-8 pr-8 pb-8 ml-8 border-b-2">
+          <div className="flex 
+          flex-col
+          w-full text-[1rem] text-black font-noto1 pt-8 pr-8 pb-8 ml-8">
             프로젝트 제목
-            <input
-              className="w-1/2 ml-3 mr-10 border-2 rounded"
+              <input
+              className="w-full p-2 mt-3 border-2 rounded font-noto2"
               placeholder="프로젝트 제목을 입력해주세요."
               onChange={(event) => setProjectTitle(event.target.value)}
             ></input>
           </div>
 
-          <div className="flex w-full text-[1rem] justify-between text-black font-noto2 pt-8 pr-8 pb-8 ml-8 border-b-2">
+          <div className="flex w-full text-[1rem] justify-between text-black font-noto1 pt-8 pr-8 pb-8 ml-8 border-b-2">
             프로젝트 사진
             <div className="w-1/4">
               <S3Upload />
