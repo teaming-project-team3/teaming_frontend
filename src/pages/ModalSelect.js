@@ -106,8 +106,10 @@ function ModalSelect(props) {
       const newValue = { value: inputValue.toLowerCase(), label: inputValue };
       setProLang([...proLang, newValue]);
       setSelProLang([...selProLang, newValue]);
+      dispatch(resetAbility(newValue, position));
       //selProLang 배열에 들어있는 각 언어를 jsx로 추가할 수 있는가?
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [proLang, selProLang]
   );
 
@@ -153,8 +155,10 @@ function ModalSelect(props) {
       const newValue = { value: inputValue.toLowerCase(), label: inputValue };
       setFrameWorks([...frameWorks, newValue]);
       setSelFrame([...selFrame, newValue]);
+      dispatch(resetSkills(newValue, position));
       //selProLang 배열에 들어있는 각 언어를 jsx로 추가할 수 있는가?
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [frameWorks, selFrame]
   );
 

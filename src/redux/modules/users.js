@@ -178,7 +178,7 @@ const loginAPI = (id, pwd, callback) => {
 
 const signUp = (data, callback) => {
   return function () {
-
+    console.log("signUp data", data);
     //회원가입 API 구현부
     apis
       .signup(data)
@@ -195,7 +195,7 @@ const signUp = (data, callback) => {
 
 const surveyAPI = (data, callback) => {
   return function () {
-
+    console.log("surbeyAPI",data);
     apis
       .survey(data)
       .then((res)=>{
@@ -243,6 +243,7 @@ export default handleActions(
       }),
     [SET_IS_LOG_IN]: (state, action) =>
       produce(state, (draft) => {
+        console.log("SET_IS_LOG_IN reducer", true);
         draft.is_login = true;
       }),
     [LOG_OUT]: (state, action) =>
@@ -257,15 +258,15 @@ export default handleActions(
       produce(state, (draft) => {
         
         if(parseInt(action.position)===1){
-          const result = [...state.abilityFront, {name:action.item.value.toLowerCase(), time:0, rate:0}]
+          const result = [...state.abilityFront, { name:action.item.value.toLowerCase(), time:0, rate:0}]
 
           draft.abilityFront = result;
         }else if(parseInt(action.position)===2){
-          const result = [...state.abilityBack, {name:action.item.value.toLowerCase(), time:0, rate:0}]
+          const result = [...state.abilityBack, { name:action.item.value.toLowerCase(), time:0, rate:0}]
 
           draft.abilityBack = result;
         }else if(parseInt(action.position)===3){
-          const result = [...state.abilityDesigner, {name:action.item.value.toLowerCase(), time:0, rate:0}]
+          const result = [...state.abilityDesigner, { name:action.item.value.toLowerCase(), time:0, rate:0}]
 
           draft.abilityDesigner = result;
         }

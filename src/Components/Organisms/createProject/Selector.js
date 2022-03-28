@@ -24,7 +24,8 @@ function Selector(props) {
   },[number, selWorks, selRoles])
 
   function setSelectorValue(){
-    const data = {work: selWorks.value, role: selRoles.value, number: number};
+    
+    const data = [selWorks.value, selRoles.value, number];
     console.log("setSelectorValue", data)
     props.dataPush(data, props.idx);
 
@@ -70,7 +71,7 @@ function Selector(props) {
       <div className="w-1/3 m-2">
         <Select
           placeholder={selRoles.label}
-          options={selWorks.value === 1 ? rolesDesigner : rolesDev}
+          options={selWorks.value === 'design' ? rolesDesigner : rolesDev}
           value={selRoles}
           onChange={(e) => {
             handleSel(e, 2);
@@ -80,7 +81,7 @@ function Selector(props) {
 
       <div className="flex w-1/3 m-2">
         <div
-          className="m-1 w-fit"
+          className="m-1 cursor-pointer w-fit"
           onClick={() => {
             countNum(false);
           }}
@@ -89,7 +90,7 @@ function Selector(props) {
         </div>
         <div className="m-1">{number}</div>
         <div
-          className="m-1 w-fit"
+          className="m-1 cursor-pointer w-fit"
           onClick={() => {
             countNum(true);
           }}

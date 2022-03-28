@@ -59,7 +59,7 @@ export const loadProjectsMainAPI = () => {
 export const createProjectAPI = (data) => {
   return async function (dispatch) {
 
-
+    console.log("createProjectAPI", data);
     apisMS
         .createProjectAPI(data)
             .then((res)=>{

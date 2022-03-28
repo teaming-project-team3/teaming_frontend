@@ -51,10 +51,6 @@ function UserSlider(props) {
 
   console.log("userList", userList);
   //const videoRef = useRef(userList.map(() => createRef()));
-
-
-
-
   //const camerasSelect = document.getElementsByClassName("cameras");
 
   useEffect(() => {
@@ -408,7 +404,6 @@ function UserSlider(props) {
         <div className="w-fit h-[80vh] bg-[#F2F3F7]">
           <div className="flex flex-wrap">
             
-
             {userList.map((user, idx)=>{
               console.log("idx in map!!!", idx, user.socketId, socket.id);
               //본인만 버튼 뜨도록
@@ -440,27 +435,8 @@ function UserSlider(props) {
             })
             }
 
-            
-
           </div>
         </div>
-
-        {/* <div className="w-fit h-[80vh] bg-[#F2F3F7]">
-                <div className="flex">
-                  <UserCard profile={exUser}></UserCard>
-
-                  <UserCard profile={exUser}></UserCard>
-
-                  <UserCard profile={exUser}></UserCard>
-                </div>
-                <div className="flex">
-                  <UserCard profile={exUser}></UserCard>
-
-                  <UserCard profile={exUser}></UserCard>
-
-                  <UserCard profile={exUser}></UserCard>
-                </div>
-        </div> */}
       </Slider>
     </div>
   );

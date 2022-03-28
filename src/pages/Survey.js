@@ -30,9 +30,9 @@ function Survey(props) {
   
   const positions = useMemo(
     () => [
-      { value: "Dev/FrontEnd", label: "Dev/FrontEnd" },
-      { value: "Dev/BackEnd", label: "Dev/BackEnd" },
-      { value: "Designer", label: "Designer" },
+      { value: "front", label: "Dev/FrontEnd" },
+      { value: "back", label: "Dev/BackEnd" },
+      { value: "design", label: "Designer" },
     ],
     []
   );
@@ -49,6 +49,11 @@ function Survey(props) {
 
   const sendSurveyData = (callback) => {
 
+    if (url1===""||url2===""||url3===""){
+      window.alert("포트폴리오를 입력하세요!");
+      return;
+    }
+
     const data={
       position : position,
       front : {
@@ -63,7 +68,8 @@ function Survey(props) {
       ability: abilityDesigner,
       skills : skillsDesigner,
       },
-      portfolioUrl : [url,url1,url2,url3],
+      portfolioUrl : [url1,url2,url3],
+      url: url,
       }
 
 

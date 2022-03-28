@@ -15,18 +15,18 @@ export const numberOfPeople =
 
 export const works = 
     [
-    { value: 1, label: "디자이너" },
-    { value: 2, label: "개발자" },
+    { value: 'design', label: "디자이너" },
+    { value: 'dev', label: "개발자" },
   ]
 
 export const rolesDesigner = 
     [
-    { value: "UI/UX", label: "UI/UX 디자이너" },
+    { value: "ui/ux", label: "UI/UX 디자이너" },
     { value: "character", label: "캐릭터 디자이너" },
   ]
 
 export const rolesDev = 
     [
-    { value: "FrontEnd", label: "프론트엔드" },
-    { value: "BackEnd", label: "백엔드" },
+    { value: "front", label: "프론트엔드" },
+    { value: "back", label: "백엔드" },
   ]
