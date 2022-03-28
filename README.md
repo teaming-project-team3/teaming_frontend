@@ -208,12 +208,11 @@ http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/userEdit
                 <li>slider, react-slick</li>
                 <li>socket.io only or socket.io with webRTC data channel N:N chat</li>
                 <li>webRTC N:N Video call</li>
+                <li>realtime users video status change, using socket</li>
             </ul>
             <h5>Pending</h5>
             <ul>
                 <li>apply design</li>
-                <li>api link to min-su-zzing</li>
-                <li>exit room button, using socket</li>
                 <li>start project button, change the chatting to saving data</li>
                 <li>Audio fix required</li>
             </ul>
@@ -239,14 +238,14 @@ http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/userEdit
                 <li>apply Git-hub zan-di view</li>
                 <li>skill windows</li>
                 <li>apply design</li>
+                <li>apply api user data on the project cards</li>
+                <li>apply api user data on the details</li>
             </ul>
             <h5>Pending</h5>
             <ul>
                 <li>api link to min-su-zzing/won-jin-zzang</li>
                 <li>apply api user data on a Radar chart</li>
                 <li>apply api user data on the skill windows</li>
-                <li>apply api user data on the project cards</li>
-                <li>apply api user data on the details</li>
                 <li>button to send DM to the user</li>
             </ul>
             <h5>rejected</h5>
