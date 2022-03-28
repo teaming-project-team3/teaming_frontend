@@ -1,4 +1,4 @@
-import React, { useCallback, useState, createRef, useEffect } from "react";
+import React, { useState, createRef, useEffect } from "react";
 import styled from "styled-components";
 // TOAST UI Editor import
 import { useDispatch, useSelector } from "react-redux";
@@ -6,11 +6,12 @@ import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Select from "react-select";
-import { jobs, numberOfPeople } from "../data/createProject/CreateProjectData";
 import S3Upload from "../Components/Organisms/upload/S3Upload";
 import { actionCreators } from "../redux/modules/projects";
 import { useLocation } from "react-router";
+import plus from "../static/images/createProject/plus.png";
+import Selector from "../Components/Organisms/createProject/Selector";
+
 
 function CreateProject() {
   const dispatch = useDispatch();
@@ -25,6 +26,9 @@ function CreateProject() {
   const editorRef = createRef();
 
   const location = useLocation();
+
+  const [workArr, setWorkArr] = useState([1]);
+
 
   useEffect(() => {
     document.documentElement.scrollTo(0, 0);
@@ -54,85 +58,35 @@ function CreateProject() {
       title: projectTitle,
       imgUrl: S3ImgUrl,
       contents: projectContents,
-      stack: [
-        ["designer", selNum[0]],
-        ["front", selNum[1]],
-        ["back", selNum[2]],
-      ],
+      stack: workArr,
       period: toStringByFormatting(endDate),
     };
 
     dispatch(actionCreators.createProjectAPI(data));
   }
 
-  const orderByLabel = useCallback(
-    (a, b) => a.label.localeCompare(b.label),
-    []
-  );
+  function plusSelector(){
+    const temp = workArr.length;
+    
+    setWorkArr([...workArr, temp+1])
+  }
 
-  const orderOptions = useCallback(
-    (values) =>
-      values
-        .filter((v) => v.isFixed)
-        .sort(orderByLabel)
-        .concat(values.filter((v) => !v.isFixed).sort(orderByLabel)),
-    [orderByLabel]
-  );
+  const dataPush = (data, idx) => {
 
-  const [selJobs, setSelJobs] = useState([]);
+      console.log("before dataPush", data, idx);
 
-  const handleChange = useCallback(
-    (inputValue, { action, removedValue }) => {
-      switch (action) {
-        case "remove-value": // delete with 'x'
-        case "pop-value": // delete with backspace
-          if (removedValue.isFixed) {
-            setSelJobs(orderOptions([...inputValue, removedValue]));
-            return;
-          }
-          break;
-        case "clear": // clear button is clicked
-          setSelJobs(jobs.filter((v) => v.isFixed));
-          return;
-        default:
-      }
-      setSelJobs(inputValue);
-    },
-    [orderOptions]
-  );
-
-  const [selNum, setSelNum] = useState([0, 0, 0]);
-
-  function handleNums(id, job, event) {
-    console.log(id);
-    if (job === "back") {
-      const newSel = selNum.map((num, idx) => {
-        if (idx === 2) {
-          return event.value;
-        } else {
-          return num;
+      const temp = workArr.map((item, i)=>{
+        if(i===idx){
+          return {...item, ...data};
+        }else{
+          return item;
         }
-      });
-      setSelNum(newSel);
-    } else if (job === "front") {
-      const newSel = selNum.map((num, idx) => {
-        if (idx === 1) {
-          return event.value;
-        } else {
-          return num;
-        }
-      });
-      setSelNum(newSel);
-    } else if (job === "designer") {
-      const newSel = selNum.map((num, idx) => {
-        if (idx === 0) {
-          return event.value;
-        } else {
-          return num;
-        }
-      });
-      setSelNum(newSel);
-    }
+      })
+
+      console.log("after dataPush", data, temp);
+
+      setWorkArr(temp);
+
   }
 
   //dev
@@ -147,7 +101,7 @@ function CreateProject() {
         </div>
 
 
-        <div className="w-full m-10 bg-white h-fit rounded-2xl pr-8">
+        <div className="w-full pr-8 m-10 bg-white h-fit rounded-2xl">
           <div className="w-full text-[1.5rem] text-black font-notoB p-8 border-b-2">
             프로젝트 정보
           </div>
@@ -192,44 +146,27 @@ function CreateProject() {
           </div>
         </div>
 
-        <div className="w-5/6 m-10 bg-white h-fit rounded-2xl">
+        <div className="w-full bg-white h-fit rounded-2xl">
           <div className="w-full text-[1.5rem] text-black font-notoB p-8 border-b-2">
             모집 정보
           </div>
 
           <div className="flex w-full text-[1rem] justify-between text-black font-noto2 pt-8 pr-8 pb-8 ml-8 border-b-2">
-            <div className="w-1/3">모집 인원</div>
-
-            <div className="flex flex-col w-2/3">
-            <div className="m-2">
-              <Select
-                options={jobs}
-                value={selJobs}
-                isMulti
-                onChange={handleChange}
-              />
-            </div>
-
-            {selJobs &&
-              selJobs.map((lang, idx) => (
-                <>
-                  <div key={idx} className="flex m-2">
-                    <div className="flex items-center justify-center w-1/3 text-base text-center border-2 font-noto2">
-                      {lang.label}
-                    </div>
-                    <div className="w-1/3">
-                      <Select
-                        options={numberOfPeople}
-                        onChange={(e) => {
-                          handleNums(idx, lang.value, e);
-                        }}
-                      >
-                      </Select>
-                    </div>
-                  </div>
-                </>
-              ))}
+            <div className="flex items-center w-1/3">
+              모집 인원
+              <div className="ml-2 border-2 h-fit" onClick={()=>{plusSelector()}}>
+                <img src={plus} alt={"+"}/>
               </div>
+            </div>
+            
+            <div className="flex flex-col w-2/3">
+            {workArr.map((item, idx)=>{
+              
+              return <Selector idx={idx} dataPush={dataPush}/>
+            })
+            }
+            </div>
+            
           </div>
 
           <div className="flex w-full text-[1rem] justify-between text-black font-noto2 pt-8 pr-8 pb-8 ml-8">
