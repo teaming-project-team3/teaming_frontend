@@ -22,6 +22,7 @@ import ScrollToTop from "./shared/ScrollToTop"
 import UserEdit from "./pages/UserEdit";
 import VideoChat from "./pages/VideoChat";
 import ProjectSearch from "./pages/ProjectSearch";
+import Images from "./Components/Organisms/upload/Images";
 
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
           <Route path="/chat/dm" element={<DMChat/>}/>
           <Route path="/chat/dm" element={<DMChat/>}/>
           <Route path="/testChat" element={<VideoChat/>}/>
+          <Route path="/images" element={<Images/>}/>
         </Routes>
     </BrowserRouter>
   );
