@@ -44,12 +44,12 @@ function UserSlider(props) {
   const [audioOn, setAudioOn] = useState(false);
   const [userList, setUserList] = useState([]);
   //const initList = [1,2,3,4,5,6];
-  const userListRedux = props.users;
+  //const userListRedux = props.users;
   localStorage.setItem("count",0);
   
   let userInfo = [];
 
-  console.log("userList", userList, userListRedux);
+  console.log("userList", userList);
   //const videoRef = useRef(userList.map(() => createRef()));
 
 
@@ -69,7 +69,7 @@ function UserSlider(props) {
     if (socket.disconnected) {
       socket.connect();
     }
-    
+    console.log("mySocket Info", socket);
     socket.emit("join_room", { roomName: room, nickName: name });
 
     socket.on("accept_join", async (userObjArr) => {
@@ -316,7 +316,7 @@ function UserSlider(props) {
   }
 
   function paintPeerFace(peerStream, id, remoteNickname, idx) {
-    console.log("peerStream : ", peerStream, userList, idx, remoteNickname, userListRedux, peopleInRoom);
+    console.log("peerStream : ", peerStream, userList, idx, remoteNickname, peopleInRoom);
 
     //새로 참여한 유저의 index가 항상 length+1이 될까??
     if(idx===undefined||idx===null){
@@ -409,9 +409,9 @@ function UserSlider(props) {
             
 
             {userList.map((user, idx)=>{
-              console.log("idx in map!!!", idx)
+              console.log("idx in map!!!", idx, user.socketId, socket.id);
               //본인만 버튼 뜨도록
-              if(user.nickName===name){
+              if(user.socketId===socket.id){
               return(<UserView
               key={user.nickName}
               idx={-1}
