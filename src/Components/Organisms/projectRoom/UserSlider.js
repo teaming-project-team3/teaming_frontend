@@ -277,6 +277,7 @@ function UserSlider(props) {
         },
       ],
     });
+    
     myPeerConnection.addEventListener("icecandidate", (event) => {
       handleIce(event, remoteSocketId);
     });
