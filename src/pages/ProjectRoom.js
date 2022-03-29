@@ -5,7 +5,7 @@ import exUser from "../static/images/userStats/example_user.png";
 // import Message from "../Components/Atoms/Messages/Message/Message";
 // import SendBtn from "../static/images/projectRoom/sendRound.svg";
 import ChatPrac from "../Components/Organisms/DMChat/ChatPrac";
-import { useSelector } from "react-redux";
+//import { useSelector } from "react-redux";
 import RadarChart from "../Components/Molecules/RadarChart";
 import clip from "../static/images/projectRoom/clip.png"
 import ProjectRoomHeader from "../Components/Molecules/ProjectRoomHeader";
@@ -17,13 +17,13 @@ export default function ProjectRoom() {
   const [isLeader, setIsLeader] = React.useState(false);
   const [mode, setMode] = React.useState(true);
   const [curr, setCurr] = React.useState("userA");
-  const users = useSelector((state)=>state.users.nowProjectUser)
+  //const users = useSelector((state)=>state.users.nowProjectUser)
 
   //const location = useLocation();
 
   //const { name, room } = queryString.parse(location.search)
 
-  console.log("users", users)
+  //console.log("users", users)
 
 
   //프로젝트ID 및 userID 구현부
@@ -41,11 +41,11 @@ export default function ProjectRoom() {
     
       <div className="bg-[#F2F3F7]">
 
-        <ProjectRoomHeader users={users}></ProjectRoomHeader>
+        <ProjectRoomHeader></ProjectRoomHeader>
 
         <div className="flex w-screen">
           
-        <UserSlider users={users} name={name} room={room} exUser={exUser} _onMouseOut={()=>{setCurr("userA");}} _onMouseOver={()=>{setCurr("userB")}}></UserSlider>
+        <UserSlider name={name} room={room} exUser={exUser} _onMouseOut={()=>{setCurr("userA");}} _onMouseOver={()=>{setCurr("userB")}}></UserSlider>
           
           {mode &&
           <div className="relative w-[25vw] h-[80vh] rounded-xl mr-10 pr-10 border-2 p-2 bg-white pb-7">

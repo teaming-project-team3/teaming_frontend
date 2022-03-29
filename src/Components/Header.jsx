@@ -11,6 +11,7 @@ const Nav = tw.div`
 
 function Header() {
   const isLogin = useSelector((state) => state.users.is_login);
+  const profileUrl = useSelector((state) => state.users.profileUrl);
   const dispatch = useDispatch();
 
   if (window.location.pathname === "/projectRoom") return null;
@@ -91,6 +92,12 @@ function Header() {
             >
               마이페이지
             </Link>
+            <div
+              to="/signUp"
+              className="col-start-12 col-span-1 pl-5 pr-5 pt-1.5 pb-1.5"
+            >
+              <img src={profileUrl} alt={""}/>
+            </div>
           </>
         )}
       </Nav>
