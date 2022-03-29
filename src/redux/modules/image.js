@@ -28,7 +28,7 @@ const initialState = {
     image_urls: [],
 }
 
-const uploadImagesS3 = (data) => {
+const uploadImagesS3 = (data, callback) => {
     return async function(dispatch, getState, {history}){
         console.log("start uploadImageS3");
 
@@ -100,22 +100,7 @@ const uploadImagesS3 = (data) => {
     
         console.log("before Create API", data, arr);
         
-        dispatch(createProjectAPI(data));
-
-        // Promise.all(arr).then((res)=>{
-
-        //   data = {...data, imgUrl: res}
-    
-        //   console.log("before Create API", data, res);
-          
-        //   dispatch(createProjectAPI(data));
-
-        // }).catch((err)=>{
-
-        //   console.log("err in promise all", err);
-
-        // })
-
+        dispatch(createProjectAPI(data, callback));
 
     }
 }

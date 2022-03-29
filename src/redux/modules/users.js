@@ -32,6 +32,7 @@ const resetSkillsAction = createAction(RESET_SKILLS, (item) => ({ item }));
 const updateSkillsAction = createAction(UPDATE_SKILLS, (data) => ({ data }));
 const deleteAbilityAction = createAction(DELETE_ABILITY, (data) => ({ data }));
 const deleteSkillsAction = createAction(DELETE_SKILLS, (data)=>({ data }));
+//const setUserLogin = createAction(SET_IS_LOG_IN, (url) => ({ url }));
 
 
 // initialState
@@ -86,9 +87,9 @@ export function setNowUsers(users) {
   return { type: SET_NOW_PROJECT_USERS, users };
 }
 
-export function setIsLogIn() {
+export function setIsLogIn(imgUrl) {
   console.log("redux, setIsLogin")
-  return { type: SET_IS_LOG_IN, true: true};
+  return { type: SET_IS_LOG_IN, imgUrl};
 }
 
 export function setLogOut(){
@@ -161,7 +162,7 @@ const loginAPI = (id, pwd, callback) => {
         setCookie("token", res.data.Authorization, 1);
         console.log("login completed", res);
         
-        dispatch(setIsLogIn());
+        dispatch(setIsLogIn(res.data.profileUrl));
         //surveyChecker 받아서 넘기기
         callback(res.data.suveyCheck);
         }
@@ -243,8 +244,10 @@ export default handleActions(
       }),
     [SET_IS_LOG_IN]: (state, action) =>
       produce(state, (draft) => {
-        console.log("SET_IS_LOG_IN reducer", true);
+        console.log("SET_IS_LOG_IN reducer", action.imgUrl);
         draft.is_login = true;
+        draft.profileImage = action.imgUrl;
+        console.log("complete setIslogin")
       }),
     [LOG_OUT]: (state, action) =>
       produce(state, (draft) => {
