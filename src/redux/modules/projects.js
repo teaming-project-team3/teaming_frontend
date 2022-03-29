@@ -13,6 +13,7 @@ const SET_PROJECT_DETAIL = "SET_PROJECT_DETAIL";
 
 // initialState
 const initialState = {
+    isLoading:true,
     projectsMain:[],
     projectsRank:[],
     projectsDeadline:[],
@@ -56,7 +57,7 @@ export const loadProjectsMainAPI = () => {
 };
 
 
-export const createProjectAPI = (data) => {
+export const createProjectAPI = (data, callback) => {
   return async function (dispatch) {
 
     console.log("createProjectAPI", data);
@@ -64,7 +65,7 @@ export const createProjectAPI = (data) => {
         .createProjectAPI(data)
             .then((res)=>{
                 console.log("PROJECT_CREATE_API RES : ", res)
-
+                callback();
                 //dispatch(setProjectsMain(res));
             })
             .catch((err)=>{
@@ -100,18 +101,19 @@ export default handleActions(
     [SET_MAIN_PROJECTS]: (state, action) =>
       produce(state, (draft) => {
 
-        draft.projectsRank = action.payload.projects.rankBoards;
-        draft.projectsDeadline = action.payload.projects.projectsDeadline;
+        draft.projectsRank = action.projects.data.rankBoards;
+        draft.projectsDeadline = action.projects.data.deadlineBoards;
         
-        draft.projectsDesigner = action.payload.projects.designBoards;
-        draft.projectsDev = action.payload.projects.frontBoards;
+        draft.projectsDesigner = action.projects.data.designBoards;
+        draft.projectsDev = action.projects.data.devBoards;
         //백엔드 처리할것
         //draft.projectsDev = action.payload.projects.backBoards;
 
-        draft.matesDesigner = action.payload.projects.designMates;
-        draft.matesDev = action.payload.projects.frontMates;
+        draft.matesDesigner = action.projects.data.designMates;
+        draft.matesDev = action.projects.data.devMates;
         //draft.matesDev = action.payload.projects.backMates;
         
+        draft.isLoading = false;
         console.log("projects save");
 
       }),

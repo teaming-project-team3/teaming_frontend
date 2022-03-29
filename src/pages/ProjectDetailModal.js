@@ -11,9 +11,9 @@ import GitHubLogo from "../static/images/userStats/gitLogo.png";
 
 function ProjectDetailModal(props) {
   const modalIsOpen = props.showDetail;
-  const projectDetail = props.projectDetail;
+  //const projectDetail = props.projectDetail;
 
-  console.log("projectDetail : ", projectDetail);
+  //console.log("projectDetail : ", projectDetail);
 
   // const testString =
   //   "## hi\n > section\n ```jsx\n let code = 1;\n``` \n *bias* \n **bold**";

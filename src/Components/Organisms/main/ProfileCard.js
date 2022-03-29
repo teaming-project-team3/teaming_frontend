@@ -1,21 +1,24 @@
 import Image from "../../Atoms/Image";
 
 function ProfileCard(props) {
+
+  const { nickname, profile, position } = props;
+
   return (
     <div
       className={`flex w-[33.563rem] h-[9.188rem] mx-[1.063rem] bg-white rounded-[0.625rem] cursor-pointer shadow-lg`}
     >
       <div className="w-[4.25rem] h-[4.25rem] ml-[0.875rem] mt-[1rem]">
-        <Image shape={"circle"} src={props.profile}></Image>
+        <Image shape={"circle"} src={profile}></Image>
       </div>
 
       <div className="flex flex-col mr-[1.875rem]">
         <div className="flex items-center h-1/2">
           <img src={props.tier} alt={""} className="mr-[0.412rem]"></img>
           <div className="mr-[0.625rem] text-[1rem] font-noto2 text-black]">
-            김기진
+            {nickname}
           </div>
-          <div className="font-noto2 text-[#593CE5]">UI/UX 디자이너</div>
+          <div className="font-noto2 text-[#593CE5]">{position}</div>
         </div>
 
         <div className="items-center content-center justify-center">

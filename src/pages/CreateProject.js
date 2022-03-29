@@ -12,10 +12,11 @@ import plus from "../static/images/createProject/plus.png";
 import Selector from "../Components/Organisms/createProject/Selector";
 import Images from "../Components/Organisms/upload/Images";
 import CreateSelect from "./CreateSelect";
-
+import { useNavigate } from "react-router";
 
 function CreateProject() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [endDate, setEndDate] = useState(new Date());
 
@@ -67,7 +68,7 @@ function CreateProject() {
       period: toStringByFormatting(endDate),
     };
 
-    dispatch(imageActions.uploadImagesS3(data));
+    dispatch(imageActions.uploadImagesS3(data,()=>{navigate('/')}));
 
     
   }
