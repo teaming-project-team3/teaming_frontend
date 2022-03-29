@@ -41,8 +41,8 @@ function Main() {
   console.log("main, projectsData : ", projectsData, isLoading);
 
   useEffect(() => {
-    isLoading = true;
-    dispatch(actionCreators.loadProjectsMainAPI());
+    setTimeout(() => dispatch(actionCreators.loadProjectsMainAPI()), 3000);
+    //dispatch(actionCreators.loadProjectsMainAPI());
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
