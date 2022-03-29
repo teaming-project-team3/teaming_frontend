@@ -10,6 +10,7 @@ import RadarChart from "../Components/Molecules/RadarChart";
 import clip from "../static/images/projectRoom/clip.png"
 import ProjectRoomHeader from "../Components/Molecules/ProjectRoomHeader";
 import UserSlider from "../Components/Organisms/projectRoom/UserSlider";
+import { useLocation } from "react-router";
 // import queryString from 'query-string'
 // import { useLocation } from "react-router";
 
@@ -19,7 +20,7 @@ export default function ProjectRoom() {
   const [curr, setCurr] = React.useState("userA");
   //const users = useSelector((state)=>state.users.nowProjectUser)
 
-  //const location = useLocation();
+  const location = useLocation();
 
   //const { name, room } = queryString.parse(location.search)
 
@@ -28,8 +29,11 @@ export default function ProjectRoom() {
 
   //프로젝트ID 및 userID 구현부
   // const room = useSelector((state)=>state.users.nowProject)
-  const room = "testRoom";
-  const name = localStorage.getItem("userId")
+  
+  const room = location.state;
+  const name = localStorage.getItem("userId");
+
+  console.log("room", room);
 
   useEffect(() => {
     if (isLeader === localStorage.getItem("userId")) {

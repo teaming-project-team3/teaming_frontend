@@ -18,7 +18,7 @@ export default function UserEdit() {
   const stats = useSelector((state) => state.users.myStats);
   const [type_num, setType] = React.useState("1");
 
-  const [isLeader, setIsLeader] = React.useState(false);
+  //const [isLeader, setIsLeader] = React.useState(false);
   const [userNickName, setUserNickName] = React.useState("");
   const [userPosition, setUserPosition] = React.useState("");
   const [profileUrl, setProfileUrl] = React.useState("");
@@ -65,9 +65,9 @@ export default function UserEdit() {
   }
 
   React.useEffect(() => {
-    if (isLeader === localStorage.getItem("userId")) {
-      setIsLeader(true);
-    }
+    // if (isLeader === localStorage.getItem("userId")) {
+    //   setIsLeader(true);
+    // }
 
     //userStatsAPI연동할것
     // eslint-disable-next-line react-hooks/exhaustive-deps

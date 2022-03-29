@@ -48,6 +48,7 @@ function ProjectList(props) {
             
             <ProjectCard
               key={0}
+              id={data[0]._id}
               _onClick={props.detailShow}
               img={data[0].imgUrl}
               stack={data[0].stack}
@@ -58,6 +59,7 @@ function ProjectList(props) {
               nickName={data[0].nickname}
             ></ProjectCard>
             <ProjectCard
+            id={data[1]._id}
             key={1}
               _onClick={props.detailShow}
               img={data[1].imgUrl}
@@ -69,6 +71,7 @@ function ProjectList(props) {
               nickName={data[1].nickname}
             ></ProjectCard>
             <ProjectCard
+            id={data[2]._id}
             key={2}
               _onClick={props.detailShow}
               img={data[2].imgUrl}
@@ -80,6 +83,7 @@ function ProjectList(props) {
               nickName={data[2].nickname}
             ></ProjectCard>
             <ProjectCard
+            id={data[3]._id}
             key={3}
               _onClick={props.detailShow}
               img={data[3].imgUrl}

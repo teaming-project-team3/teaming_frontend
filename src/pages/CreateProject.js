@@ -196,7 +196,7 @@ function CreateProject() {
           <div className="flex 
           flex-col
           w-full text-[1rem] text-black font-noto1 pt-8 pr-8 pb-8 ml-8 border-b-2">
-
+            요구 스킬
           <CreateSelect setRequired={requiredSkills}/>
           
           </div>

@@ -1,6 +1,6 @@
 function ProjectCard(props) {
 
-  const { text, stack, img, profileUrl, nickName } = props;
+  const { id, text, stack, img, profileUrl, nickName, _onClick } = props;
 
   ProjectCard.defaultProps = {
     text:"",
@@ -8,12 +8,14 @@ function ProjectCard(props) {
     img:"",
     profileUrl:"",
     nickName:"",
+    _onClick:()=>{},
+    _id:"id",
   }
 
 
   return (
     <div
-      onClick={props._onClick}
+      onClick={()=>{_onClick(id)}}
       className="flex flex-col max-w-[15.625em] max-h-[18.750em] ml-[2.250em] bg-white border-2 cursor-pointer rounded-[0.333em] shadow-lg m-2"
     >
       <div className="h-2/3 rounded-[0.333em]">
