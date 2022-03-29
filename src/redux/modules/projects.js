@@ -75,14 +75,15 @@ export const createProjectAPI = (data, callback) => {
   };
 };
 
-export const getProjectDetailAPI = (boardId) => {
+export const getProjectDetailAPI = (boardId, callback) => {
   return async function ( dispatch ) {
 
-    apis
+    apisMS
       .getProjectDetailAPI(boardId)
         .then((res) => {
           console.log("GET_PROJECT_DETAIL : ", res)
           dispatch(setProjectDetail(res.data))
+          callback();
         })
         .catch((err) => {
           console.log("GET_PROJECT_DETAIL : ", err)

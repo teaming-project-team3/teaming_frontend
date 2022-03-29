@@ -47,12 +47,12 @@ function Main() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const detailShow = (e) => {
-    console.log("project card clicked");
+  const detailShow = (id) => {
+    console.log("project card clicked", id);
 
-    dispatch(actionCreators.getProjectDetailAPI(e.value));
+    dispatch(actionCreators.getProjectDetailAPI(id, ()=>{setShowDetail(true)}));
 
-    setShowDetail(true);
+    //setShowDetail(true);
 
     return;
   };
@@ -62,7 +62,8 @@ function Main() {
       {isLoading?
         <Spinner/>
         :
-      <><Survey modalIsOpen={modalIsOpen}></Survey><ProjectDetailModal
+      <><Survey modalIsOpen={modalIsOpen}></Survey>
+      <ProjectDetailModal
           showDetail={showDetail}
           callBackSetShowFalse={() => {
             console.log("setShowDetailFalse");

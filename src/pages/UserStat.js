@@ -8,8 +8,10 @@ import UrlLink from "../Components/Molecules/UrlLink";
 import { actionCreators } from "../redux/modules/users";
 import { useDispatch, useSelector } from "react-redux";
 import ProficiencyBadge from "../Components/Molecules/ProficiencyBadge";
+import { useNavigate } from "react-router";
 
 export default function UserStat() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const stats = useSelector((state) => state.users.myStats);
   const [isLeader, setIsLeader] = React.useState(false);
@@ -115,6 +117,9 @@ export default function UserStat() {
             </div>
             <div className="rounded-[0.625rem] p-2.5 font-noto2 text-gray-900 text-sm">
               URL
+            </div>
+            <div onClick={()=>{navigate('/userEdit')}} className="rounded-[0.625rem] p-2.5 font-noto2 text-gray-900 text-sm bg-slate-200">
+              정보수정
             </div>
           </div>
 
