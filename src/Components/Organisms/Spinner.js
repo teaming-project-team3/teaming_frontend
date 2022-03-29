@@ -1,22 +1,24 @@
 import React from "react";
 import styled from "styled-components";
-
 import img from "../../logo.svg";
+import './Spinner.css'
 const Spinner = (props) => {
   return (
     <Outter>
-      <img src={img} alt={"Now Loading..."}/>
+      <img className="App-logo" src={img} alt={"Now Loading..."}/>
     </Outter>
   );
 };
 
 const Outter = styled.div`
-  background-color: #df402c88;
-  width: 100vw;
-  height: 100vh;
+  background-color: #282c34;
+  min-height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
   & img {
     width: 150px;
   }
