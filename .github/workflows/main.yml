@@ -56,3 +56,10 @@ jobs:
             --recursive \
             --region ap-northeast-2 \
             build s3://teamingdeploy
+            
+      - name: Invalidate cache CloudFront
+        uses: chetan/invalidate-cloudfront-action@master
+        env:
+          DISTRIBUTION: ${{ secrets.DISTRIBUTION_ID }}
+          PATHS: '/*'
+        continue-on-error: true
