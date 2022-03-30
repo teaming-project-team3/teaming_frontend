@@ -34,7 +34,7 @@ export default function UserStat() {
 
   console.log("init : ", stats);
 
-  if (stats.length !== 0) {
+  if ( stats && stats.length !== 0) {
     userNickName = stats.userId.nickname;
     userPosition = stats.position;
     profileUrl = stats.userId.profileUrl;
@@ -118,7 +118,7 @@ export default function UserStat() {
             <div className="rounded-[0.625rem] p-2.5 font-noto2 text-gray-900 text-sm">
               URL
             </div>
-            <div onClick={()=>{navigate('/userEdit')}} className="rounded-[0.625rem] p-2.5 font-noto2 text-gray-900 text-sm bg-slate-200">
+            <div onClick={()=>{navigate('/userEdit')}} className="cursor-pointer rounded-[0.625rem] p-2.5 font-noto2 text-gray-900 text-sm bg-slate-200">
               정보수정
             </div>
           </div>
