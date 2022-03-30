@@ -101,6 +101,8 @@ const uploadImagesS3 = (data, callback) => {
         console.log("before Create API", data, arr);
         
         dispatch(createProjectAPI(data, callback));
+        dispatch(setFile(""));
+        dispatch(setFiles([]));
 
     }
 }

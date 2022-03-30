@@ -25,7 +25,7 @@ export const Images = () => {
       dispatch(actionCreators.setFiles(imageLists));
     };
   
-    // X버튼 클릭 시 이미지 삭제
+    // 이미지 클릭 시 이미지 삭제
     const handleDeleteImage = (id) => {
       setShowImages(showImages.filter((_, index) => index !== id));
     };
@@ -40,7 +40,7 @@ export const Images = () => {
         </label>
   
         {showImages.map((image, id) => (
-          <div className="flex items-center justify-center h-full border-2 bg-slate-400 rounded-xl aspect-square" key={id} onClick={() => handleDeleteImage(id)}>
+          <div className="flex items-center justify-center h-full border-2 rounded-xl aspect-square" key={id} onClick={() => handleDeleteImage(id)}>
             <img src={image} alt={`${image}-${id}`} className="h-full"/>
           </div>
         ))}
