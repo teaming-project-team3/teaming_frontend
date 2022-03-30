@@ -1,7 +1,35 @@
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { uploadImagesS3Update } from "../../../redux/modules/image";
+import { updateUserInfoAPI } from "../../../redux/modules/users";
 import ProfileImage from "../upload/ProfileImage";
 
 export const BasicInfo = (props) => {
+  const { stats } = props;
+  const dispatch = useDispatch();
 
+  const [userNickName, setUserNickName] = React.useState("");
+  const [intro, setIntro] = React.useState("");
+  const [gitUrl, setGitUrl] = React.useState("");
+  const profileUrl = useSelector((state)=>state.image.image_url);
+
+  function dataFactory(){
+
+    const newData = {
+      "nickname": userNickName,
+      "introduction": intro,
+      "profileUrl": profileUrl,
+      "position": stats.position,
+      "front" : stats.front,
+      "back" : stats.back,
+      "design" : stats.design,
+      "portfolioUrl" : stats.portfolioUrl,
+      "url": gitUrl,
+      }
+
+      dispatch(uploadImagesS3Update(newData, (data)=>{dispatch(updateUserInfoAPI(data))}));
+
+  }
 
   
     return (
@@ -15,7 +43,7 @@ export const BasicInfo = (props) => {
           <input
             className="w-1/2 ml-3 mr-10 border-2 rounded"
             placeholder={props.nickName}
-            onChange={(event) => props.setUserNickName(event.target.value)}
+            onChange={(event) => setUserNickName(event.target.value)}
           ></input>
         </div>
 
@@ -31,7 +59,7 @@ export const BasicInfo = (props) => {
             rows={4}
             className="w-1/2 ml-3 mr-10 border-2 rounded"
             placeholder={""}
-            onChange={(event) => props.setIntro(event.target.value)}
+            onChange={(event) => setIntro(event.target.value)}
           ></textarea>
         </div>
 
@@ -40,12 +68,12 @@ export const BasicInfo = (props) => {
           <input
             className="w-1/2 ml-3 mr-10 border-2 rounded"
             placeholder={""}
-            onChange={(event) => props.setGitId(event.target.value)}
+            onChange={(event) => setGitUrl(event.target.value)}
           ></input>
         </div>
 
         <div className="flex justify-center w-full">
-          <div className="w-1/3 p-3 text-center text-white bg-purple-400 rounded font-noto2">
+          <div className="w-1/3 p-3 text-center text-white bg-purple-400 rounded font-noto2" onClick={()=>{dataFactory()}}>
             <button>적용 하기</button>
           </div>
         </div>

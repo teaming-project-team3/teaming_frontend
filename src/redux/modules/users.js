@@ -176,6 +176,23 @@ const loginAPI = (id, pwd, callback) => {
   };
 };
 
+export const updatePortFolio = (portfolioList, callback) => {
+  return function () {
+
+    apis
+      .updateUserInfo(portfolioList)
+      .then((res)=>{
+        console.log("updatePortFolio res", res);
+        callback();
+      })
+      .catch((err)=>{
+        console.log("updatePortFolio err",err);
+        callback();
+      })
+
+  };
+};
+
 
 const signUp = (data, callback) => {
   return function () {
@@ -230,6 +247,21 @@ const getMyStats = () => {
           console.log("myStats Err : ", err)
 
         })
+
+  }
+}
+
+export const updateUserInfoAPI = (data) => {
+  return function(dispatch){
+    console.log("data!",data);
+    apis
+      .updateUserInfo(data)
+      .then((res)=>{
+        console.log("updateUserInfo res",res);
+      })
+      .catch((err)=>{
+        console.log("updateUserInfo err", err);
+      })
 
   }
 }

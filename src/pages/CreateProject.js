@@ -151,7 +151,7 @@ function CreateProject() {
             이미지 업로드
             </div>
             
-            <Images/>
+            <Images idx={-1}/>
           </div>
 
           <div className="w-full text-[1rem] text-black font-noto2 p-6">
