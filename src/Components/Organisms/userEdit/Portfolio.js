@@ -1,9 +1,8 @@
 import { useState } from "react";
-import Select from "react-select";
-import ModalSelect from "../../../pages/ModalSelect";
-import Images from "../upload/Images";
 import styled from "styled-components";
 import DatePicker from "react-datepicker";
+import { useEffect } from "react";
+import ImageArr from "../upload/ImageArr";
 
 const MyDatePicker = styled(DatePicker)`
   width: 90%;
@@ -20,22 +19,49 @@ export const Portfolio = (props) => {
   const [endDate, setEndDate] = useState(new Date());
   const [projectContents, setProjectContents] = useState();
   const [projectURL, setProjectURL] = useState();
+  let portfolio = [];
+  
+  function dataFactory(){
 
+    portfolio[props.idx] = 
+      {
+      id:props.idx,
+      title: projectName,
+      image: "notUploaded! Tell to the front!",
+      description: projectContents,
+      url: projectURL,
+      period: endDate
+      }
 
+    props.dataPush(portfolio[props.idx], props.idx);
+
+  }
+
+  useEffect(()=>{
+
+    dataFactory();
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[projectName, projectContents, projectURL, endDate]);
+  
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full border-b-8">
+      <div className="flex justify-end mr-10">
+        <div className="m-1 border-2 rounded-md cursor-pointer" onClick={()=>{props.deletePortfolio(props.idx)}}>X</div>
+      </div>
       <div className="flex w-full text-[1rem] justify-between text-black font-noto2 pt-8 pr-8 pb-8 ml-8 border-b-2">
         <div className="w-1/3 pl-8">프로젝트명</div>
         <input
           className="w-1/2 ml-3 mr-10 border-2 rounded"
-          placeholder={""}
+          placeholder={props.item.title? props.item.title :""}
+          value={props.item.title}
           onChange={(event) => setProjectName(event.target.value)}
         ></input>
       </div>
 
       <div className="flex w-full text-[1rem] justify-between text-black font-noto2 pt-8 pr-8 pb-8 ml-8 border-b-2">
         <div className="w-1/3 pl-8">프로젝트 사진</div>
-        <Images/>
+        <ImageArr idx={props.idx}/>
       </div>
 
       <div className="flex w-full text-[1rem] justify-between text-black font-noto2 pt-8 pr-8 pb-8 ml-8 border-b-2">
@@ -76,6 +102,7 @@ export const Portfolio = (props) => {
           rows={4}
           className="w-1/2 ml-3 mr-10 border-2 rounded"
           placeholder={""}
+          value={props.item.description}
           onChange={(event) => setProjectContents(event.target.value)}
         ></textarea>
       </div>
@@ -85,6 +112,7 @@ export const Portfolio = (props) => {
         <input
           className="w-1/2 ml-3 mr-10 border-2 rounded"
           placeholder={""}
+          value={props.item.url}
           onChange={(event) => setProjectURL(event.target.value)}
         ></input>
       </div>
