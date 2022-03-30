@@ -60,6 +60,8 @@ export const apis = {
   signup: (data) => api.post("/auth/signup", data),
   login: (data) => api.post("/auth/signin", data ),
   survey: (data) => api.post("/users/suvey", data),
+  updateUserInfo: (data) => api.put("/users", data),
+
 
   loadProjectsMain: () => api.get("/boards"),
   getProjectDetailAPI: (boardId) => api.get(`/boards/${boardId}`),

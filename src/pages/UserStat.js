@@ -181,11 +181,11 @@ export default function UserStat() {
             <div className="flex mt-[1rem] ml-[1.8rem] h-full">
               <div className="flex flex-wrap w-3/5">
 
-                <ProficiencyBadge position={"Front-End"} ability={frontAbility} skills={frontSkills}/>
+                <ProficiencyBadge key={0} position={"Front-End"} ability={frontAbility} skills={frontSkills}/>
                 
-                <ProficiencyBadge position={"Back-End"} ability={backAbility} skills={backSkills}/>
+                <ProficiencyBadge key={1} position={"Back-End"} ability={backAbility} skills={backSkills}/>
 
-                <ProficiencyBadge position={"Design"} ability={designAbility} skills={designSkills}/>
+                <ProficiencyBadge key={2} position={"Design"} ability={designAbility} skills={designSkills}/>
                 
               </div>
 

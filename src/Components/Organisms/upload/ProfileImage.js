@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Input } from "reactstrap";
 import { actionCreators } from "../../../redux/modules/image";
 import plus from "../../../static/images/createProject/plus.png"
 
@@ -32,8 +33,8 @@ export const ProfileImage = () => {
   
     return (
       <div className="flex w-fit h-[20vh] bg-white mr-10">
-        <label htmlFor="input-file" className="flex items-center justify-center h-full bg-white border-2 cursor-pointer rounded-xl aspect-square" onChange={handleProfileImage}>
-          <input type="file" id="input-file" className="hidden bg-green-300" />
+        <label htmlFor="profile-input" className="flex items-center justify-center h-full bg-white border-2 cursor-pointer rounded-xl aspect-square" onChange={handleProfileImage}>
+          <Input key="profile" type="file" id="profile-input" className="hidden bg-green-300" />
           <div className="w-1/4 h-1/4 aspect-square">
           <img src={plus} alt={"+"}/>
           </div>

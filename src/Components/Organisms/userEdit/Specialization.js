@@ -1,10 +1,35 @@
+import React from "react";
+import { useDispatch } from "react-redux";
 import Select from "react-select";
 import ModalSelect from "../../../pages/ModalSelect";
+import { updateUserInfoAPI } from "../../../redux/modules/users";
 
 export const Specialization = (props) => {
 
-    const { position, positions, abilityFront, abilityBack, abilityDesigner, skillsFront, 
-        skillsBack, skillsDesigner, type_num, setUserPosition, checkType } = props;
+    const { stats, position, positions, abilityFront, abilityBack, abilityDesigner, skillsFront, 
+        skillsBack, skillsDesigner, type_num, checkType } = props;
+
+    const [userPosition, setUserPosition] = React.useState("");
+    const dispatch = useDispatch();
+
+    function dataFactory(){
+
+      const newData = {
+        "nickname": stats.userId.nickname,
+        "introduction": stats.introduction,
+        "profileUrl": stats.userId.profileUrl,
+        "position": userPosition,
+        "front" : { ability: abilityFront, skills: skillsFront },
+        "back" : { ability: abilityBack, skills: skillsBack },
+        "design" :  { ability: abilityDesigner, skills: skillsDesigner },
+        "portfolioUrl" : stats.portfolioUrl,
+        "url": stats.url,
+        }
+        
+  
+        dispatch(updateUserInfoAPI(newData));
+  
+    }
   
     return (
         <div className="flex justify-center w-screen mb-10 h-fit">
@@ -89,7 +114,7 @@ export const Specialization = (props) => {
          </div>
 
           <div className="flex justify-center w-full">
-            <div className="w-1/3 p-3 text-center text-white bg-purple-400 rounded font-noto2">
+            <div className="w-1/3 p-3 text-center text-white bg-purple-400 rounded font-noto2" onClick={()=>dataFactory()}>
               <button>적용 하기</button>
             </div>
           </div>
