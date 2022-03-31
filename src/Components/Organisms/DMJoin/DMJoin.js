@@ -27,7 +27,7 @@ const DMJoin = () => {
         </div>
         <Link
           onClick={(e) => (!name || !room ? e.preventDefault() : null)}
-          to={`/projectRoom?name=${name}&room=${room}`}
+          to={`/projectRoomTemp?name=${name}&room=${room}`}
         >
           <button className={'button mt-20'} type='submit'>
             가입
