@@ -93,7 +93,12 @@ function UserSlider(props) {
             userObjArr[i].nickName,
             i
           );
-          const offer = await newPC.createOffer();
+          console.log("offerToReceiveVideo!!!!!")
+          const offer = await newPC.createOffer({
+            //추가부분
+            offerToReceiveAudio: true,
+            offerToReceiveVideo: true,
+          });
           await newPC.setLocalDescription(offer);
           socket.emit("offer", {
             offer: offer,
@@ -122,7 +127,11 @@ function UserSlider(props) {
       try {
         const newPC = createConnection(remoteSocketId, remoteNickname);
         await newPC.setRemoteDescription(offer);
-        const answer = await newPC.createAnswer();
+        console.log("AnswerToReceiveVideo!!!!!");
+        const answer = await newPC.createAnswer({
+            offerToReceiveVideo: true,
+            offerToReceiveAudio: true,
+          });
         await newPC.setLocalDescription(answer);
         socket.emit("answer", {
           answer: answer,
