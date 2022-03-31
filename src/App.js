@@ -23,6 +23,7 @@ import UserEdit from "./pages/UserEdit";
 import VideoChat from "./pages/VideoChat";
 import ProjectSearch from "./pages/ProjectSearch";
 import Images from "./Components/Organisms/upload/Images";
+import ProjectRoomTemp from "./pages/ProjectRoom_temp";
 
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
           <Route path="/chat/dm" element={<DMChat/>}/>
           <Route path="/testChat" element={<VideoChat/>}/>
           <Route path="/images" element={<Images/>}/>
+          <Route path="/ProjectRoomTemp" element={<ProjectRoomTemp/>} />
         </Routes>
     </BrowserRouter>
   );

@@ -53,12 +53,12 @@ function Header() {
         >
           프로젝트 찾기
         </Link>
-        <Link to="/" className="col-start-7 col-end-8 text-base font-noto3">
+        {/* <Link to="/" className="col-start-7 col-end-8 text-base font-noto3">
           메이트 찾기
         </Link>
         <Link to="/" className="col-start-8 col-end-9 text-base font-noto3">
           이용후기
-        </Link>
+        </Link> */}
         {!isLogin && (
           <>
             <Link

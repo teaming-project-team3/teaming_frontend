@@ -1,34 +1,20 @@
 import * as React from "react";
 import { useEffect } from "react";
 import exUser from "../static/images/userStats/example_user.png";
-// import Input from "../Components/Atoms/Input";
-// import Message from "../Components/Atoms/Messages/Message/Message";
-// import SendBtn from "../static/images/projectRoom/sendRound.svg";
 import ChatPrac from "../Components/Organisms/DMChat/ChatPrac";
-//import { useSelector } from "react-redux";
 import RadarChart from "../Components/Molecules/RadarChart";
 import clip from "../static/images/projectRoom/clip.png"
 import ProjectRoomHeader from "../Components/Molecules/ProjectRoomHeader";
 import UserSlider from "../Components/Organisms/projectRoom/UserSlider";
-import { useLocation } from "react-router";
-// import queryString from 'query-string'
-// import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 export default function ProjectRoom() {
+  const navigate = useNavigate();
   const [isLeader, setIsLeader] = React.useState(false);
   const [mode, setMode] = React.useState(true);
   const [curr, setCurr] = React.useState("userA");
-  //const users = useSelector((state)=>state.users.nowProjectUser)
 
   const location = useLocation();
-
-  //const { name, room } = queryString.parse(location.search)
-
-  //console.log("users", users)
-
-
-  //프로젝트ID 및 userID 구현부
-  // const room = useSelector((state)=>state.users.nowProject)
   
   const room = location.state;
   const name = localStorage.getItem("userId");
@@ -41,11 +27,15 @@ export default function ProjectRoom() {
     }
   }, [isLeader]);
 
+  const goBack = () => {
+    navigate(-1);
+  }
+
   return (
     
       <div className="bg-[#F2F3F7]">
 
-        <ProjectRoomHeader></ProjectRoomHeader>
+        <ProjectRoomHeader goBack={goBack}></ProjectRoomHeader>
 
         <div className="flex w-screen">
           

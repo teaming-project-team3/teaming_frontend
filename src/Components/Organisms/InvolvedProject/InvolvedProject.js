@@ -1,17 +1,18 @@
 import ProjectCard from "../main/ProjectCard";
+import img from '../../../static/project.jpg'
 
 function InvolvedProject(props) {
     
   return (
     <div className="flex flex-col justify-center mb-10 w-fit">
-        <div className="flex flex-wrap w-[54.688rem] bg-white box-border rounded-[0.625rem]">
-        <ProjectCard/>
-        <ProjectCard/>
-        <ProjectCard/>
-        <ProjectCard/>
-        <ProjectCard/>
-        <ProjectCard/>
-        <ProjectCard/>
+        <div className="flex flex-wrap w-[54.688rem] justify-around bg-white box-border rounded-[0.625rem]">
+        <ProjectCard img={img} text={"프로젝트 제목"} nickName={"닉네임"}/>
+        <ProjectCard img={img} text={"프로젝트 제목"} nickName={"닉네임"}/>
+        <ProjectCard img={img} text={"프로젝트 제목"} nickName={"닉네임"}/>
+        <ProjectCard img={img} text={"프로젝트 제목"} nickName={"닉네임"}/>
+        <ProjectCard img={img} text={"프로젝트 제목"} nickName={"닉네임"}/>
+        <ProjectCard img={img} text={"프로젝트 제목"} nickName={"닉네임"}/>
+        <ProjectCard img={img} text={"프로젝트 제목"} nickName={"닉네임"}/>
         </div>
         {/* {isLoading ?
         <Spinner/>

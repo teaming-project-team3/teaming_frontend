@@ -42,7 +42,7 @@ export const loadProjectsMainAPI = () => {
   return async function (dispatch) {
 
 
-    apisMS
+    apis
         .loadProjectsMain()
             .then((res)=>{
                 console.log("PROJECT_MAIN_API RES : ", res)
@@ -78,7 +78,7 @@ export const createProjectAPI = (data, callback) => {
 export const getProjectDetailAPI = (boardId, callback) => {
   return async function ( dispatch ) {
 
-    apisMS
+    apis
       .getProjectDetailAPI(boardId)
         .then((res) => {
           console.log("GET_PROJECT_DETAIL : ", res)
