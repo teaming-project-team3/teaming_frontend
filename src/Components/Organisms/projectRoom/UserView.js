@@ -31,7 +31,7 @@ const UserView = forwardRef((props, ref) => {
         idx={props.idx}
         user={user}
         $shows={cameraOn}
-        $isMee
+        $isMee={$isMee}
         id="videoChat1"
         myVideo={myVideo}
         ></VideoChatTemp>
