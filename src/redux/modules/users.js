@@ -160,6 +160,7 @@ const loginAPI = (id, pwd, callback) => {
         if(res.data.success){
         localStorage.setItem("userId", res.data.nickname);
         setCookie("token", res.data.Authorization, 1);
+        sessionStorage.setItem("token", res.data.Authorization);
         console.log("login completed", res);
         
         dispatch(setIsLogIn(res.data.profileUrl));
@@ -286,6 +287,7 @@ export default handleActions(
         draft.is_login = false;
         deleteCookie("token");
         localStorage.removeItem("userId");
+        sessionStorage.removeItem("token");
       }),
     [GET_USER]: (state, action) => produce(state, (draft) => {}),
 

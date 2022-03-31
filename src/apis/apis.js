@@ -17,7 +17,8 @@ api.interceptors.request.use(function (config) {
 });
 
 apiMS.interceptors.request.use(function (config) {
-  const accessToken = getCookie("token");
+  //const accessToken = getCookie("token");
+  const accessToken = sessionStorage.getAttribute("token");//세션 read
   config.headers.common["Authorization"] = `${accessToken}`;
   //config.headers.common["authorization"] = `Bearer ${accessToken}`;
   return config;
