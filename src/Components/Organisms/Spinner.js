@@ -11,7 +11,7 @@ const Spinner = (props) => {
 };
 
 const Outter = styled.div`
-  background-color: #282c34;
+  background-color: #FFFFFF;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -20,7 +20,7 @@ const Outter = styled.div`
   font-size: calc(10px + 2vmin);
   color: white;
   & img {
-    width: 150px;
+    width: 5vw;
   }
 `;
 export default Spinner;

@@ -8,14 +8,12 @@ import GitHubLogo from "../static/images/userStats/gitLogo.png";
 import { useSelector } from "react-redux";
 import JobTable from "../Components/Organisms/main/detail/JobTable";
 import Badge from "../Components/Molecules/Badge";
-import SwiperSliderProjectModal from "../Components/Molecules/SwiperSilderProjectModal";
+import TailwindSlider from "../Components/Molecules/TailwindSlider";
+import SwiperSlider from "../Components/Molecules/SwiperSilder";
 
 function ProjectDetailModal(props) {
-  
-  const modalIsOpen = props.showDetail;
-  const data = useSelector((state)=>state.projects.projectDetail);
-  
-  console.log("projectDetail : ", data);
+  const modalIsOpen = true;
+  //const modalIsOpen = props.showDetail;
 
   // const testString =
   //   "## hi\n > section\n ```jsx\n let code = 1;\n``` \n *bias* \n **bold**";
@@ -25,37 +23,35 @@ function ProjectDetailModal(props) {
 
   return (
     <div className="flex w-[50vh] bg-slate-400 items-center justify-center content-center overflow-y-scroll">
-      { modalIsOpen && 
+      
       <ProjectDetailModalCustom
         checker={modalIsOpen}
         callback={props.callBackSetShowFalse}
         confirm={() => {
-          navigate("/projectRoom", {state: data._id});
+          navigate("/projectRoom");
         }}
       >
         {/* <div className="h-[40vh] justify-center bg-cover" style={{ backgroundImage: `url(${data.imgUrl[0]})` }}/> */}
 
         <div className="flex h-[40vh] justify-center bg-cover">
-          <SwiperSliderProjectModal/>
+          <SwiperSlider/>
         </div>
 
         <div className="flex justify-center w-screen mt-[-4.063rem]">
-          <Image shape="circle" src={data.imgUrl.length>=2? data.imgUrl[1] : "" } size={"130"}></Image>
+          <Image shape="circle" src={""} size={"130"}></Image>
         </div>
 
         <div className="m-10 text-4xl text-center text-black font-notoB">
-          {data.title}
+          타이틀
         </div>
 
         <div className="m-10 text-xl text-center text-gray-600 font-noto2">
-          마감 : {data.period}
-          <div className="text-base text-red-500 font-noto2">
-          남은 인원 : 디자인 {data.left[0]} 명 / 프론트 {data.left[1]} 명 / 백 {data.left[2]} 명
-          </div>
+          마감 : 
+          
         </div>
 
         <div className="text-sm text-center text-gray-700 font-noto-2">
-          {data.subContents}
+          내용
         </div>
 
         <div className="flex flex-wrap justify-center w-screen m-10 bg-[#E5E5E5]">
@@ -66,7 +62,7 @@ function ProjectDetailModal(props) {
             </div>
 
             <div className="m-10 text-base whitespace-pre-line font-noto2 text-ellipsis">
-              <Viewer initialValue={data.contents} />
+              <Viewer initialValue={"내용"} />
             </div>
           </div>
         </div>
@@ -78,7 +74,7 @@ function ProjectDetailModal(props) {
               모집요건
             </div>
 
-            <JobTable data={data.stack} left={data.left}/>
+            <JobTable data={[]} left={[0,0,0]}/>
             
           </div>
         </div>
@@ -92,7 +88,7 @@ function ProjectDetailModal(props) {
 
               <div className="flex m-10">
                 <div className="flex flex-wrap">
-                  <Badge skills={data.skills}/>
+                  <Badge skills={[]}/>
                 </div>
               </div>
             </div>
@@ -106,14 +102,14 @@ function ProjectDetailModal(props) {
 
               <UrlLink
                 logo={GitHubLogo}
-                url={data.referURL}
+                url={[]}
               ></UrlLink>
 
             </div>
           </div>
         </div>
       </ProjectDetailModalCustom>
-      }
+      
     </div>
   );
 }
