@@ -11,6 +11,8 @@ import GitHubLogo from "../static/images/userStats/gitLogo.png";
 import { useSelector } from "react-redux";
 import JobTable from "../Components/Organisms/main/detail/JobTable";
 import Badge from "../Components/Molecules/Badge";
+import ImageSlider from "../Components/Molecules/ImageSlider";
+import SlickSlider from "../Components/Molecules/SlickSlider";
 
 function ProjectDetailModal(props) {
   const modalIsOpen = props.showDetail;
@@ -34,7 +36,11 @@ function ProjectDetailModal(props) {
           navigate("/projectRoom", {state: data._id});
         }}
       >
-        <div className="h-[30vh] justify-center bg-cover" style={{ backgroundImage: `url(${data.imgUrl[0]})` }}/>
+        {/* <div className="h-[40vh] justify-center bg-cover" style={{ backgroundImage: `url(${data.imgUrl[0]})` }}/> */}
+
+        <div className="flex h-[40vh] justify-center bg-cover">
+          <SlickSlider/>
+        </div>
 
         <div className="flex justify-center w-screen mt-[-4.063rem]">
           <Image shape="circle" src={data.imgUrl.length>=2? data.imgUrl[1] : "" } size={"130"}></Image>

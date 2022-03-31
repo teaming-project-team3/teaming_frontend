@@ -345,7 +345,7 @@ function UserSlider(props) {
   function addVideoStream(video, stream) {
     console.log("addVideoStream : ", stream, video);
     video.srcObject = stream;
-
+    console.log("video.srcObject : ", video.srcObject);
     video.addEventListener("loadedmetadata", () => {
       video.play();
     });
