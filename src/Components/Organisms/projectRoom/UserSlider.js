@@ -433,6 +433,7 @@ function UserSlider(props) {
               }else{
               //타인
               return(<UserView
+              $isMee={false}
               key={user.nickName}
               idx={idx}
               user={user}
