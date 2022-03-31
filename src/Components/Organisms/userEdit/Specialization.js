@@ -32,8 +32,8 @@ export const Specialization = (props) => {
     }
   
     return (
-        <div className="flex justify-center w-screen mb-10 h-fit">
-        <div className="ml-[14.5rem] h-full w-[54.688rem] bg-white box-border rounded-[0.625rem] pb-10">
+        <div className="flex justify-center w-full mt-10 mb-10 h-fit">
+        <div className="h-full w-[54.688rem] bg-white box-border rounded-[0.625rem] pb-10">
           <div className="text-xl font-bold font-noto2 mt-7 ml-[1.8rem] pl-[1.8rem] pb-6 border-b-2 border-gray-900">
             전문분야
           </div>
