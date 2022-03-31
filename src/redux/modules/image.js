@@ -305,17 +305,7 @@ export default handleActions({
       const idx = action.payload.idx;
       const data = action.payload.files;
 
-      // const temp = draft.filesArr.map((item, i)=>{
-      //   if(item.id===idx){
-      //     return {id:idx, files: data}
-      //   }else{
-      //     return item
-      //   }
-      // })
-
       draft.filesArr[idx] = data;
-
-      //draft.filesArr = temp;
 
     }),
     [RESET_FILES_ARR]: (state, action) => produce(state, (draft) => {

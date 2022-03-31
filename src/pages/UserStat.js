@@ -125,7 +125,7 @@ export default function UserStat() {
           }
           
           {check===2 &&
-            <InvolvedProject/>
+            <InvolvedProject stats={stats}/>
           }
 
           {check===3 &&

@@ -5,7 +5,7 @@ function PortFolioBlock(props) {
     const { portfolio1, portfolio2, portfolio3, portfolio, gitId } = props;
 
   return (
-    <div className="h-[67.625rem] w-[54.688rem] bg-white box-border rounded-[0.625rem] pb-10">
+    <div className="h-fit w-[54.688rem] bg-white box-border rounded-[0.625rem] pb-10">
       <div className="text-xl font-bold font-noto2 mt-7 ml-[1.8rem] pl-[1.8rem] pb-6 border-b-2 border-gray-900">
         포트폴리오
       </div>
@@ -15,7 +15,7 @@ function PortFolioBlock(props) {
         <img src={`https://ghchart.rshah.org/${gitId}`} alt="" />
       </div>
 
-      {portfolio == null && (
+      {portfolio < 1 && (
         <div className="w-full text-center">
           포트폴리오가 없습니다. 당신의 포트폴리오를 추가해보세요!
         </div>

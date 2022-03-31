@@ -8,14 +8,20 @@ import { useNavigate } from "react-router";
 import { actionCreators, uploadImagesS3PortFolio } from "../../../redux/modules/image";
 
 function EditBlockFamily(props) {
-
+    const dispatch = useDispatch();
     const { stats, abilityFront, abilityBack, abilityDesigner, skillsFront,
     skillsBack, skillsDesigner, type_num, checkType, positions} = props;
+    let temp = [];
+    if(stats.portfolioUrl.length>0){
+      temp = stats.portfolioUrl.map((item,idx)=>{
+        return {...item, id:idx+1 }
+      })
+    }
 
-    const [portfolioList, setPortfolioList] = React.useState([{id:0}]);
-    const dispatch = useDispatch();
+    const [portfolioList, setPortfolioList] = React.useState(stats.portfolioUrl.length>0?temp:[{id:0}]);
+    
     const navigate = useNavigate();
-    const count = React.useRef(1);
+    const count = React.useRef(stats.portfolioUrl.length>0?stats.portfolioUrl.length+1:1);
     const imgList = useSelector((state)=>state.image.filesArr);
     
   function addPortList () {
@@ -100,7 +106,7 @@ function EditBlockFamily(props) {
                 <Specialization stats={stats} positions={positions} abilityFront={abilityFront}
               abilityBack={abilityBack} abilityDesigner={abilityDesigner} skillsFront={skillsFront}
               skillsBack={skillsBack} skillsDesigner={skillsDesigner} type_num={type_num}
-              checkType={checkType} />
+              checkType={checkType} position={stats.position? stats.position:""}/>
 
 
               <div className="flex justify-center w-full mb-10 h-fit">

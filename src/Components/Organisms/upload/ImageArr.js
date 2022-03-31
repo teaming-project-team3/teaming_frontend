@@ -70,7 +70,8 @@ export const ImageArr = (props) => {
           </div>
         </label>
   
-        {showImages.map((image, id) => (
+        {showImages &&
+        showImages.map((image, id) => (
           <div className="flex items-center justify-center h-full border-2 cursor-pointer rounded-xl aspect-square" key={id} onClick={() => handleDeleteImage(id)}>
             <img src={image.url} alt={`${image}-${id}`} className="h-full"/>
           </div>
