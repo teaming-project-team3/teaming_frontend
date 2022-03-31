@@ -55,9 +55,11 @@
     "redux-actions": "^2.6.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.4.1",
+    "sass": "^1.49.10",
     "slick-carousel": "^1.8.1",
     "socket.io-client": "^4.4.1",
     "styled-components": "^5.3.3",
+    "swiper": "^8.0.7",
     "tw-elements": "^1.0.0-alpha11",
     "util": "^0.12.4",
     "web-vitals": "^2.1.0"

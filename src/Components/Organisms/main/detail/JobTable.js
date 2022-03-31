@@ -1,6 +1,6 @@
 export function JobTable(props) {
 
-    const { data, left } = props;
+    const { data } = props;
   
     JobTable.defaultProps = {
       data:[],

@@ -3,17 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
 import styled from "styled-components";
 import { titles } from "../Components/Organisms/main/data/titles";
-import JumboTron from "../Components/Organisms/main/JumboTron";
 import MainBanner from "../Components/Organisms/main/MainBanner";
 import ProfileList from "../Components/Organisms/main/ProfileList";
 import ProjectList from "../Components/Organisms/main/ProjectList";
 import ShortCutCards from "../Components/Organisms/main/ShortCutCards";
 import Spinner from "../Components/Organisms/Spinner";
-import Survey from "../pages/Survey";
+import Survey from "./Survey";
 import { actionCreators } from "../redux/modules/projects";
 import Pic from "../static/Pic.png";
 import Pic2 from "../static/Pic2.png";
 import ProjectDetailModal from "./ProjectDetailModal";
+import SwiperSlider from "../Components/Molecules/SwiperSilder";
 
 const Wrap = styled.div`
   width: 90rem;
@@ -41,7 +41,7 @@ function Main() {
   console.log("main, projectsData : ", projectsData, isLoading);
 
   useEffect(() => {
-    setTimeout(() => dispatch(actionCreators.loadProjectsMainAPI()), 3000);
+    setTimeout(() => dispatch(actionCreators.loadProjectsMainAPI()), 1000);
     //dispatch(actionCreators.loadProjectsMainAPI());
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -70,7 +70,8 @@ function Main() {
             return setShowDetail(false);
           } }
         ></ProjectDetailModal><div className="flex flex-col">
-            <JumboTron></JumboTron>
+
+            <SwiperSlider/>
 
             <div className="flex justify-center mt-[3.5rem]">
               <ShortCutCards
