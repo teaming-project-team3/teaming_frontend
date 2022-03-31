@@ -5,10 +5,10 @@ import UrlBlock from "./UrlBlock";
 function StatFamily(props) {
 
     const { stats, GitHubLogo } = props;
+    let nickname = "";
     let profileUrl = "";
     let gitId = "";
     let portfolio = null;
-    let portfolio0 = null;
     let portfolio1 = null;
     let portfolio2 = null;
     let portfolio3 = null;
@@ -18,19 +18,20 @@ function StatFamily(props) {
     let backSkills = null;
     let designAbility = null;
     let designSkills = null;
-
+    let gitUrl = null;
     console.log("init : ", stats);
 
   if (stats && stats.length !== 0) {
+    nickname = stats.userId.nickname;
     profileUrl = stats.userId.profileUrl;
-
-    if (profileUrl) {
-      const gitURLArr = stats.portfolioUrl[0].url.split("/");
+    gitUrl = stats.url;
+    if (gitUrl) {
+      const gitURLArr = gitUrl.split("/");
       gitId = gitURLArr[gitURLArr.length - 1];
       console.log("check gitId", gitId);
     }
-
-    portfolio0 = stats.portfolioUrl[0];
+    portfolio = stats.portfolioUrl.length;
+    
     portfolio1 = stats.portfolioUrl[1];
     portfolio2 = stats.portfolioUrl[2];
     portfolio3 = stats.portfolioUrl[3];
@@ -74,10 +75,11 @@ function StatFamily(props) {
               backSkills={backSkills}
               designAbility={designAbility}
               designSkills={designSkills}
+              name={nickname}
             />
 
             <UrlBlock
-            portfolio0={portfolio0}
+            url={gitUrl}
             GitHubLogo={GitHubLogo}
             />
 

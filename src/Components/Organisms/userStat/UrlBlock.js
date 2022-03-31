@@ -2,7 +2,7 @@ import UrlLink from "../../Molecules/UrlLink";
 
 function UrlBlock(props) {
 
-    const { portfolio0, GitHubLogo } = props;
+    const { url, GitHubLogo } = props;
 
   return (
     <div className="flex justify-start">
@@ -11,8 +11,8 @@ function UrlBlock(props) {
                   URL
                 </div>
 
-                {portfolio0 && (
-                  <UrlLink logo={GitHubLogo} url={portfolio0.url}></UrlLink>
+                {url && (
+                  <UrlLink logo={GitHubLogo} url={url}></UrlLink>
                 )}
 
                 {/* <UrlLink logo={GitHubLogo} url={"https://Behance.com/heeyeon9578"}></UrlLink>

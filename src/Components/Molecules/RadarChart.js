@@ -4,13 +4,13 @@ import Chart from "chart.js/auto";
 function RadarChart(props) {
   const canvasDom = useRef(null);
 
-  const [curr, setCurr] = useState("userA");
+  const [curr, setCurr] = useState(props.curr);
   console.log("RadarChart : ", curr);
 
   let radarChart = null;
 
   const userA = {
-    label: "userA",
+    label: props.me,
     data: [65, 59, 90, 81, 56, 55],
     fill: true,
     backgroundColor: "rgba(255, 99, 132, 0.2)",
@@ -84,7 +84,7 @@ function RadarChart(props) {
 
   useEffect(() => {
     setCurr(props.curr)
-    if(props.curr==="userA"){
+    if(props.curr===localStorage.getItem("userId")){
       //config.data.datasets.pop();
       console.log("check pop data : ", config.data.datasets)
     }else{
@@ -94,8 +94,9 @@ function RadarChart(props) {
         return datum.label === props.curr
       })
 
+      if(selectedData.length>0){
       config.data.datasets.push(selectedData[0])
-
+      }
       console.log("check Chart : ", config.data.datasets)
     }
 
