@@ -9,7 +9,7 @@ ${(props) => (props.$shows ? "" : `hidden`)};
 
 const VideoChatTemp = forwardRef((props, ref) => {
 
-  console.log("VideoChatTemp props : ", props);
+  console.log("MUTED!!!!TEST!! : ", props.$isMee);
   
   return (
     <VideoChatGrid $shows={props.$shows}>
