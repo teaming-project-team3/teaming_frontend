@@ -9,7 +9,7 @@ ${(props) => (props.$shows ? "" : `hidden`)};
 
 const VideoChatTemp = forwardRef((props, ref) => {
 
-  console.log("VideoChatTemp props : ", props);
+  console.log("MUTED!!!!TEST!! : ", props.$isMee);
   
   return (
     <VideoChatGrid $shows={props.$shows}>
@@ -18,6 +18,7 @@ const VideoChatTemp = forwardRef((props, ref) => {
             ref={props.idx===-1 ? props.myVideo :(el) => props.myVideo.current[props.idx] = el}
             autoPlay
             playsInline
+            muted={props.$isMee}
             className="myFace"
           ></video>
         </div>
