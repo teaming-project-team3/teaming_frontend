@@ -152,7 +152,7 @@ function CreateProject() {
             프로젝트 정보
           </div>
 
-          <div className="flex 
+          <div className="flex
           flex-col
           w-full text-[1rem] text-black font-noto1 pt-8 pr-8 pb-8 ml-8">
             프로젝트 제목
@@ -163,8 +163,11 @@ function CreateProject() {
             ></input>
           </div>
 
-          <div className="flex w-full text-[1rem] justify-between text-black font-noto1 pt-8 pr-8 pb-8 ml-8 border-b-2">
+          <div className="flex
+          flex-col
+          w-full text-[1rem] justify-between text-black font-noto1 pt-3 pr-8 pb-8 ml-8 border-b-2">
             프로젝트 사진
+            <div className="w-full text-[1rem] text-gray-500 font-noto2">JPG, PNG 파일</div>
             <div className="w-1/4">
               <S3Upload />
             </div>
@@ -177,13 +180,14 @@ function CreateProject() {
             </div>
           </div>
 
-          <div className="w-full text-[1rem] text-black font-noto2 p-6">
-            <div className="p-2 mb-3">프로젝트 상세설명</div>
+          <div className="text-[1rem] justify-between text-black font-noto1 pt-3 pr-8 pb-8 ml-6 border-b-2 w-full">
+            <div className="p-2 mb-3 mr-6">프로젝트 상세설명</div>
             {/* 마크다운 적용? */}
             <Editor
               className="m-[-2rem]"
               previewStyle="vertical"
               height="80vh"
+              width=""
               initialEditType="markdown"
               initialValue="마크다운으로 내용을 입력하세요."
               ref={editorRef}
