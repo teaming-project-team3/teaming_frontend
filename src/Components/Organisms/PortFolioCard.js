@@ -1,7 +1,7 @@
 import Image from "../Atoms/Image";
 import urlClip from "../../static/images/userStats/urlClip.png";
 
-function FortFolioCard(props) {
+function PortFolioCard(props) {
 
   const { title, description, imageUrl, period, url } = props;
   console.log("props.Card", title, description, imageUrl, period, url);
@@ -44,7 +44,7 @@ function FortFolioCard(props) {
   );
 }
 
-export default FortFolioCard;
+export default PortFolioCard;
 
 
 
