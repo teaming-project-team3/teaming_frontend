@@ -9,7 +9,7 @@ function ProjectRoomHeader(props) {
     return (
         <div className="flex h-[10vh] w-screen items-center">
           
-        <div className="flex items-center justify-center h-full aspect-square">
+        <div className="flex items-center justify-center h-full cursor-pointer aspect-square" onClick={()=>{props.goBack()}}>
           <img src={backArrow} alt={""}></img>
         </div>
 

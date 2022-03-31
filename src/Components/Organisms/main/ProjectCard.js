@@ -1,13 +1,15 @@
+import img from '../../../static/project.jpg'
+
 function ProjectCard(props) {
 
-  const { id, text, stack, img, profileUrl, nickName, _onClick } = props;
+  const { id, text, stack, profileUrl, nickName, _onClick } = props;
 
   ProjectCard.defaultProps = {
-    text:"",
+    text:"프로젝트 제목",
     stack:[],
-    img:"",
-    profileUrl:"",
-    nickName:"",
+    img:{img},
+    profileUrl:"http://relative-projectURL",
+    nickName:"nickName",
     _onClick:()=>{},
     _id:"id",
   }
