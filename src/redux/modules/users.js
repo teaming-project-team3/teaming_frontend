@@ -20,6 +20,7 @@ const SET_NOW_PROJECT_USERS = "set/project/Users";
 const SET_IS_LOG_IN = "SET_IS_LOG_IN";
 const SET_MY_STATS = "SET_MY_STATS";
 const ADD_NOW_PROJECT_USER = "ADD_NOW_PROJECT_USER";
+const SET_MY_PROJECTS = "SET_MY_PROJECTS";
 
 // action creators
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
@@ -32,6 +33,7 @@ const resetSkillsAction = createAction(RESET_SKILLS, (item) => ({ item }));
 const updateSkillsAction = createAction(UPDATE_SKILLS, (data) => ({ data }));
 const deleteAbilityAction = createAction(DELETE_ABILITY, (data) => ({ data }));
 const deleteSkillsAction = createAction(DELETE_SKILLS, (data)=>({ data }));
+const setMyProjectAction = createAction(SET_MY_PROJECTS, (projects, num) => ({ projects, num }))
 //const setUserLogin = createAction(SET_IS_LOG_IN, (url) => ({ url }));
 
 
@@ -102,6 +104,10 @@ export function setMyUserStats(data){
 
 export function addNowProjectUserAC(user){
   return { type: ADD_NOW_PROJECT_USER, user }
+}
+
+export function setMyProject(projects, num){
+  return { type: SET_MY_PROJECTS, projects, num}
 }
 
 
@@ -241,6 +247,7 @@ const getMyStats = () => {
 
           console.log("My Stats res : ", res)
           dispatch(setMyUserStats(res.data.userInfo))
+          dispatch(setMyProject(res.data.projectData, res.data.totalProject))
 
         })
         .catch((err)=>{
@@ -455,6 +462,13 @@ export default handleActions(
       produce(state, (draft) => {
 
         draft.myStats = action.data;
+
+      }),
+
+      [SET_MY_PROJECTS]: (state, action) => 
+      produce(state, (draft) => {
+
+        draft.myProjects = action.projects;
 
       }),
   },

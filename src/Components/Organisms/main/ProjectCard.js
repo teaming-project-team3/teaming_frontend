@@ -11,7 +11,7 @@ function ProjectCard(props) {
     profileUrl:"http://relative-projectURL",
     nickName:"nickName",
     _onClick:()=>{},
-    _id:"id",
+    id:"id",
   }
 
 

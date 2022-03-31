@@ -9,14 +9,6 @@ export const Images = (props) => {
     const files = useSelector((state)=>state.image.image_files);
     const dispatch = useDispatch();
 
-    const { idx } = props;
-
-    console.log("files", files);
-
-    Images.defaultProps = {
-      idx:-1,
-    }
-
     useEffect(()=>{
 
 
@@ -26,6 +18,18 @@ export const Images = (props) => {
       })
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
+
+    if(!files||files===null||files===undefined||files.length===0){
+      return;
+    }
+
+    const { idx } = props;
+
+    console.log("files", files);
+
+    Images.defaultProps = {
+      idx:-1,
+    }
 
     // 이미지 상대경로 저장
     const handleAddImages = (event) => {
