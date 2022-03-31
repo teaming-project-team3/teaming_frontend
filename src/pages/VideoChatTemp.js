@@ -18,6 +18,7 @@ const VideoChatTemp = forwardRef((props, ref) => {
             ref={props.idx===-1 ? props.myVideo :(el) => props.myVideo.current[props.idx] = el}
             autoPlay
             playsInline
+            muted={props.$isMee}
             className="myFace"
           ></video>
         </div>
