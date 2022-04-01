@@ -121,12 +121,12 @@ function CreateProject() {
 
         <div className="w-full pr-8 m-10 bg-white h-fit rounded-2xl">
           <div className="w-full text-[1.5rem] text-black font-notoB p-8 border-b-2">
-            프로젝트 정보
+            프로젝트 정보 
           </div>
 
           <div className="flex 
           flex-col
-          w-full text-[1rem] text-black font-noto1 pt-8 pr-8 pb-8 ml-8 border-b-2">
+          w-full text-[1rem] text-black font-noto1 pt-8 pr-8 pb-8 ml-8">
             프로젝트 제목
               <input
               className="w-full p-2 mt-3 border-2 rounded font-noto2"
@@ -137,7 +137,7 @@ function CreateProject() {
 
           <div className="flex 
           flex-col
-          w-full text-[1rem] text-black font-noto1 pt-8 pr-8 pb-8 ml-8 border-b-2">
+          w-full text-[1rem] text-black font-noto1 pt-8 pr-8 pb-8 ml-8">
             프로젝트 부제
               <input
               className="w-full p-2 mt-3 border-2 rounded font-noto2"
@@ -146,7 +146,7 @@ function CreateProject() {
             ></input>
           </div>
 
-          <div className="flex flex-col w-full text-[1rem] justify-between text-black font-noto1 pt-8 pr-8 pb-8 ml-8 border-b-2">
+          <div className="flex flex-col w-full text-[1rem] justify-between text-black font-noto1 pt-8 pr-8 pb-8 ml-8">
             <div className="mb-8 text-black font-noto1">
             이미지 업로드
             </div>
@@ -154,7 +154,7 @@ function CreateProject() {
             <Images idx={-1}/>
           </div>
 
-          <div className="w-full text-[1rem] text-black font-noto2 p-6">
+          <div className="w-full ml-5 text-[1rem] text-black font-noto2 p-6">
             <div className="p-2 mb-3">프로젝트 상세설명</div>
             {/* 마크다운 적용? */}
             <Editor
@@ -169,12 +169,12 @@ function CreateProject() {
           </div>
         </div>
 
-        <div className="w-full bg-white h-fit rounded-2xl">
+        <div className="w-full pr-8 bg-white h-fit rounded-2xl">
           <div className="w-full text-[1.5rem] text-black font-notoB p-8 border-b-2">
             모집 정보
           </div>
 
-          <div className="flex w-full text-[1rem] justify-between text-black font-noto2 pt-8 pr-8 pb-8 ml-8 border-b-2">
+          <div className="flex w-full text-[1rem] justify-between text-black font-noto2 pt-8 pr-8 pb-8 ml-8">
             <div className="flex items-center w-1/3">
               모집 인원
               <div className="ml-2 border-2 h-fit" onClick={()=>{plusSelector()}}>
@@ -195,7 +195,7 @@ function CreateProject() {
 
           <div className="flex 
           flex-col
-          w-full text-[1rem] text-black font-noto1 pt-8 pr-8 pb-8 ml-8 border-b-2">
+          w-full text-[1rem] text-black font-noto1 pt-8 pr-3 pb-8 ml-8">
             요구 스킬
           <CreateSelect setRequired={requiredSkills}/>
           
@@ -203,7 +203,7 @@ function CreateProject() {
 
           <div className="flex 
           flex-col
-          w-full text-[1rem] text-black font-noto1 pt-8 pr-8 pb-8 ml-8 border-b-2">
+          w-full text-[1rem] text-black font-noto1 pt-8 pr-8 pb-8 ml-8">
             참고 URL
               <input
               className="w-full p-2 mt-3 border-2 rounded font-noto2"
