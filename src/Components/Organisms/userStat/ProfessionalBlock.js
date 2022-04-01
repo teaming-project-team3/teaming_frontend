@@ -3,7 +3,9 @@ import RadarChart from "../../Molecules/RadarChart";
 
 function ProfessionalBlock(props) {
 
-    const { frontAbility, frontSkills, backAbility, backSkills, designAbility, designSkills, name } = props;
+    const { frontAbility, frontSkills, backAbility, backSkills, 
+      designAbility, designSkills, name, frontScore, backScore, 
+      designScore, reliability, cooperation, stats } = props;
 
   return (
     <div className="flex justify-center w-full mb-10 h-fit">
@@ -37,7 +39,8 @@ function ProfessionalBlock(props) {
                   </div>
 
                   <div className="h-[15.938rem] w-[15.938rem]">
-                    <RadarChart me={name}></RadarChart>
+                    <RadarChart myStat={stats} me={name} frontScore={frontScore} backScore={backScore} curr={"!"}
+                    designScore={designScore} reliability={reliability} cooperation={cooperation}></RadarChart>
                   </div>
                 </div>
               </div>
