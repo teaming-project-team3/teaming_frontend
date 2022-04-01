@@ -66,6 +66,7 @@ function CreateProject() {
       referUrl: referUrl,
       skills: skills,
       period: toStringByFormatting(endDate),
+      //period: endDate,
     };
 
     dispatch(imageActions.uploadImagesS3(data,()=>{navigate('/')}));

@@ -94,15 +94,25 @@ const uploadImagesS3 = (data, callback) => {
 
         let arr = [];
 
-        arr = imageFiles.map( async (url) => {
+        // arr = await imageFiles.map( async (url) => {
           
-          const temp = await uploadFile(url);
+        //   const temp = await uploadFile(url);
           
+        //   const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+temp.request.httpRequest.path
+
+        //    return imgUrl;
+          
+        // })
+        
+        for(let i=0;i<imageFiles.length;i++){
+
+          const temp = await uploadFile(imageFiles[i]);
+
           const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+temp.request.httpRequest.path
 
-           return imgUrl;
-          
-        })
+          arr = [...arr, imgUrl];
+        }
+      
 
         console.log("arr!!!!", arr);
 
