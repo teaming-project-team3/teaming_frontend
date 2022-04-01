@@ -16,7 +16,7 @@ ${(props) => (props.$isChecked? `bg-slate-200 font-notoB` : `font-noto2`)};
 
 export default function UserStat() {
   const dispatch = useDispatch();
-  const stats = useSelector((state) => state.users.myStats);
+  const stats = useSelector((state) => state.users.myStats?state.users.myStats:UserStat.defaultProps.stats);
   const [isLeader, setIsLeader] = React.useState(false);
   const [check, setIsChecked] = React.useState(1);
   const abilityFront = useSelector((state) => state.users.abilityFront);
@@ -26,6 +26,26 @@ export default function UserStat() {
   const abilityDesigner = useSelector((state) => state.users.abilityDesigner);
   const skillsDesigner = useSelector((state) => state.users.skillsDesigner);
   const [type_num, setType] = React.useState("1");
+
+  UserStat.defaultProps = {
+    stats:{
+      back:{ability:[],skills:[]},
+      front:{ability:[],skills:[]},
+      design:{ability:[],skills:[]},
+      introduction:"",
+      portfolioUrl:[],
+      position:"",
+      url:"",
+      userId:{
+        dmRooms:[],
+        email:"",
+        kakaoId:"",
+        nickname:"",
+        profileUrl:"",
+        suveyCheck:true,
+      }
+    }
+  }
 
   let userNickName = "";
   let userPosition = "";

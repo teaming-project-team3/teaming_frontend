@@ -11,6 +11,27 @@ function EditBlockFamily(props) {
     const dispatch = useDispatch();
     const { stats, abilityFront, abilityBack, abilityDesigner, skillsFront,
     skillsBack, skillsDesigner, type_num, checkType, positions} = props;
+
+    EditBlockFamily.defaultProps = {
+      stats:{
+        back:{ability:[],skills:[]},
+        front:{ability:[],skills:[]},
+        design:{ability:[],skills:[]},
+        introduction:"",
+        portfolioUrl:[],
+        position:"",
+        url:"",
+        userId:{
+          dmRooms:[],
+          email:"",
+          kakaoId:"",
+          nickname:"",
+          profileUrl:"",
+          suveyCheck:true,
+        }
+      }
+    }
+
     let temp = [];
     if(stats.portfolioUrl.length>0){
       temp = stats.portfolioUrl.map((item,idx)=>{
