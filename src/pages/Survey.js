@@ -2,19 +2,18 @@ import React, { useState, useMemo } from "react";
 import Select from "react-select";
 import Input from "../Components/Atoms/Input";
 import { ModalCustom } from "./ModalCustom";
-import ModalSelect from "./ModalSelect";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/users";
+import TabMenu from "../Components/Modals/TabMenu";
 
 function Survey(props) {
-  const modalIsOpen = props.modalIsOpen;
+  const [modalIsOpen, setModalOpen] = useState(props.modalIsOpen?props.modalIsOpen:false);
   const dispatch = useDispatch();
   const [position, setPosition] = useState("");
   const [url, setUrl] = useState("");
   const [url1, setUrl1] = useState("");
   const [url2, setUrl2] = useState("");
   const [url3, setUrl3] = useState("");
-  const [type_num, setType] = useState("1");
   const abilityFront = useSelector((state) => state.users.abilityFront);
   const skillsFront = useSelector((state) => state.users.skillsFront);
   const abilityBack = useSelector((state) => state.users.abilityBack);
@@ -36,16 +35,6 @@ function Survey(props) {
     ],
     []
   );
-
-  const checkType = (e) => {
-    if (e.target.value === "1") {
-      setType("1");
-    } else if (e.target.value === "2") {
-      setType("2");
-    } else if (e.target.value === "3") {
-      setType("3");
-    }
-  };
 
   const sendSurveyData = (callback) => {
 
@@ -78,8 +67,10 @@ function Survey(props) {
   }
 
   return (
-    <div className="overflow-scroll">
-    <ModalCustom checker={modalIsOpen} confirm={sendSurveyData}>
+    <>
+    { modalIsOpen && 
+    <div className="fixed top-0 left-0 z-10 flex items-center w-full h-screen bg-black justify center bg-opacity-70">
+    <ModalCustom checker={modalIsOpen} confirm={sendSurveyData} close={()=>{setModalOpen(false)}}>
 
       <div className="flex justify-center m-5 text-base font-noto2">
         프로필을 완성하기 위한 다음 정보를 입력해주세요!
@@ -102,41 +93,8 @@ function Survey(props) {
         }}
       ></Input>
 
-        <div>
-          <input
-            name="radio"
-            type="radio"
-            id="type1"
-            value="1"
-            checked={type_num === "1"}
-            onChange={checkType}
-          />
-          <label htmlFor="1">FrontEnd</label>
-          <br />
-          <input
-            name="radio"
-            type="radio"
-            id="type2"
-            value="2"
-            checked={type_num === "2"}
-            onChange={checkType}
-          />
-          <label htmlFor="2">BackEnd</label>
-          <br />
-          <input
-            name="radio"
-            type="radio"
-            id="type3"
-            value="3"
-            checked={type_num === "3"}
-            onChange={checkType}
-          />
-          <label htmlFor="3">Designer</label>
-        </div>
-
-        {type_num === "1" && ( <ModalSelect position={"1"} ability={abilityFront} skills={skillsFront}/>)}
-        {type_num === "2" && ( <ModalSelect position={"2"} ability={abilityBack} skills={skillsBack}/>)}
-        {type_num === "3" && ( <ModalSelect position={"3"} ability={abilityDesigner} skills={skillsDesigner}/>)}
+      <TabMenu abilityFront={abilityFront} skillsFront={skillsFront} abilityBack={abilityBack} 
+      skillsBack={skillsBack} abilityDesigner={abilityDesigner} skillsDesigner={skillsDesigner}/>
         
       <div className="mt-5 mb-2 text-base font-noto1">
         <div className="mb-8 ml-2">
@@ -174,6 +132,8 @@ function Survey(props) {
 
       </ModalCustom>
     </div>
+  }
+  </>
   );
 }
 

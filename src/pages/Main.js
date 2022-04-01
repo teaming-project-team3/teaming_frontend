@@ -62,7 +62,7 @@ function Main() {
       {isLoading?
         <Spinner/>
         :
-      <><Survey modalIsOpen={modalIsOpen}></Survey>
+      <><Survey modalIsOpen={modalIsOpen} className="z-10"></Survey>
       <ProjectDetailModal
           showDetail={showDetail}
           callBackSetShowFalse={() => {
@@ -71,7 +71,7 @@ function Main() {
           } }
         ></ProjectDetailModal><div className="flex flex-col">
 
-            <SwiperSlider/>
+            <SwiperSlider className="z-0"/>
 
             <div className="flex justify-center mt-[3.5rem]">
               <ShortCutCards
@@ -95,7 +95,7 @@ function Main() {
 
             <ProjectList title={titles.rank} detailShow={detailShow} data={rankList} />
 
-            <ProfileList title={titles.matesDesigner} data={matesDesigner} />
+            <ProfileList title={titles.matesDesigner} data={matesDesigner} className="z-0"/>
 
             <MainBanner />
 

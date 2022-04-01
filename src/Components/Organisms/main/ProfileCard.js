@@ -6,7 +6,7 @@ function ProfileCard(props) {
 
   return (
     <div
-      className={`flex w-[33.563rem] h-[9.188rem] mx-[1.063rem] bg-white rounded-[0.625rem] cursor-pointer shadow-lg`}
+      className="flex w-[33.563rem] h-[9.188rem] mx-[1.063rem] bg-white rounded-[0.625rem] cursor-pointer"
     >
       <div className="w-[4.25rem] h-[4.25rem] ml-[0.875rem] mt-[1rem]">
         <Image shape={"circle"} src={profile}></Image>
