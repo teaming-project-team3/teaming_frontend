@@ -16,7 +16,7 @@ const TabMenu = (props) => {
                 
                 <a className={"text-xs px-2 py-2 shadow-lg rounded block leading-normal cursor-pointer" + 
                         (openTab ===1 ?
-                            "text-white bg-gray-600"
+                            "text-white bg-gray-300"
                             : "text-gray-600 bg-white")}
                 onClick={(e)=>{
                     e.preventDefault();
@@ -33,7 +33,7 @@ const TabMenu = (props) => {
                 
                 <a className={"text-xs px-2 py-2 shadow-lg rounded block leading-normal cursor-pointer" + 
                         (openTab ===2 ?
-                            "text-white bg-gray-600"
+                            "text-white bg-gray-300"
                             : "text-gray-600 bg-white")}
                 onClick={(e)=>{
                     e.preventDefault();
@@ -50,7 +50,7 @@ const TabMenu = (props) => {
                 
                 <a className={"text-xs px-2 py-2 shadow-lg rounded block leading-normal cursor-pointer" + 
                         (openTab ===3 ?
-                            "text-white bg-gray-600"
+                            "text-white bg-gray-300"
                             : "text-gray-600 bg-white")}
                 onClick={(e)=>{
                     e.preventDefault();
@@ -66,7 +66,7 @@ const TabMenu = (props) => {
             
             </ul>
 
-            <div className="relative flex flex-col w-full pb-10 break-words border-4 border-gray-500 h-fit">
+            <div className="relative flex flex-col w-full pb-10 break-words border-2 border-gray-200 h-fit">
                 <div className="flex-auto">
                     <div className="tab-content tab-space">
                         <div className={openTab===1?"block":"hidden"} id="link1">
