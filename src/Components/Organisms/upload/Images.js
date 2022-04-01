@@ -6,7 +6,7 @@ import plus from "../../../static/images/createProject/plus.png"
 
 export const Images = (props) => {
     const [showImages, setShowImages] = useState([]);
-    const files = useSelector((state)=>state.image.image_files);
+    const files = useSelector((state)=>state.image.image_files?state.image.image_files:[]);
     const dispatch = useDispatch();
 
     useEffect(()=>{
@@ -19,10 +19,11 @@ export const Images = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
+    if(props.idx!==-1){
     if(!files||files===null||files===undefined||files.length===0){
       return;
     }
-
+    }
     const { idx } = props;
 
     console.log("files", files);
