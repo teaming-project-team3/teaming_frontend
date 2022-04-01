@@ -16,7 +16,7 @@ ${(props) => (props.$isChecked? `bg-slate-200 font-notoB` : `font-noto2`)};
 
 export default function UserStat() {
   const dispatch = useDispatch();
-  const stats = useSelector((state) => state.users.myStats?state.users.myStats:UserStat.defaultProps.stats);
+  const stats = useSelector((state) => state.users.myStats);
   const [isLeader, setIsLeader] = React.useState(false);
   const [check, setIsChecked] = React.useState(1);
   const abilityFront = useSelector((state) => state.users.abilityFront);

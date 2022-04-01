@@ -11,12 +11,11 @@ import projectImg from '../../static/portfolio.png'
 SwiperCore.use([Navigation, Pagination, Autoplay])
 
 function SwiperSliderPortFolio(props) {
+  // eslint-disable-next-line no-unused-vars
   const [swiper, setSwiper] = useState(null);
   const [mainImageIndex, setMainImageIndex] = useState(0);
 
   const { imgUrlList } = props;
-
-  console.log("Swiper imgList", imgUrlList)
 
   const navigationPrevRef = useRef(null);
   const navigationNextRef = useRef(null);

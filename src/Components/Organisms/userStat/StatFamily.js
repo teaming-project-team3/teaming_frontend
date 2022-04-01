@@ -6,7 +6,6 @@ function StatFamily(props) {
 
     const { stats, GitHubLogo } = props;
     let nickname = "";
-    let profileUrl = "";
     let gitId = "";
     let portfolio = null;
     let portfolio1 = null;
@@ -18,12 +17,16 @@ function StatFamily(props) {
     let backSkills = null;
     let designAbility = null;
     let designSkills = null;
+    let frontScore = null;
+    let backScore = null;
+    let designScore = null;
+    let reliability = null;
+    let cooperation = null;
     let gitUrl = null;
     console.log("init : ", stats);
 
   if (stats && stats.length !== 0) {
     nickname = stats.userId.nickname;
-    profileUrl = stats.userId.profileUrl;
     gitUrl = stats.url;
     if (gitUrl) {
       const gitURLArr = gitUrl.split("/");
@@ -56,7 +59,23 @@ function StatFamily(props) {
     if (stats.design.skills) {
       designSkills = stats.design.skills;
     }
-    console.log("check");
+    if (stats.stack.front) {
+      frontScore = stats.stack.front;
+    }
+    if (stats.stack.back) {
+      backScore = stats.stack.back;
+    }
+    if (stats.stack.design) {
+      designScore = stats.stack.design;
+    }
+    if (stats.stack.cooperation) {
+      cooperation = stats.stack.cooperation;
+    }
+    if (stats.stack.reliability) {
+      reliability = stats.stack.reliability;
+    }
+
+    console.log("check", frontScore, backScore, designScore);
   }
 
   return (
@@ -69,6 +88,7 @@ function StatFamily(props) {
             />
 
             <ProfessionalBlock
+              stats={stats}
               frontAbility={frontAbility}
               frontSkills={frontSkills}
               backAbility={backAbility}
@@ -76,6 +96,11 @@ function StatFamily(props) {
               designAbility={designAbility}
               designSkills={designSkills}
               name={nickname}
+              frontScore={frontScore}
+              backScore={backScore}
+              designScore={designScore}
+              cooperation={cooperation}
+              reliability={reliability}
             />
 
             <UrlBlock
