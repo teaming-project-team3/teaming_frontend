@@ -60,7 +60,7 @@ export default function UserStat() {
     profileUrl = stats.userId.profileUrl;
 
     if (profileUrl) {
-      const gitURLArr = stats.portfolioUrl[0].url.split("/");
+      const gitURLArr = stats.url.split("/");
       gitId = gitURLArr[gitURLArr.length - 1];
       console.log("check gitId", gitId);
     }
@@ -113,10 +113,7 @@ export default function UserStat() {
 
         <div className="flex justify-center">
           <text className="flex content-center mt-8 w-[80vh] text-[0.875rem] font-noto2 text-[#71797D] whitespace-pre-wrap">
-            안녕하세요 :) 늘 새로운 도전으로 예술을 그려내는 디자이너
-            이도윤입니다. 👋🏻 디자인 뿐만 아니라 개발자와 협업하며 다양한 지식을
-            얻어가고 , 도전에 대한 결과물 뿐만 아니라 사람을 알고 함께
-            프로젝트를 진행하고 싶어요!
+            {stats.introduction}
           </text>
         </div>
 

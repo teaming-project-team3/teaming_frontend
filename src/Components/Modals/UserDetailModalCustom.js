@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export const ProjectDetailModalCustom = (props) => {
+export const UserDetailModalCustom = (props) => {
 
   const [show, setShow] = useState(props.checker);
 
@@ -65,7 +65,7 @@ export const ProjectDetailModalCustom = (props) => {
                     props.confirm(()=>{setShow(false)});
                   }}
                 >
-                  Join Project
+                  Scoring
                 </button>
               </div>
             </div>

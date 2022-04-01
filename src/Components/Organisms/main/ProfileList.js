@@ -61,7 +61,9 @@ function ProfileList(props) {
             <div className="flex w-fit">
               <div className="flex justify-center w-full mt-10">
             <ProfileCard
-            key={0}
+              _onClick={props.detailShow}
+              id={data[0]._id}
+              key={0}
               nickname={data[0].nickname}
               profile={data[0].profileUrl}
               position={data[0].position}
@@ -72,7 +74,9 @@ function ProfileList(props) {
             ></ProfileCard>
 
             <ProfileCard
-            key={1}
+            _onClick={props.detailShow}
+              id={data[1]._id}
+              key={1}
               nickname={data[1].nickname}
               profile={data[1].profileUrl}
               position={data[1].position}
@@ -86,6 +90,8 @@ function ProfileList(props) {
             <div className="flex w-fit">
               <div className="flex justify-center w-full mt-10">
               <ProfileCard
+              _onClick={props.detailShow}
+              id={data[2]._id}
               key={2}
               nickname={data[2].nickname}
               profile={data[2].profileUrl}
@@ -97,6 +103,8 @@ function ProfileList(props) {
             ></ProfileCard>
 
             <ProfileCard
+            _onClick={props.detailShow}
+            id={data[3]._id}
             key={3}
               nickname={data[3].nickname}
               profile={data[3].profileUrl}
