@@ -24,8 +24,9 @@ function ProjectDetailModal(props) {
   useEffect(() => {}, []);
 
   return (
-    <div className="flex items-center content-center justify-center overflow-y-scroll bg-slate-400">
+    <>
       { modalIsOpen && 
+        <div className="fixed top-0 left-0 z-10 flex items-center w-full h-screen bg-black justify center bg-opacity-70">
       <ProjectDetailModalCustom
         checker={modalIsOpen}
         callback={props.callBackSetShowFalse}
@@ -83,22 +84,23 @@ function ProjectDetailModal(props) {
           </div>
         </div>
 
-        <div className="flex justify-center bg-[#E5E5E5] mb-10 pb-10">
+        <div className="flex justify-center bg-[#E5E5E5] mb-10">
           <div className="flex justify-center w-[25vw]">
-            <div className="w-[54.688rem] bg-white box-border rounded-[0.625rem] mr-2">
+            <div className="w-full bg-white box-border rounded-[0.625rem] mr-2">
               <div className="text-xl font-bold font-noto2 mt-7 ml-[1.8rem] pl-[1.8rem] pb-6 border-b-2 border-gray-900">
                 사용기술
               </div>
 
               <div className="flex m-10">
                 <div className="flex flex-wrap">
+                  {/* 랜덤하게 색상 적용 */}
                   <Badge skills={data.skills}/>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="flex justify-start w-[25vw] mb-10">
+          <div className="flex justify-start w-[25vw]">
             <div className="bg-white box-border rounded-[0.625rem] w-full ml-2 pb-10">
               <div className="text-xl font-bold font-noto2 mt-7 ml-[1.8rem] pl-[1.8rem] pb-6 border-b-2 border-gray-900">
                 URL
@@ -113,8 +115,9 @@ function ProjectDetailModal(props) {
           </div>
         </div>
       </ProjectDetailModalCustom>
+      </div>
       }
-    </div>
+    </>
   );
 }
 
