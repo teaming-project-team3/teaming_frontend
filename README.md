@@ -5,8 +5,6 @@
 https://d1zc5f9ndqmvzc.cloudfront.net/login
 
 <br>
-유저정보수정 : 
-http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/userEdit
 
 회원가입 -> 로그인 -> 설문조사 -> 메인 -> 메인(실시간 인기 프로젝트 카드) -> 프로젝트상세모달->프로젝트룸->userB상세정보
 
@@ -98,12 +96,11 @@ http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/userEdit
             <ul>
                 <li>init view</li>
                 <li>apply design</li>
+                <li>api link with min-su zzang</li>
+                <li>category view data</li>
             </ul>
             <h5>Pending</h5>
             <ul>
-                <li>api link with min-su zzang</li>
-                <li>category view data</li>
-                <li>DM alarm on the header</li>
             </ul>
             <h5>rejected</h5>
             <ul>
@@ -123,13 +120,12 @@ http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/userEdit
             <h5>Fulfilled</h5>
             <ul>
                 <li>init view</li>
+                <li>api link with min-su zzang</li>
+                <li>Infinity Scroll</li>
             </ul>
             <h5>Pending</h5>
             <ul>
                 <li>apply design</li>
-                <li>api link with min-su zzang</li>
-                <li>DM alarm on the header</li>
-                <li>Infinity Scroll</li>
             </ul>
             <h5>rejected</h5>
             <ul>
@@ -179,11 +175,11 @@ http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/userEdit
                 <li>init view</li>
                 <li>apply Markdown viewer</li>
                 <li>button to enter-room, using socket</li>
+                <li>api link to min-su-zzing</li>
             </ul>
             <h5>Pending</h5>
             <ul>
                 <li>apply design</li>
-                <li>api link to min-su-zzing</li>
             </ul>
             <h5>rejected</h5>
             <ul>
@@ -209,12 +205,12 @@ http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/userEdit
                 <li>socket.io only or socket.io with webRTC data channel N:N chat</li>
                 <li>webRTC N:N Video call</li>
                 <li>realtime users video status change, using socket</li>
+                <li>Audio fixed</li>
             </ul>
             <h5>Pending</h5>
             <ul>
                 <li>apply design</li>
                 <li>start project button, change the chatting to saving data</li>
-                <li>Audio fix required</li>
             </ul>
             <h5>rejected</h5>
             <ul>
@@ -240,13 +236,12 @@ http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/userEdit
                 <li>apply design</li>
                 <li>apply api user data on the project cards</li>
                 <li>apply api user data on the details</li>
-            </ul>
-            <h5>Pending</h5>
-            <ul>
                 <li>api link to min-su-zzing/won-jin-zzang</li>
                 <li>apply api user data on a Radar chart</li>
                 <li>apply api user data on the skill windows</li>
-                <li>button to send DM to the user</li>
+            </ul>
+            <h5>Pending</h5>
+            <ul>
             </ul>
             <h5>rejected</h5>
             <ul>
@@ -266,42 +261,14 @@ http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/userEdit
             <h5>Fulfilled</h5>
             <ul>
                 <li>init view</li>
-            </ul>
-            <h5>Pending</h5>
-            <ul>
                 <li>apply design</li>
                 <li>api link to won-jin-zzang</li>
                 <li>apply user projects involved cards</li>
-                <li>apply user DM data</li>
-                <li>apply projects the user clicked 'like'</li>
-                <li>button click, link to the personal detail page</li>
                 <li>number of projects involved</li>
-                <li>Infinity Scroll, Optional</li>
-            </ul>
-            <h5>rejected</h5>
-            <ul>
-                <li>null</li>
-            </ul>
-        </td>
-    </tr>
-</table>
-
-<br>
-<h4><b>📰 DM(Chat) Page 📰</b></h4>
-
-<table width="100%">
-    <tr>
-        <!-- <td width="50%"><img src="https://user-images.githubusercontent.com/55970155/155251199-671a7011-385b-40d1-8700-5a01f088952b.PNG" /></td> -->
-        <td width="50%">
-            <h5>Fulfilled</h5>
-            <ul>
-                <li>init view</li>
-                <li>chatting page developed with socket.io</li>
             </ul>
             <h5>Pending</h5>
             <ul>
-                <li>apply design</li>
-                <li>api link to won-jin-zzang</li>
+                <li>button click, link to the personal detail page</li>
             </ul>
             <h5>rejected</h5>
             <ul>
@@ -310,39 +277,4 @@ http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/userEdit
         </td>
     </tr>
 </table>
-
-<각 페이지별 url>
-
-소셜로그인 : 
-http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/oauth  
-
-메인 : 
-http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/
-
-마이페이지 : 
-http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/myPage
-
-설문조사 : 
-로그인 -> test@test.com // 1q2w3e4r 로그인시 메인에서 보임
-http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/login
-
-유저정보 : 
-http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/userStats
-
-프로젝트생성 : 
-http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.comcreateProject
-
-프로젝트상세 : 
-http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/projectDetail
-
-회원가입 : 
-http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/signUp
-
-로그인 : 
-http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/login
-
-*테스트채팅 페이지 : 
-http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/testChat
-
-배포 URL : http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/
 
