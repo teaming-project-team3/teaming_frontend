@@ -203,6 +203,10 @@ const initialState = {
         }
       },
       design: {
+        ability: {
+          name: "",
+          score: -1
+        },
         skills: {
           name: "",
           score: -1

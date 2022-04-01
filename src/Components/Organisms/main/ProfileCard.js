@@ -5,6 +5,12 @@ function ProfileCard(props) {
 
   const { nickname, profile, position, id, _onClick } = props;
 
+  function nicknameFilter(nick){
+    return nick.split("&")[0]
+  }
+
+  // eslint-disable-next-line no-const-assign
+  let nick = nicknameFilter(nickname)
 
   return (
     <div
@@ -21,7 +27,7 @@ function ProfileCard(props) {
         <div className="flex items-center h-1/2">
           <img src={props.tier} alt={""} className="mr-[0.412rem]"></img>
           <div className="mr-[0.625rem] text-[1rem] font-noto2 text-black]">
-            {nickname}
+            {nick}
           </div>
           <div className="font-noto2 text-[#593CE5]">{position}</div>
         </div>
