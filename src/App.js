@@ -13,7 +13,6 @@ import CreateProject from "./pages/CreateProject"
 // Import css files
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import TempOAuth from "./pages/TempOAuth";
 import DMJoin from "./Components/Organisms/DMJoin/DMJoin";
 import DMChat from "./Components/Organisms/DMChat/DMChat";
 import UserInfo from "./pages/UserInfo";
@@ -23,7 +22,6 @@ import UserEdit from "./pages/UserEdit";
 import VideoChat from "./pages/VideoChat";
 import ProjectSearch from "./pages/ProjectSearch";
 import Images from "./Components/Organisms/upload/Images";
-import ProjectRoomTemp from "./pages/ProjectRoom_temp";
 import TabMenu from "./Components/Modals/TabMenu";
 
 
@@ -38,7 +36,6 @@ function App() {
           <Route path="/" element={<Main/>} />
           <Route path="/survey" element={<Survey />} />
           <Route path="/userinfo" element={<UserInfo />} />
-          <Route path="/oauth" element={<TempOAuth />} />
           <Route path="/myPage" element={<MyPage/>} />
           <Route path="/survey" element={<Survey/>} />
           <Route path="/userStats" element={<UserStat />} />
@@ -55,7 +52,6 @@ function App() {
           <Route path="/chat/dm" element={<DMChat/>}/>
           <Route path="/testChat" element={<VideoChat/>}/>
           <Route path="/images" element={<Images/>}/>
-          <Route path="/ProjectRoomTemp" element={<ProjectRoomTemp/>} />
           <Route path="/menu" element={<TabMenu/>} />
         </Routes>
     </BrowserRouter>

@@ -31,7 +31,7 @@ export const ModalCustom = (props) => {
                     onClick={() => {
                       props.close();
                       setShow(false);
-                      props.callback();
+                      //props.callback();
                     }}
                     type="button"
                     className="box-content h-4 col-span-1 col-start-9 p-1 text-black border-none rounded-none opacity-50 btn-close w-fit focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"

@@ -24,7 +24,7 @@ function ProjectDetailModal(props) {
   useEffect(() => {}, []);
 
   return (
-    <div className="flex w-[50vh] bg-slate-400 items-center justify-center content-center overflow-y-scroll">
+    <div className="flex items-center content-center justify-center overflow-y-scroll bg-slate-400">
       { modalIsOpen && 
       <ProjectDetailModalCustom
         checker={modalIsOpen}
