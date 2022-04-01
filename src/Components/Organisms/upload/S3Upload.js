@@ -1,7 +1,7 @@
 import './S3Upload.css';
-import { Row, Col } from 'reactstrap';
 import { useDispatch } from 'react-redux';
 import {actionCreators as imageActions} from "../../../redux/modules/image";
+import plus from "../../../static/images/createProject/plus.png"
 
 export default function S3Upload(){
     const dispatch = useDispatch();
@@ -34,14 +34,13 @@ export default function S3Upload(){
       }
 
       return (
-        <div className="h-fit w-fit">
-          <div className="App-body">
-            <Row>
-              <Col>
-                <input className="overflow-hidden" type="file" onChange={handleFileInput}/>
-              </Col>
-            </Row>
+        <div className="h-full w-fit">
+        <label htmlFor="profile-input" className="flex items-center justify-center h-full bg-white border-2 cursor-pointer rounded-xl aspect-square" onChange={handleFileInput}>
+          <input key="profile" type="file" id="profile-input" className="hidden bg-green-300" />
+          <div className="w-1/4 h-1/4 aspect-square">
+          <img src={plus} alt={"+"}/>
           </div>
+        </label>
         </div>
       );
 

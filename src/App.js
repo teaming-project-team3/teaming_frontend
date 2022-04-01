@@ -24,7 +24,7 @@ import VideoChat from "./pages/VideoChat";
 import ProjectSearch from "./pages/ProjectSearch";
 import Images from "./Components/Organisms/upload/Images";
 import ProjectRoomTemp from "./pages/ProjectRoom_temp";
-import ImageSlider from "./Components/Molecules/ImageSlider";
+import Privacy from "./pages/Privacy";
 
 
 function App() {
@@ -56,7 +56,7 @@ function App() {
           <Route path="/testChat" element={<VideoChat/>}/>
           <Route path="/images" element={<Images/>}/>
           <Route path="/ProjectRoomTemp" element={<ProjectRoomTemp/>} />
-          <Route path="/imageSlider" element={<ImageSlider/>} />
+          <Route path="/privacy" element={<Privacy/>} />
         </Routes>
     </BrowserRouter>
   );
