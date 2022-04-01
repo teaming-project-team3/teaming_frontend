@@ -1,6 +1,6 @@
 import { handleActions } from "redux-actions";
 import { produce } from "immer";
-import { apis, apisMS } from "../../apis/apis";
+import { apis } from "../../apis/apis";
 
 // actions
 const SET_MAIN_PROJECTS = "SET_MAIN_PROJECTS";
@@ -14,15 +14,251 @@ const SET_PROJECT_DETAIL = "SET_PROJECT_DETAIL";
 // initialState
 const initialState = {
     isLoading:true,
-    projectsMain:[],
-    projectsRank:[],
-    projectsDeadline:[],
-    projectDetail:[],
+    projectsMain:[{
+      _id:-1,
+      imgUrl:"",
+      contents:"",
+      stack:[["",true]],
+      title:"",
+      profileUrl:"",
+      nickname:"",
+      likeCheck:false,
+      likeCount:-1,
+    },],
+    projectsRank:[{
+      _id:-1,
+      imgUrl:"",
+      contents:"",
+      stack:[["",true]],
+      title:"",
+      profileUrl:"",
+      nickname:"",
+      likeCheck:false,
+      likeCount:-1,
+    },{
+      _id:-1,
+      imgUrl:"",
+      contents:"",
+      stack:[["",true]],
+      title:"",
+      profileUrl:"",
+      nickname:"",
+      likeCheck:false,
+      likeCount:-1,
+    },{
+      _id:-1,
+      imgUrl:"",
+      contents:"",
+      stack:[["",true]],
+      title:"",
+      profileUrl:"",
+      nickname:"",
+      likeCheck:false,
+      likeCount:-1,
+    },{
+      _id:-1,
+      imgUrl:"",
+      contents:"",
+      stack:[["",true]],
+      title:"",
+      profileUrl:"",
+      nickname:"",
+      likeCheck:false,
+      likeCount:-1,
+    },],
+    projectsDeadline:[{
+      _id:-1,
+      imgUrl:"",
+      contents:"",
+      stack:[["",true]],
+      title:"",
+      profileUrl:"",
+      nickname:"",
+      likeCheck:false,
+      likeCount:-1,
+    },{
+      _id:-1,
+      imgUrl:"",
+      contents:"",
+      stack:[["",true]],
+      title:"",
+      profileUrl:"",
+      nickname:"",
+      likeCheck:false,
+      likeCount:-1,
+    },{
+      _id:-1,
+      imgUrl:"",
+      contents:"",
+      stack:[["",true]],
+      title:"",
+      profileUrl:"",
+      nickname:"",
+      likeCheck:false,
+      likeCount:-1,
+    },{
+      _id:-1,
+      imgUrl:"",
+      contents:"",
+      stack:[["",true]],
+      title:"",
+      profileUrl:"",
+      nickname:"",
+      likeCheck:false,
+      likeCount:-1,
+    },],
+    projectDetail:[{
+      _id:-1,
+      imgUrl:"",
+      contents:"",
+      stack:[["",true]],
+      title:"",
+      profileUrl:"",
+      nickname:"",
+      likeCheck:false,
+      likeCount:-1,
+    },],
     preview:null,
-    projectsDev:[],
-    projectsDesigner:[],
-    matesDev:[],
-    matesDesigner:[],
+    projectsDev:[{
+      _id:-1,
+      imgUrl:"",
+      contents:"",
+      stack:[["",true]],
+      title:"",
+      profileUrl:"",
+      nickname:"",
+      likeCheck:false,
+      likeCount:-1,
+    },{
+      _id:-1,
+      imgUrl:"",
+      contents:"",
+      stack:[["",true]],
+      title:"",
+      profileUrl:"",
+      nickname:"",
+      likeCheck:false,
+      likeCount:-1,
+    },{
+      _id:-1,
+      imgUrl:"",
+      contents:"",
+      stack:[["",true]],
+      title:"",
+      profileUrl:"",
+      nickname:"",
+      likeCheck:false,
+      likeCount:-1,
+    },{
+      _id:-1,
+      imgUrl:"",
+      contents:"",
+      stack:[["",true]],
+      title:"",
+      profileUrl:"",
+      nickname:"",
+      likeCheck:false,
+      likeCount:-1,
+    },],
+    projectsDesigner:[{
+      _id:-1,
+      imgUrl:"",
+      contents:"",
+      stack:[["",true]],
+      title:"",
+      profileUrl:"",
+      nickname:"",
+      likeCheck:false,
+      likeCount:-1,
+    },{
+      _id:-1,
+      imgUrl:"",
+      contents:"",
+      stack:[["",true]],
+      title:"",
+      profileUrl:"",
+      nickname:"",
+      likeCheck:false,
+      likeCount:-1,
+    },{
+      _id:-1,
+      imgUrl:"",
+      contents:"",
+      stack:[["",true]],
+      title:"",
+      profileUrl:"",
+      nickname:"",
+      likeCheck:false,
+      likeCount:-1,
+    },{
+      _id:-1,
+      imgUrl:"",
+      contents:"",
+      stack:[["",true]],
+      title:"",
+      profileUrl:"",
+      nickname:"",
+      likeCheck:false,
+      likeCount:-1,
+    },],
+    matesDev:[{
+      _id:-1,
+      nickname:"",
+      profileUrl:"",
+      position:"",
+      projects:[],
+      portfolio:-1,
+    },{
+      _id:-1,
+      nickname:"",
+      profileUrl:"",
+      position:"",
+      projects:[],
+      portfolio:-1,
+    },{
+      _id:-1,
+      nickname:"",
+      profileUrl:"",
+      position:"",
+      projects:[],
+      portfolio:-1,
+    },{
+      _id:-1,
+      nickname:"",
+      profileUrl:"",
+      position:"",
+      projects:[],
+      portfolio:-1,
+    },],
+    matesDesigner:[{
+      _id:-1,
+      nickname:"",
+      profileUrl:"",
+      position:"",
+      projects:[],
+      portfolio:-1,
+    },{
+      _id:-1,
+      nickname:"",
+      profileUrl:"",
+      position:"",
+      projects:[],
+      portfolio:-1,
+    },{
+      _id:-1,
+      nickname:"",
+      profileUrl:"",
+      position:"",
+      projects:[],
+      portfolio:-1,
+    },{
+      _id:-1,
+      nickname:"",
+      profileUrl:"",
+      position:"",
+      projects:[],
+      portfolio:-1,
+    },],
 };
 
 export function setProjectsMain(projects) {
@@ -61,7 +297,7 @@ export const createProjectAPI = (data, callback) => {
   return async function (dispatch) {
 
     console.log("createProjectAPI", data);
-    apisMS
+    apis
         .createProjectAPI(data)
             .then((res)=>{
                 console.log("PROJECT_CREATE_API RES : ", res)
@@ -102,16 +338,50 @@ export default handleActions(
     [SET_MAIN_PROJECTS]: (state, action) =>
       produce(state, (draft) => {
 
-        draft.projectsRank = action.projects.data.rankBoards;
-        draft.projectsDeadline = action.projects.data.deadlineBoards;
-        
-        draft.projectsDesigner = action.projects.data.designBoards;
-        draft.projectsDev = action.projects.data.devBoards;
+        if(action.projects.data.rankBoards!==null&&action.projects.data.rankBoards.length!==0){
+        if(action.projects.data.rankBoards.length<4){
+          draft.projectsRank = [...draft.projectsRank, action.projects.data.rankBoards];
+        }else{
+          draft.projectsRank = action.projects.data.rankBoards;
+        }
+        }
+        if(action.projects.data.deadlineBoards!==null&&action.projects.data.deadlineBoards.length!==0){
+          if(action.projects.data.deadlineBoards.length<4){
+            draft.projectsDeadline = [...draft.projectsRank, action.projects.data.deadlineBoards];
+          }else{
+            draft.projectsDeadline = action.projects.data.deadlineBoards;
+          }
+        }
+        if(action.projects.data.designBoards!==null&&action.projects.data.designBoards.length!==0){
+          if(action.projects.data.designBoards.length<4){
+            draft.projectsDesigner = [...draft.projectsRank, action.projects.data.designBoards];
+          }else{
+            draft.projectsDesigner = action.projects.data.designBoards;
+          }
+        }
+        if(action.projects.data.devBoards!==null&&action.projects.data.devBoards.length!==0){
+          if(action.projects.data.devBoards.length<4){
+            draft.projectsDev = [...draft.projectsRank, action.projects.data.devBoards];
+          }else{
+            draft.projectsDev = action.projects.data.devBoards;
+          }
+        }
         //백엔드 처리할것
         //draft.projectsDev = action.payload.projects.backBoards;
-
-        draft.matesDesigner = action.projects.data.designMates;
-        draft.matesDev = action.projects.data.devMates;
+        if(action.projects.data.designMates!==null&&action.projects.data.designMates.length!==0){
+          if(action.projects.data.designMates.length<4){
+            draft.matesDesigner = [...draft.projectsRank, action.projects.data.designMates];
+          }else{
+            draft.matesDesigner = action.projects.data.designMates;
+          }
+        }
+        if(action.projects.data.devMates!==null&&action.projects.data.devMates.length!==0){
+          if(action.projects.data.devMates.length<4){
+            draft.matesDev = [...draft.projectsRank, action.projects.data.devMates];
+          }else{
+            draft.matesDev = action.projects.data.devMates;
+          }
+        }
         //draft.matesDev = action.payload.projects.backMates;
         
         draft.isLoading = false;
@@ -130,7 +400,9 @@ export default handleActions(
     [SET_PROJECT_DETAIL]: (state, action) =>
     produce(state, (draft) => {
 
+      if(action.data!==null){
       draft.projectDetail = action.data;
+      }
       console.log("SET_PROJECT_DETAIL REDUCER : ")
 
     }),

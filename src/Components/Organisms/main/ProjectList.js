@@ -33,6 +33,8 @@ function ProjectList(props) {
         }],
     }
 
+    console.log("projectList",data);
+
 
   return (
     <div className="flex flex-col mt-[6.75rem]">

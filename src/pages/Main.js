@@ -14,6 +14,8 @@ import Pic from "../static/Pic.png";
 import Pic2 from "../static/Pic2.png";
 import ProjectDetailModal from "./ProjectDetailModal";
 import SwiperSlider from "../Components/Molecules/SwiperSilder";
+import UserDetailModal from "./UserDetailModal";
+import { getSelectedUserInfo } from "../redux/modules/users";
 
 const Wrap = styled.div`
   width: 90rem;
@@ -29,6 +31,7 @@ function Main() {
   //const projectDetail = useSelector((state)=> state.projects.projectDetail)
   const modalIsOpen = location.state;
   const [showDetail, setShowDetail] = useState(false);
+  const [showUserDetail, setShowUserDetail] = useState(false);
   const rankList = useSelector((state)=>state.projects.projectsRank);
   const deadLineList = useSelector((state)=> state.projects.projectsDeadline);
   const matesDesigner = useSelector((state)=> state.projects.matesDesigner);
@@ -57,6 +60,16 @@ function Main() {
     return;
   };
 
+  const userDetailShow = (id) => {
+    console.log("project card clicked", id);
+
+    dispatch(getSelectedUserInfo(id, ()=>{setShowUserDetail(true)}));
+
+    //setShowDetail(true);
+
+    return;
+  };
+
   return (
     <Wrap className="pb-10 mx-auto my-0">
       {isLoading?
@@ -69,7 +82,16 @@ function Main() {
             console.log("setShowDetailFalse");
             return setShowDetail(false);
           } }
-        ></ProjectDetailModal><div className="flex flex-col">
+        ></ProjectDetailModal>
+        <UserDetailModal
+          showUser={showUserDetail}
+          callBackSetShowFalse={() => {
+            console.log("setShowDetailFalse");
+            return setShowUserDetail(false);
+          } }
+        >
+        </UserDetailModal>
+        <div className="flex flex-col">
 
             <SwiperSlider className="z-0"/>
 
@@ -95,13 +117,13 @@ function Main() {
 
             <ProjectList title={titles.rank} detailShow={detailShow} data={rankList} />
 
-            <ProfileList title={titles.matesDesigner} data={matesDesigner} className="z-0"/>
+            <ProfileList title={titles.matesDesigner} detailShow={userDetailShow} data={matesDesigner} className="z-0"/>
 
             <MainBanner />
 
             <ProjectList title={titles.deadline} detailShow={detailShow} data={deadLineList} />
 
-            <ProfileList title={titles.matesDev} data={matesDev} />
+            <ProfileList title={titles.matesDev} detailShow={userDetailShow} data={matesDev} />
 
             <ProjectList title={titles.wantedDesigner} detailShow={detailShow} data={designerWanted} />
 
