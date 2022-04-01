@@ -68,8 +68,8 @@ function UserSlider(props) {
     console.log("mySocket Info", socket);
     socket.emit("join_room", { roomName: room, nickName: name });
 
-    socket.on("accept_join", async (userObjArr) => {
-      console.log("----------------accept_join---------------------------------------", userObjArr);
+    socket.on("accept_join", async (userObjArr, usersStats) => {
+      console.log("----------------accept_join---------------------------------------", userObjArr, usersStats);
       setUserList(userObjArr);
       dispatch(setNowProjectUsers(userObjArr));
       localStorage.setItem("count", userObjArr.length);
@@ -113,8 +113,8 @@ function UserSlider(props) {
       writeChat("방에 있습니다.", NOTICE_CN);
     });
 
-    socket.on("offer", async (offer, remoteSocketId, remoteNickname) => {
-      console.log("--------------------------client on.offer-----------------------------", remoteNickname, peopleInRoom);
+    socket.on("offer", async (offer, remoteSocketId, remoteNickname, userStat) => {
+      console.log("--------------------------client on.offer-----------------------------", remoteNickname, peopleInRoom, userStat);
       const data = {socketId: remoteSocketId, nickName: remoteNickname, video: true, audio: false};
       setUserList((prev)=>[...prev, data])
       dispatch(addNowProjectUsers(data))

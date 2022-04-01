@@ -43,6 +43,11 @@ function Survey(props) {
       return;
     }
 
+    if (position===""){
+      window.alert("포지션을 입력하세요!");
+      return;
+    }
+
     const data={
       position : position,
       front : {
@@ -76,7 +81,7 @@ function Survey(props) {
         프로필을 완성하기 위한 다음 정보를 입력해주세요!
       </div>
 
-      <div className="mb-2 ml-5 text-base font-noto1">포지션</div>
+      <div className="mb-2 ml-5 text-base font-noto1">포지션<span className="text-red-600 font-notoB">*</span></div>
 
       <Select className="ml-5 mr-5" options={positions} placeholder={position} onChange={(e)=>{
         setPosition(e.value)

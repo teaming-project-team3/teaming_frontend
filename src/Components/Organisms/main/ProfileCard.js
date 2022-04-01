@@ -1,11 +1,16 @@
+
 import Image from "../../Atoms/Image";
 
 function ProfileCard(props) {
 
-  const { nickname, profile, position } = props;
+  const { nickname, profile, position, id, _onClick } = props;
+
 
   return (
     <div
+      onClick={()=>{
+        //유저 모달을 적용하기
+        _onClick(id)}}
       className="flex w-[33.563rem] h-[9.188rem] mx-[1.063rem] bg-white rounded-[0.625rem] cursor-pointer"
     >
       <div className="w-[4.25rem] h-[4.25rem] ml-[0.875rem] mt-[1rem]">

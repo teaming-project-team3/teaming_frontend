@@ -22,7 +22,7 @@ import UserEdit from "./pages/UserEdit";
 import VideoChat from "./pages/VideoChat";
 import ProjectSearch from "./pages/ProjectSearch";
 import Images from "./Components/Organisms/upload/Images";
-import TabMenu from "./Components/Modals/TabMenu";
+import Privacy from "./pages/Privacy";
 
 
 function App() {
@@ -52,7 +52,7 @@ function App() {
           <Route path="/chat/dm" element={<DMChat/>}/>
           <Route path="/testChat" element={<VideoChat/>}/>
           <Route path="/images" element={<Images/>}/>
-          <Route path="/menu" element={<TabMenu/>} />
+          <Route path="/privacy" element={<Privacy/>} />
         </Routes>
     </BrowserRouter>
   );
