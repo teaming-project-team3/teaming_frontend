@@ -7,16 +7,15 @@ ${(props) => (props.$shows ? "" : `hidden`)};
 
 function UserCardTemp(props) {
 
-  const { stats, _onMouseOver, _onMouseOut } = props;
+  const { stats, _onMouseOver, _onMouseOut, userDetailShow } = props;
 
   const nameManufacture = (name) => {
      return name.split("&")[0]
   }
 
   return (
-    <UserCardTw $shows={props.$shows} className="w-full h-full" onMouseOver={()=>{
-      console.log("---------------mouseOver---------------", stats.nickname);
-      _onMouseOver(stats.nickname)}} onMouseOut={()=>{_onMouseOut()}}>
+    <UserCardTw $shows={props.$shows} className="w-full h-full" onClick={()=>{userDetailShow(stats._id)}}
+    onMouseOver={()=>{_onMouseOver(stats.nickname)}} onMouseOut={()=>{_onMouseOut()}}>
       <div className="flex justify-center h-1/3 mb-[-6vh]">
         <img
           src={stats.profileUrl}
