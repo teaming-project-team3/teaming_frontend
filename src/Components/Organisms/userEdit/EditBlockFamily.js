@@ -46,6 +46,11 @@ function EditBlockFamily(props) {
     const imgList = useSelector((state)=>state.image.filesArr);
     
   function addPortList () {
+
+    if(portfolioList.length>=3){
+      window.alert("포트폴리오는 3개 까지만 등록이 가능합니다!")
+      return;
+    }
     
     console.log("addPortList");
     const temp = {id:count.current};

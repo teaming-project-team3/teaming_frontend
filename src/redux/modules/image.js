@@ -37,7 +37,7 @@ const initialState = {
     image_file: null,
     image_files: [],
     image_urls: [],
-    filesArr: {0:[]},
+    filesArr: {0:[],1:[],2:[],3:[]},
 }
 
 const uploadImagesS3 = (data, callback) => {
@@ -183,23 +183,23 @@ export const uploadImagesS3PortFolio = (portfolioList, data, callback) => {
 
       
 
-      let arr = portfolioList.map( async (portfolio)=>{
+      // let arr = portfolioList.map( async (portfolio)=>{
 
-        let urlss =[];
+      //   let urlss =[];
 
-        for(let i=0;i<imageFiles[portfolio.id].length;i++){
+      //   for(let i=0;i<imageFiles[portfolio.id].length;i++){
 
 
-          console.log("item.file", imageFiles[portfolio.id][i].file);
+      //     console.log("item.file", imageFiles[portfolio.id][i].file);
 
-          const temp = await uploadFile(imageFiles[portfolio.id][i].file);
+      //     const temp = await uploadFile(imageFiles[portfolio.id][i].file);
 
-          const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+temp.request.httpRequest.path
+      //     const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+temp.request.httpRequest.path
 
-          urlss.push({image:imgUrl});
-        }
+      //     urlss.push(imgUrl);
+      //   }
 
-        return urlss;
+      //   return {...portfolio, image:urlss};
         
         // let urls = imageFiles[portfolio.id].map( async (item)=>{
 
@@ -214,7 +214,48 @@ export const uploadImagesS3PortFolio = (portfolioList, data, callback) => {
         // })
   
         // return {...portfolio, image:urls}
-      });
+      //});
+
+      let arr=[];
+
+      for(let j=0;j<portfolioList.length;j++){
+
+        let urlss =[];
+
+        for(let i=0;i<imageFiles[portfolioList[j].id].length;i++){
+
+
+          console.log("item.file", imageFiles[portfolioList[j].id][i].file);
+
+          const temp = await uploadFile(imageFiles[portfolioList[j].id][i].file);
+
+          const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+temp.request.httpRequest.path
+
+          urlss.push(imgUrl);
+        }
+
+        arr.push({...portfolioList[j], imageUrl:urlss});
+
+      }
+
+      // let arr = portfolioList.map( async (portfolio)=>{
+
+      //   let urlss =[];
+
+      //   for(let i=0;i<imageFiles[portfolio.id].length;i++){
+
+
+      //     console.log("item.file", imageFiles[portfolio.id][i].file);
+
+      //     const temp = await uploadFile(imageFiles[portfolio.id][i].file);
+
+      //     const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+temp.request.httpRequest.path
+
+      //     urlss.push(imgUrl);
+      //   }
+
+      //   return {...portfolio, image:urlss};
+      // });
 
 
       console.log("arr!!!!", arr);
