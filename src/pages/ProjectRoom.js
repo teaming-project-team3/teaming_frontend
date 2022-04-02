@@ -7,14 +7,19 @@ import clip from "../static/images/projectRoom/clip.png"
 import ProjectRoomHeader from "../Components/Molecules/ProjectRoomHeader";
 import UserSlider from "../Components/Organisms/projectRoom/UserSlider";
 import { useLocation, useNavigate } from "react-router";
+import UserDetailModal from "./UserDetailModal";
+import { useDispatch } from "react-redux";
+import { getSelectedUserInfo } from "../redux/modules/users";
 
 export default function ProjectRoom() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isLeader, setIsLeader] = React.useState(false);
   const [mode, setMode] = React.useState(true);
   const [curr, setCurr] = React.useState("");
   const [userStats, setUserStats] = React.useState([]);
   const [myStat, setMyStat] = React.useState();
+  const [showUserDetail, setShowUserDetail] = React.useState(false);
 
   const location = useLocation();
   
@@ -43,15 +48,29 @@ export default function ProjectRoom() {
     setMyStat(data);
   }
 
+  const userDetailShow = (id) => {
+    console.log("profile card clicked", id);
+
+    dispatch(getSelectedUserInfo(id, ()=>{setShowUserDetail(true)}));
+    return;
+  };
+
   return (
     
       <div className="bg-[#F2F3F7]">
+
+        <UserDetailModal
+          showUser={showUserDetail}
+          callBackSetShowFalse={() => {
+            console.log("setShowDetailFalse");
+            return setShowUserDetail(false);
+          } }/>
 
         <ProjectRoomHeader goBack={goBack}></ProjectRoomHeader>
 
         <div className="flex w-screen">
           
-          <UserSlider statusCallBack={statusCallBack} myStatusCallBack={myStatusCallBack} name={name} room={room} 
+          <UserSlider userDetailShow={userDetailShow} statusCallBack={statusCallBack} myStatusCallBack={myStatusCallBack} name={name} room={room} 
           exUser={exUser} _onMouseOut={()=>{setCurr("");}} _onMouseOver={(nick)=>{
             console.log("-----------mouseOver nick!------------", nick);
             setCurr(nick)}}></UserSlider>

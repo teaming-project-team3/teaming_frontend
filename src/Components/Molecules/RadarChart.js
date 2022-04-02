@@ -25,8 +25,12 @@ function RadarChart(props) {
   let radarChart = null;
 
   const nameManufacture = (name) => {
-    return name.split("&")[0]
- }
+    try{
+    return name.split("&")[0];
+    }catch{
+      return name;
+    }
+  }
 
   function fiveScore(stat){
 

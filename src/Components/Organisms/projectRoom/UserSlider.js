@@ -408,6 +408,7 @@ function UserSlider(props) {
               //본인만 버튼 뜨도록
               if(user.socketId===socket.id){
               return(<UserView
+              userDetailShow={props.userDetailShow}
               key={user.nickName}
               idx={-1}
               $isMee
@@ -423,6 +424,7 @@ function UserSlider(props) {
               }else{
               //타인
               return(<UserView
+              userDetailShow={props.userDetailShow}
               $isMee={false}
               key={user.nickName}
               idx={idx}
