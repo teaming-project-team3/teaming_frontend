@@ -39,7 +39,7 @@ export const loadProjectsCatMainAPI = (category, page) => {
     
     dispatch(setLoading(true));
 
-    apisMS
+    apis
         .loadProjectsCatMain(category, page)
             .then((res)=>{
                 console.log("PROJECT_CATEGORY_API RES : ", res)
