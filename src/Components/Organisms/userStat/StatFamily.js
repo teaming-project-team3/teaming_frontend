@@ -35,9 +35,9 @@ function StatFamily(props) {
     }
     portfolio = stats.portfolioUrl.length;
     
-    portfolio1 = stats.portfolioUrl[1];
-    portfolio2 = stats.portfolioUrl[2];
-    portfolio3 = stats.portfolioUrl[3];
+    portfolio1 = stats.portfolioUrl[0];
+    portfolio2 = stats.portfolioUrl[1];
+    portfolio3 = stats.portfolioUrl[2];
 
     console.log("portfolio", portfolio);
 
