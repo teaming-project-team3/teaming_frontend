@@ -77,16 +77,10 @@ function RadarChart(props) {
   function statusFactory (stats) {
     //스탯에서 숫자 5개를 빼내서
     const arr = stats.map((stat)=>{
-      if(stat.nickname===localStorage.getItem("userId")){
-        console.log("---------------------------------MySTATS!!!!!!!!!!!--------------------------------------")
-        let temp = fiveScore(stat);
-        temp = myChartFactory(temp, stat.nickname);
-        setMyData(temp);
-      }      
-      
       return(fiveScore(stat))});
     //데이터형식에 맞게 가공해서
     const chartData = arr.map((item, idx)=>chartDataFactory(item, stats[idx].nickname));
+    console.log("------------!!!!!!!!!!!!!!!!!!manifactured Users Stats!!!!!!!!!!!!!------------", chartData);
     //setState를 한다.
     setUserData(chartData);
 
@@ -140,30 +134,41 @@ function RadarChart(props) {
   useEffect(()=>{
 
     if(props.myStat){
-      console.log("RadarChart, props.myStat", props.myStat);
-      let temp = fiveScore(props.myStat);
-      temp = myChartFactory(temp, localStorage.getItem("userId"));
+      let temp = {};
+      if(Array.isArray(props.myStat)){
+        temp = fiveScore(props.myStat[0]);
+        temp = myChartFactory(temp, props.myStat[0].nickname);
+      }else{
+        temp = fiveScore(props.myStat);
+        temp = myChartFactory(temp, props.myStat.nickname);
+      }
+      console.log("------------------RadarChart, props.myStat----------------------------------", temp);
       setMyData(temp);
     }
 
   },[props.myStat])
 
+  useEffect(()=>{
+    console.log("----------------setProps.Curr!!!!------------------", props.curr);
+    setCurr(props.curr);
+  },[props.curr])
+
   useEffect(() => {
     setCurr(props.curr)
-    if(props.curr===localStorage.getItem("userId")){
+    if(props.curr===myData.label){
       //config.data.datasets.pop();
       console.log("check pop data : ", config.data.datasets)
     }else{
-
+      
       const selectedData = dataList.filter((datum) => {
-        console.log("datum : ", datum)
+        console.log("datum : ", datum, datum.label, props.curr, props);
         return datum.label === props.curr
       })
-
+      console.log("----------selectedData!--------------", selectedData, dataList, props.curr);
       if(selectedData.length>0){
-      config.data.datasets.push(selectedData[0])
+      config.data.datasets.push(selectedData[0]);
       }
-      console.log("check Chart : ", config.data.datasets)
+      console.log("check Chart : ", config.data.datasets);
     }
 
     const ctx = canvasDom.current.getContext("2d");
@@ -176,7 +181,7 @@ function RadarChart(props) {
       radarChart.destroy()
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [config]);
+  }, [config, curr, userData]);
 
 
   return (

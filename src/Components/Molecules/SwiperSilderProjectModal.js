@@ -3,10 +3,10 @@ import SwiperCore, { Navigation, Pagination, Autoplay } from "swiper";
 import 'swiper/scss'
 import 'swiper/scss/navigation'
 import 'swiper/scss/pagination'
-import spinner from "../../static/images/spinner/spinner.png"
-import banner from "../../static/BannerImg.png"
-import dummyUser from "../../static/dummy_user.jpg"
 import JumboTron from '../Organisms/main/JumboTron';
+import projectDetail0Img from "../../static/images/projectDetail/projectEx.jpg"
+import projectDetail1Img from "../../static/images/projectDetail/projectEx1.jpg"
+import projectDetail2Img from "../../static/images/projectDetail/projectEx2.jpg"
 
 
 SwiperCore.use([Navigation, Pagination, Autoplay])
@@ -25,10 +25,10 @@ function SwiperSliderProjectModal() {
       >
         <SwiperSlide><JumboTron/>
         </SwiperSlide>
-        <SwiperSlide><img className="h-full mx-10 w-[100px]" src={banner} alt="html logo" />
+        <SwiperSlide><img className="h-full mx-10 w-[100px]" src={projectDetail0Img} alt="html logo" />
         </SwiperSlide>
-        <SwiperSlide><img className="h-full mx-10 w-[100px]" src={dummyUser} alt="html logo" /></SwiperSlide>
-        <SwiperSlide><img className="h-full mx-10 w-[100px]" src={spinner} alt="html logo" /></SwiperSlide>
+        <SwiperSlide><img className="h-full mx-10 w-[100px]" src={projectDetail1Img} alt="html logo" /></SwiperSlide>
+        <SwiperSlide><img className="h-full mx-10 w-[100px]" src={projectDetail2Img} alt="html logo" /></SwiperSlide>
       </Swiper>
     </div>
   )

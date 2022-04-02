@@ -332,9 +332,9 @@ function SignUp() {
         
 
         <div>
-          <NameTitle>이름/ 기업명 <span className="text-red-600 font-notoB">*</span> </NameTitle>
+          <NameTitle>이름 <span className="text-red-600 font-notoB">*</span> </NameTitle>
           <NameInput
-            placeholder="이름/ 기업명 입력"
+            placeholder="이름 입력"
             onChange={(e) => {
               console.log(e.target.value);
               setNickName(e.target.value);

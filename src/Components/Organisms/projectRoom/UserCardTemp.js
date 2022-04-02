@@ -10,7 +10,9 @@ function UserCardTemp(props) {
   const { stats, _onMouseOver, _onMouseOut } = props;
 
   return (
-    <UserCardTw $shows={props.$shows} className="w-full h-full" onMouseOver={()=>{_onMouseOver()}} onMouseOut={()=>{_onMouseOut(stats.nickName)}}>
+    <UserCardTw $shows={props.$shows} className="w-full h-full" onMouseOver={()=>{
+      console.log("---------------mouseOver---------------", stats.nickname);
+      _onMouseOver(stats.nickname)}} onMouseOut={()=>{_onMouseOut()}}>
       <div className="flex justify-center h-1/3 mb-[-6vh]">
         <img
           src={stats.profileUrl}

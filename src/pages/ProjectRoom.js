@@ -12,8 +12,9 @@ export default function ProjectRoom() {
   const navigate = useNavigate();
   const [isLeader, setIsLeader] = React.useState(false);
   const [mode, setMode] = React.useState(true);
-  const [curr, setCurr] = React.useState(localStorage.getItem("userId"));
+  const [curr, setCurr] = React.useState("");
   const [userStats, setUserStats] = React.useState([]);
+  const [myStat, setMyStat] = React.useState();
 
   const location = useLocation();
   
@@ -33,7 +34,13 @@ export default function ProjectRoom() {
   }
 
   const statusCallBack = (data) => {
+    console.log("StatusCallback!", data);
     setUserStats(data);
+  }
+
+  const myStatusCallBack = (data) => {
+    console.log("myStatusCallBack", data);
+    setMyStat(data);
   }
 
   return (
@@ -44,8 +51,10 @@ export default function ProjectRoom() {
 
         <div className="flex w-screen">
           
-          <UserSlider statusCallBack={statusCallBack} name={name} room={room} 
-          exUser={exUser} _onMouseOut={()=>{setCurr(localStorage.getItem("userId"));}} _onMouseOver={(nick)=>{setCurr(nick)}}></UserSlider>
+          <UserSlider statusCallBack={statusCallBack} myStatusCallBack={myStatusCallBack} name={name} room={room} 
+          exUser={exUser} _onMouseOut={()=>{setCurr("");}} _onMouseOver={(nick)=>{
+            console.log("-----------mouseOver nick!------------", nick);
+            setCurr(nick)}}></UserSlider>
           
           {mode &&
           <div className="relative w-[25vw] h-[80vh] rounded-xl mr-10 pr-10 border-2 p-2 bg-white pb-7">
@@ -65,7 +74,7 @@ export default function ProjectRoom() {
             </div>
             
             <div className="h-[95vh] ml-11 mr-11">
-              <RadarChart userStats={userStats} curr={curr}></RadarChart>
+              <RadarChart userStats={userStats} myStat={myStat} curr={curr}></RadarChart>
             </div>  
             
           </div>
