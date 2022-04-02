@@ -70,6 +70,7 @@ export const apis = {
   loadProjectsMain: () => api.get("/boards"),
   getProjectDetailAPI: (boardId) => api.get(`/boards/${boardId}`),
   createProjectAPI: (data) => api.post("/boards", data),
+  loadProjectsCatMain: (category, page) => api.get(`/boards/category/${category}/${page}`),
 
 
   getMyStatsAPI: () => api.get("/users/mypage"),
