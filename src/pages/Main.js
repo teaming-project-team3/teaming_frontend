@@ -38,6 +38,7 @@ function Main() {
   const matesDev = useSelector((state)=> state.projects.matesDev);
   const designerWanted = useSelector((state)=>state.projects.projectsDesigner);
   const devWanted = useSelector((state)=>state.projects.projectsDev);
+  const isLogin = useSelector((state) => state.users.is_login);
 
   let isLoading = useSelector((state)=>state.projects.isLoading);
 
@@ -107,6 +108,9 @@ function Main() {
 
               <ShortCutCards
                 _onClick={() => {
+                  if(!isLogin){
+                    window.alert("로그인 후에 프로젝트 생성이 가능합니다!")
+                  }
                   navigate("/createProject");
                 } }
                 img={Pic2}

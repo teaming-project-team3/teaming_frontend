@@ -24,6 +24,10 @@ function RadarChart(props) {
 
   let radarChart = null;
 
+  const nameManufacture = (name) => {
+    return name.split("&")[0]
+ }
+
   function fiveScore(stat){
 
     const backAbilScore = stat.stack.back.ability.score;
@@ -79,7 +83,7 @@ function RadarChart(props) {
     const arr = stats.map((stat)=>{
       return(fiveScore(stat))});
     //데이터형식에 맞게 가공해서
-    const chartData = arr.map((item, idx)=>chartDataFactory(item, stats[idx].nickname));
+    const chartData = arr.map((item, idx)=>chartDataFactory(item, nameManufacture(stats[idx].nickname)));
     console.log("------------!!!!!!!!!!!!!!!!!!manifactured Users Stats!!!!!!!!!!!!!------------", chartData);
     //setState를 한다.
     setUserData(chartData);
@@ -137,10 +141,10 @@ function RadarChart(props) {
       let temp = {};
       if(Array.isArray(props.myStat)){
         temp = fiveScore(props.myStat[0]);
-        temp = myChartFactory(temp, props.myStat[0].nickname);
+        temp = myChartFactory(temp, nameManufacture(props.myStat[0].nickname));
       }else{
         temp = fiveScore(props.myStat);
-        temp = myChartFactory(temp, props.myStat.nickname);
+        temp = myChartFactory(temp, nameManufacture(props.myStat.nickname));
       }
       console.log("------------------RadarChart, props.myStat----------------------------------", temp);
       setMyData(temp);
