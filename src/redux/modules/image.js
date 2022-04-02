@@ -181,22 +181,39 @@ export const uploadImagesS3PortFolio = (portfolioList, data, callback) => {
 
       console.log("imageFiles,, before map", imageFiles);
 
+      
 
       let arr = portfolioList.map( async (portfolio)=>{
-        
-        let urls = imageFiles[portfolio.id].map( async (item)=>{
 
-          console.log("item.file", item.file);
+        let urlss =[];
 
-          const temp = await uploadFile(item.file);
+        for(let i=0;i<imageFiles[portfolio.id].length;i++){
+
+
+          console.log("item.file", imageFiles[portfolio.id][i].file);
+
+          const temp = await uploadFile(imageFiles[portfolio.id][i].file);
 
           const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+temp.request.httpRequest.path
 
-         return imgUrl;
+          urlss.push({image:imgUrl});
+        }
 
-        })
+        return urlss;
+        
+        // let urls = imageFiles[portfolio.id].map( async (item)=>{
+
+        //   console.log("item.file", item.file);
+
+        //   const temp = await uploadFile(item.file);
+
+        //   const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+temp.request.httpRequest.path
+
+        //  return imgUrl;
+
+        // })
   
-        return {...portfolio, image:urls}
+        // return {...portfolio, image:urls}
       });
 
 

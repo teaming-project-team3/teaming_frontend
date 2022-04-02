@@ -337,7 +337,7 @@ export const addNowProjectUsers = (user) => {
   };
 };
 
-export const getSelectedUserInfo = (id) => {
+export const getSelectedUserInfo = (id, callback) => {
   return async function (dispatch) {
 
     apis
@@ -345,9 +345,11 @@ export const getSelectedUserInfo = (id) => {
       .then((res)=>{
         console.log("getSelectedUserInfo", res)
         dispatch(setSelectedUSerInfo(res.data));
+        callback();
       })
       .catch((err)=>{
         console.log("getSelectedUserInfo", err)
+        callback();
       })
 
   };

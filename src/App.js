@@ -15,7 +15,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import DMJoin from "./Components/Organisms/DMJoin/DMJoin";
 import DMChat from "./Components/Organisms/DMChat/DMChat";
-import UserInfo from "./pages/UserInfo";
 import ProjectRoom from "./pages/ProjectRoom";
 import ScrollToTop from "./shared/ScrollToTop"
 import UserEdit from "./pages/UserEdit";
@@ -34,10 +33,8 @@ function App() {
       <ScrollToTop/>
         <Routes>
           <Route path="/" element={<Main/>} />
-          <Route path="/survey" element={<Survey />} />
-          <Route path="/userinfo" element={<UserInfo />} />
-          <Route path="/myPage" element={<MyPage/>} />
           <Route path="/survey" element={<Survey/>} />
+          <Route path="/myPage" element={<MyPage/>} />
           <Route path="/userStats" element={<UserStat />} />
           <Route path="/userEdit" element={<UserEdit />} />
           <Route path="/createProject" element={<CreateProject/>} />

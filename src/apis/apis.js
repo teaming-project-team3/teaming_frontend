@@ -64,6 +64,8 @@ export const apis = {
   survey: (data) => api.post("/users/suvey", data),
   updateUserInfo: (data) => api.put("/users", data),
 
+  getUserPage: (id) => api.get(`/users/${id}`),
+
 
   loadProjectsMain: () => api.get("/boards"),
   getProjectDetailAPI: (boardId) => api.get(`/boards/${boardId}`),
