@@ -65,9 +65,7 @@ function Main() {
     console.log("profile card clicked", id);
 
     dispatch(getSelectedUserInfo(id, ()=>{setShowUserDetail(true)}));
-
-    //setShowDetail(true);
-
+    
     return;
   };
 

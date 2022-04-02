@@ -30,7 +30,7 @@ function UserDetailModal(props) {
   //user의 id값 넘겨받으면 동작 -> loading을 넣을까말까?
   
   const modalIsOpen = props.showUser;
-  const data = useSelector((state)=>state.users.selectedUser.length===0?UserDetailModal.defaultProps.data:state.users.selectedUser);  
+  const data = useSelector((state)=>state.users.selectedUser);  
   
   console.log("userDetail : ", data);
   // const testString =
