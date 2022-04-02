@@ -67,13 +67,18 @@ function UserSlider(props) {
       //state를 두번 업데이트 하는 행동이니 수정할것.
       setStatsList(usersStats);
       setUserList(userObjArr);
-      //dispatch(setNowProjectUsers(userObjArr));
-      //localStorage.setItem("count", userObjArr.length);
       // eslint-disable-next-line react-hooks/exhaustive-deps
       userInfo=[...userInfo, ...userObjArr];
       // eslint-disable-next-line react-hooks/exhaustive-deps
       userStatsArr=[...userStatsArr, ...usersStats];
       props.statusCallBack(userStatsArr);
+
+      let myStat = usersStats.filter((res)=>{
+        return res.socketId===socket.id
+      })
+
+      props.myStatusCallBack(myStat);
+
 
       await initCall();
 
@@ -400,7 +405,6 @@ function UserSlider(props) {
             
             {userList.map((user, idx)=>{
               
-
               //본인만 버튼 뜨도록
               if(user.socketId===socket.id){
               return(<UserView

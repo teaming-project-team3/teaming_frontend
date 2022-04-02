@@ -61,7 +61,7 @@ function Main() {
   };
 
   const userDetailShow = (id) => {
-    console.log("project card clicked", id);
+    console.log("profile card clicked", id);
 
     dispatch(getSelectedUserInfo(id, ()=>{setShowUserDetail(true)}));
 
@@ -98,7 +98,7 @@ function Main() {
             <div className="flex justify-center mt-[3.5rem]">
               <ShortCutCards
                 _onClick={() => {
-                  navigate("/");
+                  navigate("/projectFind");
                 } }
                 img={Pic}
                 bg={"#7545F2"}
