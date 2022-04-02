@@ -9,6 +9,10 @@ function UserCardTemp(props) {
 
   const { stats, _onMouseOver, _onMouseOut } = props;
 
+  const nameManufacture = (name) => {
+     return name.split("&")[0]
+  }
+
   return (
     <UserCardTw $shows={props.$shows} className="w-full h-full" onMouseOver={()=>{
       console.log("---------------mouseOver---------------", stats.nickname);
@@ -22,7 +26,7 @@ function UserCardTemp(props) {
       </div>
       <div className="flex flex-col items-center justify-center bg-white h-5/6 rounded-xl">
         <div className="flex text-base text-center font-notoB text-[1.5rem]">
-          {stats.nickname}
+          {nameManufacture(stats.nickname)}
         </div>
 
         <div className="flex text-base text-center font-noto3 text-[1rem]">
