@@ -59,11 +59,11 @@ export default function UserStat() {
     userPosition = stats.position;
     profileUrl = stats.userId.profileUrl;
 
-    if (profileUrl) {
-      const gitURLArr = stats.url.split("/");
-      gitId = gitURLArr[gitURLArr.length - 1];
-      console.log("check gitId", gitId);
-    }
+    
+    const gitURLArr = stats.url.split("/");
+    gitId = gitURLArr[gitURLArr.length - 1];
+    console.log("check gitId", gitId);
+    
 
   }
 

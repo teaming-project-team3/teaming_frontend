@@ -49,8 +49,9 @@ export const Images = (props) => {
         imageUrlLists.push(currentImageUrl);
       }
   
-      if (imageUrlLists.length > 10) {
-        imageUrlLists = imageUrlLists.slice(0, 10);
+      if (imageUrlLists.length > 3) {
+        window.alert("이미지는 3개까지 업로드 가능합니다!")
+        imageUrlLists = imageUrlLists.slice(0, 3);
       }
   
       setShowImages(imageUrlLists);
