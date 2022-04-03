@@ -1,7 +1,7 @@
 import {createAction, handleActions} from "redux-actions";
 import produce from "immer";
 import AWS from 'aws-sdk';
-import { createProjectAPI } from "./projects";
+import { createProjectAPI, updateProjectAPI } from "./projects";
 import { updatePortFolio } from "./users";
 
 //import {storage} from "../../shared/firebase";
@@ -40,7 +40,7 @@ const initialState = {
     filesArr: {0:[],1:[],2:[],3:[]},
 }
 
-const uploadImagesS3 = (data, callback) => {
+const uploadImagesS3 = (data, callback, checker=false, boardId) => {
     return async function(dispatch, getState, {history}){
         console.log("start uploadImageS3");
 
@@ -121,8 +121,13 @@ const uploadImagesS3 = (data, callback) => {
         data = {...data, imgUrl: arr}
     
         console.log("before Create API", data, arr);
+
+        if(checker){
+          dispatch(updateProjectAPI(data, boardId, callback));
+        }else{
+          dispatch(createProjectAPI(data, callback));
+        }
         
-        dispatch(createProjectAPI(data, callback));
         dispatch(setFile(""));
         dispatch(setFiles([]));
 

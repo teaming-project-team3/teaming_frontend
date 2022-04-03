@@ -23,10 +23,12 @@ import ProjectSearch from "./pages/ProjectSearch";
 import Images from "./Components/Organisms/upload/Images";
 import Privacy from "./pages/Privacy";
 import ChatBox from "./Components/Organisms/DMChat/ChatBox";
+import UpdateProject from "./pages/UpdateProject";
 
 
 function App() {
 
+  
 
   return (
     <BrowserRouter>
@@ -39,6 +41,7 @@ function App() {
           <Route path="/userStats" element={<UserStat />} />
           <Route path="/userEdit" element={<UserEdit />} />
           <Route path="/createProject" element={<CreateProject/>} />
+          <Route path="/updateProject" element={<UpdateProject/>} />
           <Route path="/ProjectRoom" element={<ProjectRoom/>} />
           <Route path="/projectDetail" element={<ProjectDetailModal/>} />
           <Route path="/projectFind" element={<ProjectSearch/>} />

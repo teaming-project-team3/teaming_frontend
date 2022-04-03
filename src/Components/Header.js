@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import tw from "tailwind-styled-components";
 import { setLogOut } from "../redux/modules/users";
+import { useNavigate } from "react-router";
 const Nav = tw.div`
   min-w-[90rem]
   pt-5
@@ -12,7 +13,10 @@ const Nav = tw.div`
 function Header() {
   const isLogin = useSelector((state) => state.users.is_login);
   const profileUrl = useSelector((state) => state.users.profileUrl);
+  const surveyCheck = useSelector((state) => state.users.surveyCheck);
+  //surveyCheck이 true면, 설문조사 나오게, surveyCheck이 false면, 글작성 되도록
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   if (window.location.pathname === "/projectRoom"||window.location.pathname === "/test") return null;
 
@@ -26,9 +30,22 @@ function Header() {
           Teaming
         </Link>
 
-        {isLogin && (
+        {isLogin && !surveyCheck && (
           <Link
             to="/createProject"
+            className="col-start-5 col-end-6 text-base font-noto3"
+          >
+            프로젝트 등록
+          </Link>
+        )}
+
+        {isLogin && surveyCheck && (
+          <Link
+            to="/"
+            onClick={() => {
+              window.alert("설문조사 후 이용이 가능합니다!");
+              navigate('/',{state : true});
+            }}
             className="col-start-5 col-end-6 text-base font-noto3"
           >
             프로젝트 등록
@@ -75,6 +92,7 @@ function Header() {
             </Link>
           </>
         )}
+
         {isLogin && (
           <>
             <Link

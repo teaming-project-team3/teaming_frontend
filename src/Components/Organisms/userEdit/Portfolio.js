@@ -14,11 +14,11 @@ const MyDatePicker = styled(DatePicker)`
 
 export const Portfolio = (props) => {
 
-  const [projectName, setProjectName] = useState();
+  const [projectName, setProjectName] = useState(props.item.title);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [projectContents, setProjectContents] = useState();
-  const [projectURL, setProjectURL] = useState();
+  const [projectContents, setProjectContents] = useState(props.item.description);
+  const [projectURL, setProjectURL] = useState(props.item.url);
   let portfolio = [];
   
   function dataFactory(){
@@ -54,7 +54,7 @@ export const Portfolio = (props) => {
         <input
           className="w-1/2 ml-3 mr-10 border-2 rounded"
           placeholder={props.item.title? props.item.title :""}
-          value={props.item.title}
+          value={projectName}
           onChange={(event) => setProjectName(event.target.value)}
         ></input>
       </div>
@@ -102,7 +102,7 @@ export const Portfolio = (props) => {
           rows={4}
           className="w-1/2 ml-3 mr-10 border-2 rounded"
           placeholder={""}
-          value={props.item.description}
+          value={projectContents}
           onChange={(event) => setProjectContents(event.target.value)}
         ></textarea>
       </div>
@@ -112,7 +112,7 @@ export const Portfolio = (props) => {
         <input
           className="w-1/2 ml-3 mr-10 border-2 rounded"
           placeholder={""}
-          value={props.item.url}
+          value={projectURL}
           onChange={(event) => setProjectURL(event.target.value)}
         ></input>
       </div>

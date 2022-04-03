@@ -1,6 +1,6 @@
 import { handleActions } from "redux-actions";
 import { produce } from "immer";
-import { apis } from "../../apis/apis";
+import { apis, apisMS } from "../../apis/apis";
 
 // actions
 const SET_MAIN_PROJECTS = "SET_MAIN_PROJECTS";
@@ -107,17 +107,17 @@ const initialState = {
       likeCheck:false,
       likeCount:-1,
     },],
-    projectDetail:[{
+    projectDetail:{
       _id:-1,
       imgUrl:"",
       contents:"",
       stack:[["",true]],
       title:"",
       profileUrl:"",
-      nickname:"",
+      nickname:{nickname:""},
       likeCheck:false,
       likeCount:-1,
-    },],
+    },
     preview:null,
     projectsDev:[{
       _id:-1,
@@ -287,6 +287,26 @@ export const loadProjectsMainAPI = () => {
             })
             .catch((err)=>{
                 console.log("PROJECT_MAIN_API ERR : ", err)
+                window.alert("잠시 후 다시 시도해주세요!");
+            })
+    
+  };
+};
+
+export const updateProjectAPI = (data, boardId, callback) => {
+  return async function (dispatch) {
+
+    console.log("updateProjectAPI", data, boardId);
+    apis
+        .updateProjectAPI(data, boardId)
+            .then((res)=>{
+                console.log("PROJECT_UPDATE_API RES : ", res)
+                callback();
+                //dispatch(setProjectsMain(res));
+            })
+            .catch((err)=>{
+                console.log("PROJECT_UPDATE_API ERR : ", err)
+                window.alert("잠시 후 다시 시도해주세요!");
             })
     
   };
@@ -297,7 +317,7 @@ export const createProjectAPI = (data, callback) => {
   return async function (dispatch) {
 
     console.log("createProjectAPI", data);
-    apis
+    apisMS
         .createProjectAPI(data)
             .then((res)=>{
                 console.log("PROJECT_CREATE_API RES : ", res)
@@ -306,6 +326,7 @@ export const createProjectAPI = (data, callback) => {
             })
             .catch((err)=>{
                 console.log("PROJECT_CREATE_API ERR : ", err)
+                window.alert("잠시 후 다시 시도해주세요!");
             })
     
   };
@@ -323,7 +344,7 @@ export const getProjectDetailAPI = (boardId, callback) => {
         })
         .catch((err) => {
           console.log("GET_PROJECT_DETAIL : ", err)
-          dispatch(setProjectDetail(err))
+          window.alert("잠시 후 다시 시도해주세요!");
         })
 
 
