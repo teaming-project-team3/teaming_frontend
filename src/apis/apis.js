@@ -64,8 +64,8 @@ export const apis = {
   loadProjectsMain: () => api.get("/boards"),
   getProjectDetailAPI: (boardId) => api.get(`/boards/${boardId}`),
   createProjectAPI: (data) => api.post("/boards", data),
-  updateProjectAPI: (data, boardId) => api.put(`/projects/${boardId}`, data),
-  deleteProjectAPI: (projectId) => api.delete(`/projects/${projectId}`),
+  updateProjectAPI: (data, boardId) => api.put(`/boards/${boardId}`, data),
+  deleteProjectAPI: (projectId) => api.delete(`/boards/${projectId}`),
   loadProjectsCatMain: (category, page) => api.get(`/boards/category/${category}/${page}`),
 
 
