@@ -45,9 +45,9 @@ export default function ProjectRoom() {
   }
 
   const myStatusCallBack = (data) => {
-    console.log("myStatusCallBack", data[0].usersStackObj);
+    console.log("myStatusCallBack", data);
 
-    setMyStat(data[0].usersStackObj);
+    setMyStat(data);
   }
 
   const userDetailShow = (id) => {

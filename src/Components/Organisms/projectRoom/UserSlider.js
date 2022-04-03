@@ -82,9 +82,9 @@ function UserSlider(props) {
       props.statusCallBack(userStats);
       
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      myStat = userObjArr.filter((res)=>{
-        console.log("mid map", res.targetRoomObjUsers.socketId, socket.id, res)
-        return res.targetRoomObjUsers.socketId===socket.id
+      myStat = userStats.filter((res)=>{
+        console.log("mid map", res)
+        return res.socketId===socket.id
       })
       console.log("after map", myStat)
       props.myStatusCallBack(myStat);
@@ -135,7 +135,7 @@ function UserSlider(props) {
       //dispatch(addNowProjectUsers(data))
       userInfo=[...userInfo, data];
       //userStatsArr=[...userStatsArr, userStat];
-      props.statusCallBack(userInfo);
+      props.statusCallBack(userInfo.map((res)=>res.usersStackObj));
       
       const temp = localStorage.getItem("count");
       localStorage.setItem("count", temp+1);
@@ -265,7 +265,9 @@ function UserSlider(props) {
     console.log("toggle!!", userInfo, nickName, status);
     const newList = userInfo.map((user) => {
       if(user.targetRoomObjUsers.nickName===nickName){
-        return {...user, video : status};
+        let temp = user.targetRoomObjUsers;
+        temp = {...temp, video:status}
+        return {targetRoomObjUsers:temp, usersStackObj:user.usersStackObj};
       }else return user;
     })  
 
@@ -365,7 +367,7 @@ function UserSlider(props) {
     console.log("before Deletion!!!-------------------", userInfo);
 
     const newList = userInfo.filter((item)=>{
-      return item.socketId !== leavedSocketId;
+      return item.targetRoomObjUsers.socketId !== leavedSocketId;
     })
 
     delete pcObj.socketId;
