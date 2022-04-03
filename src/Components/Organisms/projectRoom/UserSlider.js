@@ -3,15 +3,12 @@ import { useLocation } from "react-router";
 import Slider from "react-slick";
 import io from "socket.io-client";
 import UserView from "./UserView";
-import { useDispatch } from "react-redux";
-import { addNowProjectUsers, setNowProjectUsers } from "../../../redux/modules/users";
 
 //const ENDPOINT = "http://localhost:5000";
 const ENDPOINT = process.env.REACT_APP_BASE_URL_WJ + "/webrtc";
 let socket;
 
 function UserSlider(props) {
-  const { exUser } = props;
 
   const sliderSettings = {
     dots: true,
@@ -21,7 +18,6 @@ function UserSlider(props) {
     slidesToScroll: 1,
   };
 
-  const dispatch = useDispatch();
 
   const location = useLocation();
   //const query = queryString.parse(location.search);
@@ -43,15 +39,14 @@ function UserSlider(props) {
   const [cameraOn, setCameraOn] = useState(true);
   const [audioOn, setAudioOn] = useState(false);
   const [userList, setUserList] = useState([]);
-  //const initList = [1,2,3,4,5,6];
-  //const userListRedux = props.users;
+  const [statsList, setStatsList] = useState([]);
+
   localStorage.setItem("count",0);
   
   let userInfo = [];
+  let userStatsArr = [];
 
   console.log("userList", userList);
-  //const videoRef = useRef(userList.map(() => createRef()));
-  //const camerasSelect = document.getElementsByClassName("cameras");
 
   useEffect(() => {
 
@@ -65,18 +60,25 @@ function UserSlider(props) {
     if (socket.disconnected) {
       socket.connect();
     }
-    console.log("mySocket Info", socket);
     socket.emit("join_room", { roomName: room, nickName: name });
 
-    socket.on("accept_join", async (userObjArr) => {
-      console.log("----------------accept_join---------------------------------------", userObjArr);
+    socket.on("accept_join", async (userObjArr, usersStats) => {
+      console.log("----------------accept_join---------------------------------------", userObjArr, usersStats);
+      //state를 두번 업데이트 하는 행동이니 수정할것.
+      setStatsList(usersStats);
       setUserList(userObjArr);
-      dispatch(setNowProjectUsers(userObjArr));
-      localStorage.setItem("count", userObjArr.length);
       // eslint-disable-next-line react-hooks/exhaustive-deps
       userInfo=[...userInfo, ...userObjArr];
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      userStatsArr=[...userStatsArr, ...usersStats];
+      props.statusCallBack(userStatsArr);
 
-      console.log("check local Storage", userInfo);
+      let myStat = usersStats.filter((res)=>{
+        return res.socketId===socket.id
+      })
+
+      props.myStatusCallBack(myStat);
+
 
       await initCall();
 
@@ -93,7 +95,6 @@ function UserSlider(props) {
             userObjArr[i].nickName,
             i
           );
-          console.log("offerToReceiveVideo!!!!!")
           const offer = await newPC.createOffer({
             //추가부분
             offerToReceiveAudio: true,
@@ -113,13 +114,17 @@ function UserSlider(props) {
       writeChat("방에 있습니다.", NOTICE_CN);
     });
 
-    socket.on("offer", async (offer, remoteSocketId, remoteNickname) => {
-      console.log("--------------------------client on.offer-----------------------------", remoteNickname, peopleInRoom);
+    socket.on("offer", async (offer, remoteSocketId, remoteNickname, userStat) => {
+      console.log("--------------------------client on.offer-----------------------------", remoteNickname, peopleInRoom, userStat);
       const data = {socketId: remoteSocketId, nickName: remoteNickname, video: true, audio: false};
-      setUserList((prev)=>[...prev, data])
-      dispatch(addNowProjectUsers(data))
+      setStatsList((prev)=>[...prev, userStat]);
+      setUserList((prev)=>[...prev, data]);
+      
+      
+      //dispatch(addNowProjectUsers(data))
       userInfo=[...userInfo, data];
-      console.log("offer userInfo", userInfo);
+      userStatsArr=[...userStatsArr, userStat];
+      props.statusCallBack(userStatsArr);
       
       const temp = localStorage.getItem("count");
       localStorage.setItem("count", temp+1);
@@ -127,7 +132,6 @@ function UserSlider(props) {
       try {
         const newPC = createConnection(remoteSocketId, remoteNickname);
         await newPC.setRemoteDescription(offer);
-        console.log("AnswerToReceiveVideo!!!!!");
         const answer = await newPC.createAnswer({
             offerToReceiveVideo: true,
             offerToReceiveAudio: true,
@@ -164,7 +168,6 @@ function UserSlider(props) {
     });
 
     socket.on("leaveRoom", (leavedSocketId) => {
-      console.log("leaveRoom");
       removeVideo(leavedSocketId);
       //writeChat(`notice! ${nickName} leaved the room.`, NOTICE_CN);
       --peopleInRoom;
@@ -189,7 +192,6 @@ function UserSlider(props) {
       const devices = await navigator.mediaDevices.enumerateDevices();
       const cameras = devices.filter((device) => device.kind === "videoinput");
       const currentCamera = myStream.getVideoTracks();
-      console.log("cameras : ", cameras, currentCamera);
 
       cameras.forEach((camera) => {
         const option = document.createElement("option");
@@ -202,7 +204,6 @@ function UserSlider(props) {
 
         //camerasSelect.appendChild(option);
       });
-      console.log("cameras[0].deviceId : ", cameras[0].deviceId);
       setCameraOptions([
         ...cameraOptions,
         { value: cameras[0].deviceId, label: cameras[0].deviceId },
@@ -228,7 +229,6 @@ function UserSlider(props) {
       );
 
       // stream을 mute하는 것이 아니라 HTML video element를 mute한다.
-      console.log("myVideo : ", myStream, myVideo);
       addVideoStream(myVideo.current, myStream);
       //videoGrid.current.append(myVideo.current);
 
@@ -251,15 +251,12 @@ function UserSlider(props) {
 
   function videoToggleExceptMe(nickName, status){
     
-    console.log("videoOFF UserInfo",userInfo, nickName);
 
     const newList = userInfo.map((user) => {
       if(user.nickName===nickName){
-        console.log("nickName! same!")
         return {...user, video : status};
       }else return user;
     })  
-    console.log("videoToggleExceptMe", nickName, newList, userList)
 
     userInfo = newList;
     setUserList(newList);
@@ -331,21 +328,16 @@ function UserSlider(props) {
 
       
       //idx=userList.length+1
-      console.log("paintPeerFace, get idx of newbie", idx)
     }
 
 
-      console.log("addVideoStream in idx", userList, idx, videoRef);
 
       addVideoStream(videoRef.current[idx], peerStream);
-      console.log("video on/off?", peerStream.getVideoTracks()[0].enabled);
       
   }
 
   function addVideoStream(video, stream) {
-    console.log("addVideoStream : ", stream, video);
     video.srcObject = stream;
-    console.log("video.srcObject : ", video.srcObject);
     video.addEventListener("loadedmetadata", () => {
       video.play();
     });
@@ -358,18 +350,22 @@ function UserSlider(props) {
   // }
 
   function removeVideo(leavedSocketId) {
-    console.log("leavedSocketId : ", leavedSocketId);
-
-    console.log("before Filter : ", userInfo, pcObj);
 
     const newList = userInfo.filter((item)=>{
       return item.socketId !== leavedSocketId;
     })
 
+    const newStatList = statsList.filter((item)=>{
+      return item.socketId !== leavedSocketId;
+    })
+
     delete pcObj.socketId;
 
+    
+    userStatsArr = newStatList;
+    setStatsList(newStatList);
+
     userInfo = newList;
-    console.log("after Filter : ", newList, pcObj);
     setUserList(newList);
   }
 
@@ -377,15 +373,11 @@ function UserSlider(props) {
     setCameraOn((prev) => !prev);
 
     if (cameraOn) {
-      console.log("videoOn->off");
       let video = myVideo.current.srcObject.getVideoTracks();
       video[0].enabled = false;
       socket.emit("videoOFF", { nickName: name, roomName : room });
-      console.log("before disconnecting")
-      //socket.emit("leaveRoom", { userId: localStorage.getItem("userId") })
-      //socket.disconnect();
+
     } else {
-      console.log("videoOff->on");
       let video = myVideo.current.srcObject.getVideoTracks();
       video[0].enabled = true;
       socket.emit("videoON", { nickName: name, roomName : room });
@@ -395,12 +387,10 @@ function UserSlider(props) {
   const handleAudio = () => {
     setAudioOn((prev) => !prev);
     if (audioOn) {
-      console.log("audioOn->off");
       let video = myVideo.current.srcObject.getAudioTracks();
       video[0].enabled = false;
       socket.emit("audioON", { userId: localStorage.getItem("userId") });
     } else {
-      console.log("audioOff->On");
       let video = myVideo.current.srcObject.getAudioTracks();
       video[0].enabled = true;
       socket.emit("audioOFF", { userId: localStorage.getItem("userId") });
@@ -414,17 +404,18 @@ function UserSlider(props) {
           <div className="flex flex-wrap">
             
             {userList.map((user, idx)=>{
-              console.log("idx in map!!!", idx, user.socketId, socket.id);
+              
               //본인만 버튼 뜨도록
               if(user.socketId===socket.id){
               return(<UserView
+              userDetailShow={props.userDetailShow}
               key={user.nickName}
               idx={-1}
               $isMee
               user={user}
+              stats={statsList[idx]}
               cameraOn={cameraOn}
               myVideo={myVideo}
-              profile={exUser}
               handleCamera={handleCamera}
               handleAudio={handleAudio}
               cameraStatus={cameraOn}
@@ -433,13 +424,16 @@ function UserSlider(props) {
               }else{
               //타인
               return(<UserView
+              userDetailShow={props.userDetailShow}
               $isMee={false}
               key={user.nickName}
               idx={idx}
               user={user}
+              stats={statsList[idx]}
               cameraOn={user.video}
               myVideo={videoRef}
-              profile={exUser}
+              _onMouseOver={props._onMouseOver}
+              _onMouseOut={props._onMouseOut}
               ></UserView>)
               }
             })

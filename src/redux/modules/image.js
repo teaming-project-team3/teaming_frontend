@@ -37,7 +37,7 @@ const initialState = {
     image_file: null,
     image_files: [],
     image_urls: [],
-    filesArr: {0:[]},
+    filesArr: {0:[],1:[],2:[],3:[]},
 }
 
 const uploadImagesS3 = (data, callback) => {
@@ -94,15 +94,25 @@ const uploadImagesS3 = (data, callback) => {
 
         let arr = [];
 
-        arr = imageFiles.map( async (url) => {
+        // arr = await imageFiles.map( async (url) => {
           
-          const temp = await uploadFile(url);
+        //   const temp = await uploadFile(url);
           
+        //   const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+temp.request.httpRequest.path
+
+        //    return imgUrl;
+          
+        // })
+        
+        for(let i=0;i<imageFiles.length;i++){
+
+          const temp = await uploadFile(imageFiles[i]);
+
           const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+temp.request.httpRequest.path
 
-           return imgUrl;
-          
-        })
+          arr = [...arr, imgUrl];
+        }
+      
 
         console.log("arr!!!!", arr);
 
@@ -171,23 +181,81 @@ export const uploadImagesS3PortFolio = (portfolioList, data, callback) => {
 
       console.log("imageFiles,, before map", imageFiles);
 
+      
 
-      let arr = portfolioList.map( async (portfolio)=>{
+      // let arr = portfolioList.map( async (portfolio)=>{
+
+      //   let urlss =[];
+
+      //   for(let i=0;i<imageFiles[portfolio.id].length;i++){
+
+
+      //     console.log("item.file", imageFiles[portfolio.id][i].file);
+
+      //     const temp = await uploadFile(imageFiles[portfolio.id][i].file);
+
+      //     const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+temp.request.httpRequest.path
+
+      //     urlss.push(imgUrl);
+      //   }
+
+      //   return {...portfolio, image:urlss};
         
-        let urls = imageFiles[portfolio.id].map( async (item)=>{
+        // let urls = imageFiles[portfolio.id].map( async (item)=>{
 
-          console.log("item.file", item.file);
+        //   console.log("item.file", item.file);
 
-          const temp = await uploadFile(item.file);
+        //   const temp = await uploadFile(item.file);
+
+        //   const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+temp.request.httpRequest.path
+
+        //  return imgUrl;
+
+        // })
+  
+        // return {...portfolio, image:urls}
+      //});
+
+      let arr=[];
+
+      for(let j=0;j<portfolioList.length;j++){
+
+        let urlss =[];
+
+        for(let i=0;i<imageFiles[portfolioList[j].id].length;i++){
+
+
+          console.log("item.file", imageFiles[portfolioList[j].id][i].file);
+
+          const temp = await uploadFile(imageFiles[portfolioList[j].id][i].file);
 
           const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+temp.request.httpRequest.path
 
-         return imgUrl;
+          urlss.push(imgUrl);
+        }
 
-        })
-  
-        return {...portfolio, image:urls}
-      });
+        arr.push({...portfolioList[j], imageUrl:urlss});
+
+      }
+
+      // let arr = portfolioList.map( async (portfolio)=>{
+
+      //   let urlss =[];
+
+      //   for(let i=0;i<imageFiles[portfolio.id].length;i++){
+
+
+      //     console.log("item.file", imageFiles[portfolio.id][i].file);
+
+      //     const temp = await uploadFile(imageFiles[portfolio.id][i].file);
+
+      //     const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+temp.request.httpRequest.path
+
+      //     urlss.push(imgUrl);
+      //   }
+
+      //   return {...portfolio, image:urlss};
+      // });
 
 
       console.log("arr!!!!", arr);
@@ -305,17 +373,7 @@ export default handleActions({
       const idx = action.payload.idx;
       const data = action.payload.files;
 
-      // const temp = draft.filesArr.map((item, i)=>{
-      //   if(item.id===idx){
-      //     return {id:idx, files: data}
-      //   }else{
-      //     return item
-      //   }
-      // })
-
       draft.filesArr[idx] = data;
-
-      //draft.filesArr = temp;
 
     }),
     [RESET_FILES_ARR]: (state, action) => produce(state, (draft) => {

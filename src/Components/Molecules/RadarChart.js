@@ -1,17 +1,58 @@
 import React, { useRef, useEffect, useState } from "react";
 import Chart from "chart.js/auto";
 
+const dummy = {
+  id: 1,
+  label: "",
+  data: [1,1,1,1,1],
+  fill: true,
+  backgroundColor: "rgba(54, 162, 235, 0.2)",
+  borderColor: "rgb(54, 162, 235)",
+  pointBackgroundColor: "rgb(54, 162, 235)",
+  pointBorderColor: "#fff",
+  pointHoverBackgroundColor: "#fff",
+  pointHoverBorderColor: "rgb(54, 162, 235)",
+};
+
+
 function RadarChart(props) {
   const canvasDom = useRef(null);
 
-  const [curr, setCurr] = useState("userA");
+  const [curr, setCurr] = useState(props.curr);
+  const [userData, setUserData] = useState([]);
+  const [myData, setMyData] = useState(dummy);
   console.log("RadarChart : ", curr);
 
   let radarChart = null;
 
-  const userA = {
-    label: "userA",
-    data: [65, 59, 90, 81, 56, 55],
+  const nameManufacture = (name) => {
+    try{
+    return name.split("&")[0];
+    }catch{
+      return name;
+    }
+  }
+
+  function fiveScore(stat){
+
+    const backAbilScore = stat.stack.back.ability.score;
+    const backSkillScore = stat.stack.back.skills.score;
+    const frontAbilScore = stat.stack.front.ability.score;
+    const frontSkillScore = stat.stack.front.skills.score;
+    const designScore = stat.stack.design.skills.score;
+    const reliability = stat.stack.reliability;
+    const cooperation = stat.stack.cooperation;
+
+    return [Math.max(frontAbilScore,frontSkillScore),Math.max(backAbilScore,backSkillScore),designScore,reliability,cooperation];
+
+  }
+
+  function myChartFactory(list, nick, id){
+
+  const my = {
+    id: id,
+    label: nick,
+    data: list,
     fill: true,
     backgroundColor: "rgba(255, 99, 132, 0.2)",
     borderColor: "rgb(255, 99, 132)",
@@ -21,45 +62,55 @@ function RadarChart(props) {
     pointHoverBorderColor: "rgb(255, 99, 132)",
   };
 
-  const userB = {
-    label: "userB",
-    data: [28, 48, 40, 19, 96, 27],
-    fill: true,
-    backgroundColor: "rgba(54, 162, 235, 0.2)",
-    borderColor: "rgb(54, 162, 235)",
-    pointBackgroundColor: "rgb(54, 162, 235)",
-    pointBorderColor: "#fff",
-    pointHoverBackgroundColor: "#fff",
-    pointHoverBorderColor: "rgb(54, 162, 235)",
-  };
+  return my;
 
-  const userC = {
-    label: "userC",
-    data: [78, 99, 89, 84, 23, 45],
-    fill: true,
-    backgroundColor: "rgba(54, 162, 235, 0.2)",
-    borderColor: "rgb(54, 162, 235)",
-    pointBackgroundColor: "rgb(54, 162, 235)",
-    pointBorderColor: "#fff",
-    pointHoverBackgroundColor: "#fff",
-    pointHoverBorderColor: "rgb(54, 162, 235)",
-  };
+  }
 
-  const dataSets = [userA];
+  function chartDataFactory(list, nick, id){
+
+    const tempData = {
+      id: id,
+      label: nick,
+      data: list,
+      fill: true,
+      backgroundColor: "rgba(54, 162, 235, 0.2)",
+      borderColor: "rgb(54, 162, 235)",
+      pointBackgroundColor: "rgb(54, 162, 235)",
+      pointBorderColor: "#fff",
+      pointHoverBackgroundColor: "#fff",
+      pointHoverBorderColor: "rgb(54, 162, 235)",
+    };
+
+    return tempData;
+
+  }
+
+  function statusFactory (stats) {
+    //스탯에서 숫자 5개를 빼내서
+    const arr = stats.map((stat)=>{
+      return(fiveScore(stat))});
+    //데이터형식에 맞게 가공해서
+    const chartData = arr.map((item, idx)=>chartDataFactory(item, nameManufacture(stats[idx].nickname), stats[idx].userId));
+    console.log("------------!!!!!!!!!!!!!!!!!!manifactured Users Stats!!!!!!!!!!!!!------------", chartData);
+    //setState를 한다.
+    setUserData(chartData);
+
+  }
+
+  const dataSets = [myData];
 
   const data = {
     labels: [
       "FrontEnd",
+      "BackEnd",
       "Design",
       "Reliability",
-      "BackEnd",
-      "Algorithm",
-      "Planning",
+      "Cooperation",
     ],
     datasets: dataSets,
   };
 
-  const dataList = [userB, userC];
+  const dataList = userData;
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const config = {
@@ -82,21 +133,53 @@ function RadarChart(props) {
     },
   };
 
+  useEffect(()=>{
+
+    if(props.userStats){
+      statusFactory(props.userStats);
+    }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[props.userStats])
+
+  useEffect(()=>{
+
+    if(props.myStat){
+      let temp = {};
+      if(Array.isArray(props.myStat)){
+        temp = fiveScore(props.myStat[0]);
+        temp = myChartFactory(temp, nameManufacture(props.myStat[0].nickname), props.myStat[0].userId);
+      }else{
+        temp = fiveScore(props.myStat);
+        temp = myChartFactory(temp, nameManufacture(props.myStat.nickname), props.myStat.userId);
+      }
+      console.log("------------------RadarChart, props.myStat----------------------------------", temp);
+      setMyData(temp);
+    }
+
+  },[props.myStat])
+
+  useEffect(()=>{
+    console.log("----------------setProps.Curr!!!!------------------", props.curr);
+    setCurr(props.curr);
+  },[props.curr])
+
   useEffect(() => {
     setCurr(props.curr)
-    if(props.curr==="userA"){
+    if(props.curr===myData.userId){
       //config.data.datasets.pop();
       console.log("check pop data : ", config.data.datasets)
     }else{
-
+      
       const selectedData = dataList.filter((datum) => {
-        console.log("datum : ", datum)
-        return datum.label === props.curr
+        console.log("datum : ", datum, datum.id, datum.label, props.curr, props);
+        return datum.id === props.curr
       })
-
-      config.data.datasets.push(selectedData[0])
-
-      console.log("check Chart : ", config.data.datasets)
+      console.log("----------selectedData!--------------", selectedData, dataList, props.curr);
+      if(selectedData.length>0){
+      config.data.datasets.push(selectedData[0]);
+      }
+      console.log("check Chart : ", config.data.datasets);
     }
 
     const ctx = canvasDom.current.getContext("2d");
@@ -109,7 +192,7 @@ function RadarChart(props) {
       radarChart.destroy()
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [config]);
+  }, [config, curr, userData]);
 
 
   return (

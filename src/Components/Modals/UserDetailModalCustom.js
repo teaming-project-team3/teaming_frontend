@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export const ProjectDetailModalCustom = (props) => {
+export const UserDetailModalCustom = (props) => {
 
   const [show, setShow] = useState(props.checker);
 
@@ -57,7 +57,7 @@ export const ProjectDetailModalCustom = (props) => {
                 >
                   Close
                 </button>
-                <button
+                {/* <button
                   type="button"
                   class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1"
                   onClick={()=>{
@@ -65,8 +65,8 @@ export const ProjectDetailModalCustom = (props) => {
                     props.confirm(()=>{setShow(false)});
                   }}
                 >
-                  Join Project
-                </button>
+                  Scoring
+                </button> */}
               </div>
             </div>
           </div>

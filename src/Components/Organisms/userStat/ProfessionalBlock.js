@@ -3,16 +3,18 @@ import RadarChart from "../../Molecules/RadarChart";
 
 function ProfessionalBlock(props) {
 
-    const { frontAbility, frontSkills, backAbility, backSkills, designAbility, designSkills } = props;
+    const { frontAbility, frontSkills, backAbility, backSkills, 
+      designAbility, designSkills, name, frontScore, backScore, 
+      designScore, reliability, cooperation, stats } = props;
 
   return (
-    <div className="flex justify-center w-full h-full mb-10">
+    <div className="flex justify-center w-full mb-10 h-fit">
               <div className="mt-[2.188rem] h-full w-[54.688rem] bg-white box-border rounded-[0.625rem]">
                 <div className="text-xl font-bold font-noto2 mt-7 ml-[1.8rem] pl-[1.8rem] pb-6 border-b-2 border-gray-900">
                   전문분야
                 </div>
 
-                <div className="flex mt-[1rem] ml-[1.8rem] h-full">
+                <div className="flex mt-[1rem] ml-[1.8rem] h-fit">
                   <div className="flex flex-wrap w-3/5">
                     <ProficiencyBadge
                       key={0}
@@ -37,7 +39,8 @@ function ProfessionalBlock(props) {
                   </div>
 
                   <div className="h-[15.938rem] w-[15.938rem]">
-                    <RadarChart curr={"userA"}></RadarChart>
+                    <RadarChart myStat={stats} me={name} frontScore={frontScore} backScore={backScore} curr={"!"}
+                    designScore={designScore} reliability={reliability} cooperation={cooperation}></RadarChart>
                   </div>
                 </div>
               </div>

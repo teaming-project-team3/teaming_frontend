@@ -10,8 +10,6 @@ import { setNowUsers } from "../../../redux/modules/users";
 //import { send } from 'process';
 
 //서버 주소
-//const ENDPOINT = 'http://localhost:5000'
-//const ENDPOINT = 'http://80e1-49-142-123-104.ngrok.io'
 const ENDPOINT = process.env.REACT_APP_BASE_URL_WJ + "/waitroom";
 let socket;
 

@@ -13,18 +13,16 @@ import CreateProject from "./pages/CreateProject"
 // Import css files
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import TempOAuth from "./pages/TempOAuth";
 import DMJoin from "./Components/Organisms/DMJoin/DMJoin";
 import DMChat from "./Components/Organisms/DMChat/DMChat";
-import UserInfo from "./pages/UserInfo";
 import ProjectRoom from "./pages/ProjectRoom";
 import ScrollToTop from "./shared/ScrollToTop"
 import UserEdit from "./pages/UserEdit";
 import VideoChat from "./pages/VideoChat";
 import ProjectSearch from "./pages/ProjectSearch";
 import Images from "./Components/Organisms/upload/Images";
-import ProjectRoomTemp from "./pages/ProjectRoom_temp";
-import ImageSlider from "./Components/Molecules/ImageSlider";
+import Privacy from "./pages/Privacy";
+import ChatBox from "./Components/Organisms/DMChat/ChatBox";
 
 
 function App() {
@@ -36,11 +34,8 @@ function App() {
       <ScrollToTop/>
         <Routes>
           <Route path="/" element={<Main/>} />
-          <Route path="/survey" element={<Survey />} />
-          <Route path="/userinfo" element={<UserInfo />} />
-          <Route path="/oauth" element={<TempOAuth />} />
-          <Route path="/myPage" element={<MyPage/>} />
           <Route path="/survey" element={<Survey/>} />
+          <Route path="/myPage" element={<MyPage/>} />
           <Route path="/userStats" element={<UserStat />} />
           <Route path="/userEdit" element={<UserEdit />} />
           <Route path="/createProject" element={<CreateProject/>} />
@@ -52,11 +47,10 @@ function App() {
           <Route path="/auth/kakao/redirect" element={<KakaoRedirect />} />
           <Route path="/chat/join" element={<DMJoin/>}/>
           <Route path="/chat/dm" element={<DMChat/>}/>
-          <Route path="/chat/dm" element={<DMChat/>}/>
           <Route path="/testChat" element={<VideoChat/>}/>
           <Route path="/images" element={<Images/>}/>
-          <Route path="/ProjectRoomTemp" element={<ProjectRoomTemp/>} />
-          <Route path="/imageSlider" element={<ImageSlider/>} />
+          <Route path="/privacy" element={<Privacy/>} />
+          <Route path="/test" element={<ChatBox/>} />
         </Routes>
     </BrowserRouter>
   );

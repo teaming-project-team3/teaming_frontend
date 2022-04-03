@@ -20,6 +20,8 @@ const SET_NOW_PROJECT_USERS = "set/project/Users";
 const SET_IS_LOG_IN = "SET_IS_LOG_IN";
 const SET_MY_STATS = "SET_MY_STATS";
 const ADD_NOW_PROJECT_USER = "ADD_NOW_PROJECT_USER";
+const SET_MY_PROJECTS = "SET_MY_PROJECTS";
+const SET_SELECTED_USER_INFO = "SET_SELECTED_USER_INFO";
 
 // action creators
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
@@ -32,6 +34,8 @@ const resetSkillsAction = createAction(RESET_SKILLS, (item) => ({ item }));
 const updateSkillsAction = createAction(UPDATE_SKILLS, (data) => ({ data }));
 const deleteAbilityAction = createAction(DELETE_ABILITY, (data) => ({ data }));
 const deleteSkillsAction = createAction(DELETE_SKILLS, (data)=>({ data }));
+const setMyProjectAction = createAction(SET_MY_PROJECTS, (projects, num) => ({ projects, num }))
+const setSelectedUSerInfoCA = createAction(SET_SELECTED_USER_INFO,(data)=>({data}));
 //const setUserLogin = createAction(SET_IS_LOG_IN, (url) => ({ url }));
 
 
@@ -48,8 +52,200 @@ const initialState = {
   abilityDesigner: [],
   skillsDesigner: [],
   myProjects: [],
-  nowProjectUser: [],
-  myStats: [],
+  nowProjectUser: [{
+    _id: -1,
+    stack: {
+      front: {
+        ability: {
+          name: "",
+          score: -1
+        },
+        skills: {
+          name: "",
+          score: -1
+        }
+      },
+      back: {
+        ability: {
+          name: "",
+          score: -1
+        },
+        skills: {
+          name: "",
+          score: -1
+        }
+      },
+      design: {
+        skills: {
+          name: "",
+          score: -1
+        }
+      },
+      reliability: 50,
+      cooperation: 50
+    },
+    url: "",
+    portfolioUrl: [],
+    design: {
+      skills: []
+    },
+    back: {
+      ability: [],
+      skills: []
+    },
+    front: {
+      ability: [],
+      kills: []
+    },
+    introduction: "",
+    position: "",
+    userId: {
+      _id: -1,
+      suveyCheck: false,
+      kakaoId: "",
+      dmRooms: [],
+      profileUrl: "이미지 주소",
+      nickname: "test1",
+      email: "test1@test.com",
+      createdAt: "2022-04-01T13:25:20.845Z",
+      updatedAt: "2022-04-01T13:25:20.845Z",
+      __v: 0
+    },
+    createdAt: "2022-04-01T13:25:20.883Z",
+    updatedAt: "2022-04-01T13:25:20.883Z",
+    __v: 0
+  },],
+  myStats: {
+    _id: -1,
+    stack: {
+      front: {
+        ability: {
+          name: "",
+          score: -1
+        },
+        skills: {
+          name: "",
+          score: -1
+        }
+      },
+      back: {
+        ability: {
+          name: "",
+          score: -1
+        },
+        skills: {
+          name: "",
+          score: -1
+        }
+      },
+      design: {
+        skills: {
+          name: "",
+          score: -1
+        }
+      },
+      reliability: 50,
+      cooperation: 50
+    },
+    url: "",
+    portfolioUrl: [],
+    design: {
+      skills: []
+    },
+    back: {
+      ability: [],
+      skills: []
+    },
+    front: {
+      ability: [],
+      kills: []
+    },
+    introduction: "",
+    position: "",
+    userId: {
+      _id: -1,
+      suveyCheck: false,
+      kakaoId: "",
+      dmRooms: [],
+      profileUrl: "이미지 주소",
+      nickname: "test1",
+      email: "test1@test.com",
+      createdAt: "2022-04-01T13:25:20.845Z",
+      updatedAt: "2022-04-01T13:25:20.845Z",
+      __v: 0
+    },
+    createdAt: "2022-04-01T13:25:20.883Z",
+    updatedAt: "2022-04-01T13:25:20.883Z",
+    __v: 0
+  },
+
+  selectedUser: {
+    _id: -1,
+    stack: {
+      front: {
+        ability: {
+          name: "",
+          score: -1
+        },
+        skills: {
+          name: "",
+          score: -1
+        }
+      },
+      back: {
+        ability: {
+          name: "",
+          score: -1
+        },
+        skills: {
+          name: "",
+          score: -1
+        }
+      },
+      design: {
+        ability: {
+          name: "",
+          score: -1
+        },
+        skills: {
+          name: "",
+          score: -1
+        }
+      },
+      reliability: 50,
+      cooperation: 50
+    },
+    url: "",
+    portfolioUrl: [],
+    design: {
+      skills: []
+    },
+    back: {
+      ability: [],
+      skills: []
+    },
+    front: {
+      ability: [],
+      kills: []
+    },
+    introduction: "",
+    position: "",
+    userId: {
+      _id: -1,
+      suveyCheck: false,
+      kakaoId: "",
+      dmRooms: [],
+      profileUrl: "이미지 주소",
+      nickname: "test1",
+      email: "test1@test.com",
+      createdAt: "2022-04-01T13:25:20.845Z",
+      updatedAt: "2022-04-01T13:25:20.845Z",
+      __v: 0
+    },
+    createdAt: "2022-04-01T13:25:20.883Z",
+    updatedAt: "2022-04-01T13:25:20.883Z",
+    __v: 0
+  },
 };
 
 export function resetAbility(item, position) {
@@ -104,6 +300,14 @@ export function addNowProjectUserAC(user){
   return { type: ADD_NOW_PROJECT_USER, user }
 }
 
+export function setMyProject(projects, num){
+  return { type: SET_MY_PROJECTS, projects, num}
+}
+
+export function setSelectedUSerInfo(data){
+  return { type: SET_SELECTED_USER_INFO, data }
+}
+
 
 //middleWare
 export const resetAbilityAPI = (arrAbility) => {
@@ -132,6 +336,24 @@ export const addNowProjectUsers = (user) => {
 
   };
 };
+
+export const getSelectedUserInfo = (id, callback) => {
+  return async function (dispatch) {
+
+    apis
+    .getUserPage(id)
+      .then((res)=>{
+        console.log("getSelectedUserInfo", res)
+        dispatch(setSelectedUSerInfo(res.data));
+        callback();
+      })
+      .catch((err)=>{
+        console.log("getSelectedUserInfo", err)
+        callback();
+      })
+
+  };
+}
 
 export const updateAbilityAPI = (data, idx) => {
   return async function (dispatch) {
@@ -241,6 +463,7 @@ const getMyStats = () => {
 
           console.log("My Stats res : ", res)
           dispatch(setMyUserStats(res.data.userInfo))
+          dispatch(setMyProject(res.data.projectData, res.data.totalProject))
 
         })
         .catch((err)=>{
@@ -453,9 +676,30 @@ export default handleActions(
 
       [SET_MY_STATS]: (state, action) => 
       produce(state, (draft) => {
+        
+        if(action.data!==null){
+          draft.myStats = action.data;
 
-        draft.myStats = action.data;
+        }
 
+      }),
+
+      [SET_MY_PROJECTS]: (state, action) => 
+      produce(state, (draft) => {
+
+        if(action.projects!==null&&action.projects.length!==0){
+        draft.myProjects = action.projects;
+        }
+
+      }),
+
+      [SET_SELECTED_USER_INFO]: (state, action) => 
+      produce(state, (draft) => {
+
+        if(action.data!==null){
+        draft.selectedUser = action.data;
+        }
+        
       }),
   },
   initialState
@@ -475,6 +719,8 @@ const actionCreators = {
   deleteAbilityAction,
   deleteSkillsAction,
   getMyStats,
+  setMyProjectAction,
+  setSelectedUSerInfoCA,
 };
 
 export { actionCreators };

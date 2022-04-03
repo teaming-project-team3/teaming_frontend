@@ -14,7 +14,7 @@ function Header() {
   const profileUrl = useSelector((state) => state.users.profileUrl);
   const dispatch = useDispatch();
 
-  if (window.location.pathname === "/projectRoom") return null;
+  if (window.location.pathname === "/projectRoom"||window.location.pathname === "/test") return null;
 
   return (
     <div className="border-b-2">

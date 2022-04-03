@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import { setCookie } from "../shared/Cookie";
 import { useDispatch } from "react-redux";
 import { setIsLogIn } from "../redux/modules/users";
+import Spinner from "../Components/Organisms/Spinner";
 
 //import { actionCreators as userActions } from "../redux/modules/user";
 //import Spinner from "./Spinner";
@@ -35,7 +36,7 @@ const KakaoRedirect = (props) => {
       })
     });
 
-  return <div>Loading...</div>;
+  return <Spinner/>;
 };
 
 export default KakaoRedirect;

@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../element/Button";
 import emailCheck from "../shared/common";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/users";
 import styled from "styled-components";
 import KakaoSignupBtn from "../static/KakaoSignupBtn.png";
-import S3Upload from "../Components/Organisms/upload/S3Upload";
-import Image from "../Components/Atoms/Image";
 import HorizonLine from "../Components/Atoms/HorizonLine";
 import { useNavigate } from "react-router";
 import AWS from 'aws-sdk';
+import ProfileImage from "../Components/Organisms/upload/ProfileImage";
+import { KAKAO_AUTH_URL } from "../apis/kakao/kakao";
 
 const Title = styled.h1`
   font-family: "Noto Sans CJK KR";
@@ -217,13 +217,22 @@ function SignUp() {
   const [nickName, setNickName] = React.useState("");
   const [pwd, setPwd] = React.useState("");
   const [pwdCheck, setPwdCheck] = React.useState("");
-  // const [user_name, setUserName] = React.useState("");
-  const preview = useSelector((state) => state.image.preview);
   const imgUrl = useSelector((state) => state.image.image_url);
   const imgFile = useSelector((state) => state.image.image_file);
+
+  const [bChecked, setChecked] = useState(false);
+
+  const checkHandler = ({ target }) => {
+    setChecked(!bChecked);
+  };
   
   const signUp = async (e) => {
     e.preventDefault();
+
+    if(!bChecked){
+      window.alert("이용약관에 동의해주세요!")
+      return;
+    }
 
     if (id === "" || pwd === "" || nickName === "" || pwdCheck === "") {
       window.alert("아이디, 패스워드, 닉네임을 모두 입력해주세요!");
@@ -304,7 +313,7 @@ function SignUp() {
         <SubTitle>티밍과 함께 프로젝트에 함께할 동료를 찾아보세요!</SubTitle>
 
         <div>
-          <EmailTitle>이메일(ID) * </EmailTitle>
+          <EmailTitle>이메일(ID) <span className="text-red-600 font-notoB">*</span> </EmailTitle>
           <EmailInput
             placeholder="아이디 입력"
             onChange={(e) => {
@@ -313,28 +322,19 @@ function SignUp() {
           />
         </div>
 
-        <div className="grid grid-cols-4">
-          <EmailTitle className="grid-start-1 grid-span-1">Profile Image * </EmailTitle>
-        </div>
-
-        <div className="flex">
-          <div className="justify-center border-2">
-            <S3Upload />
-          </div>
-
-          <div>
-            <Image
-              shape="circle"
-              size={70}
-              src={preview ? preview : "http://via.placeholder.com/400x300"}
-            ></Image>
+        <div>
+          <EmailTitle>Profile Image <span className="text-red-600 font-notoB">*</span> </EmailTitle>
+          <div className="w-[384px]">
+          <ProfileImage/>
           </div>
         </div>
+
+        
 
         <div>
-          <NameTitle>이름/ 기업명 * </NameTitle>
+          <NameTitle>이름 <span className="text-red-600 font-notoB">*</span> </NameTitle>
           <NameInput
-            placeholder="이름/ 기업명 입력"
+            placeholder="이름 입력"
             onChange={(e) => {
               console.log(e.target.value);
               setNickName(e.target.value);
@@ -343,7 +343,7 @@ function SignUp() {
         </div>
 
         <div className="mb-3">
-          <PwTitle>비밀번호 * </PwTitle>
+          <PwTitle>비밀번호 <span className="text-red-600 font-notoB">*</span> </PwTitle>
           <PwInput
             type="password"
             placeholder="비밀번호 입력"
@@ -360,21 +360,13 @@ function SignUp() {
           />
         </div>
 
-        <div className="grid grid-cols-12 w-[384px] p-1 items-center place-content-center mx-auto">
-          
-          <input className="col-span-1 col-start-1" type="checkbox"/>
-          <CheckTitle className="col-span-10 col-start-2">[필수] 이용약관</CheckTitle>
-          <Look className="col-span-1 col-start-12">보기</Look>
-          
-        </div>
-
         <div
           className="grid grid-cols-12 w-[384px] p-1 items-center place-content-center mx-auto"
         >
           
-          <input className="col-span-1 col-start-1" type="checkbox"/>
-          <CheckTitle className="col-span-10 col-start-2">[필수] 개인동의 수집 이용동의서</CheckTitle>
-          <Look className="col-span-1 col-start-12">보기</Look>
+          <input checked={bChecked} onChange={(e) => checkHandler(e)} className="col-span-1 col-start-1" type="checkbox"/>
+          <CheckTitle className="col-span-10 col-start-2">[필수] 이용약관 및 개인동의 수집 이용동의서 <span className="text-red-600 font-notoB">*</span></CheckTitle>
+          <Look onClick={()=>{window.open('/privacy')}} className="col-span-1 col-start-12 cursor-pointer">보기</Look>
         </div>
 
         <div>
@@ -388,7 +380,9 @@ function SignUp() {
         </div>
 
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <KakaoBtn>
+          <KakaoBtn onClick={() => {
+            window.location.href = KAKAO_AUTH_URL;
+          }}>
             <KakaoLogo />
             <KakaoTitle>카카오 회원가입</KakaoTitle>
           </KakaoBtn>

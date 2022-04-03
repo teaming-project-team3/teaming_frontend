@@ -38,12 +38,17 @@ export const ImageArr = (props) => {
         console.log("imageUrl", currentImageUrl);
       }
   
-      if (imageUrlLists.length > 10) {
-        imageUrlLists = imageUrlLists.slice(0, 10);
+      if (imageUrlLists.length > 3) {
+        window.alert("이미지는 3개까지 업로드 가능합니다!")
+        imageUrlLists = imageUrlLists.slice(0, 3);
       }
 
-      
-      for (let i = 0; i < imageUrlLists.length; i++) {
+      let temp=0;
+
+      if(imageLists.length>3){temp=3;}
+      else{temp=imageLists.length;}
+
+      for (let i = 0; i < temp; i++) {
         totalList.push({url: imageUrlLists[i], file: imageLists[i]});
       }
 
@@ -70,7 +75,8 @@ export const ImageArr = (props) => {
           </div>
         </label>
   
-        {showImages.map((image, id) => (
+        {showImages &&
+        showImages.map((image, id) => (
           <div className="flex items-center justify-center h-full border-2 cursor-pointer rounded-xl aspect-square" key={id} onClick={() => handleDeleteImage(id)}>
             <img src={image.url} alt={`${image}-${id}`} className="h-full"/>
           </div>

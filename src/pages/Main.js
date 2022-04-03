@@ -14,6 +14,8 @@ import Pic from "../static/Pic.png";
 import Pic2 from "../static/Pic2.png";
 import ProjectDetailModal from "./ProjectDetailModal";
 import SwiperSlider from "../Components/Molecules/SwiperSilder";
+import UserDetailModal from "./UserDetailModal";
+import { getSelectedUserInfo } from "../redux/modules/users";
 
 const Wrap = styled.div`
   width: 90rem;
@@ -29,12 +31,14 @@ function Main() {
   //const projectDetail = useSelector((state)=> state.projects.projectDetail)
   const modalIsOpen = location.state;
   const [showDetail, setShowDetail] = useState(false);
+  const [showUserDetail, setShowUserDetail] = useState(false);
   const rankList = useSelector((state)=>state.projects.projectsRank);
   const deadLineList = useSelector((state)=> state.projects.projectsDeadline);
   const matesDesigner = useSelector((state)=> state.projects.matesDesigner);
   const matesDev = useSelector((state)=> state.projects.matesDev);
   const designerWanted = useSelector((state)=>state.projects.projectsDesigner);
   const devWanted = useSelector((state)=>state.projects.projectsDev);
+  const isLogin = useSelector((state) => state.users.is_login);
 
   let isLoading = useSelector((state)=>state.projects.isLoading);
 
@@ -57,26 +61,43 @@ function Main() {
     return;
   };
 
+  const userDetailShow = (id) => {
+    console.log("profile card clicked", id);
+
+    dispatch(getSelectedUserInfo(id, ()=>{setShowUserDetail(true)}));
+    
+    return;
+  };
+
   return (
     <Wrap className="pb-10 mx-auto my-0">
       {isLoading?
         <Spinner/>
         :
-      <><Survey modalIsOpen={modalIsOpen}></Survey>
+      <><Survey modalIsOpen={modalIsOpen} className="z-10"></Survey>
       <ProjectDetailModal
           showDetail={showDetail}
           callBackSetShowFalse={() => {
             console.log("setShowDetailFalse");
             return setShowDetail(false);
           } }
-        ></ProjectDetailModal><div className="flex flex-col">
+        ></ProjectDetailModal>
+        <UserDetailModal
+          showUser={showUserDetail}
+          callBackSetShowFalse={() => {
+            console.log("setShowDetailFalse");
+            return setShowUserDetail(false);
+          } }
+        >
+        </UserDetailModal>
+        <div className="flex flex-col">
 
-            <SwiperSlider/>
+            <SwiperSlider className="z-0"/>
 
             <div className="flex justify-center mt-[3.5rem]">
               <ShortCutCards
                 _onClick={() => {
-                  navigate("/");
+                  navigate("/projectFind");
                 } }
                 img={Pic}
                 bg={"#7545F2"}
@@ -85,6 +106,9 @@ function Main() {
 
               <ShortCutCards
                 _onClick={() => {
+                  if(!isLogin){
+                    window.alert("로그인 후에 프로젝트 생성이 가능합니다!")
+                  }
                   navigate("/createProject");
                 } }
                 img={Pic2}
@@ -95,13 +119,13 @@ function Main() {
 
             <ProjectList title={titles.rank} detailShow={detailShow} data={rankList} />
 
-            <ProfileList title={titles.matesDesigner} data={matesDesigner} />
+            <ProfileList title={titles.matesDesigner} detailShow={userDetailShow} data={matesDesigner} className="z-0"/>
 
             <MainBanner />
 
             <ProjectList title={titles.deadline} detailShow={detailShow} data={deadLineList} />
 
-            <ProfileList title={titles.matesDev} data={matesDev} />
+            <ProfileList title={titles.matesDev} detailShow={userDetailShow} data={matesDev} />
 
             <ProjectList title={titles.wantedDesigner} detailShow={detailShow} data={designerWanted} />
 

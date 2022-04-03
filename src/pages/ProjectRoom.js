@@ -7,12 +7,19 @@ import clip from "../static/images/projectRoom/clip.png"
 import ProjectRoomHeader from "../Components/Molecules/ProjectRoomHeader";
 import UserSlider from "../Components/Organisms/projectRoom/UserSlider";
 import { useLocation, useNavigate } from "react-router";
+import UserDetailModal from "./UserDetailModal";
+import { useDispatch } from "react-redux";
+import { getSelectedUserInfo } from "../redux/modules/users";
 
 export default function ProjectRoom() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isLeader, setIsLeader] = React.useState(false);
   const [mode, setMode] = React.useState(true);
-  const [curr, setCurr] = React.useState("userA");
+  const [curr, setCurr] = React.useState("");
+  const [userStats, setUserStats] = React.useState([]);
+  const [myStat, setMyStat] = React.useState();
+  const [showUserDetail, setShowUserDetail] = React.useState(false);
 
   const location = useLocation();
   
@@ -31,15 +38,42 @@ export default function ProjectRoom() {
     navigate(-1);
   }
 
+  const statusCallBack = (data) => {
+    console.log("StatusCallback!", data);
+    setUserStats(data);
+  }
+
+  const myStatusCallBack = (data) => {
+    console.log("myStatusCallBack", data);
+    setMyStat(data);
+  }
+
+  const userDetailShow = (id) => {
+    console.log("profile card clicked", id);
+
+    dispatch(getSelectedUserInfo(id, ()=>{setShowUserDetail(true)}));
+    return;
+  };
+
   return (
     
       <div className="bg-[#F2F3F7]">
+
+        <UserDetailModal
+          showUser={showUserDetail}
+          callBackSetShowFalse={() => {
+            console.log("setShowDetailFalse");
+            return setShowUserDetail(false);
+          } }/>
 
         <ProjectRoomHeader goBack={goBack}></ProjectRoomHeader>
 
         <div className="flex w-screen">
           
-          <UserSlider name={name} room={room} exUser={exUser} _onMouseOut={()=>{setCurr("userA");}} _onMouseOver={()=>{setCurr("userB")}}></UserSlider>
+          <UserSlider userDetailShow={userDetailShow} statusCallBack={statusCallBack} myStatusCallBack={myStatusCallBack} name={name} room={room} 
+          exUser={exUser} _onMouseOut={()=>{setCurr("");}} _onMouseOver={(nick)=>{
+            console.log("-----------mouseOver nick!------------", nick);
+            setCurr(nick)}}></UserSlider>
           
           {mode &&
           <div className="relative w-[25vw] h-[80vh] rounded-xl mr-10 pr-10 border-2 p-2 bg-white pb-7">
@@ -59,7 +93,7 @@ export default function ProjectRoom() {
             </div>
             
             <div className="h-[95vh] ml-11 mr-11">
-              <RadarChart curr={curr}></RadarChart>
+              <RadarChart userStats={userStats} myStat={myStat} curr={curr}></RadarChart>
             </div>  
             
           </div>

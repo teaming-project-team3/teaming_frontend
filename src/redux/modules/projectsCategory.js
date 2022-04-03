@@ -6,6 +6,7 @@ import { apis, apisMS } from "../../apis/apis";
 // actions
 const SET_CATEGORY_PROJECTS = "SET_CATEGORY_PROJECTS";
 const SET_LOADING = "SET_LOADING";
+const CLEAR_CATEGORY_PROJECT = "CLEAR_CATEGORY_PROJECT";
 
 // action creators
 //const setProjects = createAction(SET_MAIN_PROJECTS, (projects) => ({ projects }));
@@ -18,6 +19,10 @@ const initialState = {
     projectsDev:[],
     projectsDesigner:[],
 };
+
+export function clearCategoryProject(){
+  return { type: CLEAR_CATEGORY_PROJECT };
+}
 
 export function setLoading(checker) {
   console.log("Create Action, setLoading : ");
@@ -34,7 +39,7 @@ export const loadProjectsCatMainAPI = (category, page) => {
     
     dispatch(setLoading(true));
 
-    apisMS
+    apis
         .loadProjectsCatMain(category, page)
             .then((res)=>{
                 console.log("PROJECT_CATEGORY_API RES : ", res)
@@ -73,6 +78,15 @@ export default handleActions(
       produce(state, (draft) => {
 
         draft.isLoading = action.checker;
+
+      }),
+
+      [CLEAR_CATEGORY_PROJECT]: (state, action) =>
+      produce(state, (draft) => {
+
+        draft.projectsAll = [];
+        draft.projectsDesigner = [];
+        draft.projectsDev = [];
 
       }),
 

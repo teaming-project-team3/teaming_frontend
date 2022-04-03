@@ -58,7 +58,7 @@ export const BasicInfo = (props) => {
           <textarea
             rows={4}
             className="w-1/2 ml-3 mr-10 border-2 rounded"
-            placeholder={""}
+            placeholder={props.stats.introduction? props.stats.introduction:""}
             onChange={(event) => setIntro(event.target.value)}
           ></textarea>
         </div>
@@ -67,7 +67,7 @@ export const BasicInfo = (props) => {
           GitHub URL
           <input
             className="w-1/2 ml-3 mr-10 border-2 rounded"
-            placeholder={""}
+            placeholder={props.stats.url? props.stats.url:""}
             onChange={(event) => setGitUrl(event.target.value)}
           ></input>
         </div>

@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ProjectCard from "../Components/Organisms/main/ProjectCard";
 import tw from "tailwind-styled-components";
-import { loadProjectsCatMainAPI } from "../redux/modules/projectsCategory";
+import { clearCategoryProject, loadProjectsCatMainAPI } from "../redux/modules/projectsCategory";
 import Spinner from "../Components/Organisms/Spinner";
 import { useInView } from "react-intersection-observer"
+import ProjectDetailModal from "./ProjectDetailModal";
+import { actionCreators } from "../redux/modules/projects";
 
 const CategoryBtn = tw.div`
 rounded-3xl border-2 border-solid text-base 
@@ -24,6 +26,8 @@ function ProjectSearch() {
     const [check, setIsChecked] = useState(1);
     const [page, setPage] = useState([1,1,1]);
 
+    const [showDetail, setShowDetail] = useState(false);
+
     const [ref, inView] = useInView();
 
     useEffect(()=>{
@@ -31,6 +35,9 @@ function ProjectSearch() {
       //dispatch(loadProjectsCatMainAPI("rank",page[0]));
       //setPage([page[0]+1,page[1],page[2]]);
 
+      return (()=>{
+        dispatch(clearCategoryProject());
+      })
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
@@ -89,14 +96,29 @@ function ProjectSearch() {
         
     }
 
+    const detailShow = (id) => {
+      console.log("project card clicked", id);
+  
+      dispatch(actionCreators.getProjectDetailAPI(id, ()=>{setShowDetail(true)}));
+  
+      return;
+    };
+
 
   return (
     <div className="flex w-screen h-fit bg-[#F2F3F7] justify-center pt-10 pb-10">
-      <div className="flex flex-col w-[90vw]">
+        <ProjectDetailModal
+          showDetail={showDetail}
+          callBackSetShowFalse={() => {
+            console.log("setShowDetailFalse");
+            return setShowDetail(false);
+          }}
+        ></ProjectDetailModal>
+      <div className="flex flex-col w-[80vw]">
         
-        <div className="">
-          <div className="text-3xl text-gray-900">👊 너! 내 동료가 돼라!</div>
-          <div className="text-base text-gray-600">내가 힘을 발휘할 수 있는 프로젝트를 찾아보세요</div>
+        <div className="m-3">
+          <div className="mb-2 text-2xl text-gray-900 font-notoB">👊 너! 내 동료가 돼라!</div>
+          <div className="text-base text-gray-600 font-noto2">내가 힘을 발휘할 수 있는 프로젝트를 찾아보세요</div>
         </div>
 
         <div className="flex">
@@ -105,30 +127,35 @@ function ProjectSearch() {
             <CategoryBtn onClick={clickDesignProject} $isChecked={check===3}>🎨 디자이너</CategoryBtn>
         </div>
 
-        <div className="flex flex-wrap w-full">
+        <div className="flex flex-wrap w-full pt-10 mt-10 bg-white rounded-md">
         
-        {isLoading ?
-        <Spinner/>
-        :
-        contents.map((item) => {
-            console.log("ProjectSearch, item", item);
-            return(<ProjectCard
-            key={item._id}
-            img={item.imgUrl[0]}
-            stack={item.stack}
-            text={item.title}
-            profileUrl={
-            item.profileUrl
-            }
-            nickName={item.nickname}></ProjectCard>)
+            {isLoading ?
+            <Spinner/>
+            :
+            contents.map((item) => {
+                console.log("ProjectSearch, item", item);
+                return(
+                <div className="mb-5">
+                <ProjectCard
+                _onClick={detailShow}
+                id={item._id}
+                key={item._id}
+                img={item.imgUrl[0]}
+                stack={item.stack}
+                text={item.title}
+                profileUrl={
+                item.profileUrl
+                }
+                nickName={item.nickname}></ProjectCard>
+                </div>)
 
-        })
-        }
+            })
+            }
 
 
         </div>
 
-        <div className="h-[10vh] w-full bg-slate-600" ref={ref}>
+        <div className="h-[10vh] w-full" ref={ref}>
           
         </div>
 

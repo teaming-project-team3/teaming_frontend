@@ -20,15 +20,16 @@ ${(props) => (props.$isMee ? "" : `hidden`)};
 
 const UserView = forwardRef((props, ref) => {
 
-    const {cameraOn, myVideo, profile, handleCamera, handleAudio, cameraStatus, audioStatus, $isMee, user, idx} = props;
+    const {cameraOn, myVideo, handleCamera, handleAudio, cameraStatus, 
+      audioStatus, $isMee, user, stats, _onMouseOver, idx, _onMouseOut, userDetailShow} = props;
 
-  console.log("userView Index, VideoRef", myVideo, idx);
+  console.log("userView Index, VideoRef", stats);
 
   return (
     <VideoCard className="videoCard">
 
         <VideoChatTemp
-        idx={props.idx}
+        idx={idx}
         user={user}
         $shows={cameraOn}
         $isMee={$isMee}
@@ -36,7 +37,8 @@ const UserView = forwardRef((props, ref) => {
         myVideo={myVideo}
         ></VideoChatTemp>
 
-        <UserCardTemp user={user} $shows={!cameraOn} id="userCard1" profile={profile}/>
+        <UserCardTemp user={user} $shows={!cameraOn} userDetailShow={userDetailShow}
+        id="userCard1" stats={stats} _onMouseOver={_onMouseOver} _onMouseOut={_onMouseOut}/>
 
         <ButtonsCard $isMee={$isMee}>
         <img

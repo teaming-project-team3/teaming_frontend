@@ -5,10 +5,9 @@ import UrlBlock from "./UrlBlock";
 function StatFamily(props) {
 
     const { stats, GitHubLogo } = props;
-    let profileUrl = "";
+    let nickname = "";
     let gitId = "";
     let portfolio = null;
-    let portfolio0 = null;
     let portfolio1 = null;
     let portfolio2 = null;
     let portfolio3 = null;
@@ -18,22 +17,27 @@ function StatFamily(props) {
     let backSkills = null;
     let designAbility = null;
     let designSkills = null;
-
+    let frontScore = null;
+    let backScore = null;
+    let designScore = null;
+    let reliability = null;
+    let cooperation = null;
+    let gitUrl = null;
     console.log("init : ", stats);
 
   if (stats && stats.length !== 0) {
-    profileUrl = stats.userId.profileUrl;
-
-    if (profileUrl) {
-      const gitURLArr = stats.portfolioUrl[0].url.split("/");
+    nickname = stats.userId.nickname;
+    gitUrl = stats.url;
+    if (gitUrl) {
+      const gitURLArr = gitUrl.split("/");
       gitId = gitURLArr[gitURLArr.length - 1];
       console.log("check gitId", gitId);
     }
-
-    portfolio0 = stats.portfolioUrl[0];
-    portfolio1 = stats.portfolioUrl[1];
-    portfolio2 = stats.portfolioUrl[2];
-    portfolio3 = stats.portfolioUrl[3];
+    portfolio = stats.portfolioUrl.length;
+    
+    portfolio1 = stats.portfolioUrl[0];
+    portfolio2 = stats.portfolioUrl[1];
+    portfolio3 = stats.portfolioUrl[2];
 
     console.log("portfolio", portfolio);
 
@@ -55,7 +59,23 @@ function StatFamily(props) {
     if (stats.design.skills) {
       designSkills = stats.design.skills;
     }
-    console.log("check");
+    if (stats.stack.front) {
+      frontScore = stats.stack.front;
+    }
+    if (stats.stack.back) {
+      backScore = stats.stack.back;
+    }
+    if (stats.stack.design) {
+      designScore = stats.stack.design;
+    }
+    if (stats.stack.cooperation) {
+      cooperation = stats.stack.cooperation;
+    }
+    if (stats.stack.reliability) {
+      reliability = stats.stack.reliability;
+    }
+
+    console.log("check", frontScore, backScore, designScore);
   }
 
   return (
@@ -68,16 +88,23 @@ function StatFamily(props) {
             />
 
             <ProfessionalBlock
+              stats={stats}
               frontAbility={frontAbility}
               frontSkills={frontSkills}
               backAbility={backAbility}
               backSkills={backSkills}
               designAbility={designAbility}
               designSkills={designSkills}
+              name={nickname}
+              frontScore={frontScore}
+              backScore={backScore}
+              designScore={designScore}
+              cooperation={cooperation}
+              reliability={reliability}
             />
 
             <UrlBlock
-            portfolio0={portfolio0}
+            url={gitUrl}
             GitHubLogo={GitHubLogo}
             />
 

@@ -6,16 +6,8 @@ import plus from "../../../static/images/createProject/plus.png"
 
 export const Images = (props) => {
     const [showImages, setShowImages] = useState([]);
-    const files = useSelector((state)=>state.image.image_files);
+    const files = useSelector((state)=>state.image.image_files?state.image.image_files:[]);
     const dispatch = useDispatch();
-
-    const { idx } = props;
-
-    console.log("files", files);
-
-    Images.defaultProps = {
-      idx:-1,
-    }
 
     useEffect(()=>{
 
@@ -26,6 +18,19 @@ export const Images = (props) => {
       })
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
+
+    if(props.idx!==-1){
+    if(!files||files===null||files===undefined||files.length===0){
+      return;
+    }
+    }
+    const { idx } = props;
+
+    console.log("files", files);
+
+    Images.defaultProps = {
+      idx:-1,
+    }
 
     // 이미지 상대경로 저장
     const handleAddImages = (event) => {
@@ -44,8 +49,9 @@ export const Images = (props) => {
         imageUrlLists.push(currentImageUrl);
       }
   
-      if (imageUrlLists.length > 10) {
-        imageUrlLists = imageUrlLists.slice(0, 10);
+      if (imageUrlLists.length > 3) {
+        window.alert("이미지는 3개까지 업로드 가능합니다!")
+        imageUrlLists = imageUrlLists.slice(0, 3);
       }
   
       setShowImages(imageUrlLists);
