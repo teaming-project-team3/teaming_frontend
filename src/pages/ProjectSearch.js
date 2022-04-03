@@ -7,6 +7,7 @@ import Spinner from "../Components/Organisms/Spinner";
 import { useInView } from "react-intersection-observer"
 import ProjectDetailModal from "./ProjectDetailModal";
 import { actionCreators } from "../redux/modules/projects";
+import Survey from "./Survey";
 
 const CategoryBtn = tw.div`
 rounded-3xl border-2 border-solid text-base 
@@ -14,7 +15,7 @@ box-border px-4 py-2 m-2 bg-white cursor-pointer
 ${(props) => (props.$isChecked? `border-[#7545F2]` : `border-[#E4E8EB]`)};
 `
 
-function ProjectSearch() {
+function ProjectSearch(props) {
     let isLoading = useSelector((state)=>state.projectsCategory.isLoading);
     const dispatch = useDispatch();
 
@@ -22,6 +23,7 @@ function ProjectSearch() {
     const devProjects = useSelector((state)=>state.projectsCategory.projectsDev);
     const designerProjects = useSelector((state)=>state.projectsCategory.projectsDesigner);
 
+    const [modalIsOpen, setModalIsOpen] = useState(props.blocker);
     const [contents, setContents] = useState(allProjects);
     const [check, setIsChecked] = useState(1);
     const [page, setPage] = useState([1,1,1]);
@@ -29,6 +31,12 @@ function ProjectSearch() {
     const [showDetail, setShowDetail] = useState(false);
 
     const [ref, inView] = useInView();
+
+    useEffect(()=>{
+      console.log("state!!! search!!!!!!!!!!!!!!!!!!!!")
+      setModalIsOpen(props.blocker);
+  
+    },[props.blocker])
 
     useEffect(()=>{
       console.log("in UseEffect with start");
@@ -107,7 +115,12 @@ function ProjectSearch() {
 
   return (
     <div className="flex w-screen h-fit bg-[#F2F3F7] justify-center pt-10 pb-10">
+        <Survey modalIsOpen={modalIsOpen} close={(checker)=>{
+          console.log("call props.setBlocker", checker)
+          props.setBlocker(checker)}
+          } className="z-10"></Survey>
         <ProjectDetailModal
+          setSurveyOpen={props.setBlocker}
           showDetail={showDetail}
           callBackSetShowFalse={() => {
             console.log("setShowDetailFalse");

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { titles } from "../Components/Organisms/main/data/titles";
 import MainBanner from "../Components/Organisms/main/MainBanner";
@@ -23,14 +23,13 @@ const Wrap = styled.div`
   background-color: #e5e5e5;
 `;
 
-function Main() {
-  const location = useLocation();
+function Main(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const surveyCheck = useSelector((state) => state.users.surveyCheck);
   const projectsData = useSelector((state) => state.projects.projectsMain);
   //const projectDetail = useSelector((state)=> state.projects.projectDetail)
-  const [modalIsOpen, setModalIsOpen] = useState(location.state)
+  const [modalIsOpen, setModalIsOpen] = useState(props.blocker);
   const [showDetail, setShowDetail] = useState(false);
   const [showUserDetail, setShowUserDetail] = useState(false);
   const rankList = useSelector((state)=>state.projects.projectsRank);
@@ -43,13 +42,19 @@ function Main() {
 
   let isLoading = useSelector((state)=>state.projects.isLoading);
 
-  console.log("main, projectsData : ", projectsData, isLoading, modalIsOpen);
+  console.log("main, projectsData : ", projectsData, isLoading, modalIsOpen, surveyCheck);
 
   useEffect(()=>{
+    console.log("state!!! main!!!!!!!!!!!!!!!!!!!!")
+    setModalIsOpen(props.blocker);
 
-    setModalIsOpen(location.state);
+  },[props.blocker])
 
-  },[location.state])
+  useEffect(()=>{
+    console.log("surveyCheck!!! main!!!!!!!!!!!!!!!!!!!!")
+    setModalIsOpen(surveyCheck);
+
+  },[surveyCheck])
 
   useEffect(() => {
     setTimeout(() => dispatch(actionCreators.loadProjectsMainAPI()), 1000);
@@ -60,13 +65,6 @@ function Main() {
 
   const detailShow = (id) => {
     console.log("project card clicked", id);
-
-    if(surveyCheck){
-      window.alert("설문조사 후에 프로젝트 생성이 가능합니다!")
-      console.log("surveyCheck", surveyCheck);
-      setModalIsOpen(surveyCheck);
-      return;
-    }
 
     dispatch(actionCreators.getProjectDetailAPI(id, ()=>{setShowDetail(true)}));
 
@@ -88,8 +86,9 @@ function Main() {
       {isLoading?
         <Spinner/>
         :
-      <><Survey modalIsOpen={modalIsOpen} close={setModalIsOpen} className="z-10"></Survey>
+      <><Survey modalIsOpen={modalIsOpen} close={props.setBlocker} className="z-10"></Survey>
       <ProjectDetailModal
+          setSurveyOpen={props.setBlocker}
           showDetail={showDetail}
           callBackSetShowFalse={() => {
             console.log("setShowDetailFalse");
@@ -126,7 +125,7 @@ function Main() {
                   else if(surveyCheck){
                     window.alert("설문조사 후에 프로젝트 생성이 가능합니다!")
                     console.log("surveyCheck", surveyCheck);
-                    setModalIsOpen(surveyCheck);
+                    props.setBlocker(surveyCheck);
                   }else{
                     navigate("/createProject");
                   }

@@ -65,7 +65,8 @@ function ProjectDetailModal(props) {
             confirm={() => {
               if(surveyCheck){
                 window.alert("설문조사 후에 프로젝트 생성이 가능합니다!")
-                navigate("/");
+                props.callBackSetShowFalse()
+                props.setSurveyOpen(true);
               }else{
                 navigate("/projectRoom", { state: data._id });
               }

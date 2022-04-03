@@ -446,7 +446,7 @@ const surveyAPI = (data, callback) => {
       .then((res)=>{
 
         console.log("survey API success", res)
-        dispatch(setSurveyChecker(res.data.success));
+        dispatch(setSurveyChecker(!res.data.success));
         callback();
       })
       .catch((err)=>{
