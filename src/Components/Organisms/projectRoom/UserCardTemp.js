@@ -14,8 +14,8 @@ function UserCardTemp(props) {
   }
 
   return (
-    <UserCardTw $shows={props.$shows} className="w-full h-full" onClick={()=>{userDetailShow(stats._id)}}
-    onMouseOver={()=>{_onMouseOver(stats.nickname)}} onMouseOut={()=>{_onMouseOut()}}>
+    <UserCardTw $shows={props.$shows} className="w-full h-full" onClick={()=>{userDetailShow(stats.userId)}}
+    onMouseOver={()=>{_onMouseOver(stats.userId)}} onMouseOut={()=>{_onMouseOut()}}>
       <div className="flex justify-center h-1/3 mb-[-6vh]">
         <img
           src={stats.profileUrl}

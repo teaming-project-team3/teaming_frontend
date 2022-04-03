@@ -25,6 +25,10 @@ UserDetailModal.defaultProps = {
   }
 }
 
+const nameManufacture = (name) => {
+  return name.split("&")[0]
+}
+
 function UserDetailModal(props) {
 
   //user의 id값 넘겨받으면 동작 -> loading을 넣을까말까?
@@ -53,28 +57,28 @@ function UserDetailModal(props) {
         
         
         <div className="flex justify-center w-screen mt-[-4.063rem]">
-          <Image shape="circle" src={data.userId.profileUrl?data.userId.profileUrl:""} size={"130"}></Image>
+          <Image shape="circle" src={data.userInfo.userId.profileUrl[0]} size={"130"}></Image>
         </div>
 
         <text className="flex justify-center mt-8 text-4xl font-notoB text-[#121414]">
           {()=>{
           console.log("data", data);
           }}
-          {data.userId.nickname?data.userId.nickname:""}
+          {nameManufacture(data.userInfo.userId.nickname)}
         </text>
         
         <text className="flex justify-center mt-4 text-[1.375rem] font-noto2 text-[#71797D]">
-          {data.position?data.position:"position"}
+          {data.userInfo.position}
         </text>
 
         <div className="flex justify-center">
           <text className="flex content-center mt-8 w-[80vh] text-[0.875rem] font-noto2 text-[#71797D] whitespace-pre-wrap">
-            {data.introduction}
+            {data.userInfo.introduction}
           </text>
         </div>
 
         <div className="flex justify-center w-full">
-        <StatFamily stats={data} GitHubLogo={GitHubLogo}/>
+        <StatFamily stats={data.userInfo} GitHubLogo={GitHubLogo}/>
         </div>
         
           

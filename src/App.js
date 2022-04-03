@@ -22,6 +22,7 @@ import VideoChat from "./pages/VideoChat";
 import ProjectSearch from "./pages/ProjectSearch";
 import Images from "./Components/Organisms/upload/Images";
 import Privacy from "./pages/Privacy";
+import ChatBox from "./Components/Organisms/DMChat/ChatBox";
 
 
 function App() {
@@ -46,10 +47,10 @@ function App() {
           <Route path="/auth/kakao/redirect" element={<KakaoRedirect />} />
           <Route path="/chat/join" element={<DMJoin/>}/>
           <Route path="/chat/dm" element={<DMChat/>}/>
-          <Route path="/chat/dm" element={<DMChat/>}/>
           <Route path="/testChat" element={<VideoChat/>}/>
           <Route path="/images" element={<Images/>}/>
           <Route path="/privacy" element={<Privacy/>} />
+          <Route path="/test" element={<ChatBox/>} />
         </Routes>
     </BrowserRouter>
   );
