@@ -27,7 +27,7 @@ function PortFolioCard(props) {
             </div>
           </div>
 
-          <div className="text-sm w-[34.5rem] mt-[0.813rem] text-gray-700 font-noto2">
+          <div className="text-sm w-full mt-[0.813rem] text-gray-700 font-noto2">
               {description}
           </div>
 

@@ -84,8 +84,6 @@ function EditBlockFamily(props) {
 
     console.log("sendPortfolio", portfolioList);
 
-    
-
     //dispatch(updatePortFolio(data));
 
   };

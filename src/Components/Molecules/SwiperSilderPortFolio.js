@@ -25,7 +25,7 @@ function SwiperSliderPortFolio(props) {
       <Swiper
         ref={setSwiper}
         shouldSwiperUpdate
-        style={{height:'10em', width:'10em'}}
+        style={{height:'10em', width:'15em'}}
         spaceBetween={50}
         slidesPerView={1}
         autoplay={{ delay: 2000 }}
@@ -43,15 +43,15 @@ function SwiperSliderPortFolio(props) {
         }}
         pagination={{ clickable: true }}
       >
-        <SwiperSlide><img className="w-[9.688rem] h-[9.938rem] rounded-[0.625rem]" src={imgUrlList[0]} alt={projectImg} /></SwiperSlide>
+        <SwiperSlide><img className="w-[15.688rem] h-[9.938rem] rounded-[0.625rem]" src={imgUrlList[0]} alt={projectImg} /></SwiperSlide>
         {imgUrlList.length>0 && imgUrlList[0] &&
-            <SwiperSlide><img className="w-[9.688rem] h-[9.938rem] rounded-[0.625rem]" src={imgUrlList[0]} alt={projectImg} /></SwiperSlide>
+            <SwiperSlide><img className="w-[15.688rem] h-[9.938rem] rounded-[0.625rem]" src={imgUrlList[0]} alt={projectImg} /></SwiperSlide>
         }
         {imgUrlList.length>0 && imgUrlList[1] &&
-            <SwiperSlide><img className="w-[9.688rem] h-[9.938rem] rounded-[0.625rem]" src={imgUrlList[1]} alt={projectImg} /></SwiperSlide>
+            <SwiperSlide><img className="w-[15.688rem] h-[9.938rem] rounded-[0.625rem]" src={imgUrlList[1]} alt={projectImg} /></SwiperSlide>
         }
         {imgUrlList.length>0 && imgUrlList[2] &&
-            <SwiperSlide><img className="w-[9.688rem] h-[9.938rem] rounded-[0.625rem]" src={imgUrlList[2]} alt={projectImg} /></SwiperSlide>
+            <SwiperSlide><img className="w-[15.688rem] h-[9.938rem] rounded-[0.625rem]" src={imgUrlList[2]} alt={projectImg} /></SwiperSlide>
         }
         <div ref={navigationPrevRef}>
           <img src={arrow} alt={"<"}/>
