@@ -36,7 +36,7 @@ function UserSlider(props) {
   const myVideo = useRef();
   const videoRef = useRef([]);
   
-  const [cameraOn, setCameraOn] = useState(true);
+  const [cameraOn, setCameraOn] = useState(false);
   const [audioOn, setAudioOn] = useState(false);
   const [userList, setUserList] = useState([]);
 
@@ -126,7 +126,7 @@ function UserSlider(props) {
 
     socket.on("offer", async (offer, remoteSocketId, remoteNickname, userStat) => {
       console.log("--------------------------client on.offer-----------------------------", remoteNickname, peopleInRoom, userStat);
-      const data = {targetRoomObjUsers:{socketId: remoteSocketId, nickName: remoteNickname, video: true, audio: false},
+      const data = {targetRoomObjUsers:{socketId: remoteSocketId, nickName: remoteNickname, video: false, audio: false},
                     usersStackObj: userStat};
       //setStatsList((prev)=>[...prev, userStat]);
       setUserList((prev)=>[...prev, data]);
@@ -203,7 +203,7 @@ function UserSlider(props) {
       const devices = await navigator.mediaDevices.enumerateDevices();
       const cameras = devices.filter((device) => device.kind === "videoinput");
       const currentCamera = myStream.getVideoTracks();
-
+      
       cameras.forEach((camera) => {
         const option = document.createElement("option");
         option.value = camera.deviceId;
@@ -247,6 +247,10 @@ function UserSlider(props) {
         // mute default
         myStream //
           .getAudioTracks()
+          .forEach((track) => (track.enabled = false));
+
+        myStream
+          .getVideoTracks()
           .forEach((track) => (track.enabled = false));
 
         await getCameras();
