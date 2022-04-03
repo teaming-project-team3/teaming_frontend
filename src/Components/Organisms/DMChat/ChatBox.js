@@ -28,9 +28,9 @@ const ChatBox = ( ) => {
             <div className="flex flex-row justify-center mt-10">
                 <div className="flex flex-col justify-center w-[16rem] h-[12rem] bg-[#FFFFFF] border-slate-400 shadow-xl rounded-xl border-3 mt-10 ml-8">
                     <div className="flex justify-center w-full h-1/3 left-50%">
-                        <div className="h-full -mt-20 bg-black rounded-full aspect-square"></div>
+                        <div className="h-full -mt-[4.5rem] bg-black rounded-full aspect-square"></div>
                     </div>
-                    <div className="flex justify-center -mt-5 text-black font-notoB"><p>공주님</p></div>
+                    <div className="flex justify-center -mt-6 text-black font-notoB"><p>공주님</p></div>
                     <div className="flex justify-center mt-2">
                         <svg width="17" height="2" viewBox="0 0 17 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 1H16.5" stroke="#121414"/>
@@ -41,9 +41,9 @@ const ChatBox = ( ) => {
 
                 <div className="flex flex-col justify-center w-[16rem] h-[12rem] bg-[#FFFFFF] border-slate-400 shadow-xl rounded-xl border-3 mt-10 ml-8">
                     <div className="flex justify-center w-full h-1/3 left-50%">
-                        <div className="h-full -mt-20 bg-black rounded-full aspect-square"></div>
+                        <div className="h-full -mt-[4.5rem] bg-black rounded-full aspect-square"></div>
                     </div>
-                    <div className="flex justify-center -mt-5 text-black font-notoB"><p>공주님</p></div>
+                    <div className="flex justify-center -mt-6 text-black font-notoB"><p>공주님</p></div>
                     <div className="flex justify-center mt-2">
                         <svg width="17" height="2" viewBox="0 0 17 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 1H16.5" stroke="#121414"/>
@@ -54,9 +54,9 @@ const ChatBox = ( ) => {
 
                 <div className="flex flex-col justify-center w-[16rem] h-[12rem] bg-[#FFFFFF] border-slate-400 shadow-xl rounded-xl border-3 mt-10 ml-8">
                     <div className="flex justify-center w-full h-1/3 left-50%">
-                        <div className="h-full -mt-20 bg-black rounded-full aspect-square"></div>
+                        <div className="h-full -mt-[4.5rem] bg-black rounded-full aspect-square"></div>
                     </div>
-                    <div className="flex justify-center -mt-5 text-black font-notoB"><p>공주님</p></div>
+                    <div className="flex justify-center -mt-6 text-black font-notoB"><p>공주님</p></div>
                     <div className="flex justify-center mt-2">
                         <svg width="17" height="2" viewBox="0 0 17 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 1H16.5" stroke="#121414"/>
@@ -64,6 +64,8 @@ const ChatBox = ( ) => {
                     </div>
                     <div className="flex justify-center mt-1 text-xs text-slate-500 font-noto"><p>Frontend Developer</p></div>
                 </div>
+
+                
 
             </div>
 
