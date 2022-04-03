@@ -3,6 +3,7 @@ import styled from "styled-components";
 import DatePicker from "react-datepicker";
 import { useEffect } from "react";
 import ImageArr from "../upload/ImageArr";
+import { ImageUploaded } from "../upload/ImageUploaded";
 
 const MyDatePicker = styled(DatePicker)`
   width: 90%;
@@ -19,6 +20,7 @@ export const Portfolio = (props) => {
   const [endDate, setEndDate] = useState(new Date());
   const [projectContents, setProjectContents] = useState(props.item.description);
   const [projectURL, setProjectURL] = useState(props.item.url);
+  const [imgList, setImgList] = useState(props.item.imageUrl);
   let portfolio = [];
   
   function dataFactory(){
@@ -27,7 +29,7 @@ export const Portfolio = (props) => {
       {
       id:props.idx,
       title: projectName,
-      image: "notUploaded! Tell to the front!",
+      imageUrl: imgList,
       description: projectContents,
       url: projectURL,
       period: endDate
@@ -39,10 +41,18 @@ export const Portfolio = (props) => {
 
   useEffect(()=>{
 
+    setProjectName(props.item.title?props.item.title:"");
+    setProjectContents(props.item.description?props.item.description:"");
+    setProjectURL(props.item.url?props.item.url:"");
+
+  },[props.item])
+
+  useEffect(()=>{
+
     dataFactory();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[projectName, projectContents, projectURL, endDate]);
+  },[projectName, projectContents, projectURL, endDate, imgList]);
   
   return (
     <div className="w-full h-full border-b-8">
@@ -60,7 +70,12 @@ export const Portfolio = (props) => {
       </div>
 
       <div className="flex w-full text-[1rem] justify-between text-black font-noto2 pt-8 pr-8 pb-8 ml-8 border-b-2">
-        <div className="w-1/3 pl-8">프로젝트 사진</div>
+        <div className="w-1/3 pl-8">추가한 이미지</div>
+        <ImageUploaded imgList={props.item.imageUrl} setImgList={setImgList}/>
+      </div>
+
+      <div className="flex w-full text-[1rem] justify-between text-black font-noto2 pt-8 pr-8 pb-8 ml-8 border-b-2">
+        <div className="w-1/3 pl-8">추가할 이미지</div>
         <ImageArr idx={props.idx}/>
       </div>
 

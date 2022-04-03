@@ -403,13 +403,14 @@ const loginAPI = (id, pwd, callback) => {
   };
 };
 
-export const updatePortFolio = (portfolioList, callback) => {
+export const updatePortFolio = (portfolioList, callback, resetCallBack) => {
   return function () {
 
     apis
       .updateUserInfo(portfolioList)
       .then((res)=>{
         console.log("updatePortFolio res", res);
+        resetCallBack();
         callback();
       })
       .catch((err)=>{

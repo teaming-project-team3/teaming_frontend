@@ -81,6 +81,7 @@ function StatFamily(props) {
   return (
     <div className="flex flex-col justify-center w-fit">
             <PortFolioBlock
+              gitId={gitId}
               portfolio={portfolio}
               portfolio1={portfolio1}
               portfolio2={portfolio2}
