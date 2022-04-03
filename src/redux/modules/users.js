@@ -32,6 +32,7 @@ const resetSkillsAction = createAction(RESET_SKILLS, (item) => ({ item }));
 const updateSkillsAction = createAction(UPDATE_SKILLS, (data) => ({ data }));
 const deleteAbilityAction = createAction(DELETE_ABILITY, (data) => ({ data }));
 const deleteSkillsAction = createAction(DELETE_SKILLS, (data)=>({ data }));
+//const setUserLogin = createAction(SET_IS_LOG_IN, (url) => ({ url }));
 
 
 // initialState
@@ -86,9 +87,9 @@ export function setNowUsers(users) {
   return { type: SET_NOW_PROJECT_USERS, users };
 }
 
-export function setIsLogIn() {
+export function setIsLogIn(imgUrl) {
   console.log("redux, setIsLogin")
-  return { type: SET_IS_LOG_IN, true: true};
+  return { type: SET_IS_LOG_IN, imgUrl};
 }
 
 export function setLogOut(){
@@ -159,9 +160,10 @@ const loginAPI = (id, pwd, callback) => {
         if(res.data.success){
         localStorage.setItem("userId", res.data.nickname);
         setCookie("token", res.data.Authorization, 1);
+        sessionStorage.setItem("token", res.data.Authorization);
         console.log("login completed", res);
         
-        dispatch(setIsLogIn());
+        dispatch(setIsLogIn(res.data.profileUrl));
         //surveyChecker 받아서 넘기기
         callback(res.data.suveyCheck);
         }
@@ -175,10 +177,27 @@ const loginAPI = (id, pwd, callback) => {
   };
 };
 
+export const updatePortFolio = (portfolioList, callback) => {
+  return function () {
+
+    apis
+      .updateUserInfo(portfolioList)
+      .then((res)=>{
+        console.log("updatePortFolio res", res);
+        callback();
+      })
+      .catch((err)=>{
+        console.log("updatePortFolio err",err);
+        callback();
+      })
+
+  };
+};
+
 
 const signUp = (data, callback) => {
   return function () {
-
+    console.log("signUp data", data);
     //회원가입 API 구현부
     apis
       .signup(data)
@@ -195,7 +214,7 @@ const signUp = (data, callback) => {
 
 const surveyAPI = (data, callback) => {
   return function () {
-
+    console.log("surbeyAPI",data);
     apis
       .survey(data)
       .then((res)=>{
@@ -233,6 +252,21 @@ const getMyStats = () => {
   }
 }
 
+export const updateUserInfoAPI = (data) => {
+  return function(dispatch){
+    console.log("data!",data);
+    apis
+      .updateUserInfo(data)
+      .then((res)=>{
+        console.log("updateUserInfo res",res);
+      })
+      .catch((err)=>{
+        console.log("updateUserInfo err", err);
+      })
+
+  }
+}
+
 // reducer
 export default handleActions(
   {
@@ -243,13 +277,17 @@ export default handleActions(
       }),
     [SET_IS_LOG_IN]: (state, action) =>
       produce(state, (draft) => {
+        console.log("SET_IS_LOG_IN reducer", action.imgUrl);
         draft.is_login = true;
+        draft.profileImage = action.imgUrl;
+        console.log("complete setIslogin")
       }),
     [LOG_OUT]: (state, action) =>
       produce(state, (draft) => {
         draft.is_login = false;
         deleteCookie("token");
         localStorage.removeItem("userId");
+        sessionStorage.removeItem("token");
       }),
     [GET_USER]: (state, action) => produce(state, (draft) => {}),
 
@@ -257,15 +295,15 @@ export default handleActions(
       produce(state, (draft) => {
         
         if(parseInt(action.position)===1){
-          const result = [...state.abilityFront, {name:action.item.value.toLowerCase(), time:0, rate:0}]
+          const result = [...state.abilityFront, { name:action.item.value.toLowerCase(), time:0, rate:0}]
 
           draft.abilityFront = result;
         }else if(parseInt(action.position)===2){
-          const result = [...state.abilityBack, {name:action.item.value.toLowerCase(), time:0, rate:0}]
+          const result = [...state.abilityBack, { name:action.item.value.toLowerCase(), time:0, rate:0}]
 
           draft.abilityBack = result;
         }else if(parseInt(action.position)===3){
-          const result = [...state.abilityDesigner, {name:action.item.value.toLowerCase(), time:0, rate:0}]
+          const result = [...state.abilityDesigner, { name:action.item.value.toLowerCase(), time:0, rate:0}]
 
           draft.abilityDesigner = result;
         }

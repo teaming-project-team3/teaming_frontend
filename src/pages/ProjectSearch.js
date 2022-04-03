@@ -1,13 +1,98 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import ProjectCard from "../Components/Organisms/main/ProjectCard";
-import ProjectImage from "../static/project.jpg";
+import tw from "tailwind-styled-components";
+import { loadProjectsCatMainAPI } from "../redux/modules/projectsCategory";
+import Spinner from "../Components/Organisms/Spinner";
+import { useInView } from "react-intersection-observer"
 
+const CategoryBtn = tw.div`
+rounded-3xl border-2 border-solid text-base 
+box-border px-4 py-2 m-2 bg-white cursor-pointer
+${(props) => (props.$isChecked? `border-[#7545F2]` : `border-[#E4E8EB]`)};
+`
 
 function ProjectSearch() {
+    let isLoading = useSelector((state)=>state.projectsCategory.isLoading);
+    const dispatch = useDispatch();
+
+    const allProjects = useSelector((state)=>state.projectsCategory.projectsAll);
+    const devProjects = useSelector((state)=>state.projectsCategory.projectsDev);
+    const designerProjects = useSelector((state)=>state.projectsCategory.projectsDesigner);
+
+    const [contents, setContents] = useState(allProjects);
+    const [check, setIsChecked] = useState(1);
+    const [page, setPage] = useState([1,1,1]);
+
+    const [ref, inView] = useInView();
+
+    useEffect(()=>{
+      console.log("in UseEffect with start");
+      //dispatch(loadProjectsCatMainAPI("rank",page[0]));
+      //setPage([page[0]+1,page[1],page[2]]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[]);
+
+    useEffect(()=>{
+      setContents(allProjects);
+    },[allProjects])
+
+    useEffect(()=>{
+      setContents(devProjects);
+    },[devProjects])
+
+    useEffect(()=>{
+      setContents(designerProjects);
+    },[designerProjects])
+
+    useEffect(()=>{
+      if(check===1){
+        console.log("in UseEffect inView");
+        dispatch(loadProjectsCatMainAPI("rank",page[0]));
+        setPage([page[0]+1,page[1],page[2]+1]);
+        setContents(allProjects);
+      }else if(check===2){
+        dispatch(loadProjectsCatMainAPI("dev",page[1]));
+        setPage([page[0],page[1]+1,page[2]]);
+        setContents(devProjects);
+      }else if(check===3){
+        dispatch(loadProjectsCatMainAPI("design",page[2]));
+        setPage([page[0],page[1],page[2]+1]);
+        setContents(designerProjects);
+      }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[inView])
+
+    const clickAllProject = () => {
+
+        setContents(allProjects);
+        setIsChecked(1);
+        
+    }
+
+    const clickDevProject = () => {
+        
+        //dispatch(loadProjectsCatMainAPI("dev",page[1]));
+        //setPage([page[0],page[1]+1,page[2]]);
+        setContents(devProjects);
+        setIsChecked(2);
+        
+    }
+
+    const clickDesignProject = () => {
+        
+        //dispatch(loadProjectsCatMainAPI("design",page[2]));
+        //setPage([page[0],page[1],page[2]+1]);
+        setContents(designerProjects);
+        setIsChecked(3);
+        
+    }
+
 
   return (
     <div className="flex w-screen h-fit bg-[#F2F3F7] justify-center pt-10 pb-10">
-      <div className="flex flex-col w-[80vw]">
+      <div className="flex flex-col w-[90vw]">
         
         <div className="">
           <div className="text-3xl text-gray-900">👊 너! 내 동료가 돼라!</div>
@@ -15,53 +100,36 @@ function ProjectSearch() {
         </div>
 
         <div className="flex">
-            <div className="rounded-3xl border-[#7545F2] border-2 border-solid text-base box-border px-4 py-2 m-2 bg-white">✏️ 전체</div>
-            <div className="rounded-3xl border-[#E4E8EB] border-2 border-solid text-base box-border px-4 py-2 m-2 bg-white">💻 개발자</div>
-            <div className="rounded-3xl border-[#E4E8EB] border-2 border-solid text-base box-border px-4 py-2 m-2 bg-white">🎨 디자이너</div>
+            <CategoryBtn onClick={clickAllProject} $isChecked={check===1}>✏️ 전체</CategoryBtn>
+            <CategoryBtn onClick={clickDevProject} $isChecked={check===2}>💻 개발자</CategoryBtn>
+            <CategoryBtn onClick={clickDesignProject} $isChecked={check===3}>🎨 디자이너</CategoryBtn>
         </div>
 
         <div className="flex flex-wrap w-full">
-        <ProjectCard
-        img={ProjectImage}
-        stack={"Back-End"}
-        text={"파이썬으로 배우는 금융공학/퀀트"}
-        profileUrl={
-          "https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927"
-        }
-        nickName={"우아한형제"}></ProjectCard>
-        <ProjectCard
-        img={ProjectImage}
-        stack={"Back-End"}
-        text={"파이썬으로 배우는 금융공학/퀀트"}
-        profileUrl={
-          "https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927"
-        }
-        nickName={"우아한형제"}></ProjectCard>
-        <ProjectCard
-        img={ProjectImage}
-        stack={"Back-End"}
-        text={"파이썬으로 배우는 금융공학/퀀트"}
-        profileUrl={
-          "https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927"
-        }
-        nickName={"우아한형제"}></ProjectCard>
-        <ProjectCard
-        img={ProjectImage}
-        stack={"Back-End"}
-        text={"파이썬으로 배우는 금융공학/퀀트"}
-        profileUrl={
-          "https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927"
-        }
-        nickName={"우아한형제"}></ProjectCard>
-        <ProjectCard
-        img={ProjectImage}
-        stack={"Back-End"}
-        text={"파이썬으로 배우는 금융공학/퀀트"}
-        profileUrl={
-          "https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927"
-        }
-        nickName={"우아한형제"}></ProjectCard>
+        
+        {isLoading ?
+        <Spinner/>
+        :
+        contents.map((item) => {
+            console.log("ProjectSearch, item", item);
+            return(<ProjectCard
+            key={item._id}
+            img={item.imgUrl[0]}
+            stack={item.stack}
+            text={item.title}
+            profileUrl={
+            item.profileUrl
+            }
+            nickName={item.nickname}></ProjectCard>)
 
+        })
+        }
+
+
+        </div>
+
+        <div className="h-[10vh] w-full bg-slate-600" ref={ref}>
+          
         </div>
 
       </div>

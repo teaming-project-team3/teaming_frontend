@@ -1,7 +1,8 @@
 import Image from "../Atoms/Image";
 import urlClip from "../../static/images/userStats/urlClip.png";
+import SwipeSliderPortFolio from "../Molecules/SwiperSilderPortFolio"
 
-function FortFolioCard(props) {
+function PortFolioCard(props) {
 
   const { title, description, imageUrl, period, url } = props;
   console.log("props.Card", title, description, imageUrl, period, url);
@@ -12,9 +13,9 @@ function FortFolioCard(props) {
     <>
       {/* 포트폴리오 카드 1개 */}
       <div className="flex ml-[3.6rem] mt-7 border-2 mr-[6.875rem]">
-        <div className="w-[9.688rem] h-[9.938rem] rounded-[0.625rem]">
-          <Image src={imageUrl} shape="rectangle"></Image>
-        </div>
+
+          <SwipeSliderPortFolio imgUrlList={imageUrl}/>
+        
         <div className="flex flex-col mt-[0.938rem]">
           <div className="flex">
             <div className="text-base font-bold text-gray-900">
@@ -35,6 +36,7 @@ function FortFolioCard(props) {
               <Image src={urlClip} shape="rectangle"></Image>
             </div>
             <div className="text-[#593CE5] text-[0.875rem]">
+              
               {url}
             </div>
           </div>
@@ -44,7 +46,7 @@ function FortFolioCard(props) {
   );
 }
 
-export default FortFolioCard;
+export default PortFolioCard;
 
 
 

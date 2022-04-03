@@ -50,3 +50,31 @@ export const proficiency =
 { value: "3", label: "중" },
 { value: "4", label: "상" },
 ]
+
+
+export const requiredSkillsInit = 
+    [
+    { value: "java", label: "java" },
+    { value: "c", label: "c" },
+    { value: "c++", label: "c++" },
+    { value: "c#", label: "c#" },
+    { value: "javascript", label: "javascript" },
+    { value: "python", label: "python" },
+    { value: "php", label: "php" },
+    { value: "r", label: "r" },
+    { value: "swift", label: "swift" },
+    { value: "ruby", label: "ruby" },
+    { value: "kotlin", label: "kotlin" },
+    { value: "sql", label: "sql" },
+    { value: "react", label: "react" },
+    { value: "flutter", label: "flutter" },
+    { value: "node.js", label: "node.js" },
+    { value: "spring", label: "spring" },
+    { value: "express.js", label: "express.js" },
+    { value: "django", label: "django" },
+    { value: "vue", label: "vue" },
+    { value: "angular", label: "angular" },
+    { value: "jquery", label: "jquery" },
+    { value: "ruby on rails", label: "ruby on rails" },
+    { value: "laravel", label: "laravel" },
+  ]

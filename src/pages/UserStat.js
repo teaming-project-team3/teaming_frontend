@@ -1,74 +1,50 @@
 /* eslint-disable no-const-assign */
 import * as React from "react";
-import RadarChart from "../Components/Molecules/RadarChart";
 import Image from "../Components/Atoms/Image";
-import FortFolioCard from "../Components/Organisms/FortFolioCard";
 import GitHubLogo from "../static/images/userStats/gitLogo.png";
-import UrlLink from "../Components/Molecules/UrlLink";
 import { actionCreators } from "../redux/modules/users";
 import { useDispatch, useSelector } from "react-redux";
-import ProficiencyBadge from "../Components/Molecules/ProficiencyBadge";
+import StatFamily from "../Components/Organisms/userStat/StatFamily";
+import tw from "tailwind-styled-components";
+import EditBlockFamily from "../Components/Organisms/userEdit/EditBlockFamily";
+import InvolvedProject from "../Components/Organisms/InvolvedProject/InvolvedProject";
+
+const CategoryBtn = tw.div`
+rounded-[0.625rem] p-2.5 text-gray-900 text-sm mb-3 cursor-pointer
+${(props) => (props.$isChecked? `bg-slate-200 font-notoB` : `font-noto2`)};
+`
 
 export default function UserStat() {
   const dispatch = useDispatch();
   const stats = useSelector((state) => state.users.myStats);
   const [isLeader, setIsLeader] = React.useState(false);
-  
+  const [check, setIsChecked] = React.useState(1);
+  const abilityFront = useSelector((state) => state.users.abilityFront);
+  const skillsFront = useSelector((state) => state.users.skillsFront);
+  const abilityBack = useSelector((state) => state.users.abilityBack);
+  const skillsBack = useSelector((state) => state.users.skillsBack);
+  const abilityDesigner = useSelector((state) => state.users.abilityDesigner);
+  const skillsDesigner = useSelector((state) => state.users.skillsDesigner);
+  const [type_num, setType] = React.useState("1");
+
   let userNickName = "";
   let userPosition = "";
   let profileUrl = "";
   let gitId = "";
-  let portfolio = null;
-  let portfolio0 = null;
-  let portfolio1 = null;
-  let portfolio2 = null;
-  let portfolio3 = null;
-  let frontAbility = null;
-  let frontSkills = null;
-  let backAbility = null;
-  let backSkills = null;
-  let designAbility = null;
-  let designSkills = null;
 
   console.log("init : ", stats);
 
-  if (stats.length !== 0) {
+  if (stats && stats.length !== 0) {
     userNickName = stats.userId.nickname;
     userPosition = stats.position;
     profileUrl = stats.userId.profileUrl;
 
-    if(profileUrl){
-    const gitURLArr = stats.portfolioUrl[0].url.split("/");
-    gitId = gitURLArr[gitURLArr.length - 1];
-    console.log("check gitId", gitId);
+    if (profileUrl) {
+      const gitURLArr = stats.portfolioUrl[0].url.split("/");
+      gitId = gitURLArr[gitURLArr.length - 1];
+      console.log("check gitId", gitId);
     }
-    
-    portfolio0 = stats.portfolioUrl[0];
-    portfolio1 = stats.portfolioUrl[1];
-    portfolio2 = stats.portfolioUrl[2];
-    portfolio3 = stats.portfolioUrl[3];
 
-    console.log("portfolio", portfolio);
-
-    if(stats.front.ability){
-      frontAbility = stats.front.ability;
-    }
-    if(stats.front.skills){
-      frontSkills = stats.front.skills;
-    }
-    if(stats.back.ability){
-      backAbility = stats.back.ability;
-    }
-    if(stats.back.skills){
-      backSkills = stats.back.skills;
-    }
-    if(stats.design.ability){
-      designAbility = stats.design.ability;
-    }
-    if(stats.design.skills){
-      designSkills = stats.design.skills;
-    }
-    console.log("check");
   }
 
   React.useEffect(() => {
@@ -78,8 +54,27 @@ export default function UserStat() {
 
     //userStatsAPI연동할것
     dispatch(actionCreators.getMyStats());
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const positions = React.useMemo(
+    () => [
+      { value: "Dev/FrontEnd", label: "Dev/FrontEnd" },
+      { value: "Dev/BackEnd", label: "Dev/BackEnd" },
+      { value: "Designer", label: "Designer" },
+    ],
+    []
+  );
+
+  const checkType = (e) => {
+    if (e.target.value === "1") {
+      setType("1");
+    } else if (e.target.value === "2") {
+      setType("2");
+    } else if (e.target.value === "3") {
+      setType("3");
+    }
+  };
 
   return (
     <>
@@ -107,104 +102,40 @@ export default function UserStat() {
 
         <div className="flex justify-center w-screen mt-[4.313rem]">
           <div className="bg-white h-fit w-[12.813rem] mr-7 p-4 box-border rounded-[0.625rem]">
-            <div className="bg-slate-200 rounded-[0.625rem] p-2.5 font-notoB text-gray-900 text-sm mb-3">
-              포트폴리오
-            </div>
-            <div className="rounded-[0.625rem] p-2.5 font-noto2 text-gray-900 text-sm mb-3">
-              전문분야
-            </div>
-            <div className="rounded-[0.625rem] p-2.5 font-noto2 text-gray-900 text-sm">
-              URL
-            </div>
+            <CategoryBtn $isChecked={check===1} onClick={()=>{setIsChecked(1)}}>
+              마이페이지
+            </CategoryBtn>
+            <CategoryBtn $isChecked={check===2} onClick={()=>{setIsChecked(2)}}>
+              참여프로젝트
+            </CategoryBtn>
+            <CategoryBtn
+              // onClick={() => {
+              //   navigate("/userEdit");
+              // }}
+              $isChecked={check===3} 
+              onClick={()=>{setIsChecked(3)}}
+            >
+              정보수정
+            </CategoryBtn>
           </div>
 
-          {/* 포트폴리오 블럭 */}
-          <div className="h-[67.625rem] w-[54.688rem] bg-white box-border rounded-[0.625rem]">
-            <div className="text-xl font-bold font-noto2 mt-7 ml-[1.8rem] pl-[1.8rem] pb-6 border-b-2 border-gray-900">
-              포트폴리오
-            </div>
+          
+          {check===1 &&
+            <StatFamily stats={stats} GitHubLogo={GitHubLogo}/>
+          }
+          
+          {check===2 &&
+            <InvolvedProject/>
+          }
 
-            {/* 깃헙 잔디 */}
-            <div className="flex ml-[3.6rem] mt-7 border-2 mr-[6.875rem]">
-              <img src={`https://ghchart.rshah.org/${gitId}`} alt="" />
-            </div>
+          {check===3 &&
+             <EditBlockFamily stats={stats} abilityFront={abilityFront}
+             abilityBack={abilityBack} abilityDesigner={abilityDesigner} skillsFront={skillsFront}
+             skillsBack={skillsBack} skillsDesigner={skillsDesigner} type_num={type_num}
+             checkType={checkType} positions={positions} />
+          }
 
-            {portfolio==null &&
-              <div className="w-full text-center">
-                포트폴리오가 없습니다. 당신의 포트폴리오를 추가해보세요!
-              </div>
-            }
-
-            {portfolio1!==undefined && portfolio1 && (
-              <FortFolioCard
-                title={portfolio1.title}
-                description={portfolio1.description}
-                imageUrl={portfolio1.imageUrl}
-                url={portfolio1.url}
-                period={portfolio1.period}
-              ></FortFolioCard>
-            )}
-
-            {portfolio2 && portfolio2!==undefined && (
-              <FortFolioCard
-                title={portfolio2.title}
-                description={portfolio2.description}
-                imageUrl={portfolio2.imageUrl}
-                url={portfolio2.url}
-                period={portfolio2.period}
-              ></FortFolioCard>
-            )}
-
-            {portfolio3 && portfolio3!==undefined && (
-              <FortFolioCard
-                title={portfolio3.title}
-                description={portfolio3.description}
-                imageUrl={portfolio3.imageUrl}
-                url={portfolio3.url}
-                period={portfolio3.period}
-              ></FortFolioCard>
-            )}
-          </div>
-        </div>
-
-        <div className="flex justify-center w-screen h-screen mb-10">
-          <div className="mt-[2.188rem] ml-[14.5rem] h-full w-[54.688rem] bg-white box-border rounded-[0.625rem]">
-            <div className="text-xl font-bold font-noto2 mt-7 ml-[1.8rem] pl-[1.8rem] pb-6 border-b-2 border-gray-900">
-              전문분야
-            </div>
-
-            <div className="flex mt-[1rem] ml-[1.8rem] h-full">
-              <div className="flex flex-wrap w-3/5">
-
-                <ProficiencyBadge position={"Front-End"} ability={frontAbility} skills={frontSkills}/>
-                
-                <ProficiencyBadge position={"Back-End"} ability={backAbility} skills={backSkills}/>
-
-                <ProficiencyBadge position={"Design"} ability={designAbility} skills={designSkills}/>
-                
-              </div>
-
-              <div className="h-[15.938rem] w-[15.938rem]">
-                <RadarChart curr={"userA"}></RadarChart>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex justify-start">
-          <div className="mt-[2.188rem] ml-[23.5rem] mb-[2.188rem] h-[26.438rem] w-[27rem] bg-white box-border rounded-[0.625rem]">
-            <div className="text-xl font-bold font-noto2 mt-7 ml-[1.8rem] pl-[1.8rem] pb-6 border-b-2 border-gray-900">
-              URL
-            </div>
-
-            {portfolio0 && (
-              <UrlLink logo={GitHubLogo} url={portfolio0.url}></UrlLink>
-            )}
-
-            {/* <UrlLink logo={GitHubLogo} url={"https://Behance.com/heeyeon9578"}></UrlLink>
-
-            <UrlLink logo={GitHubLogo} url={"https://Behance.com/heeyeon9578"}></UrlLink> */}
-          </div>
+          
         </div>
       </div>
     </>

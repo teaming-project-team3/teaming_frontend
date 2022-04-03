@@ -44,17 +44,13 @@ function UserSlider(props) {
   const [audioOn, setAudioOn] = useState(false);
   const [userList, setUserList] = useState([]);
   //const initList = [1,2,3,4,5,6];
-  const userListRedux = props.users;
+  //const userListRedux = props.users;
   localStorage.setItem("count",0);
   
   let userInfo = [];
 
-  console.log("userList", userList, userListRedux);
+  console.log("userList", userList);
   //const videoRef = useRef(userList.map(() => createRef()));
-
-
-
-
   //const camerasSelect = document.getElementsByClassName("cameras");
 
   useEffect(() => {
@@ -69,7 +65,7 @@ function UserSlider(props) {
     if (socket.disconnected) {
       socket.connect();
     }
-    
+    console.log("mySocket Info", socket);
     socket.emit("join_room", { roomName: room, nickName: name });
 
     socket.on("accept_join", async (userObjArr) => {
@@ -97,7 +93,12 @@ function UserSlider(props) {
             userObjArr[i].nickName,
             i
           );
-          const offer = await newPC.createOffer();
+          console.log("offerToReceiveVideo!!!!!")
+          const offer = await newPC.createOffer({
+            //추가부분
+            offerToReceiveAudio: true,
+            offerToReceiveVideo: true,
+          });
           await newPC.setLocalDescription(offer);
           socket.emit("offer", {
             offer: offer,
@@ -126,7 +127,11 @@ function UserSlider(props) {
       try {
         const newPC = createConnection(remoteSocketId, remoteNickname);
         await newPC.setRemoteDescription(offer);
-        const answer = await newPC.createAnswer();
+        console.log("AnswerToReceiveVideo!!!!!");
+        const answer = await newPC.createAnswer({
+            offerToReceiveVideo: true,
+            offerToReceiveAudio: true,
+          });
         await newPC.setLocalDescription(answer);
         socket.emit("answer", {
           answer: answer,
@@ -277,6 +282,7 @@ function UserSlider(props) {
         },
       ],
     });
+    
     myPeerConnection.addEventListener("icecandidate", (event) => {
       handleIce(event, remoteSocketId);
     });
@@ -316,7 +322,7 @@ function UserSlider(props) {
   }
 
   function paintPeerFace(peerStream, id, remoteNickname, idx) {
-    console.log("peerStream : ", peerStream, userList, idx, remoteNickname, userListRedux, peopleInRoom);
+    console.log("peerStream : ", peerStream, userList, idx, remoteNickname, peopleInRoom);
 
     //새로 참여한 유저의 index가 항상 length+1이 될까??
     if(idx===undefined||idx===null){
@@ -339,7 +345,7 @@ function UserSlider(props) {
   function addVideoStream(video, stream) {
     console.log("addVideoStream : ", stream, video);
     video.srcObject = stream;
-
+    console.log("video.srcObject : ", video.srcObject);
     video.addEventListener("loadedmetadata", () => {
       video.play();
     });
@@ -407,11 +413,10 @@ function UserSlider(props) {
         <div className="w-fit h-[80vh] bg-[#F2F3F7]">
           <div className="flex flex-wrap">
             
-
             {userList.map((user, idx)=>{
-              console.log("idx in map!!!", idx)
+              console.log("idx in map!!!", idx, user.socketId, socket.id);
               //본인만 버튼 뜨도록
-              if(user.nickName===name){
+              if(user.socketId===socket.id){
               return(<UserView
               key={user.nickName}
               idx={-1}
@@ -428,6 +433,7 @@ function UserSlider(props) {
               }else{
               //타인
               return(<UserView
+              $isMee={false}
               key={user.nickName}
               idx={idx}
               user={user}
@@ -439,27 +445,8 @@ function UserSlider(props) {
             })
             }
 
-            
-
           </div>
         </div>
-
-        {/* <div className="w-fit h-[80vh] bg-[#F2F3F7]">
-                <div className="flex">
-                  <UserCard profile={exUser}></UserCard>
-
-                  <UserCard profile={exUser}></UserCard>
-
-                  <UserCard profile={exUser}></UserCard>
-                </div>
-                <div className="flex">
-                  <UserCard profile={exUser}></UserCard>
-
-                  <UserCard profile={exUser}></UserCard>
-
-                  <UserCard profile={exUser}></UserCard>
-                </div>
-        </div> */}
       </Slider>
     </div>
   );

@@ -97,10 +97,10 @@ http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/userEdit
             <h5>Fulfilled</h5>
             <ul>
                 <li>init view</li>
+                <li>apply design</li>
             </ul>
             <h5>Pending</h5>
             <ul>
-                <li>apply design</li>
                 <li>api link with min-su zzang</li>
                 <li>category view data</li>
                 <li>DM alarm on the header</li>
@@ -154,10 +154,10 @@ http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/userEdit
                 <li>apply image upload to S3 and get URL</li>
                 <li>apply multi selector inputs for jobs</li>
                 <li>api link to Min-su-Zzing</li>
+                <li>apply design</li>
             </ul>
             <h5>Pending</h5>
             <ul>
-                <li>apply design</li>
             </ul>
             <h5>rejected</h5>
             <ul>
@@ -178,12 +178,12 @@ http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/userEdit
             <ul>
                 <li>init view</li>
                 <li>apply Markdown viewer</li>
+                <li>button to enter-room, using socket</li>
             </ul>
             <h5>Pending</h5>
             <ul>
                 <li>apply design</li>
                 <li>api link to min-su-zzing</li>
-                <li>button to enter-room, using socket</li>
             </ul>
             <h5>rejected</h5>
             <ul>
@@ -207,14 +207,14 @@ http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/userEdit
                 <li>Other users info view, Radar chart Mouse Hover Event</li>
                 <li>slider, react-slick</li>
                 <li>socket.io only or socket.io with webRTC data channel N:N chat</li>
+                <li>webRTC N:N Video call</li>
+                <li>realtime users video status change, using socket</li>
             </ul>
             <h5>Pending</h5>
             <ul>
                 <li>apply design</li>
-                <li>api link to min-su-zzing</li>
-                <li>exit room button, using socket</li>
                 <li>start project button, change the chatting to saving data</li>
-                <li>webRTC N:N Video call</li>
+                <li>Audio fix required</li>
             </ul>
             <h5>rejected</h5>
             <ul>
@@ -237,15 +237,15 @@ http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/userEdit
                 <li>apply Radar Chart, Chart.js</li>
                 <li>apply Git-hub zan-di view</li>
                 <li>skill windows</li>
+                <li>apply design</li>
+                <li>apply api user data on the project cards</li>
+                <li>apply api user data on the details</li>
             </ul>
             <h5>Pending</h5>
             <ul>
-                <li>apply design</li>
                 <li>api link to min-su-zzing/won-jin-zzang</li>
                 <li>apply api user data on a Radar chart</li>
                 <li>apply api user data on the skill windows</li>
-                <li>apply api user data on the project cards</li>
-                <li>apply api user data on the details</li>
                 <li>button to send DM to the user</li>
             </ul>
             <h5>rejected</h5>
@@ -302,32 +302,6 @@ http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com/userEdit
             <ul>
                 <li>apply design</li>
                 <li>api link to won-jin-zzang</li>
-            </ul>
-            <h5>rejected</h5>
-            <ul>
-                <li>null</li>
-            </ul>
-        </td>
-    </tr>
-</table>
-
-
-<br>
-<h4><b>📰 Video Call Page 📰</b></h4>
-
-<table width="100%">
-    <tr>
-        <!-- <td width="50%"><img src="https://user-images.githubusercontent.com/55970155/155251199-671a7011-385b-40d1-8700-5a01f088952b.PNG" /></td> -->
-        <td width="50%">
-            <h5>Fulfilled</h5>
-            <ul>
-                <li>init view, Project Room page</li>
-            </ul>
-            <h5>Pending</h5>
-            <ul>
-                <li>apply design</li>
-                <li>api link to min-su-zzing</li>
-                <li>construct webRTC, socket.io to build Video call</li>
             </ul>
             <h5>rejected</h5>
             <ul>

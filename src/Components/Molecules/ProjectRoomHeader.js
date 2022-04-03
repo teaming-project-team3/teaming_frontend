@@ -1,15 +1,15 @@
 import backArrow from "../../static/images/projectRoom/backPress.svg";
-import onlineIcon from '../../icons/onlineIcon.png'
+//import onlineIcon from '../../icons/onlineIcon.png'
 
 
 function ProjectRoomHeader(props) {
     
-    const {users} = props;
+    //const {users} = props;
   
     return (
         <div className="flex h-[10vh] w-screen items-center">
           
-        <div className="flex items-center justify-center h-full aspect-square">
+        <div className="flex items-center justify-center h-full cursor-pointer aspect-square" onClick={()=>{props.goBack()}}>
           <img src={backArrow} alt={""}></img>
         </div>
 
@@ -20,7 +20,7 @@ function ProjectRoomHeader(props) {
         
         {/* {isLeader && <Button>프로젝트 시작!</Button>} */}
 
-        <div className="flex m-10 font-noto2 justify-items-center">
+        {/* <div className="flex m-10 font-noto2 justify-items-center">
           {users ? (
             <div>
               <div className='activeContainer'>
@@ -37,7 +37,7 @@ function ProjectRoomHeader(props) {
               </div>
             </div>
             ) : null}
-        </div>
+        </div> */}
 
 
       </div>

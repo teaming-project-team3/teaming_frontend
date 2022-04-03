@@ -1,8 +1,7 @@
 import './S3Upload.css';
-import { Row, Col, Input } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 import { useDispatch } from 'react-redux';
 import {actionCreators as imageActions} from "../../../redux/modules/image";
-
 
 export default function S3Upload(){
     const dispatch = useDispatch();
@@ -39,7 +38,7 @@ export default function S3Upload(){
           <div className="App-body">
             <Row>
               <Col>
-                <Input className="overflow-hidden" type="file" onChange={handleFileInput}/>
+                <input className="overflow-hidden" type="file" onChange={handleFileInput}/>
               </Col>
             </Row>
           </div>

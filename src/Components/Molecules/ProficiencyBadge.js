@@ -16,9 +16,9 @@ function ProficiencyBadge(props) {
 
     <div className="flex">
       {ability &&
-        ability.map((item) => {
+        ability.map((item, idx) => {
           return (
-            <div className="m-1 h-1/5">
+            <div key={idx} className="m-1 h-1/5">
               <img
                 src={`https://img.shields.io/badge/${item.name}-3776AB?style=for-the-badge&logo=${item.name}&logoColor=white`}
                 alt={""}
@@ -28,11 +28,11 @@ function ProficiencyBadge(props) {
         })}
     </div>
 
-    <div className="flex">
+    <div className="flex">  
       {skills &&
-        skills.map((item) => {
+        skills.map((item, idx) => {
           return (
-            <div className="w-1/5 m-1 h-1/5">
+            <div key={idx} className="w-1/5 m-1 h-1/5">
               <img
                 src={`https://img.shields.io/badge/${item.name}-3776AB?style=for-the-badge&logo=${item.name}&logoColor=white`}
                 alt={""}

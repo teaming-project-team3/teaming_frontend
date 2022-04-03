@@ -17,7 +17,8 @@ api.interceptors.request.use(function (config) {
 });
 
 apiMS.interceptors.request.use(function (config) {
-  const accessToken = getCookie("token");
+  //const accessToken = getCookie("token");
+  const accessToken = sessionStorage.getAttribute("token");//세션 read
   config.headers.common["Authorization"] = `${accessToken}`;
   //config.headers.common["authorization"] = `Bearer ${accessToken}`;
   return config;
@@ -29,6 +30,7 @@ export const apisMS = {
   getProjectDetailAPI: (boardId) => apiMS.get(`/boards/${boardId}`),
   //createProject
   createProjectAPI: (data) => apiMS.post("/boards", data),
+  loadProjectsCatMain: (category, page) => apiMS.get(`/boards/category/${category}/${page}`),
 
 }
 
@@ -59,6 +61,8 @@ export const apis = {
   signup: (data) => api.post("/auth/signup", data),
   login: (data) => api.post("/auth/signin", data ),
   survey: (data) => api.post("/users/suvey", data),
+  updateUserInfo: (data) => api.put("/users", data),
+
 
   loadProjectsMain: () => api.get("/boards"),
   getProjectDetailAPI: (boardId) => api.get(`/boards/${boardId}`),
