@@ -10,6 +10,7 @@ function ProficiencyBadge(props) {
   };
 
   function colorDesignator(item) {
+    console.log("Ability Color Designator!!", item.time + item.rate, item);
     switch (item.time + item.rate) {
       case 2:
         return "61DAFB";
@@ -31,6 +32,7 @@ function ProficiencyBadge(props) {
   }
 
   function skillColorDesignator(item) {
+    console.log("Skill Color Designator!!", item.time + item.rate, item);
     switch (item.time + item.rate) {
       case 2:
         return "FF6550";
