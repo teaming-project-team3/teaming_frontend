@@ -22,6 +22,7 @@ const SET_MY_STATS = "SET_MY_STATS";
 const ADD_NOW_PROJECT_USER = "ADD_NOW_PROJECT_USER";
 const SET_MY_PROJECTS = "SET_MY_PROJECTS";
 const SET_SELECTED_USER_INFO = "SET_SELECTED_USER_INFO";
+const SET_SURVEY_CHECKER = "SET_SURVEY_CHECKER";
 
 // action creators
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
@@ -43,7 +44,7 @@ const setSelectedUSerInfoCA = createAction(SET_SELECTED_USER_INFO,(data)=>({data
 const initialState = {
   user: null,
   is_login: false,
-  surveyChecker: false,
+  surveyCheck: false,
   profileImage: null,
   abilityFront: [],
   skillsFront: [],
@@ -283,9 +284,9 @@ export function setNowUsers(users) {
   return { type: SET_NOW_PROJECT_USERS, users };
 }
 
-export function setIsLogIn(imgUrl) {
+export function setIsLogIn(imgUrl, surveyCheck) {
   console.log("redux, setIsLogin")
-  return { type: SET_IS_LOG_IN, imgUrl};
+  return { type: SET_IS_LOG_IN, imgUrl, surveyCheck};
 }
 
 export function setLogOut(){
@@ -308,6 +309,9 @@ export function setSelectedUSerInfo(data){
   return { type: SET_SELECTED_USER_INFO, data }
 }
 
+export function setSurveyChecker(checker){
+  return { type : SET_SURVEY_CHECKER, checker }
+}
 
 //middleWare
 export const resetAbilityAPI = (arrAbility) => {
@@ -385,7 +389,7 @@ const loginAPI = (id, pwd, callback) => {
         sessionStorage.setItem("token", res.data.Authorization);
         console.log("login completed", res);
         
-        dispatch(setIsLogIn(res.data.profileUrl));
+        dispatch(setIsLogIn(res.data.profileUrl, !res.data.suveyCheck));
         //surveyChecker 받아서 넘기기
         callback(res.data.suveyCheck);
         }
@@ -435,13 +439,14 @@ const signUp = (data, callback) => {
 };
 
 const surveyAPI = (data, callback) => {
-  return function () {
+  return function (dispatch) {
     console.log("surbeyAPI",data);
     apis
       .survey(data)
       .then((res)=>{
 
         console.log("survey API success", res)
+        dispatch(setSurveyChecker(res.data.success));
         callback();
       })
       .catch((err)=>{
@@ -500,9 +505,10 @@ export default handleActions(
       }),
     [SET_IS_LOG_IN]: (state, action) =>
       produce(state, (draft) => {
-        console.log("SET_IS_LOG_IN reducer", action.imgUrl);
+        console.log("SET_IS_LOG_IN reducer", action.imgUrl, action.surveyCheck);
         draft.is_login = true;
         draft.profileImage = action.imgUrl;
+        draft.surveyCheck = action.surveyCheck;
         console.log("complete setIslogin")
       }),
     [LOG_OUT]: (state, action) =>
@@ -701,6 +707,14 @@ export default handleActions(
         }
         
       }),
+
+      [SET_SURVEY_CHECKER]: (state, action) =>
+      produce(state, (draft) => {
+
+        draft.surveyCheck = action.checker;
+
+      }),
+
   },
   initialState
 );

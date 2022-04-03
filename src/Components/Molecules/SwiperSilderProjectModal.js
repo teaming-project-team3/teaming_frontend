@@ -3,19 +3,21 @@ import SwiperCore, { Navigation, Pagination, Autoplay } from "swiper";
 import 'swiper/scss'
 import 'swiper/scss/navigation'
 import 'swiper/scss/pagination'
-import JumboTron from '../Organisms/main/JumboTron';
-import projectDetail0Img from "../../static/images/projectDetail/projectEx.jpg"
-import projectDetail1Img from "../../static/images/projectDetail/projectEx1.jpg"
-import projectDetail2Img from "../../static/images/projectDetail/projectEx2.jpg"
+import projectImg from "../../static/images/projectDetail/projectEx.jpg"
 
 
 SwiperCore.use([Navigation, Pagination, Autoplay])
 
-function SwiperSliderProjectModal() {
+function SwiperSliderProjectModal(props) {
+
+
+  const { imgUrlList } = props;
+
   return(
     <div>
       <Swiper
         //style={{height:'20em', width:'5em'}}
+        centeredSlides={true}
         className="h-[20em] w-[70em]"
         spaceBetween={50}
         slidesPerView={1}
@@ -23,12 +25,16 @@ function SwiperSliderProjectModal() {
         navigation
         pagination={{ clickable: true }}
       >
-        <SwiperSlide><JumboTron/>
-        </SwiperSlide>
-        <SwiperSlide><img className="h-full mx-10 w-[100px]" src={projectDetail0Img} alt="html logo" />
-        </SwiperSlide>
-        <SwiperSlide><img className="h-full mx-10 w-[100px]" src={projectDetail1Img} alt="html logo" /></SwiperSlide>
-        <SwiperSlide><img className="h-full mx-10 w-[100px]" src={projectDetail2Img} alt="html logo" /></SwiperSlide>
+        <SwiperSlide><img className="w-full h-[9.938rem] rounded-[0.625rem] object-contain" src={imgUrlList[0]} alt={projectImg} /></SwiperSlide>
+        {imgUrlList.length>0 && imgUrlList[0] &&
+            <SwiperSlide><img className="w-full h-[9.938rem] rounded-[0.625rem] object-contain" src={imgUrlList[0]} alt={projectImg} /></SwiperSlide>
+        }
+        {imgUrlList.length>0 && imgUrlList[1] &&
+            <SwiperSlide><img className="w-full h-[9.938rem] rounded-[0.625rem] object-contain" src={imgUrlList[1]} alt={projectImg} /></SwiperSlide>
+        }
+        {imgUrlList.length>0 && imgUrlList[2] &&
+            <SwiperSlide><img className="w-full h-[9.938rem] rounded-[0.625rem] object-contain" src={imgUrlList[2]} alt={projectImg} /></SwiperSlide>
+        }
       </Swiper>
     </div>
   )

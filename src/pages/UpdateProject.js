@@ -1,7 +1,7 @@
 import React, { useState, createRef, useEffect } from "react";
 import styled from "styled-components";
 // TOAST UI Editor import
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
 import DatePicker from "react-datepicker";
@@ -14,21 +14,25 @@ import Images from "../Components/Organisms/upload/Images";
 import CreateSelect from "./CreateSelect";
 import { useNavigate } from "react-router";
 
-function CreateProject() {
+function UpdateProject(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const data = useSelector((state) => state.projects.projectDetail);
+
   const [endDate, setEndDate] = useState(new Date());
 
-  const [projectTitle, setProjectTitle] = useState("");
-  const [projectSubTitle, setProjectSubTitle] = useState("");
-  const [projectContents, setProjectContents] = useState("");
-  const [referUrl, setReferUrl] = useState("");
+  const [projectTitle, setProjectTitle] = useState(data.title);
+  const [projectSubTitle, setProjectSubTitle] = useState(data.subContents);
+  const [projectContents, setProjectContents] = useState(data.contents);
+  const [referUrl, setReferUrl] = useState(data.referURL);
   const [skills, setSkills] = useState([]);
 
   const editorRef = createRef();
 
   const location = useLocation();
+
+  const id = location.state;
 
   const [workArr, setWorkArr] = useState([1]);
 
@@ -56,7 +60,7 @@ function CreateProject() {
     setProjectContents(editorRef.current.getInstance().getMarkdown());
   }
 
-  async function createProjectFunc() {
+  async function updateProjectFunc() {
 
     const data = {
       title: projectTitle,
@@ -69,8 +73,7 @@ function CreateProject() {
       //period: endDate,
     };
 
-    dispatch(imageActions.uploadImagesS3(data,()=>{navigate('/')}));
-
+    dispatch(imageActions.uploadImagesS3(data,()=>{navigate('/')}, true, id));
     
   }
 
@@ -113,10 +116,10 @@ function CreateProject() {
     <div className="flex justify-center w-screen bg-[#F2F3F7] h-fit">
       <div className="flex flex-col items-center justify-center p-10">
         <div className="w-full text-[2.5rem] text-black font-notoB">
-          프로젝트 등록
+          프로젝트 수정
         </div>
         <div className="w-full text-[1rem] text-gray-500 font-noto2">
-        팀원을 구하는 프로젝트 정보를 입력해주세요!
+        수정하고자 하는 프로젝트 정보를 입력해주세요!
         </div>
 
 
@@ -125,13 +128,13 @@ function CreateProject() {
             프로젝트 정보 
           </div>
 
-          <div className="flex
+          <div className="flex 
           flex-col
           w-full text-[1rem] text-black font-noto1 pt-8 pr-8 pb-8 ml-8">
             프로젝트 제목
               <input
               className="w-full p-2 mt-3 border-2 rounded font-noto2"
-              placeholder="프로젝트 제목을 입력해주세요."
+              value={projectTitle}
               onChange={(event) => setProjectTitle(event.target.value)}
             ></input>
           </div>
@@ -142,7 +145,7 @@ function CreateProject() {
             프로젝트 부제
               <input
               className="w-full p-2 mt-3 border-2 rounded font-noto2"
-              placeholder="프로젝트 부제를 입력해주세요."
+              value={projectSubTitle}
               onChange={(event) => setProjectSubTitle(event.target.value)}
             ></input>
           </div>
@@ -162,9 +165,8 @@ function CreateProject() {
               className="m-[-2rem]"
               previewStyle="vertical"
               height="80vh"
-              width=""
               initialEditType="markdown"
-              initialValue="마크다운으로 내용을 입력하세요."
+              initialValue={projectContents}
               ref={editorRef}
               onChange={onChangeMD}
             ></Editor>
@@ -209,7 +211,7 @@ function CreateProject() {
             참고 URL
               <input
               className="w-full p-2 mt-3 border-2 rounded font-noto2"
-              placeholder="참고할 수 있는 URL을 입력해주세요."
+              value={referUrl}
               onChange={(event) => setReferUrl(event.target.value)}
             ></input>
           </div>
@@ -233,7 +235,7 @@ function CreateProject() {
         </div>
         </div>
 
-        <div className="rounded bg-[#593CE5] w-1/3 p-3 text-white font-noto2 text-center mt-10 cursor-pointer" onClick={createProjectFunc}>
+        <div className="rounded bg-[#593CE5] w-1/3 p-3 text-white font-noto2 text-center mt-10 cursor-pointer" onClick={updateProjectFunc}>
         <button>프로젝트 등록하기</button>
         </div>
 
@@ -250,4 +252,4 @@ const MyDatePicker = styled(DatePicker)`
   color: #000000;
 `; // styled-components 이용 스타일륑
 
-export default CreateProject;
+export default UpdateProject;
