@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import Chart from "chart.js/auto";
 
 const dummy = {
+  id: 1,
   label: "",
   data: [1,1,1,1,1],
   fill: true,
@@ -46,9 +47,10 @@ function RadarChart(props) {
 
   }
 
-  function myChartFactory(list, nick){
+  function myChartFactory(list, nick, id){
 
   const my = {
+    id: id,
     label: nick,
     data: list,
     fill: true,
@@ -64,9 +66,10 @@ function RadarChart(props) {
 
   }
 
-  function chartDataFactory(list, nick){
+  function chartDataFactory(list, nick, id){
 
     const tempData = {
+      id: id,
       label: nick,
       data: list,
       fill: true,
@@ -87,7 +90,7 @@ function RadarChart(props) {
     const arr = stats.map((stat)=>{
       return(fiveScore(stat))});
     //데이터형식에 맞게 가공해서
-    const chartData = arr.map((item, idx)=>chartDataFactory(item, nameManufacture(stats[idx].nickname)));
+    const chartData = arr.map((item, idx)=>chartDataFactory(item, nameManufacture(stats[idx].nickname), stats[idx].userId));
     console.log("------------!!!!!!!!!!!!!!!!!!manifactured Users Stats!!!!!!!!!!!!!------------", chartData);
     //setState를 한다.
     setUserData(chartData);
@@ -145,10 +148,10 @@ function RadarChart(props) {
       let temp = {};
       if(Array.isArray(props.myStat)){
         temp = fiveScore(props.myStat[0]);
-        temp = myChartFactory(temp, nameManufacture(props.myStat[0].nickname));
+        temp = myChartFactory(temp, nameManufacture(props.myStat[0].nickname), props.myStat[0].userId);
       }else{
         temp = fiveScore(props.myStat);
-        temp = myChartFactory(temp, nameManufacture(props.myStat.nickname));
+        temp = myChartFactory(temp, nameManufacture(props.myStat.nickname), props.myStat.userId);
       }
       console.log("------------------RadarChart, props.myStat----------------------------------", temp);
       setMyData(temp);
@@ -163,14 +166,14 @@ function RadarChart(props) {
 
   useEffect(() => {
     setCurr(props.curr)
-    if(props.curr===myData.label){
+    if(props.curr===myData.userId){
       //config.data.datasets.pop();
       console.log("check pop data : ", config.data.datasets)
     }else{
       
       const selectedData = dataList.filter((datum) => {
-        console.log("datum : ", datum, datum.label, props.curr, props);
-        return datum.label === props.curr
+        console.log("datum : ", datum, datum.id, datum.label, props.curr, props);
+        return datum.id === props.curr
       })
       console.log("----------selectedData!--------------", selectedData, dataList, props.curr);
       if(selectedData.length>0){
