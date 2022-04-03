@@ -39,14 +39,14 @@ function UserSlider(props) {
   const [cameraOn, setCameraOn] = useState(true);
   const [audioOn, setAudioOn] = useState(false);
   const [userList, setUserList] = useState([]);
-  const [statsList, setStatsList] = useState([]);
 
   localStorage.setItem("count",0);
   
   let userInfo = [];
-  let userStatsArr = [];
+  let userStats = [];
+  let myStat = {};
 
-  console.log("userList", userList);
+  console.log("userList, userStatsArr", userList);
 
   useEffect(() => {
 
@@ -62,21 +62,31 @@ function UserSlider(props) {
     }
     socket.emit("join_room", { roomName: room, nickName: name });
 
-    socket.on("accept_join", async (userObjArr, usersStats) => {
-      console.log("----------------accept_join---------------------------------------", userObjArr, usersStats);
+    socket.on("accept_join", async (userObjArr) => {
+      console.log("----------------accept_join---------------------------------------", userObjArr);
       //state를 두번 업데이트 하는 행동이니 수정할것.
-      setStatsList(usersStats);
+      //setStatsList(usersStats);
       setUserList(userObjArr);
       // eslint-disable-next-line react-hooks/exhaustive-deps
       userInfo=[...userInfo, ...userObjArr];
+      console.log("--------------------------userInfo check---------------", userInfo);
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      userStatsArr=[...userStatsArr, ...usersStats];
-      props.statusCallBack(userStatsArr);
+      //userStatsArr=[...userStatsArr, ...usersStats];
+      // eslint-disable-next-line react-hooks/exhaustive-deps
 
-      let myStat = usersStats.filter((res)=>{
-        return res.socketId===socket.id
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      userStats = userObjArr.map((res)=>{
+        return res.usersStackObj;
       })
-
+      console.log("userStats", userStats);
+      props.statusCallBack(userStats);
+      
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      myStat = userObjArr.filter((res)=>{
+        console.log("mid map", res.targetRoomObjUsers.socketId, socket.id, res)
+        return res.targetRoomObjUsers.socketId===socket.id
+      })
+      console.log("after map", myStat)
       props.myStatusCallBack(myStat);
 
 
@@ -91,8 +101,8 @@ function UserSlider(props) {
       for (let i = 0; i < length - 1; ++i) {
         try {
           const newPC = createConnection(
-            userObjArr[i].socketId,
-            userObjArr[i].nickName,
+            userObjArr[i].targetRoomObjUsers.socketId,
+            userObjArr[i].targetRoomObjUsers.nickName,
             i
           );
           const offer = await newPC.createOffer({
@@ -104,9 +114,9 @@ function UserSlider(props) {
           socket.emit("offer", {
             offer: offer,
             localNickName: name,
-            remoteSocketId: userObjArr[i].socketId,
+            remoteSocketId: userObjArr[i].targetRoomObjUsers.socketId,
           });
-          writeChat(`__${userObjArr[i].nickname}__`, NOTICE_CN);
+          writeChat(`__${userObjArr[i].targetRoomObjUsers.nickname}__`, NOTICE_CN);
         } catch (err) {
           console.error(err);
         }
@@ -116,15 +126,16 @@ function UserSlider(props) {
 
     socket.on("offer", async (offer, remoteSocketId, remoteNickname, userStat) => {
       console.log("--------------------------client on.offer-----------------------------", remoteNickname, peopleInRoom, userStat);
-      const data = {socketId: remoteSocketId, nickName: remoteNickname, video: true, audio: false};
-      setStatsList((prev)=>[...prev, userStat]);
+      const data = {targetRoomObjUsers:{socketId: remoteSocketId, nickName: remoteNickname, video: true, audio: false},
+                    usersStackObj: userStat};
+      //setStatsList((prev)=>[...prev, userStat]);
       setUserList((prev)=>[...prev, data]);
       
       
       //dispatch(addNowProjectUsers(data))
       userInfo=[...userInfo, data];
-      userStatsArr=[...userStatsArr, userStat];
-      props.statusCallBack(userStatsArr);
+      //userStatsArr=[...userStatsArr, userStat];
+      props.statusCallBack(userInfo);
       
       const temp = localStorage.getItem("count");
       localStorage.setItem("count", temp+1);
@@ -251,9 +262,9 @@ function UserSlider(props) {
 
   function videoToggleExceptMe(nickName, status){
     
-
+    console.log("toggle!!", userInfo, nickName, status);
     const newList = userInfo.map((user) => {
-      if(user.nickName===nickName){
+      if(user.targetRoomObjUsers.nickName===nickName){
         return {...user, video : status};
       }else return user;
     })  
@@ -351,22 +362,18 @@ function UserSlider(props) {
 
   function removeVideo(leavedSocketId) {
 
-    const newList = userInfo.filter((item)=>{
-      return item.socketId !== leavedSocketId;
-    })
+    console.log("before Deletion!!!-------------------", userInfo);
 
-    const newStatList = statsList.filter((item)=>{
+    const newList = userInfo.filter((item)=>{
       return item.socketId !== leavedSocketId;
     })
 
     delete pcObj.socketId;
 
-    
-    userStatsArr = newStatList;
-    setStatsList(newStatList);
-
     userInfo = newList;
+    console.log("userInfo", userInfo);
     setUserList(newList);
+
   }
 
   const handleCamera = async () => {
@@ -403,8 +410,12 @@ function UserSlider(props) {
         <div className="w-fit h-[80vh] bg-[#F2F3F7]">
           <div className="flex flex-wrap">
             
-            {userList.map((user, idx)=>{
+            {userList.map((data, idx)=>{
+              const user = data.targetRoomObjUsers;
+              const stats = data.usersStackObj;
               
+              console.log("in map,", user, stats);
+
               //본인만 버튼 뜨도록
               if(user.socketId===socket.id){
               return(<UserView
@@ -413,7 +424,7 @@ function UserSlider(props) {
               idx={-1}
               $isMee
               user={user}
-              stats={statsList[idx]}
+              stats={stats}
               cameraOn={cameraOn}
               myVideo={myVideo}
               handleCamera={handleCamera}
@@ -429,7 +440,7 @@ function UserSlider(props) {
               key={user.nickName}
               idx={idx}
               user={user}
-              stats={statsList[idx]}
+              stats={stats}
               cameraOn={user.video}
               myVideo={videoRef}
               _onMouseOver={props._onMouseOver}
