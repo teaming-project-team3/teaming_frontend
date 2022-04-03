@@ -5,9 +5,10 @@ import { ModalCustom } from "./ModalCustom";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/users";
 import TabMenu from "../Components/Modals/TabMenu";
+import { useEffect } from "react";
 
 function Survey(props) {
-  const [modalIsOpen, setModalOpen] = useState(props.modalIsOpen?props.modalIsOpen:false);
+  const [modalIsOpen, setModalOpen] = useState(props.modalIsOpen);
   const dispatch = useDispatch();
   const [position, setPosition] = useState("");
   const [url, setUrl] = useState("");
@@ -20,6 +21,14 @@ function Survey(props) {
   const skillsBack = useSelector((state) => state.users.skillsBack);
   const abilityDesigner = useSelector((state) => state.users.abilityDesigner);
   const skillsDesigner = useSelector((state) => state.users.skillsDesigner);
+
+  console.log("modal is open?", modalIsOpen);
+
+  useEffect(()=>{
+    console.log("useEffect change")
+    setModalOpen(props.modalIsOpen);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[props.modalIsOpen])
 
   // useEffect(()=>{
     
@@ -75,7 +84,7 @@ function Survey(props) {
     <>
     { modalIsOpen && 
     <div className="fixed top-0 left-0 z-10 flex items-center w-full h-screen bg-black justify center bg-opacity-70">
-    <ModalCustom checker={modalIsOpen} confirm={sendSurveyData} close={()=>{setModalOpen(false)}}>
+    <ModalCustom checker={modalIsOpen} confirm={sendSurveyData} close={()=>{props.close(false)}}>
 
       <div className="flex justify-center m-5 text-base font-noto2">
         프로필을 완성하기 위한 다음 정보를 입력해주세요!

@@ -27,9 +27,10 @@ function Main() {
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const surveyCheck = useSelector((state) => state.users.surveyCheck);
   const projectsData = useSelector((state) => state.projects.projectsMain);
   //const projectDetail = useSelector((state)=> state.projects.projectDetail)
-  const modalIsOpen = location.state;
+  const [modalIsOpen, setModalIsOpen] = useState(location.state)
   const [showDetail, setShowDetail] = useState(false);
   const [showUserDetail, setShowUserDetail] = useState(false);
   const rankList = useSelector((state)=>state.projects.projectsRank);
@@ -42,7 +43,13 @@ function Main() {
 
   let isLoading = useSelector((state)=>state.projects.isLoading);
 
-  console.log("main, projectsData : ", projectsData, isLoading);
+  console.log("main, projectsData : ", projectsData, isLoading, modalIsOpen);
+
+  useEffect(()=>{
+
+    setModalIsOpen(location.state);
+
+  },[location.state])
 
   useEffect(() => {
     setTimeout(() => dispatch(actionCreators.loadProjectsMainAPI()), 1000);
@@ -53,6 +60,13 @@ function Main() {
 
   const detailShow = (id) => {
     console.log("project card clicked", id);
+
+    if(surveyCheck){
+      window.alert("설문조사 후에 프로젝트 생성이 가능합니다!")
+      console.log("surveyCheck", surveyCheck);
+      setModalIsOpen(surveyCheck);
+      return;
+    }
 
     dispatch(actionCreators.getProjectDetailAPI(id, ()=>{setShowDetail(true)}));
 
@@ -74,7 +88,7 @@ function Main() {
       {isLoading?
         <Spinner/>
         :
-      <><Survey modalIsOpen={modalIsOpen} className="z-10"></Survey>
+      <><Survey modalIsOpen={modalIsOpen} close={setModalIsOpen} className="z-10"></Survey>
       <ProjectDetailModal
           showDetail={showDetail}
           callBackSetShowFalse={() => {
@@ -109,8 +123,14 @@ function Main() {
                   if(!isLogin){
                     window.alert("로그인 후에 프로젝트 생성이 가능합니다!")
                   }
-                  navigate("/createProject");
-                } }
+                  else if(surveyCheck){
+                    window.alert("설문조사 후에 프로젝트 생성이 가능합니다!")
+                    console.log("surveyCheck", surveyCheck);
+                    setModalIsOpen(surveyCheck);
+                  }else{
+                    navigate("/createProject");
+                  }
+                }}
                 img={Pic2}
                 bg={""}
                 text={"사이드 프로젝트 아이디어가 있으신 분이라면?"}
