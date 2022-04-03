@@ -30,11 +30,6 @@ function Survey(props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[props.modalIsOpen])
 
-  // useEffect(()=>{
-    
-  //   console.log("Parents! ability", skillsFront)
-  //   console.log("params", modalIsOpen)
-  // },[abilityFront, modalIsOpen, skillsFront])
   
   const positions = useMemo(
     () => [

@@ -24,18 +24,29 @@ import Images from "./Components/Organisms/upload/Images";
 import Privacy from "./pages/Privacy";
 import ChatBox from "./Components/Organisms/DMChat/ChatBox";
 import UpdateProject from "./pages/UpdateProject";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 
 function App() {
 
-  
+  const surveyChecker = useSelector((state) => state.users.surveyCheck);
+
+  const [blocker, setBlocker] = useState(surveyChecker);
+
+  useEffect(()=>{
+
+    setBlocker(surveyChecker);
+
+  },[surveyChecker])
 
   return (
     <BrowserRouter>
-      <Header />
+      <Header setBlocker={setBlocker} />
       <ScrollToTop/>
         <Routes>
-          <Route path="/" element={<Main/>} />
+          <Route path="/" element={<Main blocker={blocker} setBlocker={setBlocker}/>} />
           <Route path="/survey" element={<Survey/>} />
           <Route path="/myPage" element={<MyPage/>} />
           <Route path="/userStats" element={<UserStat />} />
@@ -44,7 +55,7 @@ function App() {
           <Route path="/updateProject" element={<UpdateProject/>} />
           <Route path="/ProjectRoom" element={<ProjectRoom/>} />
           <Route path="/projectDetail" element={<ProjectDetailModal/>} />
-          <Route path="/projectFind" element={<ProjectSearch/>} />
+          <Route path="/projectFind" element={<ProjectSearch blocker={blocker} setBlocker={setBlocker}/>} />
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/auth/kakao/redirect" element={<KakaoRedirect />} />

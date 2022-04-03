@@ -319,6 +319,15 @@ export const uploadImagesS3Update = (data, callback) => {
     
             console.log("uploaded S3 ImgUrl : ", imgUrl);
 
+            data = {...data, "profileUrl" : imgUrl}
+  
+            console.log("before Create API", data, imgUrl);
+            
+            callback(data);
+
+            dispatch(setFile(""));
+            dispatch(setFiles([]));
+
           })
           .send((err) => {
             if (err) console.log("s3 upload err", err);
@@ -330,19 +339,20 @@ export const uploadImagesS3Update = (data, callback) => {
       console.log("imageFiles,, before map", imageFile);
 
 
-      const temp = await uploadFile(imageFile);
-      
-      const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+temp.request.httpRequest.path
+      let temp = await uploadFile(imageFile);
+      console.log(temp);
+      // temp = await Promise(temp);
 
-      console.log("arr!!!!", imgUrl);
+      // const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+temp.request.httpRequest.path
 
-      data = {...data, "profileUrl" : imgUrl}
+      // console.log("arr!!!!", imgUrl);
+
+      // data = {...data, "profileUrl" : imgUrl}
   
-      console.log("before Create API", data, imgUrl);
-      dispatch(setFile(""));
-      dispatch(setFiles([]));
+      // console.log("before Create API", data, imgUrl);
       
-      callback(data);
+      
+      // callback(data);
       //dispatch(updateUserInfoAPI(data, callback));
 
 
@@ -377,7 +387,7 @@ export default handleActions({
       console.log("SET_FILES_ARR : ", action.payload.files);
       const idx = action.payload.idx;
       const data = action.payload.files;
-
+      
       draft.filesArr[idx] = data;
 
     }),
