@@ -9,7 +9,6 @@ const ENDPOINT = process.env.REACT_APP_BASE_URL_WJ + "/webrtc";
 let socket;
 
 function UserSlider(props) {
-
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -17,7 +16,6 @@ function UserSlider(props) {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-
 
   const location = useLocation();
   //const query = queryString.parse(location.search);
@@ -35,13 +33,13 @@ function UserSlider(props) {
 
   const myVideo = useRef();
   const videoRef = useRef([]);
-  
+
   const [cameraOn, setCameraOn] = useState(true);
   const [audioOn, setAudioOn] = useState(false);
   const [userList, setUserList] = useState([]);
 
-  localStorage.setItem("count",0);
-  
+  localStorage.setItem("count", 0);
+
   let userInfo = [];
   let userStats = [];
   let myStat = {};
@@ -49,21 +47,25 @@ function UserSlider(props) {
   console.log("userList, userStatsArr", userList);
 
   useEffect(() => {
-
-  socket = io(ENDPOINT, {
-    //withCredentials: true,
-    extraHeaders: {
-      "my-custom-header": "abcd",
-    },
-  });
+    socket = io(ENDPOINT, {
+      //withCredentials: true,
+      extraHeaders: {
+        "my-custom-header": "abcd",
+      },
+    });
 
     if (socket.disconnected) {
       socket.connect();
     }
     socket.emit("join_room", { roomName: room, nickName: name });
 
-    socket.on("accept_join", async (userObjArr) => {
-      console.log("----------------accept_join---------------------------------------", userObjArr);
+    socket.on("accept_join", async (userObjArr, usersStats) => {
+      console.log(
+        "----------------accept_join---------------------------------------",
+        userObjArr,
+        usersStats
+      );
+
       //state를 두번 업데이트 하는 행동이니 수정할것.
       //setStatsList(usersStats);
       setUserList(userObjArr);
@@ -88,7 +90,6 @@ function UserSlider(props) {
       })
       console.log("after map", myStat)
       props.myStatusCallBack(myStat);
-
 
       await initCall();
 
@@ -147,16 +148,17 @@ function UserSlider(props) {
             offerToReceiveVideo: true,
             offerToReceiveAudio: true,
           });
-        await newPC.setLocalDescription(answer);
-        socket.emit("answer", {
-          answer: answer,
-          remoteSocketId: remoteSocketId,
-        });
-        writeChat(`notice! __${remoteNickname}__ joined the room`, NOTICE_CN);
-      } catch (err) {
-        console.error(err);
+          await newPC.setLocalDescription(answer);
+          socket.emit("answer", {
+            answer: answer,
+            remoteSocketId: remoteSocketId,
+          });
+          writeChat(`notice! __${remoteNickname}__ joined the room`, NOTICE_CN);
+        } catch (err) {
+          console.error(err);
+        }
       }
-    });
+    );
 
     socket.on("answer", async (answer, remoteSocketId) => {
       await pcObj[remoteSocketId].setRemoteDescription(answer);
@@ -167,15 +169,11 @@ function UserSlider(props) {
     });
 
     socket.on("videoON", async (nickName, videoStatus) => {
-      
       videoToggleExceptMe(nickName, videoStatus);
-    
     });
 
     socket.on("videoOFF", async (nickName, videoStatus) => {
-
-        videoToggleExceptMe(nickName, videoStatus);
-    
+      videoToggleExceptMe(nickName, videoStatus);
     });
 
     socket.on("leaveRoom", (leavedSocketId) => {
@@ -185,11 +183,10 @@ function UserSlider(props) {
       //sortStreams();
     });
 
-    return (()=>{
+    return () => {
       console.log("새로고침 할 때 불러지나?");
       socket.disconnect();
-      }
-      )
+    };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ENDPOINT, location.pathname]);
@@ -269,13 +266,12 @@ function UserSlider(props) {
         temp = {...temp, video:status}
         return {targetRoomObjUsers:temp, usersStackObj:user.usersStackObj};
       }else return user;
-    })  
+    })
 
     userInfo = newList;
     setUserList(newList);
 
     return;
-    
   }
 
   function createConnection(remoteSocketId, remoteNickname, idx) {
@@ -292,11 +288,11 @@ function UserSlider(props) {
         },
       ],
     });
-    
+
     myPeerConnection.addEventListener("icecandidate", (event) => {
       handleIce(event, remoteSocketId);
     });
-    
+
     myPeerConnection.addEventListener("addstream", (event) => {
       handleAddStream(event, remoteSocketId, remoteNickname, idx);
     });
@@ -332,21 +328,23 @@ function UserSlider(props) {
   }
 
   function paintPeerFace(peerStream, id, remoteNickname, idx) {
-    console.log("peerStream : ", peerStream, userList, idx, remoteNickname, peopleInRoom);
+    console.log(
+      "peerStream : ",
+      peerStream,
+      userList,
+      idx,
+      remoteNickname,
+      peopleInRoom
+    );
 
     //새로 참여한 유저의 index가 항상 length+1이 될까??
-    if(idx===undefined||idx===null){
-    
-      idx = peopleInRoom-1;
+    if (idx === undefined || idx === null) {
+      idx = peopleInRoom - 1;
 
-      
       //idx=userList.length+1
     }
 
-
-
-      addVideoStream(videoRef.current[idx], peerStream);
-      
+    addVideoStream(videoRef.current[idx], peerStream);
   }
 
   function addVideoStream(video, stream) {
@@ -384,12 +382,11 @@ function UserSlider(props) {
     if (cameraOn) {
       let video = myVideo.current.srcObject.getVideoTracks();
       video[0].enabled = false;
-      socket.emit("videoOFF", { nickName: name, roomName : room });
-
+      socket.emit("videoOFF", { nickName: name, roomName: room });
     } else {
       let video = myVideo.current.srcObject.getVideoTracks();
       video[0].enabled = true;
-      socket.emit("videoON", { nickName: name, roomName : room });
+      socket.emit("videoON", { nickName: name, roomName: room });
     }
   };
 
@@ -449,9 +446,7 @@ function UserSlider(props) {
               _onMouseOut={props._onMouseOut}
               ></UserView>)
               }
-            })
-            }
-
+            })}
           </div>
         </div>
       </Slider>
