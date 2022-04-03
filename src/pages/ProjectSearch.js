@@ -127,7 +127,7 @@ function ProjectSearch(props) {
             return setShowDetail(false);
           }}
         ></ProjectDetailModal>
-      <div className="flex flex-col w-[80vw]">
+      <div className="flex flex-col w-[65vw]">
         
         <div className="m-3">
           <div className="mb-2 text-2xl text-gray-900 font-notoB">👊 너! 내 동료가 돼라!</div>
@@ -142,10 +142,8 @@ function ProjectSearch(props) {
 
         <div className="flex flex-wrap w-full pt-10 mt-10 bg-white rounded-md">
         
-            {isLoading ?
-            <Spinner/>
-            :
-            contents.map((item) => {
+            
+            {contents.map((item) => {
                 console.log("ProjectSearch, item", item);
                 return(
                 <div className="mb-5">
@@ -162,14 +160,15 @@ function ProjectSearch(props) {
                 nickName={item.nickname}></ProjectCard>
                 </div>)
 
-            })
-            }
+            })}
 
 
         </div>
 
         <div className="h-[10vh] w-full" ref={ref}>
-          
+        {isLoading &&
+            <Spinner/>
+            }
         </div>
 
       </div>

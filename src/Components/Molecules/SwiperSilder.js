@@ -3,9 +3,9 @@ import SwiperCore, { Navigation, Pagination, Autoplay } from "swiper";
 import 'swiper/scss'
 import 'swiper/scss/navigation'
 import 'swiper/scss/pagination'
-import projectDetail0Img from "../../static/images/projectDetail/projectEx.jpg"
-import projectDetail1Img from "../../static/images/projectDetail/projectEx1.jpg"
-import projectDetail2Img from "../../static/images/projectDetail/projectEx2.jpg"
+import projectDetail0Img from "../../static/images/main/jumboTron2.png"
+import projectDetail1Img from "../../static/images/main/jumboTron3.png"
+import projectDetail2Img from "../../static/images/main/jumboTron4.png"
 import JumboTron from '../Organisms/main/JumboTron';
 
 
@@ -22,6 +22,7 @@ function SwiperSlider() {
         autoplay={{ delay: 3000 }}
         navigation
         pagination={{ clickable: true }}
+        loop={true}
       >
         <SwiperSlide><JumboTron/></SwiperSlide>
         <SwiperSlide><img className="w-full h-full mx-10" src={projectDetail0Img} alt="html logo" /></SwiperSlide>

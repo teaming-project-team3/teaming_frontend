@@ -4,8 +4,6 @@ import AWS from 'aws-sdk';
 import { createProjectAPI, updateProjectAPI } from "./projects";
 import { updatePortFolio } from "./users";
 
-//import {storage} from "../../shared/firebase";
-
 const UPLOADING = "UPLOADING";
 const UPLOAD_IMAGE = "UPLOAD_IMAGE";
 const SET_PREVIEW = "SET_PREVIEW";
@@ -16,19 +14,15 @@ const RESET_FILES_ARR = "RESET_FILES_ARR";
 const CLEAR_IMG = "CLEAR_IMG";
 const INIT_FILES = "INIT_FILES";
 const REMOVE_FILES_ARR = "REMOVE_FILES_ARR";
-//const SET_IMG_URLS = "SET_IMG_URLS";
 
-//const uploading = createAction(UPLOADING, (uploading) => ({uploading}));
 const uploadImage = createAction(UPLOAD_IMAGE, (image_url) => ({image_url}));
 const setPreview = createAction(SET_PREVIEW, (preview) => ({preview}));
 const setFile = createAction(SET_FILE, (file) => ({file}));
 const setFiles = createAction(SET_FILES, (files) => ({files}));
 const setFilesArr = createAction(SET_FILES_ARR, (files, idx) => ({files, idx}));
 const clearImg = createAction(CLEAR_IMG, (idx)=>({idx}));
-//const initFiles = createAction(INIT_FILES, (id)=> ({id}));
 const removeFilesArr = createAction(REMOVE_FILES_ARR, (id)=>({id}));
-//const resetFilesArr = createAction(RESET_FILES_ARR, ()=>{});
-//const setImgUrls = createAction(SET_IMG_URLS, (urls)=>({urls}));
+const resetFilesArr = createAction(RESET_FILES_ARR,()=>({}));
 
 const initialState = {
     image_url: '',
@@ -93,16 +87,6 @@ const uploadImagesS3 = (data, callback, checker=false, boardId) => {
         console.log("imageFiles,, before map", imageFiles);
 
         let arr = [];
-
-        // arr = await imageFiles.map( async (url) => {
-          
-        //   const temp = await uploadFile(url);
-          
-        //   const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+temp.request.httpRequest.path
-
-        //    return imgUrl;
-          
-        // })
         
         for(let i=0;i<imageFiles.length;i++){
 
@@ -186,49 +170,20 @@ export const uploadImagesS3PortFolio = (portfolioList, data, callback) => {
 
       console.log("imageFiles,, before map", imageFiles);
 
-      
-
-      // let arr = portfolioList.map( async (portfolio)=>{
-
-      //   let urlss =[];
-
-      //   for(let i=0;i<imageFiles[portfolio.id].length;i++){
-
-
-      //     console.log("item.file", imageFiles[portfolio.id][i].file);
-
-      //     const temp = await uploadFile(imageFiles[portfolio.id][i].file);
-
-      //     const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+temp.request.httpRequest.path
-
-      //     urlss.push(imgUrl);
-      //   }
-
-      //   return {...portfolio, image:urlss};
-        
-        // let urls = imageFiles[portfolio.id].map( async (item)=>{
-
-        //   console.log("item.file", item.file);
-
-        //   const temp = await uploadFile(item.file);
-
-        //   const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+temp.request.httpRequest.path
-
-        //  return imgUrl;
-
-        // })
-  
-        // return {...portfolio, image:urls}
-      //});
-
       let arr=[];
 
       for(let j=0;j<portfolioList.length;j++){
 
-        let urlss =[];
+        let urlss = [];
+        
+        if(portfolioList[j].imageUrl.length>0){
+          urlss = portfolioList[j].imageUrl;
+        };
+        console.log("portfolio.imageList", portfolioList, portfolioList[j].imageUrl);
+
+        if(imageFiles[portfolioList[j].id]!==null&&imageFiles[portfolioList[j].id]!==undefined){
 
         for(let i=0;i<imageFiles[portfolioList[j].id].length;i++){
-
 
           console.log("item.file", imageFiles[portfolioList[j].id][i].file);
 
@@ -236,32 +191,12 @@ export const uploadImagesS3PortFolio = (portfolioList, data, callback) => {
 
           const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+temp.request.httpRequest.path
 
-          urlss.push(imgUrl);
+          urlss = [...urlss, imgUrl];
         }
-
+      }
         arr.push({...portfolioList[j], imageUrl:urlss});
 
       }
-
-      // let arr = portfolioList.map( async (portfolio)=>{
-
-      //   let urlss =[];
-
-      //   for(let i=0;i<imageFiles[portfolio.id].length;i++){
-
-
-      //     console.log("item.file", imageFiles[portfolio.id][i].file);
-
-      //     const temp = await uploadFile(imageFiles[portfolio.id][i].file);
-
-      //     const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+temp.request.httpRequest.path
-
-      //     urlss.push(imgUrl);
-      //   }
-
-      //   return {...portfolio, image:urlss};
-      // });
-
 
       console.log("arr!!!!", arr);
 
@@ -271,7 +206,7 @@ export const uploadImagesS3PortFolio = (portfolioList, data, callback) => {
       
       console.log("before Create API", data);
       
-      dispatch(updatePortFolio(data, callback));
+      dispatch(updatePortFolio(data, callback, ()=>{dispatch(resetFilesArr());}));
       //dispatch(resetFilesArr());
 
   }
@@ -341,20 +276,6 @@ export const uploadImagesS3Update = (data, callback) => {
 
       let temp = await uploadFile(imageFile);
       console.log(temp);
-      // temp = await Promise(temp);
-
-      // const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+temp.request.httpRequest.path
-
-      // console.log("arr!!!!", imgUrl);
-
-      // data = {...data, "profileUrl" : imgUrl}
-  
-      // console.log("before Create API", data, imgUrl);
-      
-      
-      // callback(data);
-      //dispatch(updateUserInfoAPI(data, callback));
-
 
   }
 }
@@ -394,9 +315,7 @@ export default handleActions({
     [RESET_FILES_ARR]: (state, action) => produce(state, (draft) => {
 
 
-      draft.filesArr = {0:[]};
-
-      //draft.filesArr = temp;
+      draft.filesArr = {0:[],1:[],2:[]};
 
     }),
     [REMOVE_FILES_ARR]: (state, action) => produce(state, (draft) => {

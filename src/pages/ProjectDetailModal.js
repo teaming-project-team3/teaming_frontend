@@ -19,14 +19,22 @@ function ProjectDetailModal(props) {
 
   console.log("projectDetail : ", data);
 
-  //프로젝트 maker 여부 체크
-  const checkMaker = () => {
+    //프로젝트 maker 여부 체크
+    const checkMaker = () => {
 
-    if(data.nickname.nickname === localStorage.getItem("userId")){
-      setIsMaker(true);
+      if(data.nickname.nickname === localStorage.getItem("userId")){
+        setIsMaker(true);
+      }
+  
     }
+  
+  useEffect(()=>{
+    checkMaker();
 
-  }
+    return(()=>setIsMaker(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[modalIsOpen])
+
 
   const navigate = useNavigate();
 
