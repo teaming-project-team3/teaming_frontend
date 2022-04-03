@@ -8,9 +8,9 @@ export const BasicInfo = (props) => {
   const { stats } = props;
   const dispatch = useDispatch();
 
-  const [userNickName, setUserNickName] = React.useState("");
-  const [intro, setIntro] = React.useState("");
-  const [gitUrl, setGitUrl] = React.useState("");
+  const [userNickName, setUserNickName] = React.useState(props.nickName);
+  const [intro, setIntro] = React.useState(props.stats.introduction);
+  const [gitUrl, setGitUrl] = React.useState(props.stats.url);
   const profileUrl = useSelector((state)=>state.image.image_url);
 
   function dataFactory(){
@@ -42,7 +42,7 @@ export const BasicInfo = (props) => {
           닉네임
           <input
             className="w-1/2 ml-3 mr-10 border-2 rounded"
-            placeholder={props.nickName}
+            value={userNickName}
             onChange={(event) => setUserNickName(event.target.value)}
           ></input>
         </div>
@@ -58,7 +58,7 @@ export const BasicInfo = (props) => {
           <textarea
             rows={4}
             className="w-1/2 ml-3 mr-10 border-2 rounded"
-            placeholder={props.stats.introduction? props.stats.introduction:""}
+            value={intro}
             onChange={(event) => setIntro(event.target.value)}
           ></textarea>
         </div>
@@ -67,7 +67,7 @@ export const BasicInfo = (props) => {
           GitHub URL
           <input
             className="w-1/2 ml-3 mr-10 border-2 rounded"
-            placeholder={props.stats.url? props.stats.url:""}
+            placeholder={gitUrl}
             onChange={(event) => setGitUrl(event.target.value)}
           ></input>
         </div>
