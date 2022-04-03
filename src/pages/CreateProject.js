@@ -125,7 +125,7 @@ function CreateProject() {
             프로젝트 정보 
           </div>
 
-          <div className="flex 
+          <div className="flex
           flex-col
           w-full text-[1rem] text-black font-noto1 pt-8 pr-8 pb-8 ml-8">
             프로젝트 제목
@@ -162,6 +162,7 @@ function CreateProject() {
               className="m-[-2rem]"
               previewStyle="vertical"
               height="80vh"
+              width=""
               initialEditType="markdown"
               initialValue="마크다운으로 내용을 입력하세요."
               ref={editorRef}
