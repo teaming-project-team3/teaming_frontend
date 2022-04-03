@@ -1,7 +1,7 @@
 import tw from "tailwind-styled-components";
 
 const UserCardTw = tw.div`
-w-full h-full
+w-full h-full cursor-pointer
 ${(props) => (props.$shows ? "" : `hidden`)};
 `;
 

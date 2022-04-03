@@ -34,7 +34,7 @@ function RadarChart(props) {
   }
 
   function fiveScore(stat){
-
+    console.log("fiveScore--------------", stat);
     const backAbilScore = stat.stack.back.ability.score;
     const backSkillScore = stat.stack.back.skills.score;
     const frontAbilScore = stat.stack.front.ability.score;
@@ -86,6 +86,7 @@ function RadarChart(props) {
   }
 
   function statusFactory (stats) {
+    console.log("----------------------------status", stats)
     //스탯에서 숫자 5개를 빼내서
     const arr = stats.map((stat)=>{
       return(fiveScore(stat))});

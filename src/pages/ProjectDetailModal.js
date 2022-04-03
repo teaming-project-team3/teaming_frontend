@@ -15,7 +15,7 @@ function ProjectDetailModal(props) {
   const modalIsOpen = props.showDetail;
   const data = useSelector((state) => state.projects.projectDetail);
   const surveyCheck = useSelector((state) => state.users.surveyCheck)
-  const [isMaker, setIsMaker] = useState(true);
+  const [isMaker, setIsMaker] = useState(false);
 
   console.log("projectDetail : ", data);
 
@@ -32,10 +32,14 @@ function ProjectDetailModal(props) {
 
   const goDeleteProject = () => {
 
+    console.log("delete project", data);
+
     apis
       .deleteProjectAPI(data._id)
         .then((res)=>{
           console.log("deleteProjectAPI res", res);
+          window.alert("삭제가 완료되었습니다!")
+          navigate('/');
         })
         .catch((err)=>{
           console.log("deleteProjectAPI err", err);
@@ -65,7 +69,8 @@ function ProjectDetailModal(props) {
             confirm={() => {
               if(surveyCheck){
                 window.alert("설문조사 후에 프로젝트 생성이 가능합니다!")
-                navigate("/");
+                props.callBackSetShowFalse()
+                props.setSurveyOpen(true);
               }else{
                 navigate("/projectRoom", { state: data._id });
               }
