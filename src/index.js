@@ -6,7 +6,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import 'tw-elements';
-import ScrollToTop from './shared/ScrollToTop';
 
 ReactDOM.render(
   <Provider store={store}>

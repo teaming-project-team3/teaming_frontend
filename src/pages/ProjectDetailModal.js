@@ -80,7 +80,7 @@ function ProjectDetailModal(props) {
                 props.callBackSetShowFalse()
                 props.setSurveyOpen(true);
               }else{
-                navigate("/projectRoom", { state: data._id });
+                navigate("/projectRoom", { state: {id: data._id, title: data.title}});
               }
             }}
           >
