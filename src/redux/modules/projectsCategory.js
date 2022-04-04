@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { handleActions } from "redux-actions";
 import { produce } from "immer";
-import { apis, apisMS } from "../../apis/apis";
+import { apis } from "../../apis/apis";
 
 // actions
 const SET_CATEGORY_PROJECTS = "SET_CATEGORY_PROJECTS";

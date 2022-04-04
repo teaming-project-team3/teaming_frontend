@@ -264,8 +264,7 @@ function SignUp() {
     const REGION = "ap-northeast-2";
     const S3_BUCKET = 'teaming.link';
   
-    console.log("aws!",process.env.REACT_APP_BASE_ACCESS_KEY);
-    console.log("aws!!",process.env.REACT_APP_SECRET_ACCESS_KEY);
+    console.log("static!")
   
     AWS.config.update({
       accessKeyId: process.env.REACT_APP_BASE_ACCESS_KEY,

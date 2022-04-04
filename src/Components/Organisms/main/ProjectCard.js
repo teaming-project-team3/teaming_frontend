@@ -1,4 +1,4 @@
-import img from "../../../static/project.jpg";
+import imgDefault from "../../../static/project.jpg";
 import tw from "tailwind-styled-components";
 
 const StackStatus = tw.div`
@@ -8,12 +8,12 @@ ${(props) => (props.num > 0 ? `bg-[#7545F2]` : `bg-[#DC143C]`)};
 `;
 
 function ProjectCard(props) {
-  const { id, text, stack, profileUrl, nickName, _onClick } = props;
+  const { id, text, stack, profileUrl, nickName, _onClick, img } = props;
 
   ProjectCard.defaultProps = {
     text: "프로젝트 제목",
     stack: [],
-    img: { img },
+    img: { imgDefault },
     profileUrl: "http://relative-projectURL",
     nickName: "nickName",
     _onClick: () => {},
@@ -33,7 +33,7 @@ function ProjectCard(props) {
       onClick={() => {
         _onClick(id);
       }}
-      className="flex flex-col w-[15.625em] h-[18.750em] ml-[2.250em] bg-white border-2 cursor-pointer rounded-[0.333em] shadow-lg m-2"
+      className="flex flex-col hover:border-blue-200 w-[15.625em] h-[18.750em] ml-[2.250em] bg-white border-2 cursor-pointer rounded-[0.333em] shadow-lg m-2"
     >
       <div className="h-2/3 rounded-[0.333em]">
         <img
