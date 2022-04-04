@@ -93,6 +93,14 @@ export default function UserStat() {
     }
   };
 
+  const nameManufacture = (name) => {
+    try{
+    return name.split("&")[0];
+    }catch{
+      return name;
+    }
+  }
+
   return (
     <>
       <div className="bg-[#E5E5E5]">
@@ -102,7 +110,7 @@ export default function UserStat() {
           <Image shape="circle" src={profileUrl} size={"130"}></Image>
         </div>
         <text className="flex justify-center mt-8 text-4xl font-notoB text-[#121414]">
-          {userNickName}
+          {nameManufacture(userNickName)}
         </text>
         <text className="flex justify-center mt-4 text-[1.375rem] font-noto2 text-[#71797D]">
           {userPosition}

@@ -23,9 +23,8 @@ export default function ProjectRoom() {
   const [myStat, setMyStat] = React.useState();
   const [showUserDetail, setShowUserDetail] = React.useState(false);
 
-  
   const room = location.state.id;
-  const title = location.state.title; 
+  const title = location.state.title;
   const name = localStorage.getItem("userId");
 
   const involvedToggle = () => {

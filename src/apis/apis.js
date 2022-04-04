@@ -57,7 +57,10 @@ export const apis = {
   updateProjectAPI: (data, boardId) => api.put(`/boards/${boardId}`, data),
   deleteProjectAPI: (projectId) => api.delete(`/boards/${projectId}`),
   loadProjectsCatMain: (category, page) => api.get(`/boards/category/${category}/${page}`),
-  postClosed: (projectId) => api.post(`/boards/postClosed/${projectId}`),
-  postInvolved:(projectId, involved) => api.post(`boards/postInvolved/${projectId}`, involved),
+
+  joinProjectAPI: (projectId) => api.get(`/projects/${projectId}`),
+  postClosed: (projectId) => api.post(`/projects/start/${projectId}`),
+  postInvolvedIn:(projectId, involved) => api.post(`projects/projectIn/${projectId}`),
+  postInvolvedOut:(projectId, involved) => api.post(`projects/projectOut/${projectId}`),
 
 };
