@@ -23,7 +23,8 @@ export default function ProjectRoom() {
 
   const location = useLocation();
   
-  const room = location.state;
+  const room = location.state.id;
+  const title = location.state.title;
   const name = localStorage.getItem("userId");
 
   console.log("room", room);
@@ -68,7 +69,7 @@ export default function ProjectRoom() {
             return setShowUserDetail(false);
           } }/>
 
-        <ProjectRoomHeader goBack={goBack}></ProjectRoomHeader>
+        <ProjectRoomHeader title={title} goBack={goBack}></ProjectRoomHeader>
 
         <div className="flex w-screen">
           
