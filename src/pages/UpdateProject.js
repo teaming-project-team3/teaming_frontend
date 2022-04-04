@@ -26,7 +26,7 @@ function UpdateProject(props) {
   const [projectTitle, setProjectTitle] = useState(data.title);
   const [projectSubTitle, setProjectSubTitle] = useState(data.subContents);
   const [projectContents, setProjectContents] = useState(data.contents);
-  const [referUrl, setReferUrl] = useState(data.referURL);
+  const [referUrl, setReferUrl] = useState(data.referURL?data.referURL:"");
   const [skills, setSkills] = useState([]);
   const [imgList, setImgList] = useState(data.imgUrl.length>0?data.imgUrl:[]);
 
