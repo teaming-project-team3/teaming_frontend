@@ -11,6 +11,7 @@ import AWS from 'aws-sdk';
 import ProfileImage from "../Components/Organisms/upload/ProfileImage";
 import { KAKAO_AUTH_URL } from "../apis/kakao/kakao";
 
+
 const Title = styled.h1`
   font-family: "Noto Sans CJK KR";
   font-style: normal;
