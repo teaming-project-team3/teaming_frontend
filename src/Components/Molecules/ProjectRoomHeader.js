@@ -14,7 +14,7 @@ function ProjectRoomHeader(props) {
         </div>
 
         <div className="w-[60vw] text-xl text-black font-noto2">
-          동물운동 플랫폼 아임펫뿜뿜
+          {props.title?props.title:""}
         </div>
         
         

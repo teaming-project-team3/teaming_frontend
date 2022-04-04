@@ -1,5 +1,4 @@
 import ProjectCard from "../main/ProjectCard";
-import img from '../../../static/project.jpg'
 import { useSelector } from "react-redux";
 
 function InvolvedProject(props) {
