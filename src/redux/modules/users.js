@@ -250,42 +250,34 @@ const initialState = {
 };
 
 export function resetAbility(item, position) {
-  console.log("액션을 생성할거야!", item);
   return { type: RESET_ABILITY, item: item, position: position };
 }
 
 export function resetSkills(skill, position) {  
-  console.log("액션을 생성할거야!", skill);
   return { type: RESET_SKILLS, item: skill, position: position };
 }
 
 export function updateSkills(data, idx, position) {
-  console.log("액션을 생성할거야!", data);
   return { type: UPDATE_SKILLS, data: data, idx: idx, position: position };
 }
 
 export function updateAbility(data, idx, position) {
-  console.log("액션을 생성할거야!", data);
   return { type: UPDATE_ABILITY, data: data, idx: idx, position: position };
 }
 
 export function deleteAbility(data, position) {
-  console.log("액션을 생성할거야!", data);
   return { type: DELETE_ABILITY, data: data, position: position };
 }
 
 export function deleteSkills(data, position) {
-  console.log("액션을 생성할거야!", data);
   return { type: DELETE_SKILLS, data: data, position: position };
 }
 
 export function setNowUsers(users) {
-  console.log("redux, setNowUsers")
   return { type: SET_NOW_PROJECT_USERS, users };
 }
 
 export function setIsLogIn(imgUrl, surveyCheck) {
-  console.log("redux, setIsLogin")
   return { type: SET_IS_LOG_IN, imgUrl, surveyCheck};
 }
 
@@ -316,11 +308,7 @@ export function setSurveyChecker(checker){
 //middleWare
 export const resetAbilityAPI = (arrAbility) => {
   return async function (dispatch) {
-    //dispatch(isLoaded(false));
-    //const docRef = await addDoc(collection(db, "word"), word);
-    //const word_data = { id: docRef.id, ...word };
 
-    console.log("addAbility : ", arrAbility);
     dispatch(resetAbility(arrAbility));
   };
 };
@@ -347,12 +335,10 @@ export const getSelectedUserInfo = (id, callback) => {
     apis
     .getUserPage(id)
       .then((res)=>{
-        console.log("getSelectedUserInfo", res)
         dispatch(setSelectedUSerInfo(res.data));
         callback();
       })
       .catch((err)=>{
-        console.log("getSelectedUserInfo", err)
         callback();
       })
 
@@ -361,11 +347,7 @@ export const getSelectedUserInfo = (id, callback) => {
 
 export const updateAbilityAPI = (data, idx) => {
   return async function (dispatch) {
-    //dispatch(isLoaded(false));
-    //const docRef = await addDoc(collection(db, "word"), word);
-    //const word_data = { id: docRef.id, ...word };
 
-    console.log("updateAbility : ", data);
     dispatch(updateAbility(data, idx));
   };
 };
@@ -387,7 +369,6 @@ const loginAPI = (id, pwd, callback) => {
         localStorage.setItem("userId", res.data.nickname);
         setCookie("token", res.data.Authorization, 1);
         sessionStorage.setItem("token", res.data.Authorization);
-        console.log("login completed", res);
         
         dispatch(setIsLogIn(res.data.profileUrl, !res.data.suveyCheck));
         //surveyChecker 받아서 넘기기
@@ -395,7 +376,6 @@ const loginAPI = (id, pwd, callback) => {
         }
       })
       .catch((err) => {
-        console.log("login err : ", err);
         window.alert("로그인 실패!", err);
       });
 
@@ -409,12 +389,10 @@ export const updatePortFolio = (portfolioList, callback, resetCallBack) => {
     apis
       .updateUserInfo(portfolioList)
       .then((res)=>{
-        console.log("updatePortFolio res", res);
         resetCallBack();
         callback();
       })
       .catch((err)=>{
-        console.log("updatePortFolio err",err);
         callback();
       })
 
@@ -424,16 +402,13 @@ export const updatePortFolio = (portfolioList, callback, resetCallBack) => {
 
 const signUp = (data, callback) => {
   return function () {
-    console.log("signUp data", data);
     //회원가입 API 구현부
     apis
       .signup(data)
       .then((res) => {
-        console.log("signup completed", res);
         callback();
       })
       .catch((err) => {
-        console.log("signup err : ", err);
         window.alert("잠시 후 다시 시도해주세요!")
       });
   };
@@ -441,17 +416,15 @@ const signUp = (data, callback) => {
 
 const surveyAPI = (data, callback) => {
   return function (dispatch) {
-    console.log("surbeyAPI",data);
+
     apis
       .survey(data)
       .then((res)=>{
 
-        console.log("survey API success", res)
         dispatch(setSurveyChecker(!res.data.success));
         callback();
       })
       .catch((err)=>{
-        console.log("survey API err",err)
       })
 
 
@@ -467,14 +440,11 @@ const getMyStats = () => {
       .getMyStatsAPI()
         .then((res)=>{
 
-          console.log("My Stats res : ", res)
           dispatch(setMyUserStats(res.data.userInfo))
           dispatch(setMyProject(res.data.projectData, res.data.totalProject))
 
         })
         .catch((err)=>{
-
-          console.log("myStats Err : ", err)
 
         })
 
@@ -483,14 +453,12 @@ const getMyStats = () => {
 
 export const updateUserInfoAPI = (data) => {
   return function(dispatch){
-    console.log("data!",data);
+
     apis
       .updateUserInfo(data)
       .then((res)=>{
-        console.log("updateUserInfo res",res);
       })
       .catch((err)=>{
-        console.log("updateUserInfo err", err);
       })
 
   }
@@ -502,15 +470,12 @@ export default handleActions(
     [SET_PROFILE_IMG]: (state, action) =>
       produce(state, (draft) => {
         draft.profileImage = action.payload.imgUrl;
-        console.log("image save");
       }),
     [SET_IS_LOG_IN]: (state, action) =>
       produce(state, (draft) => {
-        console.log("SET_IS_LOG_IN reducer", action.imgUrl, action.surveyCheck);
         draft.is_login = true;
         draft.profileImage = action.imgUrl;
         draft.surveyCheck = action.surveyCheck;
-        console.log("complete setIslogin")
       }),
     [LOG_OUT]: (state, action) =>
       produce(state, (draft) => {
@@ -579,8 +544,6 @@ export default handleActions(
 
     [DELETE_ABILITY]: (state, action) =>
       produce(state, (draft) => {
-        console.log("before Delete");
-
         if(parseInt(action.position)===1){
           draft.abilityFront = draft.abilityFront.filter((l, idx) => {
             return action.data !== l.name;
@@ -594,8 +557,6 @@ export default handleActions(
             return action.data !== l.name;
           });
         }
-
-        console.log("after Delete");
       }),
 
     [RESET_SKILLS]: (state, action) =>
@@ -671,13 +632,11 @@ export default handleActions(
 
       [SET_NOW_PROJECT_USERS]: (state, action) =>
       produce(state, (draft) => {
-        console.log("SET_NOW_PROJECT_USERS", action.users);
         draft.nowProjectUser = action.users;
       }),
       
       [ADD_NOW_PROJECT_USER]: (state, action) =>
       produce(state, (draft) => {
-        console.log("ADD_NOW_PROJECT_USER", action.user);
         draft.nowProjectUser = [...draft.nowProjectUser, action.user];
       }),
 

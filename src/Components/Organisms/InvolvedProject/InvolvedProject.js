@@ -5,7 +5,6 @@ function InvolvedProject(props) {
 
   const myProjects = useSelector((state)=>state.users.myProjects);
   
-  console.log("involvedProjects", myProjects);
 
   return (
     <div className="flex flex-col justify-center mb-10 w-fit">
@@ -17,7 +16,6 @@ function InvolvedProject(props) {
           {myProjects && myProjects.length>0?
 
           myProjects.map((project)=>{
-            console.log("involvedProjects ,in map!", project);
             return(<ProjectCard id={project._id} img={project.imgUrl} text={project.title} nickName={project.userId} stack={project.stack} profileUrl={project.profileUrl?project.profileUrl:""}/>)
           })
 

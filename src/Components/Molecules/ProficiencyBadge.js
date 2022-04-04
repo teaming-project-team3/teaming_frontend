@@ -1,7 +1,5 @@
 function ProficiencyBadge(props) {
   const { ability, skills, position } = props;
-  console.log("no length", skills, position);
-  //console.log("length", ability.length)
 
   ProficiencyBadge.defaultProps = {
     ability: [],
@@ -10,7 +8,6 @@ function ProficiencyBadge(props) {
   };
 
   function colorDesignator(item) {
-    console.log("Ability Color Designator!!", item.time + item.rate, item);
     switch (parseInt(item.time) + parseInt(item.rate)) {
       case 2:
         return "61DAFB";
@@ -32,7 +29,6 @@ function ProficiencyBadge(props) {
   }
 
   function skillColorDesignator(item) {
-    console.log("Skill Color Designator!!", item.time + item.rate, item);
     switch (parseInt(item.time) + parseInt(item.rate)) {
       case 2:
         return "FF6550";

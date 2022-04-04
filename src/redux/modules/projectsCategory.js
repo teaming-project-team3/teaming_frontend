@@ -25,12 +25,10 @@ export function clearCategoryProject(){
 }
 
 export function setLoading(checker) {
-  console.log("Create Action, setLoading : ");
   return { type: SET_LOADING, checker};
 }
 
 export function setProjectsMain(projects, category) {
-  console.log("Create Action, setProjectsMain : ", projects);
   return { type: SET_CATEGORY_PROJECTS, projects, category};
 }
 
@@ -42,12 +40,9 @@ export const loadProjectsCatMainAPI = (category, page) => {
     apis
         .loadProjectsCatMain(category, page)
             .then((res)=>{
-                console.log("PROJECT_CATEGORY_API RES : ", res)
-
                 dispatch(setProjectsMain(res, category));
             })
             .catch((err)=>{
-                console.log("PROJECT_CATEGORY_API ERR : ", err)
             })
     
   };
@@ -70,7 +65,6 @@ export default handleActions(
 
         
         draft.isLoading = false;
-        console.log("projects category save");
 
       }),
 

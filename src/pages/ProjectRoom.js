@@ -27,8 +27,6 @@ export default function ProjectRoom() {
   const title = location.state.title;
   const name = localStorage.getItem("userId");
 
-  console.log("room", room);
-
   useEffect(() => {
     if (isLeader === localStorage.getItem("userId")) {
       setIsLeader(true);
@@ -40,20 +38,14 @@ export default function ProjectRoom() {
   }
 
   const statusCallBack = (data) => {
-    
-    console.log("StatusCallback!", data);
     setUserStats(data);
   }
 
   const myStatusCallBack = (data) => {
-    console.log("myStatusCallBack", data);
-
     setMyStat(data);
   }
 
   const userDetailShow = (id) => {
-    console.log("profile card clicked", id);
-
     dispatch(getSelectedUserInfo(id, ()=>{setShowUserDetail(true)}));
     return;
   };
@@ -65,7 +57,6 @@ export default function ProjectRoom() {
         <UserDetailModal
           showUser={showUserDetail}
           callBackSetShowFalse={() => {
-            console.log("setShowDetailFalse");
             return setShowUserDetail(false);
           } }/>
 
@@ -75,7 +66,6 @@ export default function ProjectRoom() {
           
           <UserSlider userDetailShow={userDetailShow} statusCallBack={statusCallBack} myStatusCallBack={myStatusCallBack} name={name} room={room} 
           exUser={exUser} _onMouseOut={()=>{setCurr("");}} _onMouseOver={(nick)=>{
-            console.log("-----------mouseOver nick!------------", nick);
             setCurr(nick)}}></UserSlider>
           
           {mode &&

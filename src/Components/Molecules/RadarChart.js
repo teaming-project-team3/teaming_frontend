@@ -21,7 +21,6 @@ function RadarChart(props) {
   const [curr, setCurr] = useState(props.curr);
   const [userData, setUserData] = useState([]);
   const [myData, setMyData] = useState(dummy);
-  console.log("RadarChart : ", curr);
 
   let radarChart = null;
 
@@ -34,7 +33,6 @@ function RadarChart(props) {
   }
 
   function fiveScore(stat){
-    console.log("fiveScore--------------", stat);
     const backAbilScore = stat.stack.back.ability.score;
     const backSkillScore = stat.stack.back.skills.score;
     const frontAbilScore = stat.stack.front.ability.score;
@@ -86,13 +84,11 @@ function RadarChart(props) {
   }
 
   function statusFactory (stats) {
-    console.log("----------------------------status", stats)
     //스탯에서 숫자 5개를 빼내서
     const arr = stats.map((stat)=>{
       return(fiveScore(stat))});
     //데이터형식에 맞게 가공해서
     const chartData = arr.map((item, idx)=>chartDataFactory(item, nameManufacture(stats[idx].nickname), stats[idx].userId));
-    console.log("------------!!!!!!!!!!!!!!!!!!manifactured Users Stats!!!!!!!!!!!!!------------", chartData);
     //setState를 한다.
     setUserData(chartData);
 
@@ -154,14 +150,12 @@ function RadarChart(props) {
         temp = fiveScore(props.myStat);
         temp = myChartFactory(temp, nameManufacture(props.myStat.nickname), props.myStat.userId);
       }
-      console.log("------------------RadarChart, props.myStat----------------------------------", temp);
       setMyData(temp);
     }
 
   },[props.myStat])
 
   useEffect(()=>{
-    console.log("----------------setProps.Curr!!!!------------------", props.curr);
     setCurr(props.curr);
   },[props.curr])
 
@@ -169,22 +163,16 @@ function RadarChart(props) {
     setCurr(props.curr)
     if(props.curr===myData.userId){
       //config.data.datasets.pop();
-      console.log("check pop data : ", config.data.datasets)
     }else{
-      
       const selectedData = dataList.filter((datum) => {
-        console.log("datum : ", datum, datum.id, datum.label, props.curr, props);
         return datum.id === props.curr
       })
-      console.log("----------selectedData!--------------", selectedData, dataList, props.curr);
       if(selectedData.length>0){
       config.data.datasets.push(selectedData[0]);
       }
-      console.log("check Chart : ", config.data.datasets);
     }
 
     const ctx = canvasDom.current.getContext("2d");
-    console.log(ctx);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     radarChart = new Chart(ctx, config);

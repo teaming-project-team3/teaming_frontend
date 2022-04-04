@@ -23,7 +23,6 @@ function StatFamily(props) {
     let reliability = null;
     let cooperation = null;
     let gitUrl = null;
-    console.log("init : ", stats);
 
   if (stats && stats.length !== 0) {
     nickname = stats.userId.nickname;
@@ -31,15 +30,12 @@ function StatFamily(props) {
     if (gitUrl) {
       const gitURLArr = gitUrl.split("/");
       gitId = gitURLArr[gitURLArr.length - 1];
-      console.log("check gitId", gitId);
     }
     portfolio = stats.portfolioUrl.length;
     
     portfolio1 = stats.portfolioUrl[0];
     portfolio2 = stats.portfolioUrl[1];
     portfolio3 = stats.portfolioUrl[2];
-
-    console.log("portfolio", portfolio);
 
     if (stats.front.ability) {
       frontAbility = stats.front.ability;
@@ -75,7 +71,6 @@ function StatFamily(props) {
       reliability = stats.stack.reliability;
     }
 
-    console.log("check", frontScore, backScore, designScore);
   }
 
   return (

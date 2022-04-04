@@ -35,7 +35,6 @@ const UserView = forwardRef((props, ref) => {
     userDetailShow,
   } = props;
 
-  console.log("userView Index, VideoRef", stats);
 
   return (
     <VideoCard className="videoCard">

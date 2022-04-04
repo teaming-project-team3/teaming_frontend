@@ -17,8 +17,6 @@ export default function UserEdit() {
   const abilityDesigner = useSelector((state) => state.users.abilityDesigner);
   const skillsDesigner = useSelector((state) => state.users.skillsDesigner);
 
-  console.log("stats", stats);
-
   const positions = React.useMemo(
     () => [
       { value: "Dev/FrontEnd", label: "Dev/FrontEnd" },
@@ -27,8 +25,6 @@ export default function UserEdit() {
     ],
     []
   );
-
-  console.log("init : ", stats);
 
   React.useEffect(() => {
     // if (isLeader === localStorage.getItem("userId")) {

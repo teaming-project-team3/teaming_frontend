@@ -42,29 +42,23 @@ function Main(props) {
 
   let isLoading = useSelector((state)=>state.projects.isLoading);
 
-  console.log("main, projectsData : ", projectsData, isLoading, modalIsOpen, surveyCheck);
-
   useEffect(()=>{
-    console.log("state!!! main!!!!!!!!!!!!!!!!!!!!")
     setModalIsOpen(props.blocker);
 
   },[props.blocker])
 
   useEffect(()=>{
-    console.log("surveyCheck!!! main!!!!!!!!!!!!!!!!!!!!")
     setModalIsOpen(surveyCheck);
 
   },[surveyCheck])
 
   useEffect(() => {
-    setTimeout(() => dispatch(actionCreators.loadProjectsMainAPI()), 1000);
-    //dispatch(actionCreators.loadProjectsMainAPI());
-
+    dispatch(actionCreators.loadProjectsMainAPI());
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const detailShow = (id) => {
-    console.log("project card clicked", id);
 
     dispatch(actionCreators.getProjectDetailAPI(id, ()=>{setShowDetail(true)}));
 
@@ -74,7 +68,6 @@ function Main(props) {
   };
 
   const userDetailShow = (id) => {
-    console.log("profile card clicked", id);
 
     dispatch(getSelectedUserInfo(id, ()=>{setShowUserDetail(true)}));
     
@@ -91,14 +84,12 @@ function Main(props) {
           setSurveyOpen={props.setBlocker}
           showDetail={showDetail}
           callBackSetShowFalse={() => {
-            console.log("setShowDetailFalse");
             return setShowDetail(false);
           } }
         ></ProjectDetailModal>
         <UserDetailModal
           showUser={showUserDetail}
           callBackSetShowFalse={() => {
-            console.log("setShowDetailFalse");
             return setShowUserDetail(false);
           } }
         >
@@ -124,7 +115,6 @@ function Main(props) {
                   }
                   else if(surveyCheck){
                     window.alert("설문조사 후에 프로젝트 생성이 가능합니다!")
-                    console.log("surveyCheck", surveyCheck);
                     props.setBlocker(surveyCheck);
                   }else{
                     navigate("/createProject");

@@ -15,7 +15,6 @@ const KakaoRedirect = (props) => {
 
   // 인가코드
   let code = new URL(window.location.href).searchParams.get("code");
-  console.log("code : ", code);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -23,10 +22,8 @@ const KakaoRedirect = (props) => {
     apis
     .kakaoSend(code)
       .then((res) => {
-        console.log("kakao res : " , res);
         localStorage.setItem("userId", res.data.nickname);
         setCookie("token", res.data.Authorization, 1);
-        console.log("login completed", res);
         
         dispatch(setIsLogIn());
         navigate("/")

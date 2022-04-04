@@ -22,10 +22,7 @@ function Survey(props) {
   const abilityDesigner = useSelector((state) => state.users.abilityDesigner);
   const skillsDesigner = useSelector((state) => state.users.skillsDesigner);
 
-  console.log("modal is open?", modalIsOpen);
-
   useEffect(()=>{
-    console.log("useEffect change")
     setModalOpen(props.modalIsOpen);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[props.modalIsOpen])

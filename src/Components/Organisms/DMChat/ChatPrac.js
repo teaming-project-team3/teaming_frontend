@@ -22,14 +22,12 @@ const ChatPrac = (props) => {
   const [messages, setMessages] = useState([]);
 
   const location = useLocation();
-  console.log(location);
 
   useEffect(() => {
     //const { name, room } = queryString.parse(location.search)
 
     const { name, room } = props;
 
-    console.log("start", name, room);
 
     socket = io(ENDPOINT, {
       withCredentials: true,
@@ -41,10 +39,8 @@ const ChatPrac = (props) => {
     setRoom(room);
     setName(name);
 
-    console.log("before join : ", room, name);
 
     socket.emit("join", { name, room }, (error) => {
-      console.log("join : ", error);
       if (error) {
         alert("join Error", error);
       }
@@ -54,12 +50,10 @@ const ChatPrac = (props) => {
 
   useEffect(() => {
     socket.on("message", (message) => {
-      console.log("message : ", message);
       setMessages((messages) => [...messages, message]);
     });
 
     socket.on("roomData", ({ users }) => {
-      console.log("roomData", users);
       //setUsers(users)
       dispatch(setNowUsers(users));
     });
@@ -74,13 +68,11 @@ const ChatPrac = (props) => {
     event.preventDefault();
 
     if (message) {
-      console.log("before SendMessage", message);
       let sendData = { sender: name, message: message, room: room };
       socket.emit("sendMessage", sendData, () => setMessage(""));
       let data = { user: "curr", text: message };
       setMessages((messages) => [...messages, data]);
       setMessage("");
-      console.log("after SendMessage", sendData);
     }
   };
 

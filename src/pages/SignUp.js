@@ -288,11 +288,7 @@ function SignUp() {
     myBucket.putObject(params)
       .on('httpUploadProgress', (evt, res) => {
         let imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+res.request.httpRequest.path
-
-        console.log("uploaded S3 ImgUrl : ", imgUrl);
-        //dispatch(actionCreators.uploadImage(imgUrl))
         data = {...data, profileUrl: imgUrl};
-        
         setTimeout(() => {
         }, 3000)
         
@@ -336,7 +332,6 @@ function SignUp() {
           <NameInput
             placeholder="이름 입력"
             onChange={(e) => {
-              console.log(e.target.value);
               setNickName(e.target.value);
             }}
           />

@@ -262,7 +262,6 @@ const initialState = {
 };
 
 export function setProjectsMain(projects) {
-  console.log("Create Action, setProjectsMain : ", projects);
   return { type: SET_MAIN_PROJECTS, projects};
 }
 
@@ -281,12 +280,9 @@ export const loadProjectsMainAPI = () => {
     apis
         .loadProjectsMain()
             .then((res)=>{
-                console.log("PROJECT_MAIN_API RES : ", res)
-
                 dispatch(setProjectsMain(res));
             })
             .catch((err)=>{
-                console.log("PROJECT_MAIN_API ERR : ", err)
                 window.alert("잠시 후 다시 시도해주세요!");
             })
     
@@ -296,16 +292,13 @@ export const loadProjectsMainAPI = () => {
 export const updateProjectAPI = (data, boardId, callback) => {
   return async function (dispatch) {
 
-    console.log("updateProjectAPI", data, boardId);
     apis
         .updateProjectAPI(data, boardId)
             .then((res)=>{
-                console.log("PROJECT_UPDATE_API RES : ", res)
                 callback();
                 //dispatch(setProjectsMain(res));
             })
             .catch((err)=>{
-                console.log("PROJECT_UPDATE_API ERR : ", err)
                 window.alert("잠시 후 다시 시도해주세요!");
             })
     
@@ -316,16 +309,13 @@ export const updateProjectAPI = (data, boardId, callback) => {
 export const createProjectAPI = (data, callback) => {
   return async function (dispatch) {
 
-    console.log("createProjectAPI", data);
     apisMS
         .createProjectAPI(data)
             .then((res)=>{
-                console.log("PROJECT_CREATE_API RES : ", res)
                 callback();
                 //dispatch(setProjectsMain(res));
             })
             .catch((err)=>{
-                console.log("PROJECT_CREATE_API ERR : ", err)
                 window.alert("잠시 후 다시 시도해주세요!");
             })
     
@@ -338,12 +328,10 @@ export const getProjectDetailAPI = (boardId, callback) => {
     apis
       .getProjectDetailAPI(boardId)
         .then((res) => {
-          console.log("GET_PROJECT_DETAIL : ", res)
           dispatch(setProjectDetail(res.data))
           callback();
         })
         .catch((err) => {
-          console.log("GET_PROJECT_DETAIL : ", err)
           window.alert("잠시 후 다시 시도해주세요!");
         })
 
@@ -406,7 +394,6 @@ export default handleActions(
         //draft.matesDev = action.payload.projects.backMates;
         
         draft.isLoading = false;
-        console.log("projects save");
 
       }),
 
@@ -414,7 +401,6 @@ export default handleActions(
     produce(state, (draft) => {
 
       draft.projectsMain = [ ...state.projectsMain,  action.payload.project];
-      console.log("project created, save");
 
     }),
 
@@ -424,7 +410,6 @@ export default handleActions(
       if(action.data!==null){
       draft.projectDetail = action.data;
       }
-      console.log("SET_PROJECT_DETAIL REDUCER : ")
 
     }),
 
