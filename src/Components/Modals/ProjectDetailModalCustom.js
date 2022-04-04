@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 export const ProjectDetailModalCustom = (props) => {
+
+  const isLogin = useSelector((state)=>state.users.is_login);
 
   const [show, setShow] = useState(props.checker);
 
@@ -61,7 +64,12 @@ export const ProjectDetailModalCustom = (props) => {
                   type="button"
                   class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1"
                   onClick={()=>{
-                    //설문데이터 전송 api 구현부
+                    
+                    if(!isLogin){
+                      window.alert("로그인이 필요한 서비스입니다!")
+                      return;
+                    }
+
                     props.confirm(()=>{setShow(false)});
                   }}
                 >
