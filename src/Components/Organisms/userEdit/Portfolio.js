@@ -20,7 +20,8 @@ export const Portfolio = (props) => {
   const [endDate, setEndDate] = useState(new Date());
   const [projectContents, setProjectContents] = useState(props.item.description);
   const [projectURL, setProjectURL] = useState(props.item.url);
-  const [imgList, setImgList] = useState(props.item.imageUrl);
+  const [imgList, setImgList] = useState(props.item.imageUrl?props.item.imageUrl:[]);
+
   let portfolio = [];
   
   function dataFactory(){
@@ -76,7 +77,7 @@ export const Portfolio = (props) => {
 
       <div className="flex w-full text-[1rem] justify-between text-black font-noto2 pt-8 pr-8 pb-8 ml-8 border-b-2">
         <div className="w-1/3 pl-8">추가할 이미지</div>
-        <ImageArr idx={props.idx}/>
+        <ImageArr idx={props.idx} imgLen={imgList.length}/>
       </div>
 
       <div className="flex w-full text-[1rem] justify-between text-black font-noto2 pt-8 pr-8 pb-8 ml-8 border-b-2">

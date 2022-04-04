@@ -1,11 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators } from "../../../redux/modules/image";
 import plus from "../../../static/images/createProject/plus.png"
 
 export const ImageArr = (props) => {
     const showImages = useSelector((state)=>state.image.filesArr[props.idx]);
+    const [size, setSize] = useState(props.imgLen);
     console.log("ImageArr!", showImages);
+
+    useEffect(()=>{
+      setSize(props.imgLen);
+    },[props.imgLen])
 
     const dispatch = useDispatch();
 
@@ -17,7 +22,6 @@ export const ImageArr = (props) => {
 
     useEffect(()=>{
 
-
       return(()=>{
         console.log("Images useEffect return,", idx);
         dispatch(actionCreators.clearImg(idx));
@@ -27,6 +31,12 @@ export const ImageArr = (props) => {
 
     // 이미지 상대경로 저장
     const handleAddImages = (event) => {
+
+      if(showImages.length+size>3){
+        window.alert('이미지는 3개 이상 저장할 수 없습니다!')
+        return;
+      }
+
       let totalList = [...showImages];
       const imageLists = event.target.files;
       let imageUrlLists = [];

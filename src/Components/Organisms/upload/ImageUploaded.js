@@ -36,3 +36,5 @@ export const ImageUploaded = (props) => {
       </div>
     );
   };
+
+export default ImageUploaded;

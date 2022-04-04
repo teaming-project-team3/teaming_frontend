@@ -14,7 +14,7 @@ export const Images = (props) => {
 
       return(()=>{
         console.log("Images useEffect return,", idx);
-        //dispatch(actionCreators.clearImg(idx));
+        dispatch(actionCreators.clearImg(idx));
       })
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
@@ -36,9 +36,17 @@ export const Images = (props) => {
     const handleAddImages = (event) => {
       const imageLists = event.target.files;
 
+      
+
       let temp = Object.values(imageLists);
       
       temp =  [...files, ...temp];
+
+      console.log("------------------------len checker", props.imgLen, temp.length, temp);
+      if(props.imgLen+temp.length>3){
+      window.alert('이미지는 최대 3개 업로드 가능합니다!');
+      return;
+      }
 
       console.log("temp!!", temp);
 
