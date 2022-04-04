@@ -260,23 +260,23 @@ function SignUp() {
 
   };
 
-  const REGION = "ap-northeast-2";
-  const S3_BUCKET = 'teaming.link';
-
-  console.log("aws!",process.env.REACT_APP_BASE_ACCESS_KEY);
-  console.log("aws!!",process.env.REACT_APP_SECRET_ACCESS_KEY);
-
-  AWS.config.update({
-    accessKeyId: process.env.REACT_APP_BASE_ACCESS_KEY,
-    secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY
-  });
-  
-  const myBucket = new AWS.S3({
-    params: { Bucket: S3_BUCKET},
-    region: REGION,
-  });
-
   const uploadFile = (file, data) => {
+    const REGION = "ap-northeast-2";
+    const S3_BUCKET = 'teaming.link';
+  
+    console.log("aws!",process.env.REACT_APP_BASE_ACCESS_KEY);
+    console.log("aws!!",process.env.REACT_APP_SECRET_ACCESS_KEY);
+  
+    AWS.config.update({
+      accessKeyId: process.env.REACT_APP_BASE_ACCESS_KEY,
+      secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY
+    });
+    
+    const myBucket = new AWS.S3({
+      params: { Bucket: S3_BUCKET},
+      region: REGION,
+    });
+    
     const imgName = `${id}_${new Date().getTime()}`
     const params = {
       ACL: 'public-read',
