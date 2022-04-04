@@ -40,6 +40,7 @@ export const loadProjectsCatMainAPI = (category, page) => {
     apis
         .loadProjectsCatMain(category, page)
             .then((res)=>{
+                console.log("res", category, page)
                 dispatch(setProjectsMain(res, category));
             })
             .catch((err)=>{

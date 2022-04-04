@@ -291,7 +291,7 @@ export const loadProjectsMainAPI = () => {
 
 export const updateProjectAPI = (data, boardId, callback) => {
   return async function (dispatch) {
-
+    console.log("update",data)
     apis
         .updateProjectAPI(data, boardId)
             .then((res)=>{

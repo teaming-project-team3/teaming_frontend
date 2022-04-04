@@ -59,13 +59,14 @@ function ProjectSearch(props) {
     useEffect(()=>{
       if(check===1){
         dispatch(loadProjectsCatMainAPI("rank",page[0]));
-        setPage([page[0]+1,page[1],page[2]+1]);
+        setPage([page[0]+1,page[1],page[2]]);
         setContents(allProjects);
       }else if(check===2){
         dispatch(loadProjectsCatMainAPI("dev",page[1]));
         setPage([page[0],page[1]+1,page[2]]);
         setContents(devProjects);
       }else if(check===3){
+        console.log("design projects", page)
         dispatch(loadProjectsCatMainAPI("design",page[2]));
         setPage([page[0],page[1],page[2]+1]);
         setContents(designerProjects);
