@@ -20,7 +20,6 @@ import { getSelectedUserInfo } from "../redux/modules/users";
 const Wrap = styled.div`
   width: 90rem;
   justify-content: center;
-  background-color: #e5e5e5;
 `;
 
 function Main(props) {
@@ -30,38 +29,40 @@ function Main(props) {
   const [modalIsOpen, setModalIsOpen] = useState(props.blocker);
   const [showDetail, setShowDetail] = useState(false);
   const [showUserDetail, setShowUserDetail] = useState(false);
-  const rankList = useSelector((state)=>state.projects.projectsRank);
-  const deadLineList = useSelector((state)=> state.projects.projectsDeadline);
-  const matesDesigner = useSelector((state)=> state.projects.matesDesigner);
-  const matesDev = useSelector((state)=> state.projects.matesDev);
-  const designerWanted = useSelector((state)=>state.projects.projectsDesigner);
-  const devWanted = useSelector((state)=>state.projects.projectsDev);
+  const rankList = useSelector((state) => state.projects.projectsRank);
+  const deadLineList = useSelector((state) => state.projects.projectsDeadline);
+  const matesDesigner = useSelector((state) => state.projects.matesDesigner);
+  const matesDev = useSelector((state) => state.projects.matesDev);
+  const designerWanted = useSelector(
+    (state) => state.projects.projectsDesigner
+  );
+  const devWanted = useSelector((state) => state.projects.projectsDev);
   const isLogin = useSelector((state) => state.users.is_login);
 
-  let isLoading = useSelector((state)=>state.projects.isLoading);
-
-  useEffect(()=>{
-    setModalIsOpen(props.blocker);
-
-  },[props.blocker])
-
-  useEffect(()=>{
-    setModalIsOpen(surveyCheck);
-
-  },[surveyCheck])
+  let isLoading = useSelector((state) => state.projects.isLoading);
 
   useEffect(() => {
-    setTimeout(()=>{
-      dispatch(actionCreators.loadProjectsMainAPI())
+    setModalIsOpen(props.blocker);
+  }, [props.blocker]);
 
-    },750);
-    
+  useEffect(() => {
+    setModalIsOpen(surveyCheck);
+  }, [surveyCheck]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(actionCreators.loadProjectsMainAPI());
+    }, 750);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const detailShow = (id) => {
-
-    dispatch(actionCreators.getProjectDetailAPI(id, ()=>{setShowDetail(true)}));
+    dispatch(
+      actionCreators.getProjectDetailAPI(id, () => {
+        setShowDetail(true);
+      })
+    );
 
     //setShowDetail(true);
 
@@ -69,41 +70,47 @@ function Main(props) {
   };
 
   const userDetailShow = (id) => {
+    dispatch(
+      getSelectedUserInfo(id, () => {
+        setShowUserDetail(true);
+      })
+    );
 
-    dispatch(getSelectedUserInfo(id, ()=>{setShowUserDetail(true)}));
-    
     return;
   };
 
   return (
     <Wrap className="pb-10 mx-auto my-0">
-      {isLoading?
-        <Spinner/>
-        :
-      <><Survey modalIsOpen={modalIsOpen} close={props.setBlocker} className="z-10"></Survey>
-      <ProjectDetailModal
-          setSurveyOpen={props.setBlocker}
-          showDetail={showDetail}
-          callBackSetShowFalse={() => {
-            return setShowDetail(false);
-          } }
-        ></ProjectDetailModal>
-        <UserDetailModal
-          showUser={showUserDetail}
-          callBackSetShowFalse={() => {
-            return setShowUserDetail(false);
-          } }
-        >
-        </UserDetailModal>
-        <div className="flex flex-col">
-
-            <SwiperSlider className="z-0"/>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <>
+          <Survey
+            modalIsOpen={modalIsOpen}
+            close={props.setBlocker}
+            className="z-10"
+          ></Survey>
+          <ProjectDetailModal
+            setSurveyOpen={props.setBlocker}
+            showDetail={showDetail}
+            callBackSetShowFalse={() => {
+              return setShowDetail(false);
+            }}
+          ></ProjectDetailModal>
+          <UserDetailModal
+            showUser={showUserDetail}
+            callBackSetShowFalse={() => {
+              return setShowUserDetail(false);
+            }}
+          ></UserDetailModal>
+          <div className="flex flex-col">
+            <SwiperSlider className="z-0" />
 
             <div className="flex justify-center mt-[3.5rem]">
               <ShortCutCards
                 _onClick={() => {
                   navigate("/projectFind");
-                } }
+                }}
                 img={Pic}
                 bg={"#7545F2"}
                 text={"사이드 프로젝트를 찾는 분이라면?"}
@@ -111,13 +118,12 @@ function Main(props) {
 
               <ShortCutCards
                 _onClick={() => {
-                  if(!isLogin){
-                    window.alert("로그인 후에 프로젝트 생성이 가능합니다!")
-                  }
-                  else if(surveyCheck){
-                    window.alert("설문조사 후에 프로젝트 생성이 가능합니다!")
+                  if (!isLogin) {
+                    window.alert("로그인 후에 프로젝트 생성이 가능합니다!");
+                  } else if (surveyCheck) {
+                    window.alert("설문조사 후에 프로젝트 생성이 가능합니다!");
                     props.setBlocker(surveyCheck);
-                  }else{
+                  } else {
                     navigate("/createProject");
                   }
                 }}
@@ -127,23 +133,47 @@ function Main(props) {
               ></ShortCutCards>
             </div>
 
-            <ProjectList title={titles.rank} detailShow={detailShow} data={rankList} />
+            <ProjectList
+              title={titles.rank}
+              detailShow={detailShow}
+              data={rankList}
+            />
 
-            <ProfileList title={titles.matesDesigner} detailShow={userDetailShow} data={matesDesigner} className="z-0"/>
+            <ProfileList
+              title={titles.matesDesigner}
+              detailShow={userDetailShow}
+              data={matesDesigner}
+              className="z-0"
+            />
 
             <MainBanner />
 
-            <ProjectList title={titles.deadline} detailShow={detailShow} data={deadLineList} />
+            <ProjectList
+              title={titles.deadline}
+              detailShow={detailShow}
+              data={deadLineList}
+            />
 
-            <ProfileList title={titles.matesDev} detailShow={userDetailShow} data={matesDev} />
+            <ProfileList
+              title={titles.matesDev}
+              detailShow={userDetailShow}
+              data={matesDev}
+            />
 
-            <ProjectList title={titles.wantedDesigner} detailShow={detailShow} data={designerWanted} />
+            <ProjectList
+              title={titles.wantedDesigner}
+              detailShow={detailShow}
+              data={designerWanted}
+            />
 
-            <ProjectList title={titles.wantedDev} detailShow={detailShow} data={devWanted} />
-
-
-          </div></>
-      }
+            <ProjectList
+              title={titles.wantedDev}
+              detailShow={detailShow}
+              data={devWanted}
+            />
+          </div>
+        </>
+      )}
     </Wrap>
   );
 }

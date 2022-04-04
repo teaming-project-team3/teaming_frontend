@@ -1,39 +1,39 @@
-import img from '../../../static/project.jpg'
+import img from "../../../static/project.jpg";
 import tw from "tailwind-styled-components";
 
 const StackStatus = tw.div`
 px-2 text-white text-[0.75em] font-noto3 
 rounded-2xl bg-[#7545F2] w-fit mr-1
-${(props) => (props.num>0?`bg-[#7545F2]`:`bg-[#DC143C]`)};
-`
+${(props) => (props.num > 0 ? `bg-[#7545F2]` : `bg-[#DC143C]`)};
+`;
 
 function ProjectCard(props) {
-
   const { id, text, stack, profileUrl, nickName, _onClick } = props;
 
   ProjectCard.defaultProps = {
-    text:"프로젝트 제목",
-    stack:[],
-    img:{img},
-    profileUrl:"http://relative-projectURL",
-    nickName:"nickName",
-    _onClick:()=>{},
-    id:"id",
-  }
+    text: "프로젝트 제목",
+    stack: [],
+    img: { img },
+    profileUrl: "http://relative-projectURL",
+    nickName: "nickName",
+    _onClick: () => {},
+    id: "id",
+  };
 
   const nameManufacture = (name) => {
-    try{
-    return name.split("&")[0];
-    }catch{
+    try {
+      return name.split("&")[0];
+    } catch {
       return name;
     }
-  }
-
+  };
 
   return (
     <div
-      onClick={()=>{_onClick(id)}}
-      className="flex flex-col max-w-[15.625em] max-h-[18.750em] ml-[2.250em] bg-white border-2 cursor-pointer rounded-[0.333em] shadow-lg m-2"
+      onClick={() => {
+        _onClick(id);
+      }}
+      className="flex flex-col w-[15.625em] h-[18.750em] ml-[2.250em] bg-white border-2 cursor-pointer rounded-[0.333em] shadow-lg m-2"
     >
       <div className="h-2/3 rounded-[0.333em]">
         <img
@@ -45,20 +45,14 @@ function ProjectCard(props) {
 
       <div className="flex flex-col p-[0.813em] items-stretch h-1/3">
         <div className="flex flex-wrap w-full">
-
           {stack &&
-          
-         stack.map((item, idx)=>{
-            return(<StackStatus num={item[2]}>
-            {item[2]>0 ?
-            item[1] + "✅"
-            :
-            item[1] + "❌"}
-          </StackStatus>)
-          })
-          
-          }
-
+            stack.map((item, idx) => {
+              return (
+                <StackStatus num={item[2]}>
+                  {item[2] > 0 ? item[1] + "✅" : item[1] + "❌"}
+                </StackStatus>
+              );
+            })}
         </div>
 
         <div className="py-[0.656em] text-black text-[1em] font-notoB truncate ...">
