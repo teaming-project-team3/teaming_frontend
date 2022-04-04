@@ -7,6 +7,30 @@ function Badge(props) {
         position:"",
     }
 
+    const getRandom = (min, max) => Math.floor(Math.random() * (max - min) + min);
+
+    function skillColorDesignator() {
+
+      switch (getRandom(2, 10)) {
+        case 2:
+          return "FF6550";
+        case 3:
+          return "9999FF";
+        case 4:
+          return "31A8FF";
+        case 5:
+          return "3DDC84";
+        case 6:
+          return "D70010";
+        case 7:
+          return "DDE072";
+        case 8:
+          return "0078D7";
+        default:
+          return "FF6384";
+      }
+    }
+
     return (
     <div className="w-full">
     <div>{position}</div>
@@ -17,7 +41,7 @@ function Badge(props) {
           return (
             <div className="m-1">
               <img
-                src={`https://img.shields.io/badge/${item.name}-3776AB?style=for-the-badge&logo=${item.name}&logoColor=white`}
+                src={`https://img.shields.io/badge/${item}-${skillColorDesignator()}?style=for-the-badge&logo=${item}&logoColor=white`}
                 alt={""}
               ></img>
             </div>

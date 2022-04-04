@@ -14,11 +14,17 @@ import Images from "../Components/Organisms/upload/Images";
 import CreateSelect from "./CreateSelect";
 import { useNavigate } from "react-router";
 
+
+
 function CreateProject() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [endDate, setEndDate] = useState(new Date());
+  const today = new Date()
+  const tomorrow = new Date(today)
+  tomorrow.setDate(tomorrow.getDate() + 1)
+
+  const [endDate, setEndDate] = useState(tomorrow);
 
   const [projectTitle, setProjectTitle] = useState("");
   const [projectSubTitle, setProjectSubTitle] = useState("");
@@ -31,7 +37,6 @@ function CreateProject() {
   const location = useLocation();
 
   const [workArr, setWorkArr] = useState([1]);
-
 
   useEffect(() => {
     document.documentElement.scrollTo(0, 0);
@@ -161,7 +166,7 @@ function CreateProject() {
               height="80vh"
               width=""
               initialEditType="markdown"
-              initialValue="마크다운으로 내용을 입력하세요."
+              placeholder="마크다운으로 내용을 입력하세요."
               ref={editorRef}
               onChange={onChangeMD}
             ></Editor>
@@ -215,11 +220,11 @@ function CreateProject() {
           모집 기간
           {/* 달력을 이용하여 날짜 선택 */}
           <div className="calender-container">
-            <div className="flex calender-box">
+            <div className="flex items-center calender-box">
               <div className="mr-2 cursor-pointer date">마감일</div>
-              <div className="ml-2 cursor-pointer">
+              <div className="flex justify-center p-2 ml-2 bg-purple-200 rounded-md cursor-pointer w-[7rem] mr-20 border hover:border-purple-500">
                 <MyDatePicker
-                  className="cursor-pointer"
+                  className="cursor-pointer w-fit"
                   selected={endDate}
                   dateFormat="yyyy-MM-dd" // 날짜 형식
                   onChange={(date) => setEndDate(date)}

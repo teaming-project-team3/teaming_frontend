@@ -1,4 +1,3 @@
-import project1 from "../../../static/images/userStats/exProject01.png";
 import ProfileCard from "./ProfileCard";
 import Tier from "../../../static/images/main/tier.svg";
 import Slider from "react-slick";
@@ -59,7 +58,7 @@ function ProfileList(props) {
         
         <Slider {...sliderSettings}>
             <div className="flex w-fit">
-              <div className="flex justify-center w-full mt-10">
+              <div className="flex justify-center w-full p-3 mt-10">
             <ProfileCard
               _onClick={props.detailShow}
               id={data[0]._id}
@@ -69,8 +68,7 @@ function ProfileList(props) {
               position={data[0].position}
               projects={data[0].project}
               tier={Tier}
-              project1={project1}
-              project2={project1}
+              data={data[0]}
             ></ProfileCard>
 
             <ProfileCard
@@ -82,8 +80,7 @@ function ProfileList(props) {
               position={data[1].position}
               projects={data[1].project}
               tier={Tier}
-              project1={project1}
-              project2={project1}
+              data={data[1]}
             ></ProfileCard>
               </div>
             </div>
@@ -98,8 +95,7 @@ function ProfileList(props) {
               position={data[2].position}
               projects={data[2].project}
               tier={Tier}
-              project1={project1}
-              project2={project1}
+              data={data[2]}
             ></ProfileCard>
 
             <ProfileCard
@@ -111,8 +107,7 @@ function ProfileList(props) {
               position={data[3].position}
               projects={data[3].project}
               tier={Tier}
-              project1={project1}
-              project2={project1}
+              data={data[3]}
             ></ProfileCard>
               </div>
             </div>

@@ -25,15 +25,15 @@ function SwiperSliderProjectModal(props) {
         navigation
         pagination={{ clickable: true }}
       >
-        <SwiperSlide><img className="w-full h-[9.938rem] rounded-[0.625rem] object-contain" src={imgUrlList[0]} alt={projectImg} /></SwiperSlide>
+        <SwiperSlide><img className="w-full rounded-[0.625rem] object-cover" src={imgUrlList[0]} alt={projectImg} /></SwiperSlide>
         {imgUrlList.length>0 && imgUrlList[0] &&
-            <SwiperSlide><img className="w-full h-[9.938rem] rounded-[0.625rem] object-contain" src={imgUrlList[0]} alt={projectImg} /></SwiperSlide>
+            <SwiperSlide><img className="w-full rounded-[0.625rem] object-contain" src={imgUrlList[0]} alt={projectImg} /></SwiperSlide>
         }
         {imgUrlList.length>0 && imgUrlList[1] &&
-            <SwiperSlide><img className="w-full h-[9.938rem] rounded-[0.625rem] object-contain" src={imgUrlList[1]} alt={projectImg} /></SwiperSlide>
+            <SwiperSlide><img className="w-full rounded-[0.625rem] object-contain" src={imgUrlList[1]} alt={projectImg} /></SwiperSlide>
         }
         {imgUrlList.length>0 && imgUrlList[2] &&
-            <SwiperSlide><img className="w-full h-[9.938rem] rounded-[0.625rem] object-contain" src={imgUrlList[2]} alt={projectImg} /></SwiperSlide>
+            <SwiperSlide><img className="w-full rounded-[0.625rem] object-contain" src={imgUrlList[2]} alt={projectImg} /></SwiperSlide>
         }
       </Swiper>
     </div>

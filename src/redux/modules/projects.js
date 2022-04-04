@@ -1,6 +1,6 @@
 import { handleActions } from "redux-actions";
 import { produce } from "immer";
-import { apis, apisMS } from "../../apis/apis";
+import { apis } from "../../apis/apis";
 
 // actions
 const SET_MAIN_PROJECTS = "SET_MAIN_PROJECTS";
@@ -310,7 +310,7 @@ export const updateProjectAPI = (data, boardId, callback) => {
 export const createProjectAPI = (data, callback) => {
   return async function (dispatch) {
 
-    apisMS
+    apis
         .createProjectAPI(data)
             .then((res)=>{
                 callback();
