@@ -51,7 +51,10 @@ function Main(props) {
   },[surveyCheck])
 
   useEffect(() => {
-    dispatch(actionCreators.loadProjectsMainAPI());
+    setTimeout(()=>{
+      dispatch(actionCreators.loadProjectsMainAPI())
+
+    },750);
     
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
