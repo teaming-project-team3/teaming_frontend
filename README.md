@@ -4,6 +4,10 @@
 로그인 : 
 https://d1zc5f9ndqmvzc.cloudfront.net/login
 
+http://teaming.link.s3-website.ap-northeast-2.amazonaws.com
+
+https://teaming.link
+
 <br>
 
 회원가입 -> 로그인 -> 설문조사 -> 메인 -> 메인(실시간 인기 프로젝트 카드) -> 프로젝트상세모달->프로젝트룸->userB상세정보
