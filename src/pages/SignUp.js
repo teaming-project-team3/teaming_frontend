@@ -260,14 +260,12 @@ function SignUp() {
 
   };
 
-  const ACCESS_KEY = process.env.REACT_APP_BASE_ACCESS_KEY;
-  const SECRET_ACCESS_KEY = process.env.REACT_APP_SECRET_ACCESS_KEY;
   const REGION = "ap-northeast-2";
   const S3_BUCKET = 'teaming.link';
 
   AWS.config.update({
-    accessKeyId: ACCESS_KEY,
-    secretAccessKey: SECRET_ACCESS_KEY
+    accessKeyId: process.env.REACT_APP_BASE_ACCESS_KEY,
+    secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY
   });
   
   const myBucket = new AWS.S3({

@@ -40,14 +40,12 @@ const uploadImagesS3 = (data, callback, checker=false, boardId) => {
         const id = localStorage.getItem("userId");
         const imageFiles = getState().image.image_files;
         
-        const ACCESS_KEY = process.env.REACT_APP_BASE_ACCESS_KEY;
-        const SECRET_ACCESS_KEY = process.env.REACT_APP_SECRET_ACCESS_KEY;
         const REGION = "ap-northeast-2";
         const S3_BUCKET = 'teaming.link';
       
         AWS.config.update({
-          accessKeyId: ACCESS_KEY,
-          secretAccessKey: SECRET_ACCESS_KEY
+          accessKeyId: process.env.REACT_APP_BASE_ACCESS_KEY,
+          secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY
         });
         
         const myBucket = new AWS.S3({
@@ -116,14 +114,12 @@ export const uploadImagesS3PortFolio = (portfolioList, data, callback) => {
       const id = localStorage.getItem("userId");
       const imageFiles = getState().image.filesArr;
       
-      const ACCESS_KEY = process.env.REACT_APP_BASE_ACCESS_KEY;
-      const SECRET_ACCESS_KEY = process.env.REACT_APP_SECRET_ACCESS_KEY;
       const REGION = "ap-northeast-2";
       const S3_BUCKET = 'teaming.link';
     
       AWS.config.update({
-        accessKeyId: ACCESS_KEY,
-        secretAccessKey: SECRET_ACCESS_KEY
+        accessKeyId: process.env.REACT_APP_BASE_ACCESS_KEY,
+        secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY
       });
       
       const myBucket = new AWS.S3({
@@ -192,14 +188,12 @@ export const uploadImagesS3Update = (data, callback) => {
       const id = localStorage.getItem("userId");
       const imageFile = data.profileUrl;
       
-      const ACCESS_KEY = process.env.REACT_APP_BASE_ACCESS_KEY;
-      const SECRET_ACCESS_KEY = process.env.REACT_APP_SECRET_ACCESS_KEY;
       const REGION = "ap-northeast-2";
       const S3_BUCKET = 'teaming.link';
     
       AWS.config.update({
-        accessKeyId: ACCESS_KEY,
-        secretAccessKey: SECRET_ACCESS_KEY
+        accessKeyId: process.env.REACT_APP_BASE_ACCESS_KEY,
+        secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY
       });
       
       const myBucket = new AWS.S3({
