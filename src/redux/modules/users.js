@@ -23,6 +23,7 @@ const ADD_NOW_PROJECT_USER = "ADD_NOW_PROJECT_USER";
 const SET_MY_PROJECTS = "SET_MY_PROJECTS";
 const SET_SELECTED_USER_INFO = "SET_SELECTED_USER_INFO";
 const SET_SURVEY_CHECKER = "SET_SURVEY_CHECKER";
+const LOG_IN_MAINTAIN = "LOG_IN_MAINTAIN";
 
 // action creators
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
@@ -281,6 +282,10 @@ export function setIsLogIn(imgUrl, surveyCheck) {
   return { type: SET_IS_LOG_IN, imgUrl, surveyCheck};
 }
 
+export function loginMaintainer(checker) {
+  return { type: LOG_IN_MAINTAIN, checker};
+}
+
 export function setLogOut(){
   return { type:LOG_OUT }
 }
@@ -393,6 +398,7 @@ export const updatePortFolio = (portfolioList, callback, resetCallBack) => {
         callback();
       })
       .catch((err)=>{
+        window.alert('잠시 후 다시 시도해주세요!')
         callback();
       })
 
@@ -451,14 +457,17 @@ const getMyStats = () => {
   }
 }
 
-export const updateUserInfoAPI = (data) => {
-  return function(dispatch){
+export const updateUserInfoAPI = (data, goMain) => {
+  return async function(dispatch){
 
     apis
       .updateUserInfo(data)
       .then((res)=>{
+        goMain();
       })
       .catch((err)=>{
+        window.alert('잠시 후 다시 시도해주세요!')
+        goMain();
       })
 
   }
@@ -672,6 +681,13 @@ export default handleActions(
       produce(state, (draft) => {
 
         draft.surveyCheck = action.checker;
+
+      }),
+
+      [LOG_IN_MAINTAIN]: (state, action) =>
+      produce(state, (draft) =>{
+
+        draft.is_login = action.checker;
 
       }),
 

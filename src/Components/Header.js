@@ -16,7 +16,7 @@ function Header(props) {
   const surveyCheck = useSelector((state) => state.users.surveyCheck);
   //surveyCheck이 true면, 설문조사 나오게, surveyCheck이 false면, 글작성 되도록
   const dispatch = useDispatch();
-
+  
   if (window.location.pathname === "/projectRoom"||window.location.pathname === "/test") return null;
 
   return (

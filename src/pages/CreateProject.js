@@ -65,6 +65,7 @@ function CreateProject() {
       referUrl: referUrl,
       skills: skills,
       period: toStringByFormatting(endDate),
+      imgUrl: [],
       //period: endDate,
     };
 
