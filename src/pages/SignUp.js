@@ -263,13 +263,12 @@ function SignUp() {
   const uploadFile = (file, data) => {
     const REGION = "ap-northeast-2";
     const S3_BUCKET = 'teaming.link';
-  
-    console.log("aws!",process.env.REACT_APP_BASE_ACCESS_KEY);
-    console.log("aws!!",process.env.REACT_APP_SECRET_ACCESS_KEY);
+
+    console.log("direct str");
   
     AWS.config.update({
-      accessKeyId: process.env.REACT_APP_BASE_ACCESS_KEY,
-      secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY
+      accessKeyId: "AKIAZJ3LGUQ4TBL3O7RL",
+      secretAccessKey: "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"
     });
     
     const myBucket = new AWS.S3({
