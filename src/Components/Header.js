@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import tw from "tailwind-styled-components";
 import { setLogOut, setSurveyChecker } from "../redux/modules/users";
+import logo from "../static/images/logo.png"
 
 const Nav = tw.div`
   min-w-[90rem]
@@ -26,7 +27,7 @@ function Header(props) {
           to="/"
           className="col-span-1 col-start-2 text-xl text-[#593CE5] font-notoB"
         >
-          Teaming
+          <img src={logo} alt={"Teaming"}></img>
         </Link>
 
         {isLogin && !surveyCheck && (

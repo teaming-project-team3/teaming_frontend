@@ -1,19 +1,36 @@
+import { useState } from "react";
 import { apis } from "../../apis/apis";
 import backArrow from "../../static/images/projectRoom/backPress.svg";
 //import onlineIcon from '../../icons/onlineIcon.png'
 
 function ProjectRoomHeader(props) {
 
+  const [start, setStart] = useState(false);
+
+
   const requestJoin = () => {
-    apis
-      .postInvolved(props.projectId, props.involved)
+
+    (props.involved? 
+      apis
+      .postInvolvedOut(props.projectId, props.involved)
       .then((res)=>{
-        console.log("involved:",res)
+        console.log("involvedOut:",res)
+        props.involvedToggle();
+      })
+      .catch((err)=>{
+        console.log("involved err:",err)
+      })      
+      :
+      apis
+      .postInvolvedIn(props.projectId, props.involved)
+      .then((res)=>{
+        console.log("involvedIn:",res)
         props.involvedToggle();
       })
       .catch((err)=>{
         console.log("involved err:",err)
       })
+      )
   }
 
   const close = () => {
@@ -21,7 +38,7 @@ function ProjectRoomHeader(props) {
     .postClosed(props.projectId)
     .then((res)=>{
       console.log("close:",res)
-      props.involvedToggle();
+      setStart(true);
     })
     .catch((err)=>{
       console.log("close err:",err)
@@ -54,15 +71,15 @@ function ProjectRoomHeader(props) {
 
       <div className="w-full"></div>
       <div className="flex justify-end w-full mr-10">
-      {props.isLeader && (
+      {!start && props.isLeader && (
         <div
-          className="w-1/5 p-3 text-center text-gray-700 bg-green-200 border rounded cursor-pointer font-noto2 hover:border-green-500"
+          className="w-1/5 p-3 text-center text-gray-700 bg-green-200 border rounded-full cursor-pointer font-noto2 hover:border-green-500"
           onClick={close}
         >
           <button>마감하기</button>
         </div>
       )}
-      {props.involved && (
+      {!start && !props.isLeader && !props.involved && (
         <div
           className="w-1/5 p-3 text-center text-gray-700 bg-purple-100 border rounded-full cursor-pointer font-noto2 hover:border-purple-500"
           onClick={requestJoin}
@@ -70,7 +87,7 @@ function ProjectRoomHeader(props) {
           <button>티밍하기</button>
         </div>
       )}
-      {!props.involved && (
+      {!start && !props.isLeader && props.involved && (
         <div
           className="w-1/5 p-3 text-center text-gray-700 bg-red-200 border rounded-full cursor-pointer font-noto2 hover:border-red-500"
           onClick={requestJoin}

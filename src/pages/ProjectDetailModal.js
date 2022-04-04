@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Viewer } from "@toast-ui/react-editor";
 import { useNavigate } from "react-router";
-import Image from "../Components/Atoms/Image";
 import { ProjectDetailModalCustom } from "../Components/Modals/ProjectDetailModalCustom";
 import UrlLink from "../Components/Molecules/UrlLink";
 import GitHubLogo from "../static/images/userStats/gitLogo.png";
@@ -62,6 +61,23 @@ function ProjectDetailModal(props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const callJoinAPI = () => {
+    apis
+      .joinProjectAPI(data._id)
+      .then((res)=>{
+        console.log("res",res)
+        navigate("/projectRoom", { state: {id: data._id, title: data.title, isLeader: res.data.leaderCheck, involved: res.data.projectInCheck}});
+
+      })
+      .catch((err)=>{
+        console.log("err",err)
+      })
+  }
+
+  const dateFactory = (date) => {
+     return date.split("T")[0]
+  }
+
   return (
     <>
       {modalIsOpen && (
@@ -75,7 +91,8 @@ function ProjectDetailModal(props) {
                 props.callBackSetShowFalse()
                 props.setSurveyOpen(true);
               }else{
-                navigate("/projectRoom", { state: {id: data._id, title: data.title, isLeader: isMaker, involved: data.isInvolved}});
+                
+                callJoinAPI();
               }
             }}
           >
@@ -83,14 +100,6 @@ function ProjectDetailModal(props) {
 
             <div className="flex h-[40vh] justify-center bg-cover">
               <SwiperSliderProjectModal imgUrlList={data.imgUrl} />
-            </div>
-
-            <div className="flex justify-center w-screen mt-[-4.063rem]">
-              <Image
-                shape="circle"
-                src={data.imgUrl.length >= 2 ? data.imgUrl[1] : ""}
-                size={"130"}
-              ></Image>
             </div>
 
             <div className="m-10 text-4xl text-center text-black font-notoB">
@@ -117,7 +126,7 @@ function ProjectDetailModal(props) {
             }
 
             <div className="m-10 text-xl text-center text-gray-600 font-noto2">
-              마감 : {data.period}
+              마감 : {dateFactory(data.period)}
               <div className="text-base text-red-500 font-noto2">
                 남은 인원 : 디자인 {data.left[0]} 명 / 프론트 {data.left[1]} 명
                 / 백 {data.left[2]} 명
