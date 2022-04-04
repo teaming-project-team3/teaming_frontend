@@ -5,7 +5,6 @@ export const UserDetailModalCustom = (props) => {
   const [show, setShow] = useState(props.checker);
 
   useEffect(() => {
-    console.log("useEffect, setShow", props.checker);
     setShow(props.checker);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -26,15 +26,12 @@ function Selector(props) {
   function setSelectorValue(){
     
     const data = [selWorks.value, selRoles.value, number];
-    console.log("setSelectorValue", data)
     props.dataPush(data, props.idx);
 
   }
 
   function handleSel(e, checker) {
-    console.log("handleSel", e.value, checker);
     if (checker === 1) {
-      console.log("checker1", e.label);
       setSelWorks(e);
     } else if (checker === 2) {
       setSelRoles(e);

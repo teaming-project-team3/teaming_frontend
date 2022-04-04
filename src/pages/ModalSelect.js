@@ -26,7 +26,6 @@ function ModalSelect(props) {
   const position = props.position;
   const ability = props.ability? props.ability : null;
   const skill = props.skills? props.skills : null;
-  console.log("props!!!!", props.ability);
 
   const skillName = skill.map((item, i)=>{
     return {value:item.name, label:item.name}
@@ -37,12 +36,9 @@ function ModalSelect(props) {
     return {value:item.name, label:item.name}
   })
 
-  console.log("ability, skill top : ", skillName);
-
   const styles = useMemo(
     () => ({
       multiValueRemove: (base, state) => {
-        console.log("multiValueRemove", state.data)
         return state.data.isFixed ? { ...base, display: "none" } : base;
       },
     }),
@@ -131,15 +127,11 @@ function ModalSelect(props) {
           return;
         default:
       }
-      // if 이미 있으면 삭제하고,
-      // console.log("selected : ", inputValue, langState, selProLang);
-      // setLangState(inputValue);
 
       setSelFrame(inputValue);
 
       if(removedValue){
         //삭제
-        console.log(removedValue);
         dispatch(deleteSkills(removedValue.value.toLowerCase(), position));
         }else{
             //추가시 이미 있으면 기존 데이터 return하는 map 함수 구현하기
@@ -179,7 +171,6 @@ function ModalSelect(props) {
 
       {ability &&
         ability.map((data, idx) => {
-          console.log("check reRendering,", data, periodOfUse[data.time])
           
           return(
           <>
@@ -196,7 +187,6 @@ function ModalSelect(props) {
                           time: e.value,
                           rate: data.rate,
                         };
-                        console.log("onChange time : ", t);
                         dispatch(updateAbility(t, idx, position));
                     }}
                 ></Select>
@@ -212,7 +202,6 @@ function ModalSelect(props) {
                       time: data.time,
                       rate: e.value,
                     };
-                    console.log("onChange time : ", t);
                     dispatch(updateAbility(t, idx, position));
                   }}
                 ></Select>
@@ -250,7 +239,6 @@ function ModalSelect(props) {
                       time: e.value,
                       rate: data.rate,
                     };
-                    console.log("onChange time : ", t);
                     dispatch(updateSkills(t, idx, position));
                   }}
                 ></Select>
@@ -266,7 +254,6 @@ function ModalSelect(props) {
                       time: data.time,
                       rate: e.value,
                     };
-                    console.log("onChange time : ", t);
                     dispatch(updateSkills(t, idx, position));
                   }}
                 ></Select>

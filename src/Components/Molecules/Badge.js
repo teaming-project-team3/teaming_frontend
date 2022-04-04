@@ -1,8 +1,6 @@
 function Badge(props) {
 
     const {skills, position} = props;
-    console.log("no length", skills, position)
-    //console.log("length", ability.length)
 
     Badge.defaultProps = {
         skills:[],

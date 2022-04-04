@@ -6,7 +6,6 @@ import plus from "../../../static/images/createProject/plus.png"
 export const ImageArr = (props) => {
     const showImages = useSelector((state)=>state.image.filesArr[props.idx]);
     const [size, setSize] = useState(props.imgLen);
-    console.log("ImageArr!", showImages);
 
     useEffect(()=>{
       setSize(props.imgLen);
@@ -23,7 +22,6 @@ export const ImageArr = (props) => {
     useEffect(()=>{
 
       return(()=>{
-        console.log("Images useEffect return,", idx);
         dispatch(actionCreators.clearImg(idx));
       })
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -41,11 +39,9 @@ export const ImageArr = (props) => {
       const imageLists = event.target.files;
       let imageUrlLists = [];
         
-      //[{url: asdfdasf, file: asdfasdf},{url: asdfdasf, file: asdfasdf},{url: asdfdasf, file: asdfasdf}]
       for (let i = 0; i < imageLists.length; i++) {
         const currentImageUrl = URL.createObjectURL(imageLists[i]);
         imageUrlLists.push(currentImageUrl);
-        console.log("imageUrl", currentImageUrl);
       }
   
       if (imageUrlLists.length > 3) {
@@ -62,8 +58,6 @@ export const ImageArr = (props) => {
         totalList.push({url: imageUrlLists[i], file: imageLists[i]});
       }
 
-      
-      console.log("add portfolio",idx)
       dispatch(actionCreators.setFilesArr(totalList, idx));
       
     };

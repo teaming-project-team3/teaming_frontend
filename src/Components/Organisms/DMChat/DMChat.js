@@ -24,12 +24,10 @@ const DMChat = ( ) => {
   const [messages, setMessages] = useState([])
 
   const location = useLocation();
-  console.log(location)
 
   useEffect(() => {
     const { name, room } = queryString.parse(location.search)
 
-    console.log("start", name, room)
 
     socket = io(ENDPOINT, {
       withCredentials: true,
@@ -41,10 +39,8 @@ const DMChat = ( ) => {
     setRoom(room)
     setName(name)
 
-    console.log("before join : ", room, name)
 
     socket.emit('join', { name, room }, (error) => {
-      console.log("join : ", error)
       if (error) {
         alert("join Error",error)
       }
@@ -54,17 +50,14 @@ const DMChat = ( ) => {
 
   useEffect(() => {
     socket.on('message', (message) => {
-      console.log("message : ", message)
       setMessages((messages) => [...messages, message])
     })
 
     socket.on('roomData', ({ users }) => {
-      console.log("roomData", users)
       setUsers(users)
     })
 
     return (()=>{
-      console.log("willunmount")
       socket.disconnect()});
   }, [])
 
@@ -72,14 +65,12 @@ const DMChat = ( ) => {
     event.preventDefault()
 
     if (message) {
-      console.log("before SendMessage", message)
       let sendData = {sender: name, message: message, room: room}
       socket.emit('sendMessage', sendData, () => setMessage(''))
       
       let data = {user: "curr", test: message}
       setMessages((messages) => [...messages, data])
 
-      console.log("after SendMessage", message)
     }
   }
 

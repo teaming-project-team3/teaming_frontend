@@ -10,11 +10,6 @@ export const Upload = (props) => {
     const setProfilePreview = useSetRecoilState(profilePreview)
 
     const selectFile = (e) => {
-        console.log(e);
-        console.log(e.target);
-        console.log(e.target.files[0]);
-
-        console.log(fileInput.current.files[0]);
 
         const useReader = new FileReader();
         const file = fileInput.current.files[0];
@@ -23,7 +18,6 @@ export const Upload = (props) => {
 
 
         useReader.onloadend = () => {
-            console.log(useReader.result);
             
             //프로필 이미지인지, 포스팅 이미지인지 구분 후, preview recoil에 set
             if(props.is_profile){

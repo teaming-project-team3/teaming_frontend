@@ -81,7 +81,6 @@ const Login = (props) => {
           placeholder="이메일(ID)를 입력하세요"
           onChange={(e) => {
             setId(e.target.value);
-            // console.log(e.target.value);
           }}
         />
         <div className="font-normal font-noto2 text-[0.875rem] leading-[150%]">
@@ -94,7 +93,6 @@ const Login = (props) => {
           type="password"
           onChange={(e) => {
             setPwd(e.target.value);
-            // console.log(e.target.value);
           }}
           onKeyDown={onKeyPress}
           onSubmit={signIn}

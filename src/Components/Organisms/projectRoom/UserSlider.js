@@ -22,7 +22,6 @@ function UserSlider(props) {
   const name = props.name;
   //const name = localStorage.getItem("userId");
   const room = props.room;
-  console.log("Rtcview : ", name, room);
   let myStream;
 
   const NOTICE_CN = "noticeChat";
@@ -44,7 +43,6 @@ function UserSlider(props) {
   let userStats = [];
   let myStat = {};
 
-  console.log("userList, userStatsArr", userList);
 
   useEffect(() => {
     socket = io(ENDPOINT, {
@@ -60,35 +58,22 @@ function UserSlider(props) {
     socket.emit("join_room", { roomName: room, nickName: name });
 
     socket.on("accept_join", async (userObjArr, usersStats) => {
-      console.log(
-        "----------------accept_join---------------------------------------",
-        userObjArr,
-        usersStats
-      );
 
       //state를 두번 업데이트 하는 행동이니 수정할것.
-      //setStatsList(usersStats);
       setUserList(userObjArr);
       // eslint-disable-next-line react-hooks/exhaustive-deps
       userInfo=[...userInfo, ...userObjArr];
-      console.log("--------------------------userInfo check---------------", userInfo);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      //userStatsArr=[...userStatsArr, ...usersStats];
-      // eslint-disable-next-line react-hooks/exhaustive-deps
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
       userStats = userObjArr.map((res)=>{
         return res.usersStackObj;
       })
-      console.log("userStats", userStats);
       props.statusCallBack(userStats);
       
       // eslint-disable-next-line react-hooks/exhaustive-deps
       myStat = userStats.filter((res)=>{
-        console.log("mid map", res)
         return res.socketId===socket.id
       })
-      console.log("after map", myStat)
       props.myStatusCallBack(myStat);
 
       await initCall();
@@ -126,16 +111,10 @@ function UserSlider(props) {
     });
 
     socket.on("offer", async (offer, remoteSocketId, remoteNickname, userStat) => {
-      console.log("--------------------------client on.offer-----------------------------", remoteNickname, peopleInRoom, userStat);
       const data = {targetRoomObjUsers:{socketId: remoteSocketId, nickName: remoteNickname, video: false, audio: false},
                     usersStackObj: userStat};
-      //setStatsList((prev)=>[...prev, userStat]);
       setUserList((prev)=>[...prev, data]);
-      
-      
-      //dispatch(addNowProjectUsers(data))
       userInfo=[...userInfo, data];
-      //userStatsArr=[...userStatsArr, userStat];
       props.statusCallBack(userInfo.map((res)=>res.usersStackObj));
       
       const temp = localStorage.getItem("count");
@@ -178,13 +157,10 @@ function UserSlider(props) {
 
     socket.on("leaveRoom", (leavedSocketId) => {
       removeVideo(leavedSocketId);
-      //writeChat(`notice! ${nickName} leaved the room.`, NOTICE_CN);
       --peopleInRoom;
-      //sortStreams();
     });
 
     return () => {
-      console.log("새로고침 할 때 불러지나?");
       socket.disconnect();
     };
 
@@ -210,7 +186,6 @@ function UserSlider(props) {
           option.selected = true;
         }
 
-        //camerasSelect.appendChild(option);
       });
       setCameraOptions([
         ...cameraOptions,
@@ -238,7 +213,6 @@ function UserSlider(props) {
 
       // stream을 mute하는 것이 아니라 HTML video element를 mute한다.
       addVideoStream(myVideo.current, myStream);
-      //videoGrid.current.append(myVideo.current);
 
       if (!deviceId) {
         // mute default
@@ -263,7 +237,6 @@ function UserSlider(props) {
 
   function videoToggleExceptMe(nickName, status){
     
-    console.log("toggle!!", userInfo, nickName, status);
     const newList = userInfo.map((user) => {
       if(user.targetRoomObjUsers.nickName===nickName){
         let temp = user.targetRoomObjUsers;
@@ -332,14 +305,6 @@ function UserSlider(props) {
   }
 
   function paintPeerFace(peerStream, id, remoteNickname, idx) {
-    console.log(
-      "peerStream : ",
-      peerStream,
-      userList,
-      idx,
-      remoteNickname,
-      peopleInRoom
-    );
 
     //새로 참여한 유저의 index가 항상 length+1이 될까??
     if (idx === undefined || idx === null) {
@@ -365,17 +330,12 @@ function UserSlider(props) {
   // }
 
   function removeVideo(leavedSocketId) {
-
-    console.log("before Deletion!!!-------------------", userInfo);
-
     const newList = userInfo.filter((item)=>{
       return item.targetRoomObjUsers.socketId !== leavedSocketId;
     })
 
     delete pcObj.socketId;
-
     userInfo = newList;
-    console.log("userInfo", userInfo);
     setUserList(newList);
 
   }
@@ -417,8 +377,6 @@ function UserSlider(props) {
               const user = data.targetRoomObjUsers;
               const stats = data.usersStackObj;
               
-              console.log("in map,", user, stats);
-
               //본인만 버튼 뜨도록
               if(user.socketId===socket.id){
               return(<UserView

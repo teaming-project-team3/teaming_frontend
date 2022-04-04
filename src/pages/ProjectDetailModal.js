@@ -17,8 +17,6 @@ function ProjectDetailModal(props) {
   const surveyCheck = useSelector((state) => state.users.surveyCheck)
   const [isMaker, setIsMaker] = useState(false);
 
-  console.log("projectDetail : ", data);
-
     //프로젝트 maker 여부 체크
     const checkMaker = () => {
 
@@ -40,17 +38,13 @@ function ProjectDetailModal(props) {
 
   const goDeleteProject = () => {
 
-    console.log("delete project", data);
-
     apis
       .deleteProjectAPI(data._id)
         .then((res)=>{
-          console.log("deleteProjectAPI res", res);
           window.alert("삭제가 완료되었습니다!")
           navigate('/');
         })
         .catch((err)=>{
-          console.log("deleteProjectAPI err", err);
           window.alert("잠시 후 다시 시도해주세요!");
         })
 

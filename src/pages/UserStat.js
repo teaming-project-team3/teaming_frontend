@@ -52,8 +52,6 @@ export default function UserStat() {
   let profileUrl = "";
   let gitId = "";
 
-  console.log("init : ", stats);
-
   if (stats && stats.length !== 0) {
     userNickName = stats.userId.nickname;
     userPosition = stats.position;
@@ -61,9 +59,8 @@ export default function UserStat() {
 
     
     const gitURLArr = stats.url.split("/");
-    gitId = gitURLArr[gitURLArr.length - 1];
-    console.log("check gitId", gitId);
-    
+    // eslint-disable-next-line no-unused-vars
+    gitId = gitURLArr[gitURLArr.length - 1];    
 
   }
 

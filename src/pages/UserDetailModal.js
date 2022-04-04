@@ -35,11 +35,6 @@ function UserDetailModal(props) {
   
   const modalIsOpen = props.showUser;
   const data = useSelector((state)=>state.users.selectedUser);  
-  
-  console.log("userDetail : ", data);
-  // const testString =
-  //   "## hi\n > section\n ```jsx\n let code = 1;\n``` \n *bias* \n **bold**";
-
 
   useEffect(() => {
   }, []);
@@ -61,9 +56,6 @@ function UserDetailModal(props) {
         </div>
 
         <text className="flex justify-center mt-8 text-4xl font-notoB text-[#121414]">
-          {()=>{
-          console.log("data", data);
-          }}
           {nameManufacture(data.userInfo.userId.nickname)}
         </text>
         

@@ -36,11 +36,9 @@ const initialState = {
 
 const uploadImagesS3 = (data, callback, checker=false, boardId) => {
     return async function(dispatch, getState, {history}){
-        console.log("start uploadImageS3");
 
         const id = localStorage.getItem("userId");
         const imageFiles = getState().image.image_files;
-        console.log("get State in uploadImages S3", imageFiles);
         
         const ACCESS_KEY = process.env.REACT_APP_BASE_ACCESS_KEY;
         const SECRET_ACCESS_KEY = process.env.REACT_APP_SECRET_ACCESS_KEY;
@@ -61,8 +59,6 @@ const uploadImagesS3 = (data, callback, checker=false, boardId) => {
           
           const imgName = `${id}_${new Date().getTime()}`
 
-          console.log("upload File, file", file);
-
           const params = {
             ACL: 'public-read',
             Body: file,
@@ -74,8 +70,6 @@ const uploadImagesS3 = (data, callback, checker=false, boardId) => {
             .on('httpUploadProgress', async (evt, res) => {
               const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+res.request.httpRequest.path
       
-              console.log("uploaded S3 ImgUrl : ", imgUrl);
-
             })
             .send((err) => {
               if (err) console.log("s3 upload err", err);
@@ -83,8 +77,6 @@ const uploadImagesS3 = (data, callback, checker=false, boardId) => {
           
         
         }
-
-        console.log("imageFiles,, before map", imageFiles);
 
         let arr = [];
 
@@ -99,19 +91,14 @@ const uploadImagesS3 = (data, callback, checker=false, boardId) => {
           arr = [...arr, imgUrl];
         }
 
-        console.log("arr!!!!", arr);
-
         arr = await Promise.all(arr);
 
         }
 
-        console.log("data.imgUrl", data, data.imgUrl);
         const temp = [...data.imgUrl, arr];
 
         data = {...data, imgUrl: temp}
     
-        console.log("before Create API", data, arr);
-
         if(checker){
           dispatch(updateProjectAPI(data, boardId, callback));
         }else{
@@ -126,11 +113,9 @@ const uploadImagesS3 = (data, callback, checker=false, boardId) => {
 
 export const uploadImagesS3PortFolio = (portfolioList, data, callback) => {
   return async function(dispatch, getState, {history}){
-      console.log("start uploadImageS3");
 
       const id = localStorage.getItem("userId");
       const imageFiles = getState().image.filesArr;
-      console.log("get State in uploadImages S3", imageFiles);
       
       const ACCESS_KEY = process.env.REACT_APP_BASE_ACCESS_KEY;
       const SECRET_ACCESS_KEY = process.env.REACT_APP_SECRET_ACCESS_KEY;
@@ -151,8 +136,6 @@ export const uploadImagesS3PortFolio = (portfolioList, data, callback) => {
         
         const imgName = `${id}_${new Date().getTime()}`
 
-        console.log("upload File, file", file);
-
         const params = {
           ACL: 'public-read',
           Body: file,
@@ -164,17 +147,11 @@ export const uploadImagesS3PortFolio = (portfolioList, data, callback) => {
           .on('httpUploadProgress', async (evt, res) => {
             const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+res.request.httpRequest.path
     
-            console.log("uploaded S3 ImgUrl : ", imgUrl);
-
           })
           .send((err) => {
             if (err) console.log("s3 upload err", err);
           })
-        
-      
       }
-
-      console.log("imageFiles,, before map", imageFiles);
 
       let arr=[];
 
@@ -185,13 +162,10 @@ export const uploadImagesS3PortFolio = (portfolioList, data, callback) => {
         if(portfolioList[j].imageUrl.length>0){
           urlss = portfolioList[j].imageUrl;
         };
-        console.log("portfolio.imageList", portfolioList, portfolioList[j].imageUrl);
 
         if(imageFiles[portfolioList[j].id]!==null&&imageFiles[portfolioList[j].id]!==undefined){
 
         for(let i=0;i<imageFiles[portfolioList[j].id].length;i++){
-
-          console.log("item.file", imageFiles[portfolioList[j].id][i].file);
 
           const temp = await uploadFile(imageFiles[portfolioList[j].id][i].file);
 
@@ -204,14 +178,10 @@ export const uploadImagesS3PortFolio = (portfolioList, data, callback) => {
 
       }
 
-      console.log("arr!!!!", arr);
-
       arr = await Promise.all(arr);
 
       data = {...data, "portfolioUrl":arr};
-      
-      console.log("before Create API", data);
-      
+            
       dispatch(updatePortFolio(data, callback, ()=>{dispatch(resetFilesArr());}));
       //dispatch(resetFilesArr());
 
@@ -220,11 +190,9 @@ export const uploadImagesS3PortFolio = (portfolioList, data, callback) => {
 
 export const uploadImagesS3Update = (data, callback) => {
   return async function(dispatch, getState, {history}){
-      console.log("start uploadImageS3");
 
       const id = localStorage.getItem("userId");
       const imageFile = getState().image.image_file;
-      console.log("get State in uploadImages S3", imageFile);
       
       const ACCESS_KEY = process.env.REACT_APP_BASE_ACCESS_KEY;
       const SECRET_ACCESS_KEY = process.env.REACT_APP_SECRET_ACCESS_KEY;
@@ -245,8 +213,6 @@ export const uploadImagesS3Update = (data, callback) => {
         
         const imgName = `${id}_${new Date().getTime()}`
 
-        console.log("upload File, file", file);
-
         const params = {
           ACL: 'public-read',
           Body: file,
@@ -258,12 +224,8 @@ export const uploadImagesS3Update = (data, callback) => {
           .on('httpUploadProgress', async (evt, res) => {
             const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+res.request.httpRequest.path
     
-            console.log("uploaded S3 ImgUrl : ", imgUrl);
-
             data = {...data, "profileUrl" : imgUrl}
-  
-            console.log("before Create API", data, imgUrl);
-            
+              
             callback(data);
 
             dispatch(setFile(""));
@@ -276,9 +238,6 @@ export const uploadImagesS3Update = (data, callback) => {
         
       
       }
-
-      console.log("imageFiles,, before map", imageFile);
-
 
       let temp = await uploadFile(imageFile);
       console.log(temp);
@@ -301,17 +260,12 @@ export default handleActions({
         draft.image_file = action.payload.file;
       }),
     [SET_FILES]: (state, action) => produce(state, (draft) => {
-      console.log("SET_FILES : ", action.payload.files);
       draft.image_files = action.payload.files;
-      console.log("SET_FILES : ", draft.image_files);
     }),
     [INIT_FILES]: (state, action) => produce(state, (draft) => {
-      console.log("INIT_FILES : ", action.payload.id);
       draft.image_files = [...draft.image_files, {id:action.payload.id}];
-      
       }),
     [SET_FILES_ARR]: (state, action) => produce(state, (draft) => {
-      console.log("SET_FILES_ARR : ", action.payload.files);
       const idx = action.payload.idx;
       const data = action.payload.files;
       
@@ -325,13 +279,10 @@ export default handleActions({
 
     }),
     [REMOVE_FILES_ARR]: (state, action) => produce(state, (draft) => {
-      console.log("REMOVE_FILES_ARR : ", action.payload.files);
-
       delete draft.filesArr[action.payload.id];
 
     }),
     [CLEAR_IMG]: (state, action) => produce(state, (draft) => {
-      console.log("CLEAR_IMG : ", action.payload.idx);
       
         draft.image_files = [];
         draft.image_file = "";
