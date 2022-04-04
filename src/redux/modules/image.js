@@ -43,7 +43,7 @@ const uploadImagesS3 = (data, callback, checker=false, boardId) => {
         const ACCESS_KEY = process.env.REACT_APP_BASE_ACCESS_KEY;
         const SECRET_ACCESS_KEY = process.env.REACT_APP_SECRET_ACCESS_KEY;
         const REGION = "ap-northeast-2";
-        const S3_BUCKET = 'teamingdeploy';
+        const S3_BUCKET = 'teaming.link';
       
         AWS.config.update({
           accessKeyId: ACCESS_KEY,
@@ -71,7 +71,7 @@ const uploadImagesS3 = (data, callback, checker=false, boardId) => {
       
             })
             .send((err) => {
-              if (err) console.log("s3 upload err", err);
+              if (err) window.alert('이미지가 업로드 되지 않았습니다 에러코드 : ',err)
             })
           
         
@@ -85,7 +85,7 @@ const uploadImagesS3 = (data, callback, checker=false, boardId) => {
 
           const temp = await uploadFile(imageFiles[i]);
 
-          const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+temp.request.httpRequest.path
+          const imgUrl = "https://s3.ap-northeast-2.amazonaws.com"+temp.request.httpRequest.path
 
           arr = [...arr, imgUrl];
         }
@@ -119,7 +119,7 @@ export const uploadImagesS3PortFolio = (portfolioList, data, callback) => {
       const ACCESS_KEY = process.env.REACT_APP_BASE_ACCESS_KEY;
       const SECRET_ACCESS_KEY = process.env.REACT_APP_SECRET_ACCESS_KEY;
       const REGION = "ap-northeast-2";
-      const S3_BUCKET = 'teamingdeploy';
+      const S3_BUCKET = 'teaming.link';
     
       AWS.config.update({
         accessKeyId: ACCESS_KEY,
@@ -147,7 +147,7 @@ export const uploadImagesS3PortFolio = (portfolioList, data, callback) => {
     
           })
           .send((err) => {
-            if (err) console.log("s3 upload err", err);
+            if (err) window.alert('이미지가 업로드 되지 않았습니다 에러코드 : ',err)
           })
       }
 
@@ -167,7 +167,7 @@ export const uploadImagesS3PortFolio = (portfolioList, data, callback) => {
 
           const temp = await uploadFile(imageFiles[portfolioList[j].id][i].file);
 
-          const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+temp.request.httpRequest.path
+          const imgUrl = "https://s3.ap-northeast-2.amazonaws.com"+temp.request.httpRequest.path
 
           urlss = [...urlss, imgUrl];
         }
@@ -190,12 +190,12 @@ export const uploadImagesS3Update = (data, callback) => {
   return async function(dispatch, getState, {history}){
 
       const id = localStorage.getItem("userId");
-      const imageFile = getState().image.image_file;
+      const imageFile = data.profileUrl;
       
       const ACCESS_KEY = process.env.REACT_APP_BASE_ACCESS_KEY;
       const SECRET_ACCESS_KEY = process.env.REACT_APP_SECRET_ACCESS_KEY;
       const REGION = "ap-northeast-2";
-      const S3_BUCKET = 'teamingdeploy';
+      const S3_BUCKET = 'teaming.link';
     
       AWS.config.update({
         accessKeyId: ACCESS_KEY,
@@ -220,7 +220,7 @@ export const uploadImagesS3Update = (data, callback) => {
         
         return myBucket.putObject(params)
           .on('httpUploadProgress', async (evt, res) => {
-            const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+res.request.httpRequest.path
+            const imgUrl = "https://s3.ap-northeast-2.amazonaws.com"+res.request.httpRequest.path
     
             data = {...data, "profileUrl" : imgUrl}
               
@@ -231,7 +231,7 @@ export const uploadImagesS3Update = (data, callback) => {
 
           })
           .send((err) => {
-            if (err) console.log("s3 upload err", err);
+            if (err) window.alert('이미지가 업로드 되지 않았습니다 에러코드 : ',err)
           })
         
       

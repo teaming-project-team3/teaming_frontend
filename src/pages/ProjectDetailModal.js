@@ -46,6 +46,7 @@ function ProjectDetailModal(props) {
         })
         .catch((err)=>{
           window.alert("잠시 후 다시 시도해주세요!");
+          navigate('/');
         })
 
   }
@@ -74,7 +75,7 @@ function ProjectDetailModal(props) {
                 props.callBackSetShowFalse()
                 props.setSurveyOpen(true);
               }else{
-                navigate("/projectRoom", { state: {id: data._id, title: data.title}});
+                navigate("/projectRoom", { state: {id: data._id, title: data.title, isLeader: isMaker, involved: data.isInvolved}});
               }
             }}
           >

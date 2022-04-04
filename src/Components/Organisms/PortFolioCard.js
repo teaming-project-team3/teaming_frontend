@@ -15,7 +15,7 @@ function PortFolioCard(props) {
 
           <SwipeSliderPortFolio imgUrlList={imageUrl}/>
         
-        <div className="flex flex-col mt-[0.938rem]">
+        <div className="flex flex-col mt-[0.938rem] pl-2">
           <div className="flex">
             <div className="text-base font-bold text-gray-900">
               {title}
@@ -30,12 +30,11 @@ function PortFolioCard(props) {
               {description}
           </div>
 
-          <div className="bottom-0 flex">
+          <div className="bottom-0 flex mt-3">
             <div className="w-[0.781rem] h-[0.781rem] items-end">
               <Image src={urlClip} shape="rectangle"></Image>
             </div>
-            <div className="text-[#593CE5] text-[0.875rem]">
-              
+            <div className="text-[#593CE5] text-[0.875rem] cursor-pointer" onClick={()=>{ window.open(url,'_blank')}}>
               {url}
             </div>
           </div>

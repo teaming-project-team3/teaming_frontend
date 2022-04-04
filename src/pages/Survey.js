@@ -39,13 +39,8 @@ function Survey(props) {
 
   const sendSurveyData = (callback) => {
 
-    if (url1===""||url2===""||url3===""){
-      window.alert("포트폴리오를 입력하세요!");
-      return;
-    }
-
     if (position===""){
-      window.alert("포지션을 입력하세요!");
+      window.alert("포지션을 입력해주세요!");
       return;
     }
 

@@ -300,6 +300,7 @@ export const updateProjectAPI = (data, boardId, callback) => {
             })
             .catch((err)=>{
                 window.alert("잠시 후 다시 시도해주세요!");
+                callback();
             })
     
   };
@@ -317,6 +318,7 @@ export const createProjectAPI = (data, callback) => {
             })
             .catch((err)=>{
                 window.alert("잠시 후 다시 시도해주세요!");
+                callback();
             })
     
   };

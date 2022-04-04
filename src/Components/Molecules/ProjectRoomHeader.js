@@ -1,26 +1,85 @@
+import { apis } from "../../apis/apis";
 import backArrow from "../../static/images/projectRoom/backPress.svg";
 //import onlineIcon from '../../icons/onlineIcon.png'
 
-
 function ProjectRoomHeader(props) {
-    
-    //const {users} = props;
-  
-    return (
-        <div className="flex h-[10vh] w-screen items-center">
+
+  const requestJoin = () => {
+    apis
+      .postInvolved(props.projectId, props.involved)
+      .then((res)=>{
+        console.log("involved:",res)
+        props.involvedToggle();
+      })
+      .catch((err)=>{
+        console.log("involved err:",err)
+      })
+  }
+
+  const close = () => {
+    apis
+    .postClosed(props.projectId)
+    .then((res)=>{
+      console.log("close:",res)
+      props.involvedToggle();
+    })
+    .catch((err)=>{
+      console.log("close err:",err)
+    })
+  }
+
+
+  return (
+    <div className="flex h-[10vh] w-screen items-center">
+      <div
+        className="flex items-center justify-center h-full cursor-pointer aspect-square"
+        onClick={() => {
+          if (window.confirm('정말로 나가시겠습니까?'))
+          {
+              props.goBack();
+          }
+          else
+          {
+              
+          }
           
-        <div className="flex items-center justify-center h-full cursor-pointer aspect-square" onClick={()=>{props.goBack()}}>
-          <img src={backArrow} alt={""}></img>
-        </div>
+        }}
+      >
+        <img src={backArrow} alt={""}></img>
+      </div>
 
-        <div className="w-[60vw] text-xl text-black font-noto2">
-          {props.title?props.title:""}
-        </div>
-        
-        
-        {/* {isLeader && <Button>프로젝트 시작!</Button>} */}
+      <div className="w-[60vw] text-xl text-black font-noto2">
+        {props.title ? props.title : ""}
+      </div>
 
-        {/* <div className="flex m-10 font-noto2 justify-items-center">
+      <div className="w-full"></div>
+      <div className="flex justify-end w-full mr-10">
+      {props.isLeader && (
+        <div
+          className="w-1/5 p-3 text-center text-gray-700 bg-green-200 border rounded cursor-pointer font-noto2 hover:border-green-500"
+          onClick={close}
+        >
+          <button>마감하기</button>
+        </div>
+      )}
+      {props.involved && (
+        <div
+          className="w-1/5 p-3 text-center text-gray-700 bg-purple-100 border rounded-full cursor-pointer font-noto2 hover:border-purple-500"
+          onClick={requestJoin}
+        >
+          <button>티밍하기</button>
+        </div>
+      )}
+      {!props.involved && (
+        <div
+          className="w-1/5 p-3 text-center text-gray-700 bg-red-200 border rounded-full cursor-pointer font-noto2 hover:border-red-500"
+          onClick={requestJoin}
+        >
+          <button>티밍취소</button>
+        </div>
+      )}
+      </div>
+      {/* <div className="flex m-10 font-noto2 justify-items-center">
           {users ? (
             <div>
               <div className='activeContainer'>
@@ -38,10 +97,8 @@ function ProjectRoomHeader(props) {
             </div>
             ) : null}
         </div> */}
+    </div>
+  );
+}
 
-
-      </div>
-    );
-  }
-  
-  export default ProjectRoomHeader;
+export default ProjectRoomHeader;

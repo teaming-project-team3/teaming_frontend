@@ -1,10 +1,13 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 import Select from "react-select";
 import ModalSelect from "../../../pages/ModalSelect";
 import { updateUserInfoAPI } from "../../../redux/modules/users";
 
 export const Specialization = (props) => {
+
+    const navigate = useNavigate();
 
     const { stats, position, positions, abilityFront, abilityBack, abilityDesigner, skillsFront, 
         skillsBack, skillsDesigner, type_num, checkType } = props;
@@ -27,7 +30,7 @@ export const Specialization = (props) => {
         }
         
   
-        dispatch(updateUserInfoAPI(newData));
+        dispatch(updateUserInfoAPI(newData,()=>navigate('/')));
   
     }
   
