@@ -51,7 +51,7 @@ function ProjectCard(props) {
          stack.map((item, idx)=>{
             return(<StackStatus num={item[2]}>
             {item[2]>0 ?
-            item[1] + ""
+            item[1] + "✅"
             :
             item[1] + "❌"}
           </StackStatus>)
