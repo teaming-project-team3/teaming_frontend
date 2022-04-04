@@ -6,6 +6,7 @@ https://d1zc5f9ndqmvzc.cloudfront.net/login
 
 http://teaming.link.s3-website.ap-northeast-2.amazonaws.com
 
+https://teaming.link
 
 <br>
 
