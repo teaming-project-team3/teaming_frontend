@@ -86,7 +86,7 @@ const ChatPrac = (props) => {
 
   return (
     <div className="relative flex flex-col h-full">
-      <div className="relative flex flex-col w-full h-full p-2 overflow-y-scroll bg-white rounded-xl">
+      <div className="relative flex flex-col w-full h-full p-2 bg-white rounded-xl">
         {/* <InfoBar room={room} /> */}
           <Messages messages={messages} name={"curr"} />
       </div>

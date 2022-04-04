@@ -25,6 +25,12 @@ const Login = (props) => {
   const [id, setId] = React.useState("");
   const [pwd, setPwd] = React.useState("");
 
+  const onKeyPress=(e)=>{
+    if(e.key==='Enter'){
+      signIn(e);
+    }
+  }
+
   const signIn = async (e) => {
     e.preventDefault();
 
@@ -72,7 +78,7 @@ const Login = (props) => {
         <input
           className="w-[24rem] h-[2.875rem] border-2 border-inherit box-border rounded pl-2"
           value={id}
-          placeholder="Normal value"
+          placeholder="이메일(ID)를 입력하세요"
           onChange={(e) => {
             setId(e.target.value);
             // console.log(e.target.value);
@@ -84,12 +90,13 @@ const Login = (props) => {
         <input
           className="w-[24rem] h-[2.875rem] border-2 border-inherit box-border rounded pl-2"
           value={pwd}
-          placeholder="Normal value"
+          placeholder="비밀번호를 입력하세요"
           type="password"
           onChange={(e) => {
             setPwd(e.target.value);
             // console.log(e.target.value);
           }}
+          onKeyDown={onKeyPress}
           onSubmit={signIn}
         />
         <Link

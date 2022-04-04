@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import tw from "tailwind-styled-components";
 import { setLogOut, setSurveyChecker } from "../redux/modules/users";
-import { useNavigate } from "react-router";
+
 const Nav = tw.div`
   min-w-[90rem]
   pt-5
