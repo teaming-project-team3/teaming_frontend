@@ -57,7 +57,7 @@ jobs:
           aws s3 cp \
             --recursive \
             --region ap-northeast-2 \
-            build s3://teamingdeploy
+            build s3://teaming.link
             
       - name: Invalidate cache CloudFront
         uses: chetan/invalidate-cloudfront-action@master
