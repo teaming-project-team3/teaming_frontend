@@ -94,7 +94,7 @@ const uploadImagesS3 = (data, callback, checker=false, boardId) => {
 
         }
 
-        const temp = [...data.imgUrl, arr];
+        const temp = [...data.imgUrl, ...arr];
 
         data = {...data, imgUrl: temp}
     
