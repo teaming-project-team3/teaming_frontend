@@ -1,5 +1,7 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 import { uploadImagesS3Update } from "../../../redux/modules/image";
 import { updateUserInfoAPI } from "../../../redux/modules/users";
 import ProfileImage from "../upload/ProfileImage";
@@ -7,11 +9,19 @@ import ProfileImage from "../upload/ProfileImage";
 export const BasicInfo = (props) => {
   const { stats } = props;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [userNickName, setUserNickName] = React.useState(props.nickName);
   const [intro, setIntro] = React.useState(props.stats.introduction);
   const [gitUrl, setGitUrl] = React.useState(props.stats.url);
-  const profileUrl = useSelector((state)=>state.image.image_url);
+  const [profileUrl, setProfileUrl] = React.useState(props.stats.profileUrl);
+  const [changed, setChanged] = React.useState(false);
+
+  useEffect(()=>{
+
+    setChanged(true)
+
+  },[profileUrl])
 
   function dataFactory(){
 
@@ -27,7 +37,12 @@ export const BasicInfo = (props) => {
       "url": gitUrl,
       }
 
-      dispatch(uploadImagesS3Update(newData, (data)=>{dispatch(updateUserInfoAPI(data))}));
+    if(changed){
+      dispatch(uploadImagesS3Update(newData, (data)=>{dispatch(updateUserInfoAPI(data, ()=>navigate('/')))}));
+    }else{
+      dispatch(updateUserInfoAPI(newData,()=>navigate('/')))
+    }
+
 
   }
 
@@ -49,7 +64,7 @@ export const BasicInfo = (props) => {
 
         <div className="flex w-full text-[1rem] justify-between text-black font-noto2 pt-8 pr-8 pl-8 pb-8 ml-8 border-b-2">
           프로필 이미지
-          <ProfileImage
+          <ProfileImage imgUrl={profileUrl} setProfileUrl={setProfileUrl}
           ></ProfileImage>
         </div>
 
@@ -67,7 +82,7 @@ export const BasicInfo = (props) => {
           GitHub URL
           <input
             className="w-1/2 ml-3 mr-10 border-2 rounded"
-            placeholder={gitUrl}
+            value={gitUrl}
             onChange={(event) => setGitUrl(event.target.value)}
           ></input>
         </div>

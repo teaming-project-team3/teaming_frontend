@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "../element/Button";
 import emailCheck from "../shared/common";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/users";
 import styled from "styled-components";
 import KakaoSignupBtn from "../static/KakaoSignupBtn.png";
@@ -217,8 +217,7 @@ function SignUp() {
   const [nickName, setNickName] = React.useState("");
   const [pwd, setPwd] = React.useState("");
   const [pwdCheck, setPwdCheck] = React.useState("");
-  const imgUrl = useSelector((state) => state.image.image_url);
-  const imgFile = useSelector((state) => state.image.image_file);
+  const [imgFile,setImgFile] = useState("");
 
   const [bChecked, setChecked] = useState(false);
 
@@ -254,7 +253,7 @@ function SignUp() {
       password: pwd,
       passwordCheck: pwdCheck,
       nickname: nickName,
-      profileUrl: imgUrl,
+      profileUrl: "",
     };
 
     uploadFile(imgFile, data);
@@ -264,7 +263,7 @@ function SignUp() {
   const ACCESS_KEY = process.env.REACT_APP_BASE_ACCESS_KEY;
   const SECRET_ACCESS_KEY = process.env.REACT_APP_SECRET_ACCESS_KEY;
   const REGION = "ap-northeast-2";
-  const S3_BUCKET = 'teamingdeploy';
+  const S3_BUCKET = 'teaming.link';
 
   AWS.config.update({
     accessKeyId: ACCESS_KEY,
@@ -287,16 +286,16 @@ function SignUp() {
     
     myBucket.putObject(params)
       .on('httpUploadProgress', (evt, res) => {
-        let imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+res.request.httpRequest.path
+        let imgUrl = "https://s3.ap-northeast-2.amazonaws.com"+res.request.httpRequest.path
         data = {...data, profileUrl: imgUrl};
-        setTimeout(() => {
-        }, 3000)
         
       dispatch(userActions.signUp(data, () => {navigate('/login')}));
 
       })
       .send((err) => {
-        if (err) window.alert("잠시 후 다시 시도해주세요.")
+        if (err) {window.alert("잠시 후 다시 시도해주세요.", err)
+                  console.log(err)
+      }
       })
     
   }
@@ -321,7 +320,7 @@ function SignUp() {
         <div>
           <EmailTitle>Profile Image <span className="text-red-600 font-notoB">*</span> </EmailTitle>
           <div className="w-[384px]">
-          <ProfileImage/>
+          <ProfileImage setProfileUrl={setImgFile}/>
           </div>
         </div>
 

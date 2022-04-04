@@ -23,8 +23,9 @@ import Privacy from "./pages/Privacy";
 import ChatBox from "./Components/Organisms/DMChat/ChatBox";
 import UpdateProject from "./pages/UpdateProject";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { loginMaintainer } from "./redux/modules/users";
 
 
 function App() {
@@ -33,11 +34,21 @@ function App() {
 
   const [blocker, setBlocker] = useState(surveyChecker);
 
+  const dispatch = useDispatch();
+
   useEffect(()=>{
 
     setBlocker(surveyChecker);
 
   },[surveyChecker])
+
+  useEffect(()=>{
+    
+    dispatch(loginMaintainer(localStorage.getItem("userId")!==null))
+
+    return(()=>{})
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
 
   return (
     <BrowserRouter>

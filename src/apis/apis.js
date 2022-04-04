@@ -49,7 +49,7 @@ export const apis = {
   updateUserInfo: (data) => api.put("/users", data),
 
   getUserPage: (userId) => api.get(`/users/${userId}`),
-
+  getMyStatsAPI: () => api.get("/users/mypage"),
 
   loadProjectsMain: () => api.get("/boards"),
   getProjectDetailAPI: (boardId) => api.get(`/boards/${boardId}`),
@@ -57,7 +57,7 @@ export const apis = {
   updateProjectAPI: (data, boardId) => api.put(`/boards/${boardId}`, data),
   deleteProjectAPI: (projectId) => api.delete(`/boards/${projectId}`),
   loadProjectsCatMain: (category, page) => api.get(`/boards/category/${category}/${page}`),
+  postClosed: (projectId) => api.post(`/boards/postClosed/${projectId}`),
+  postInvolved:(projectId, involved) => api.post(`boards/postInvolved/${projectId}`, involved),
 
-
-  getMyStatsAPI: () => api.get("/users/mypage"),
 };

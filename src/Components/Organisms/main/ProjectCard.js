@@ -1,4 +1,11 @@
 import img from '../../../static/project.jpg'
+import tw from "tailwind-styled-components";
+
+const StackStatus = tw.div`
+px-2 text-white text-[0.75em] font-noto3 
+rounded-2xl bg-[#7545F2] w-fit mr-1
+${(props) => (props.num>0?`bg-[#7545F2]`:`bg-[#DC143C]`)};
+`
 
 function ProjectCard(props) {
 
@@ -42,9 +49,12 @@ function ProjectCard(props) {
           {stack &&
           
          stack.map((item, idx)=>{
-            return(<div className="px-2 text-white text-[0.75em] font-noto3 rounded-2xl bg-[#7545F2] w-fit mr-1">
-            {item[1] + "✅" + item[2]}
-          </div>)
+            return(<StackStatus num={item[2]}>
+            {item[2]>0 ?
+            item[1] + "✅" + item[2]
+            :
+            item[1] + "❌" + item[2]}
+          </StackStatus>)
           })
           
           }

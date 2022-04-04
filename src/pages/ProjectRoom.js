@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useEffect } from "react";
 import exUser from "../static/images/userStats/example_user.png";
 import ChatPrac from "../Components/Organisms/DMChat/ChatPrac";
 import RadarChart from "../Components/Molecules/RadarChart";
@@ -12,26 +11,26 @@ import { useDispatch } from "react-redux";
 import { getSelectedUserInfo } from "../redux/modules/users";
 
 export default function ProjectRoom() {
+  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [isLeader, setIsLeader] = React.useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [isLeader, setIsLeader] = React.useState(location.state.isLeader);
+  const [involved, setInvolved] = React.useState(location.state.involved);
   const [mode, setMode] = React.useState(true);
   const [curr, setCurr] = React.useState("");
   const [userStats, setUserStats] = React.useState([]);
   const [myStat, setMyStat] = React.useState();
   const [showUserDetail, setShowUserDetail] = React.useState(false);
 
-  const location = useLocation();
   
   const room = location.state.id;
-  const title = location.state.title;
+  const title = location.state.title; 
   const name = localStorage.getItem("userId");
 
-  useEffect(() => {
-    if (isLeader === localStorage.getItem("userId")) {
-      setIsLeader(true);
-    }
-  }, [isLeader]);
+  const involvedToggle = () => {
+    setInvolved((prev)=>!prev);
+  }
 
   const goBack = () => {
     navigate(-1);
@@ -60,7 +59,8 @@ export default function ProjectRoom() {
             return setShowUserDetail(false);
           } }/>
 
-        <ProjectRoomHeader title={title} goBack={goBack}></ProjectRoomHeader>
+        <ProjectRoomHeader title={title} goBack={goBack} projectId={room} 
+        involved={involved} involvedToggle={involvedToggle} isLeader={isLeader}></ProjectRoomHeader>
 
         <div className="flex w-screen">
           
