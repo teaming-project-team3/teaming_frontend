@@ -5,7 +5,6 @@ import SwipeSliderPortFolio from "../Molecules/SwiperSilderPortFolio"
 function PortFolioCard(props) {
 
   const { title, description, imageUrl, period, url } = props;
-  console.log("props.Card", title, description, imageUrl, period, url);
 
   if(url===undefined) return null;
 

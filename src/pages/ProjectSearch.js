@@ -33,16 +33,11 @@ function ProjectSearch(props) {
     const [ref, inView] = useInView();
 
     useEffect(()=>{
-      console.log("state!!! search!!!!!!!!!!!!!!!!!!!!")
       setModalIsOpen(props.blocker);
   
     },[props.blocker])
 
     useEffect(()=>{
-      console.log("in UseEffect with start");
-      //dispatch(loadProjectsCatMainAPI("rank",page[0]));
-      //setPage([page[0]+1,page[1],page[2]]);
-
       return (()=>{
         dispatch(clearCategoryProject());
       })
@@ -63,7 +58,6 @@ function ProjectSearch(props) {
 
     useEffect(()=>{
       if(check===1){
-        console.log("in UseEffect inView");
         dispatch(loadProjectsCatMainAPI("rank",page[0]));
         setPage([page[0]+1,page[1],page[2]+1]);
         setContents(allProjects);
@@ -105,7 +99,6 @@ function ProjectSearch(props) {
     }
 
     const detailShow = (id) => {
-      console.log("project card clicked", id);
   
       dispatch(actionCreators.getProjectDetailAPI(id, ()=>{setShowDetail(true)}));
   
@@ -116,14 +109,12 @@ function ProjectSearch(props) {
   return (
     <div className="flex w-screen h-fit bg-[#F2F3F7] justify-center pt-10 pb-10">
         <Survey modalIsOpen={modalIsOpen} close={(checker)=>{
-          console.log("call props.setBlocker", checker)
           props.setBlocker(checker)}
           } className="z-10"></Survey>
         <ProjectDetailModal
           setSurveyOpen={props.setBlocker}
           showDetail={showDetail}
           callBackSetShowFalse={() => {
-            console.log("setShowDetailFalse");
             return setShowDetail(false);
           }}
         ></ProjectDetailModal>
@@ -144,7 +135,6 @@ function ProjectSearch(props) {
         
             
             {contents.map((item) => {
-                console.log("ProjectSearch, item", item);
                 return(
                 <div className="mb-5">
                 <ProjectCard

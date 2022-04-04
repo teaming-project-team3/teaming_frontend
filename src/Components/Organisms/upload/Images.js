@@ -10,10 +10,7 @@ export const Images = (props) => {
     const dispatch = useDispatch();
 
     useEffect(()=>{
-
-
       return(()=>{
-        console.log("Images useEffect return,", idx);
         dispatch(actionCreators.clearImg(idx));
       })
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -25,8 +22,6 @@ export const Images = (props) => {
     }
     }
     const { idx } = props;
-
-    console.log("files", files);
 
     Images.defaultProps = {
       idx:-1,
@@ -42,13 +37,10 @@ export const Images = (props) => {
       
       temp =  [...files, ...temp];
 
-      console.log("------------------------len checker", props.imgLen, temp.length, temp);
       if(props.imgLen+temp.length>3){
       window.alert('이미지는 최대 3개 업로드 가능합니다!');
       return;
       }
-
-      console.log("temp!!", temp);
 
       let imageUrlLists = [...showImages];
   
@@ -64,7 +56,6 @@ export const Images = (props) => {
   
       setShowImages(imageUrlLists);
       
-      console.log("createProject", idx)
       dispatch(actionCreators.setFiles(temp));
       
     };
@@ -73,10 +64,7 @@ export const Images = (props) => {
     const handleDeleteImage = (id) => {
       const removedList = showImages.filter((_, index) => index !== id);
       const removedFiles = files.filter((_,index) => index !== id);
-      setShowImages(removedList);
-
-      console.log("removedList", removedFiles, files);
-      
+      setShowImages(removedList);      
       dispatch(actionCreators.setFiles(removedFiles));
         
     };

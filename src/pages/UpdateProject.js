@@ -58,7 +58,6 @@ function UpdateProject(props) {
   }
 
   function onChangeMD() {
-    console.log(editorRef.current.getInstance().getMarkdown());
     setProjectContents(editorRef.current.getInstance().getMarkdown());
   }
 
@@ -88,7 +87,6 @@ function UpdateProject(props) {
 
   const dataPush = (data, idx) => {
 
-      console.log("before dataPush", data, idx);
       //인덱스 찾아서 추가
       const temp = workArr.map((item, i)=>{
         if(i===idx){
@@ -97,8 +95,6 @@ function UpdateProject(props) {
           return item;
         }
       })
-
-      console.log("after dataPush", data, temp);
 
       setWorkArr(temp);
 

@@ -3,7 +3,6 @@ import { useEffect } from "react";
 
 export const ImageUploaded = (props) => {
     const [showImages,setShowImages] = useState(props.imgList);
-    console.log("ImageUploaded!!", showImages);
 
     ImageUploaded.defaultProps = {
       idx:-1,

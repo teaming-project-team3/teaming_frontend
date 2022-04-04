@@ -10,12 +10,10 @@ const animatedComponents = makeAnimated();
 
 function CreateSelect(props) {
   // styles that do not show 'x' for fixed options
-  console.log("props!!!!", props.ability);
 
   const styles = useMemo(
     () => ({
       multiValueRemove: (base, state) => {
-        console.log("multiValueRemove", state.data);
         return state.data.isFixed ? { ...base, display: "none" } : base;
       },
     }),

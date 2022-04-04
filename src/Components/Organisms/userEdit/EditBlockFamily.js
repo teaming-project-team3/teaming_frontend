@@ -52,7 +52,6 @@ function EditBlockFamily(props) {
       return;
     }
     
-    console.log("addPortList");
     const temp = {id:count.current};
 
     setPortfolioList([...portfolioList, temp]);
@@ -61,12 +60,8 @@ function EditBlockFamily(props) {
     count.current+=1;
   }
 
-  console.log("init : ", stats);
-
   function sendPortfolio () {
     
-    console.log("sendPortfolio", portfolioList, imgList);
-
     const newData = {
       "nickname": stats.userId.nickname,
       "introduction": stats.introduction,
@@ -81,21 +76,13 @@ function EditBlockFamily(props) {
 
     dispatch(uploadImagesS3PortFolio(portfolioList, newData, ()=>{navigate('/')} ));
 
-
-    console.log("sendPortfolio", portfolioList);
-
-    //dispatch(updatePortFolio(data));
-
   };
 
   function deletePortfolio (idx) {
-    console.log("deletePortfolio", idx);
     const removed = portfolioList.filter((item, i)=>{
       return item.id !== idx;
     })
     
-    console.log("after removed", removed);
-
     setPortfolioList(removed);
 
     dispatch(actionCreators.removeFilesArr(idx));
@@ -103,8 +90,6 @@ function EditBlockFamily(props) {
   }
 
   const dataPush = (data, idx) => {
-
-    console.log("before dataPush", data, idx);
     //인덱스 찾아서 추가
     const temp = portfolioList.map((item, i)=>{
       if(item.id===idx){
@@ -113,8 +98,6 @@ function EditBlockFamily(props) {
         return item;
       }
     })
-
-    console.log("after dataPush", data, temp);
 
     setPortfolioList(temp);
 

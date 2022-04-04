@@ -19,7 +19,6 @@ export const ProfileImage = () => {
   
     // 이미지 상대경로 저장
     const handleProfileImage = (event) => {
-      console.log("single!")
       if(showImage.length>=1){
           return;
       }
