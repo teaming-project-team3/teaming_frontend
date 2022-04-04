@@ -37,14 +37,6 @@ export const apis = {
 
   //createProject
 
-
-  // post
-  // post: (lastpost, number) => api.get(`/api/post?lastpost=${lastpost}&number=${number}`),
-  // postDetail: (postId) => api.get(`/api/post/${postId}`),
-  // add: (data) => api.post("/api/post", data),
-  // delete: (postId) => api.delete(`/api/post/${postId}`),
-  // edit: (postId, data) => api.put(`/api/post/${postId}`, data),
-
   // like
   addLike: (postId) => api.post(`/api/post/${postId}/like`),
   cancelLike: (postId) => api.delete(`/api/post/${postId}/like`),

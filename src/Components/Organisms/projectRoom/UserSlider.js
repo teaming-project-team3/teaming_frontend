@@ -4,7 +4,6 @@ import Slider from "react-slick";
 import io from "socket.io-client";
 import UserView from "./UserView";
 
-//const ENDPOINT = "http://localhost:5000";
 const ENDPOINT = process.env.REACT_APP_BASE_URL_WJ + "/webrtc";
 let socket;
 
