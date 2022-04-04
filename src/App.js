@@ -7,7 +7,6 @@ import Header from "./Components/Header"
 import Main from "./pages/Main";
 import Survey from "./pages/Survey"
 import UserStat from "./pages/UserStat"
-import MyPage from "./pages/MyPage"
 import ProjectDetailModal from "./pages/ProjectDetailModal"
 import CreateProject from "./pages/CreateProject"
 // Import css files
@@ -18,7 +17,6 @@ import DMChat from "./Components/Organisms/DMChat/DMChat";
 import ProjectRoom from "./pages/ProjectRoom";
 import ScrollToTop from "./shared/ScrollToTop"
 import UserEdit from "./pages/UserEdit";
-import VideoChat from "./pages/VideoChat";
 import ProjectSearch from "./pages/ProjectSearch";
 import Images from "./Components/Organisms/upload/Images";
 import Privacy from "./pages/Privacy";
@@ -48,7 +46,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Main blocker={blocker} setBlocker={setBlocker}/>} />
           <Route path="/survey" element={<Survey/>} />
-          <Route path="/myPage" element={<MyPage/>} />
           <Route path="/userStats" element={<UserStat />} />
           <Route path="/userEdit" element={<UserEdit />} />
           <Route path="/createProject" element={<CreateProject/>} />
@@ -61,7 +58,6 @@ function App() {
           <Route path="/auth/kakao/redirect" element={<KakaoRedirect />} />
           <Route path="/chat/join" element={<DMJoin/>}/>
           <Route path="/chat/dm" element={<DMChat/>}/>
-          <Route path="/testChat" element={<VideoChat/>}/>
           <Route path="/images" element={<Images/>}/>
           <Route path="/privacy" element={<Privacy/>} />
           <Route path="/test" element={<ChatBox/>} />

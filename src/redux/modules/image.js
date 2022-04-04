@@ -68,7 +68,6 @@ const uploadImagesS3 = (data, callback, checker=false, boardId) => {
           
           return myBucket.putObject(params)
             .on('httpUploadProgress', async (evt, res) => {
-              const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+res.request.httpRequest.path
       
             })
             .send((err) => {
@@ -145,7 +144,6 @@ export const uploadImagesS3PortFolio = (portfolioList, data, callback) => {
         
         return myBucket.putObject(params)
           .on('httpUploadProgress', async (evt, res) => {
-            const imgUrl = "http://teamingdeploy.s3-website.ap-northeast-2.amazonaws.com"+res.request.httpRequest.path
     
           })
           .send((err) => {
