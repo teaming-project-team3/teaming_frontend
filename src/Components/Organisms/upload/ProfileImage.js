@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Input } from "reactstrap";
@@ -7,6 +8,14 @@ import plus from "../../../static/images/createProject/plus.png"
 export const ProfileImage = () => {
     const [showImage, setShowImage] = useState([]);
     const dispatch = useDispatch();
+
+    useEffect(()=>{
+
+      return(()=>{
+        dispatch(actionCreators.clearImg(0));
+      })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[]);
   
     // 이미지 상대경로 저장
     const handleProfileImage = (event) => {

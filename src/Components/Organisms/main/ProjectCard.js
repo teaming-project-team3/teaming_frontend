@@ -14,6 +14,14 @@ function ProjectCard(props) {
     id:"id",
   }
 
+  const nameManufacture = (name) => {
+    try{
+    return name.split("&")[0];
+    }catch{
+      return name;
+    }
+  }
+
 
   return (
     <div
@@ -53,7 +61,7 @@ function ProjectCard(props) {
           alt={"project card"}
           className="flex-initial w-[1.250em] h-[1.250em] rounded-full"
         ></img>
-        <p className="flex-initial pl-[0.438em]">{nickName}</p>
+        <p className="flex-initial pl-[0.438em]">{nameManufacture(nickName)}</p>
       </div>
     </div>
   );

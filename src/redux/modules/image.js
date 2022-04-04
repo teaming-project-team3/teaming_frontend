@@ -87,6 +87,8 @@ const uploadImagesS3 = (data, callback, checker=false, boardId) => {
         console.log("imageFiles,, before map", imageFiles);
 
         let arr = [];
+
+        if(imageFiles.length>0){
         
         for(let i=0;i<imageFiles.length;i++){
 
@@ -96,13 +98,17 @@ const uploadImagesS3 = (data, callback, checker=false, boardId) => {
 
           arr = [...arr, imgUrl];
         }
-      
 
         console.log("arr!!!!", arr);
 
         arr = await Promise.all(arr);
 
-        data = {...data, imgUrl: arr}
+        }
+
+        console.log("data.imgUrl", data, data.imgUrl);
+        const temp = [...data.imgUrl, arr];
+
+        data = {...data, imgUrl: temp}
     
         console.log("before Create API", data, arr);
 
@@ -326,17 +332,11 @@ export default handleActions({
     }),
     [CLEAR_IMG]: (state, action) => produce(state, (draft) => {
       console.log("CLEAR_IMG : ", action.payload.idx);
-
-      const idx = action.payload.idx;
       
-      if(idx===-1){
         draft.image_files = [];
-      }else{
-        //draft.image_file = null;
-        //delete draft.filesArr[idx];
-        //draft.preview = null;
-      }
-
+        draft.image_file = "";
+        draft.filesArr = {0:[],1:[],2:[]};
+        draft.preview = "";
 
     }),
 }, initialState);

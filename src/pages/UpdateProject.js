@@ -13,6 +13,7 @@ import Selector from "../Components/Organisms/createProject/Selector";
 import Images from "../Components/Organisms/upload/Images";
 import CreateSelect from "./CreateSelect";
 import { useNavigate } from "react-router";
+import ImageUploaded from "../Components/Organisms/upload/ImageUploaded";
 
 function UpdateProject(props) {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ function UpdateProject(props) {
   const [projectContents, setProjectContents] = useState(data.contents);
   const [referUrl, setReferUrl] = useState(data.referURL);
   const [skills, setSkills] = useState([]);
+  const [imgList, setImgList] = useState(data.imgUrl.length>0?data.imgUrl:[]);
 
   const editorRef = createRef();
 
@@ -68,6 +70,7 @@ function UpdateProject(props) {
       contents: projectContents,
       stack: workArr,
       referUrl: referUrl,
+      imgUrl:imgList,
       skills: skills,
       period: toStringByFormatting(endDate),
       //period: endDate,
@@ -152,10 +155,18 @@ function UpdateProject(props) {
 
           <div className="flex flex-col w-full text-[1rem] justify-between text-black font-noto1 pt-8 pr-8 pb-8 ml-8">
             <div className="mb-8 text-black font-noto1">
+            기존 이미지
+            </div>
+            
+            <ImageUploaded idx={-1} imgList={imgList} setImgList={setImgList}/>
+          </div>
+
+          <div className="flex flex-col w-full text-[1rem] justify-between text-black font-noto1 pt-8 pr-8 pb-8 ml-8">
+            <div className="mb-8 text-black font-noto1">
             이미지 업로드
             </div>
             
-            <Images idx={-1}/>
+            <Images idx={-1} imgLen={imgList.length}/>
           </div>
 
           <div className="w-full ml-5 text-[1rem] text-black font-noto2 p-6">
