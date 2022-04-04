@@ -1,5 +1,13 @@
 
 import Image from "../../Atoms/Image";
+import project1 from "../../../static/images/userStats/exProject01.png";
+import SwiperSliderPortFolioMain from "../../Molecules/SwiperSilderPortFolioMain";
+import tw from "tailwind-styled-components";
+
+const ProfileBox = tw.div`
+w-[4.25rem] h-[4.25rem] ml-[0.875rem] mt-[1rem]
+${(props)=>(props.profile?"":`hidden`)}
+`
 
 function ProfileCard(props) {
 
@@ -7,6 +15,18 @@ function ProfileCard(props) {
 
   function nicknameFilter(nick){
     return nick.split("&")[0]
+  }
+
+  const positionFilter = (value) => {
+
+    if(value==="front"){
+      return "Dev/FrontEnd"
+    }else if(value==="back"){
+      return "Dev/BackEnd"
+    }else if(value==="designer"){
+      return "Designer"
+    }
+
   }
 
   // eslint-disable-next-line no-const-assign
@@ -17,39 +37,22 @@ function ProfileCard(props) {
       onClick={()=>{
         //유저 모달을 적용하기
         _onClick(id)}}
-      className="flex w-[33.563rem] h-[9.188rem] mx-[1.063rem] bg-white rounded-[0.625rem] cursor-pointer"
+      className="flex justify-around w-[33.563rem] h-[9.188rem] mx-[1.063rem] bg-white rounded-[0.625rem] border-2 cursor-pointer shadow-xl hover:border-purple-200"
     >
-      <div className="w-[4.25rem] h-[4.25rem] ml-[0.875rem] mt-[1rem]">
+      <ProfileBox>
         <Image shape={"circle"} src={profile}></Image>
-      </div>
+      </ProfileBox>
 
-      <div className="flex flex-col mr-[1.875rem]">
-        <div className="flex items-center h-1/2">
-          <img src={props.tier} alt={""} className="mr-[0.412rem]"></img>
-          <div className="mr-[0.625rem] text-[1rem] font-noto2 text-black]">
+      <div className="flex flex-col justify-around mr-[1.875rem] ml-2">
+          <div className="mr-[0.625rem] text-[1.2rem] font-notoB text-black]">
             {nick}
           </div>
-          <div className="font-noto2 text-[#593CE5]">{position}</div>
-        </div>
-
-        <div className="items-center content-center justify-center">
-          <div className="bg-[#593CE5] rounded text-white text-center">
-            프로필보기
-          </div>
-        </div>
+          <div className="font-noto2 text-[#593CE5]">{positionFilter(position)}</div>
       </div>
 
-      <div className="flex">
-        <img
-          src={props.project1}
-          alt={""}
-          className="rounded-[0.625rem] w-[6.875rem] h-[6.875rem] m-auto"
-        ></img>
-        <img
-          src={props.project2}
-          alt={""}
-          className="rounded-[0.625rem] w-[6.875rem] h-[6.875rem] m-auto"
-        ></img>
+      <div className="flex justify-around h-full">
+        <SwiperSliderPortFolioMain imgUrlList={props.data.portfolioUrl[0].imageUrl?props.data.portfolioUrl[0].imageUrl:project1}/>
+        <SwiperSliderPortFolioMain imgUrlList={props.data.portfolioUrl[1].imageUrl?props.data.portfolioUrl[1].imageUrl:project1}/>
       </div>
     </div>
   );

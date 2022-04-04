@@ -110,13 +110,13 @@ function ProjectDetailModal(props) {
 
               <div className="flex justify-center w-full">
               <div
-                className="p-3 mr-1 text-center text-white bg-red-400 rounded w-fit font-noto2"
+                className="p-3 mr-1 text-center text-white bg-red-300 border rounded w-fit font-noto2 hover:border-red-500"
                 onClick={goDeleteProject}
               >
                 <button>프로젝트 삭제</button>
               </div>
               <div
-                className="p-3 ml-1 text-center text-white bg-green-400 rounded w-fit font-noto2"
+                className="p-3 ml-1 text-center text-white bg-green-300 border rounded w-fit font-noto2 hover:border-green-500"
                 onClick={goUpdateProject}
               >
                 <button>프로젝트 수정</button>
