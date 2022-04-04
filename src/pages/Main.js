@@ -27,8 +27,6 @@ function Main(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const surveyCheck = useSelector((state) => state.users.surveyCheck);
-  const projectsData = useSelector((state) => state.projects.projectsMain);
-  //const projectDetail = useSelector((state)=> state.projects.projectDetail)
   const [modalIsOpen, setModalIsOpen] = useState(props.blocker);
   const [showDetail, setShowDetail] = useState(false);
   const [showUserDetail, setShowUserDetail] = useState(false);

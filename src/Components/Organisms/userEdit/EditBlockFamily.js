@@ -3,7 +3,7 @@ import BasicInfo from "./BasicInfo";
 import Portfolio from "./Portfolio";
 import Specialization from "./Specialization";
 import plus from "../../../static/images/createProject/plus.png"
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { actionCreators, uploadImagesS3PortFolio } from "../../../redux/modules/image";
 
@@ -43,7 +43,6 @@ function EditBlockFamily(props) {
     
     const navigate = useNavigate();
     const count = React.useRef(stats.portfolioUrl.length>0?stats.portfolioUrl.length+1:1);
-    const imgList = useSelector((state)=>state.image.filesArr);
     
   function addPortList () {
 
