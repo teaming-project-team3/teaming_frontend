@@ -10,6 +10,7 @@ import { useNavigate } from "react-router";
 import AWS from 'aws-sdk';
 import ProfileImage from "../Components/Organisms/upload/ProfileImage";
 import { KAKAO_AUTH_URL } from "../apis/kakao/kakao";
+import ReactGA from "react-ga";
 
 const Title = styled.h1`
   font-family: "Noto Sans CJK KR";
@@ -256,7 +257,17 @@ function SignUp() {
       profileUrl: "",
     };
 
-    uploadFile(imgFile, data);
+    ReactGA.event({
+      category: "Button",
+      action: "User Signup",
+      label: "Login",
+    });
+
+    if(imgFile!==""){
+      uploadFile(imgFile, data);
+    }else{
+      dispatch(userActions.signUp(data, () => {navigate('/login')}));
+    }
 
   };
 
