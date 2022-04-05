@@ -2,6 +2,7 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../apis/apis";
 import { deleteCookie, setCookie } from "../../shared/Cookie";
+import ReactGA from "react-ga";
 
 // actions
 //const LOG_IN = "LOG_IN";
@@ -182,6 +183,7 @@ const initialState = {
   },
 
   selectedUser: {
+    userInfo: {
     _id: -1,
     stack: {
       front: {
@@ -247,6 +249,7 @@ const initialState = {
     createdAt: "2022-04-01T13:25:20.883Z",
     updatedAt: "2022-04-01T13:25:20.883Z",
     __v: 0
+  },
   },
 };
 
@@ -336,7 +339,7 @@ export const addNowProjectUsers = (user) => {
 
 export const getSelectedUserInfo = (id, callback) => {
   return async function (dispatch) {
-
+    console.log("selectedUserInfo", id);
     apis
     .getUserPage(id)
       .then((res)=>{
@@ -376,6 +379,11 @@ const loginAPI = (id, pwd, callback) => {
         sessionStorage.setItem("token", res.data.Authorization);
         
         dispatch(setIsLogIn(res.data.profileUrl, !res.data.suveyCheck));
+        ReactGA.event({
+          category: "User",
+          action: "User Login",
+          label: "Login",
+        });
         //surveyChecker 받아서 넘기기
         callback(res.data.suveyCheck);
         }
@@ -412,6 +420,11 @@ const signUp = (data, callback) => {
     apis
       .signup(data)
       .then((res) => {
+        ReactGA.event({
+          category: "User",
+          action: "User Signup",
+          label: "Signup",
+        });
         callback();
       })
       .catch((err) => {
@@ -428,6 +441,11 @@ const surveyAPI = (data, callback) => {
       .then((res)=>{
 
         dispatch(setSurveyChecker(!res.data.success));
+        ReactGA.event({
+          category: "User",
+          action: "User Survey",
+          label: "Survey",
+        });
         callback();
       })
       .catch((err)=>{
@@ -445,9 +463,15 @@ const getMyStats = () => {
     apis
       .getMyStatsAPI()
         .then((res)=>{
-
+          
           dispatch(setMyUserStats(res.data.userInfo))
           dispatch(setMyProject(res.data.projectData, res.data.totalProject))
+
+          ReactGA.event({
+            category: "User",
+            action: "My User Info",
+            label: "My Stats",
+          });
 
         })
         .catch((err)=>{

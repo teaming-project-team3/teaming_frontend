@@ -391,6 +391,8 @@ function UserSlider(props) {
               handleAudio={handleAudio}
               cameraStatus={cameraOn}
               audioStatus={audioOn}
+              _onMouseOver={()=>{}}
+              _onMouseOut={()=>{}}
               ></UserView>)
               }else{
               //타인
