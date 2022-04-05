@@ -49,11 +49,26 @@ function ProfileCard(props) {
           </div>
           <div className="font-noto2 text-[#593CE5]">{positionFilter(position)}</div>
       </div>
-
-      <div className="flex justify-around h-full">
+      
+      {props.data && props.data.portfolioUrl &&  props.data.portfolioUrl.length>1 ?
+        <div className="flex justify-around h-full">
+          <SwiperSliderPortFolioMain imgUrlList={props.data.portfolioUrl[0].imageUrl?props.data.portfolioUrl[0].imageUrl:project1}/>
+          <SwiperSliderPortFolioMain imgUrlList={props.data.portfolioUrl[1].imageUrl?props.data.portfolioUrl[1].imageUrl:project1}/>
+        </div>
+        : props.data.portfolioUrl && props.data.portfolioUrl.length===1 ?
+        <div className="flex justify-around h-full">
         <SwiperSliderPortFolioMain imgUrlList={props.data.portfolioUrl[0].imageUrl?props.data.portfolioUrl[0].imageUrl:project1}/>
-        <SwiperSliderPortFolioMain imgUrlList={props.data.portfolioUrl[1].imageUrl?props.data.portfolioUrl[1].imageUrl:project1}/>
-      </div>
+        <SwiperSliderPortFolioMain imgUrlList={project1}/>
+        </div>
+        : props.data.portfolioUrl && props.data.portfolioUrl.length===0 ?
+        <div className="flex justify-around h-full">
+        <SwiperSliderPortFolioMain imgUrlList={project1}/>
+        <SwiperSliderPortFolioMain imgUrlList={project1}/>
+        </div>
+        :
+        <></>
+      }
+      
     </div>
   );
 }
