@@ -358,7 +358,7 @@ export const updateAbilityAPI = (data, idx) => {
 };
 
 // middleware actions
-const loginAPI = (id, pwd, callback) => { 
+const loginAPI = (id, pwd, callback) => {
   return function (dispatch) {
     //로그인 API 구현부
 
@@ -455,6 +455,7 @@ const getMyStats = () => {
         })
 
   }
+
 }
 
 export const updateUserInfoAPI = (data, goMain) => {
