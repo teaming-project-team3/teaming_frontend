@@ -25,8 +25,8 @@ function SwiperSlider() {
         loop={true}
       >
         <SwiperSlide><img className="w-full h-full" src={projectDetail3Img} alt="html logo" /></SwiperSlide>
-        <SwiperSlide><img className="w-full h-full" src={projectDetail0Img} alt="html logo" /></SwiperSlide>
         <SwiperSlide><img className="w-full h-full" src={projectDetail1Img} alt="html logo" /></SwiperSlide>
+        <SwiperSlide><img className="w-full h-full" src={projectDetail0Img} alt="html logo" /></SwiperSlide>
         <SwiperSlide><img className="w-full h-full" src={projectDetail2Img} alt="html logo" /></SwiperSlide>
       </Swiper>
     </div>

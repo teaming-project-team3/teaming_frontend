@@ -43,7 +43,7 @@ const Login = (props) => {
       window.alert("이메일 형식이 맞지 않습니다!");
       return;
     }
-
+    
     dispatch(userActions.loginAPI(id, pwd, (surveyChecker)=>
       navigate('/', {state: !surveyChecker}
     )))

@@ -48,6 +48,14 @@ export default function ProjectRoom() {
     return;
   };
 
+  function mouseOutCurr(){
+    setCurr("");
+  }
+
+  function mouseOverCurr(nick){
+    setCurr(nick)
+  }
+
   return (
     
       <div className="bg-[#F2F3F7]">
@@ -64,8 +72,7 @@ export default function ProjectRoom() {
         <div className="flex w-screen">
           
           <UserSlider userDetailShow={userDetailShow} statusCallBack={statusCallBack} myStatusCallBack={myStatusCallBack} name={name} room={room} 
-          exUser={exUser} _onMouseOut={()=>{setCurr("");}} _onMouseOver={(nick)=>{
-            setCurr(nick)}}></UserSlider>
+          exUser={exUser} _onMouseOut={mouseOutCurr} _onMouseOver={mouseOverCurr}></UserSlider>
           
           {mode &&
           <div className="relative w-[25vw] h-[80vh] rounded-xl mr-10 pr-10 border-2 p-2 bg-white pb-7">
