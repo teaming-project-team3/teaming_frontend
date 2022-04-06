@@ -42,20 +42,24 @@ const uploadImagesS3 = (data, callback, checker=false, boardId) => {
         
         const REGION = "ap-northeast-2";
         const S3_BUCKET = 'teaming.link';
+    
+        AWS.config.update({
+          accessKeyId: process.env.REACT_APP_BASE_ACCESS_KEY,
+          secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY
+        });
         
         const myBucket = new AWS.S3({
-          accessKeyId: process.env.REACT_APP_BASE_ACCESS_KEY,
-          secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY,
           params: { Bucket: S3_BUCKET},
           region: REGION,
         });
+        
       
         const uploadFile = async (file) => {
           
           const imgName = `${id}_${new Date().getTime()}`
 
           const params = {
-            ACL: 'public-read',
+            ACL: 'private',
             Body: file,
             Bucket: S3_BUCKET,
             Key: "upload/projects/" + imgName + file.name
@@ -114,19 +118,23 @@ export const uploadImagesS3PortFolio = (portfolioList, data, callback) => {
       const REGION = "ap-northeast-2";
       const S3_BUCKET = 'teaming.link';
     
-      const myBucket = new AWS.S3({
+      AWS.config.update({
         accessKeyId: process.env.REACT_APP_BASE_ACCESS_KEY,
-        secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY,
+        secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY
+      });
+      
+      const myBucket = new AWS.S3({
         params: { Bucket: S3_BUCKET},
         region: REGION,
       });
+      
 
       const uploadFile = async (file) => {
         
         const imgName = `${id}_${new Date().getTime()}`
 
         const params = {
-          ACL: 'public-read',
+          ACL: 'private',
           Body: file,
           Bucket: S3_BUCKET,
           Key: "upload/projects/" + imgName + file.name
@@ -185,19 +193,22 @@ export const uploadImagesS3Update = (data, callback) => {
       const REGION = "ap-northeast-2";
       const S3_BUCKET = 'teaming.link';
     
-       const myBucket = new AWS.S3({
-          accessKeyId: process.env.REACT_APP_BASE_ACCESS_KEY,
-          secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY,
-          params: { Bucket: S3_BUCKET},
-          region: REGION,
-        });
-    
+      AWS.config.update({
+        accessKeyId: process.env.REACT_APP_BASE_ACCESS_KEY,
+        secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY
+      });
+      
+      const myBucket = new AWS.S3({
+        params: { Bucket: S3_BUCKET},
+        region: REGION,
+      });
+      
       const uploadFile = async (file) => {
         
         const imgName = `${id}_${new Date().getTime()}`
 
         const params = {
-          ACL: 'public-read',
+          ACL: 'private',
           Body: file,
           Bucket: S3_BUCKET,
           Key: "upload/projects/" + imgName + file.name

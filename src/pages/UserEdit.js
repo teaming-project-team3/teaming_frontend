@@ -19,9 +19,9 @@ export default function UserEdit() {
 
   const positions = React.useMemo(
     () => [
-      { value: "Dev/FrontEnd", label: "Dev/FrontEnd" },
-      { value: "Dev/BackEnd", label: "Dev/BackEnd" },
-      { value: "Designer", label: "Designer" },
+      { value: "front", label: "Dev/FrontEnd" },
+      { value: "back", label: "Dev/BackEnd" },
+      { value: "design", label: "Designer" },
     ],
     []
   );

@@ -8,7 +8,7 @@ function UrlLink(props) {
             box-border rounded 
             "
       >
-        <img src={logo} alt="logo"></img>
+        <img src={logo} alt="logo" className="w-[1rem] h-[1rem]"></img>
         <div className="text-sm text-[#593CE5] font-noto2 ml-[1.375rem] text-ellipsis">
           {url}
         </div>

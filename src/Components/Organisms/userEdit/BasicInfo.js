@@ -38,9 +38,13 @@ export const BasicInfo = (props) => {
       }
 
     if(changed){
-      dispatch(uploadImagesS3Update(newData, (data)=>{dispatch(updateUserInfoAPI(data, ()=>navigate('/')))}));
+      dispatch(uploadImagesS3Update(newData, (data)=>{dispatch(updateUserInfoAPI(data, ()=>{
+        window.alert("수정이 완료되었습니다!")
+        navigate('/')}))}));
     }else{
-      dispatch(updateUserInfoAPI(newData,()=>navigate('/')))
+      dispatch(updateUserInfoAPI(newData,()=>{
+        window.alert("수정이 완료되었습니다!")
+        navigate('/')}))
     }
 
 

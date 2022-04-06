@@ -26,7 +26,7 @@ const ChatPrac = (props) => {
   useEffect(() => {
     //const { name, room } = queryString.parse(location.search)
 
-    const { name, room } = props;
+    const { name, room, title } = props;
 
 
     socket = io(ENDPOINT, {
@@ -39,8 +39,7 @@ const ChatPrac = (props) => {
     setRoom(room);
     setName(name);
 
-
-    socket.emit("join", { name, room }, (error) => {
+    socket.emit("join", { name, room, title }, (error) => {
       if (error) {
         alert("join Error", error);
       }

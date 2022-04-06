@@ -30,7 +30,9 @@ export const Specialization = (props) => {
         }
         
   
-        dispatch(updateUserInfoAPI(newData,()=>navigate('/')));
+        dispatch(updateUserInfoAPI(newData,()=>{
+          window.alert("수정이 완료되었습니다!");
+          navigate('/')}));
   
     }
   

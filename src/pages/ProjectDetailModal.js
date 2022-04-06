@@ -88,7 +88,7 @@ function ProjectDetailModal(props) {
   return (
     <>
       {modalIsOpen && (
-        <div className="fixed top-0 left-0 z-10 flex items-center w-full h-screen bg-black justify center bg-opacity-70">
+        <div className="fixed top-0 left-0 z-10 flex flex-col items-center w-screen h-screen bg-black justify center bg-opacity-70">
           <ProjectDetailModalCustom
             checker={modalIsOpen}
             callback={props.callBackSetShowFalse}
@@ -103,11 +103,12 @@ function ProjectDetailModal(props) {
               }
             }}
           >
-            {/* <div className="h-[40vh] justify-center bg-cover" style={{ backgroundImage: `url(${data.imgUrl[0]})` }}/> */}
 
             <div className="flex h-[40vh] justify-center bg-cover">
               <SwiperSliderProjectModal imgUrlList={data.imgUrl} />
             </div>
+
+            <div className="h-[20vh]"></div>
 
             <div className="p-10 text-4xl text-center text-black font-notoB">
               {data.title}
@@ -144,7 +145,7 @@ function ProjectDetailModal(props) {
               {data.subContents}
             </div>
 
-            <div className="flex flex-wrap justify-center w-screen m-10 bg-[#E5E5E5]">
+            <div className="flex flex-wrap justify-center m-10 bg-[#E5E5E5]">
               {/* 모집내용 블럭 */}
               <div className="w-[50vw] bg-white box-border rounded-[0.625rem]">
                 <div className="text-xl font-bold font-noto2 mt-7 pl-[3.6rem] pb-6 border-b-2">

@@ -31,6 +31,13 @@ export const skillsInit =
     { value: "jquery", label: "jquery" },
     { value: "ruby on rails", label: "ruby on rails" },
     { value: "laravel", label: "laravel" },
+    { value: "figma", label: "figma" },
+    { value: "adobexd", label: "adobexd" },
+    { value: "zeplin", label: "zeplin" },
+    { value: "sketch", label: "sketch" },
+    { value: "illustrator", label: "illustrator" },
+    { value: "photoshop", label: "photoshop" },
+    { value: "aftereffect", label: "aftereffect" },
   ]
 
   export const periodOfUse = 
@@ -77,4 +84,11 @@ export const requiredSkillsInit =
     { value: "jquery", label: "jquery" },
     { value: "ruby on rails", label: "ruby on rails" },
     { value: "laravel", label: "laravel" },
+    { value: "figma", label: "figma" },
+    { value: "adobexd", label: "adobexd" },
+    { value: "zeplin", label: "zeplin" },
+    { value: "sketch", label: "sketch" },
+    { value: "illustrator", label: "illustrator" },
+    { value: "photoshop", label: "photoshop" },
+    { value: "aftereffect", label: "aftereffect" },
   ]
