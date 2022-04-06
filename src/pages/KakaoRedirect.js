@@ -22,6 +22,7 @@ const KakaoRedirect = (props) => {
     apis
     .kakaoSend(code)
       .then((res) => {
+        console.log("kakao",res);
         localStorage.setItem("userId", res.data.nickname);
         setCookie("token", res.data.Authorization, 1);
         

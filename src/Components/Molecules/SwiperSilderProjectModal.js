@@ -18,14 +18,14 @@ function SwiperSliderProjectModal(props) {
       <Swiper
         //style={{height:'20em', width:'5em'}}
         centeredSlides={true}
-        className="h-[20em] w-[70em]"
+        className="h-[25em] w-[70em]"
         spaceBetween={50}
         slidesPerView={1}
         autoplay={{ delay: 1000 }}
         navigation
         pagination={{ clickable: true }}
       >
-        <SwiperSlide><img className="w-full rounded-[0.625rem] object-cover" src={imgUrlList[0]} alt={projectImg} /></SwiperSlide>
+        <SwiperSlide><img className="w-full rounded-[0.625rem] object-contain" src={imgUrlList[0]} alt={projectImg} /></SwiperSlide>
         {imgUrlList.length>0 && imgUrlList[0] &&
             <SwiperSlide><img className="w-full rounded-[0.625rem] object-contain" src={imgUrlList[0]} alt={projectImg} /></SwiperSlide>
         }

@@ -80,7 +80,7 @@ export default function ProjectRoom() {
               <img onClick={()=>{setMode(false)}} src={clip} alt={""}></img>
             </div>
             
-            <ChatPrac name={name} room={room}></ChatPrac>
+            <ChatPrac name={name} room={room} title={title}></ChatPrac>
           
           </div>
           }

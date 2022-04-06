@@ -23,7 +23,7 @@ export const ProjectDetailModalCustom = (props) => {
           aria-labelledby="exampleModalScrollableLabel"
           aria-hidden="true"
         >
-          <div class="modal-dialog modal-xl modal-dialog-scrollable relative w-auto pointer-events-none">
+          <div class="modal-dialog modal-xl modal-dialog-scrollable relative w-[1440px] pointer-events-none">
             <div class="modal-content border-none shadow-lg relative flex flex-col items-center justify-center content-center w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
               <div class="modal-header p-4 border-b border-gray-200 w-[100%] flex items-center justify-center content-center text-[#593CE5]">
                 <div className="grid grid-cols-9 text-[#593CE5] p-5 w-[100%]">

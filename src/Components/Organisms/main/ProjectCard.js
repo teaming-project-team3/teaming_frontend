@@ -35,11 +35,11 @@ function ProjectCard(props) {
       }}
       className="flex flex-col hover:border-blue-200 w-[15.625em] h-[18.750em] ml-[2.250em] bg-white border-2 cursor-pointer rounded-[0.333em] shadow-lg m-2"
     >
-      <div className="h-2/3 rounded-[0.333em]">
+      <div className="h-2/3 overflow-hidden rounded-[0.333em]">
         <img
           src={img}
-          alt="projectImage"
-          className="object-fill rounded-t-[0.333em]"
+          alt={imgDefault}
+          className="object-fill overflow-hidden rounded-t-[0.333em]"
         ></img>
       </div>
 
@@ -62,7 +62,7 @@ function ProjectCard(props) {
       <div className="flex pl-[0.813em] pb-[1.250em] text-gray-600 text-[0.75em] font-noto2 w-full">
         <img
           src={profileUrl}
-          alt={"project card"}
+          alt={require("../../../static/images/userStats/user_icon.png").default}
           className="flex-initial w-[1.250em] h-[1.250em] rounded-full"
         ></img>
         <p className="flex-initial pl-[0.438em]">{nameManufacture(nickName)}</p>
