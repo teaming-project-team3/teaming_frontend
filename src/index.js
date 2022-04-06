@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, Suspense } from 'react';
 import store from "./redux/configStore";
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -6,10 +6,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import 'tw-elements';
+import Spinner from './Components/Organisms/Spinner';
 
 ReactDOM.render(
   <Provider store={store}>
+    <Suspense fallback={Spinner}>
     <App />
+    </Suspense>
   </Provider>,
   document.getElementById('root')
 );

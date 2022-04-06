@@ -73,7 +73,9 @@ function EditBlockFamily(props) {
       "url": stats.url,
       }
 
-    dispatch(uploadImagesS3PortFolio(portfolioList, newData, ()=>{navigate('/')} ));
+    dispatch(uploadImagesS3PortFolio(portfolioList, newData, ()=>{
+      window.alert("수정이 완료되었습니다!");
+      navigate('/')} ));
 
   };
 
