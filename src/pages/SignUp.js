@@ -271,8 +271,8 @@ function SignUp() {
     console.log("static!")
   
     AWS.config.update({
-      accessKeyId: process.env.REACT_APP_BASE_ACCESS_KEY,
-      secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY
+      accessKeyId: "AKIAZJ3LGUQ4TBL3O7RL",
+      secretAccessKey: "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"
     });
 
     const myBucket = new AWS.S3({

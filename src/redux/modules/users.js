@@ -428,7 +428,13 @@ const signUp = (data, callback) => {
         callback();
       })
       .catch((err) => {
-        window.alert("잠시 후 다시 시도해주세요!")
+        if(err.response.data.message==="Exisiting email"){
+          window.alert(`이미 있는 이메일입니다!`)
+        }else if(err.response.data.message==="Exisiting nickname"){
+          window.alert(`이미 있는 닉네임입니다!`)
+        }else{
+        window.alert(`다시 시도해주세요!, 이유 : ${err.response.data.error}, ${err.response.data.message}`)
+        }
       });
   };
 };
@@ -449,6 +455,7 @@ const surveyAPI = (data, callback) => {
         callback();
       })
       .catch((err)=>{
+        window.alert("err",err.data.msg);
       })
 
 

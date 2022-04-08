@@ -68,11 +68,13 @@ function ProjectDetailModal(props) {
       .joinProjectAPI(data._id)
       .then((res)=>{
         console.log("res",res)
+
         ReactGA.event({
           category: "Project",
           action: "projectRoom",
           label: "projectRoom",
         });
+        
         navigate("/projectRoom", { state: {id: data._id, title: data.title, isLeader: res.data.leaderCheck, involved: res.data.projectInCheck}});
 
       })
