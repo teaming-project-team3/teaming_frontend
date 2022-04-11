@@ -2,6 +2,7 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../apis/apis";
 import { deleteCookie, setCookie } from "../../shared/Cookie";
+import ReactGA from "react-ga";
 
 // actions
 //const LOG_IN = "LOG_IN";
@@ -182,6 +183,7 @@ const initialState = {
   },
 
   selectedUser: {
+    userInfo: {
     _id: -1,
     stack: {
       front: {
@@ -247,6 +249,7 @@ const initialState = {
     createdAt: "2022-04-01T13:25:20.883Z",
     updatedAt: "2022-04-01T13:25:20.883Z",
     __v: 0
+  },
   },
 };
 
@@ -336,7 +339,7 @@ export const addNowProjectUsers = (user) => {
 
 export const getSelectedUserInfo = (id, callback) => {
   return async function (dispatch) {
-
+    console.log("selectedUserInfo", id);
     apis
     .getUserPage(id)
       .then((res)=>{
@@ -358,7 +361,7 @@ export const updateAbilityAPI = (data, idx) => {
 };
 
 // middleware actions
-const loginAPI = (id, pwd, callback) => { 
+const loginAPI = (id, pwd, callback) => {
   return function (dispatch) {
     //로그인 API 구현부
 
@@ -376,6 +379,11 @@ const loginAPI = (id, pwd, callback) => {
         sessionStorage.setItem("token", res.data.Authorization);
         
         dispatch(setIsLogIn(res.data.profileUrl, !res.data.suveyCheck));
+        ReactGA.event({
+          category: "User",
+          action: "User Login",
+          label: "Login",
+        });
         //surveyChecker 받아서 넘기기
         callback(res.data.suveyCheck);
         }
@@ -412,10 +420,21 @@ const signUp = (data, callback) => {
     apis
       .signup(data)
       .then((res) => {
+        ReactGA.event({
+          category: "User",
+          action: "User Signup",
+          label: "Signup",
+        });
         callback();
       })
       .catch((err) => {
-        window.alert("잠시 후 다시 시도해주세요!")
+        if(err.response.data.message==="Exisiting email"){
+          window.alert(`이미 있는 이메일입니다!`)
+        }else if(err.response.data.message==="Exisiting nickname"){
+          window.alert(`이미 있는 닉네임입니다!`)
+        }else{
+        window.alert(`다시 시도해주세요!, 이유 : ${err.response.data.error}, ${err.response.data.message}`)
+        }
       });
   };
 };
@@ -428,9 +447,15 @@ const surveyAPI = (data, callback) => {
       .then((res)=>{
 
         dispatch(setSurveyChecker(!res.data.success));
+        ReactGA.event({
+          category: "User",
+          action: "User Survey",
+          label: "Survey",
+        });
         callback();
       })
       .catch((err)=>{
+        window.alert("err",err.data.msg);
       })
 
 
@@ -445,9 +470,15 @@ const getMyStats = () => {
     apis
       .getMyStatsAPI()
         .then((res)=>{
-
+          
           dispatch(setMyUserStats(res.data.userInfo))
           dispatch(setMyProject(res.data.projectData, res.data.totalProject))
+
+          ReactGA.event({
+            category: "User",
+            action: "My User Info",
+            label: "My Stats",
+          });
 
         })
         .catch((err)=>{
@@ -455,6 +486,7 @@ const getMyStats = () => {
         })
 
   }
+
 }
 
 export const updateUserInfoAPI = (data, goMain) => {

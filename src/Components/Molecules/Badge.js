@@ -37,9 +37,9 @@ function Badge(props) {
 
     <div className="flex">
       {skills &&
-        skills.map((item) => {
+        skills.map((item, idx) => {
           return (
-            <div className="m-1">
+            <div className="m-1" key={idx}>
               <img
                 src={`https://img.shields.io/badge/${item}-${skillColorDesignator()}?style=for-the-badge&logo=${item}&logoColor=white`}
                 alt={""}

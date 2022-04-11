@@ -33,13 +33,13 @@ function ProjectCard(props) {
       onClick={() => {
         _onClick(id);
       }}
-      className="flex flex-col hover:border-blue-200 w-[15.625em] h-[18.750em] ml-[2.250em] bg-white border-2 cursor-pointer rounded-[0.333em] shadow-lg m-2"
+      className="flex flex-col overflow-hidden hover:border-blue-200 w-[15.625em] h-[18.750em] ml-[2.250em] bg-white border-2 cursor-pointer rounded-[0.333em] shadow-lg m-2"
     >
-      <div className="h-2/3 rounded-[0.333em]">
+      <div className="object-contain object-center overflow-hidden h-2/3">
         <img
           src={img}
-          alt="projectImage"
-          className="object-fill rounded-t-[0.333em]"
+          alt={imgDefault}
+          className="object-cover w-full h-full overflow-hidden"
         ></img>
       </div>
 
@@ -62,7 +62,7 @@ function ProjectCard(props) {
       <div className="flex pl-[0.813em] pb-[1.250em] text-gray-600 text-[0.75em] font-noto2 w-full">
         <img
           src={profileUrl}
-          alt={"project card"}
+          alt={require("../../../static/images/userStats/user_icon.png").default}
           className="flex-initial w-[1.250em] h-[1.250em] rounded-full"
         ></img>
         <p className="flex-initial pl-[0.438em]">{nameManufacture(nickName)}</p>

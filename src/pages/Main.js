@@ -8,14 +8,12 @@ import ProfileList from "../Components/Organisms/main/ProfileList";
 import ProjectList from "../Components/Organisms/main/ProjectList";
 import ShortCutCards from "../Components/Organisms/main/ShortCutCards";
 import Spinner from "../Components/Organisms/Spinner";
-import Survey from "./Survey";
 import { actionCreators } from "../redux/modules/projects";
 import Pic from "../static/Pic.png";
 import Pic2 from "../static/Pic2.png";
-import ProjectDetailModal from "./ProjectDetailModal";
 import SwiperSlider from "../Components/Molecules/SwiperSilder";
-import UserDetailModal from "./UserDetailModal";
 import { getSelectedUserInfo } from "../redux/modules/users";
+import { Survey, ProjectDetailModal, UserDetailModal } from "../pages"
 
 const Wrap = styled.div`
   width: 90rem;
@@ -41,11 +39,14 @@ function Main(props) {
 
   let isLoading = useSelector((state) => state.projects.isLoading);
 
+    console.log("main modalIsOpen", modalIsOpen);
+
   useEffect(() => {
     setModalIsOpen(props.blocker);
   }, [props.blocker]);
 
   useEffect(() => {
+    console.log("check main surveyCheck", surveyCheck)
     setModalIsOpen(surveyCheck);
   }, [surveyCheck]);
 

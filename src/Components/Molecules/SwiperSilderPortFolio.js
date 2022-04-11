@@ -24,7 +24,6 @@ function SwiperSliderPortFolio(props) {
     <div>
       <Swiper
         ref={setSwiper}
-        shouldSwiperUpdate
         style={{height:'10em', width:'15em'}}
         spaceBetween={50}
         slidesPerView={1}

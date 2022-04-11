@@ -156,18 +156,20 @@ function ModalSelect(props) {
 
   return (
     <div>
-      <div className="flex mt-5 mb-2 ml-5 text-base font-noto1">사용 언어</div>
-      <CreatableSelect
-        className="ml-5 mr-5"
-        isMulti // show multiple options
-        isClearable={proLang.some((v) => !v.isFixed)} // clear button shows conditionally
-        value={abilityName}
-        options={proLang}
-        styles={styles} // styles that do not show 'x' for fixed options
-        onChange={handleChange}
-        onCreateOption={handleCreate}
-        components={animatedComponents} // animate builtin components
-      />
+      {position!=="3" &&
+            <><div className="flex mt-5 mb-2 ml-5 text-base font-noto1">사용 언어</div><CreatableSelect
+          className="ml-5 mr-5"
+          isMulti // show multiple options
+          isClearable={proLang.some((v) => !v.isFixed)} // clear button shows conditionally
+          value={abilityName}
+          options={proLang}
+          styles={styles} // styles that do not show 'x' for fixed options
+          onChange={handleChange}
+          onCreateOption={handleCreate}
+          components={animatedComponents} // animate builtin components
+        /></>
+      }
+
 
       {ability &&
         ability.map((data, idx) => {

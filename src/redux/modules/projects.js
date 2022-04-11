@@ -1,6 +1,7 @@
 import { handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../apis/apis";
+import ReactGA from "react-ga";
 
 // actions
 const SET_MAIN_PROJECTS = "SET_MAIN_PROJECTS";
@@ -207,28 +208,28 @@ const initialState = {
       profileUrl:"",
       position:"",
       projects:[],
-      portfolio:-1,
+      portfolioUrl:[],
     },{
       _id:-1,
       nickname:"",
       profileUrl:"",
       position:"",
       projects:[],
-      portfolio:-1,
+      portfolioUrl:[],
     },{
       _id:-1,
       nickname:"",
       profileUrl:"",
       position:"",
       projects:[],
-      portfolio:-1,
+      portfolioUrl:[],
     },{
       _id:-1,
       nickname:"",
       profileUrl:"",
       position:"",
       projects:[],
-      portfolio:-1,
+      portfolioUrl:[],
     },],
     matesDesigner:[{
       _id:-1,
@@ -236,28 +237,28 @@ const initialState = {
       profileUrl:"",
       position:"",
       projects:[],
-      portfolio:-1,
+      portfolioUrl:[],
     },{
       _id:-1,
       nickname:"",
       profileUrl:"",
       position:"",
       projects:[],
-      portfolio:-1,
+      portfolioUrl:[],
     },{
       _id:-1,
       nickname:"",
       profileUrl:"",
       position:"",
       projects:[],
-      portfolio:-1,
+      portfolioUrl:[],
     },{
       _id:-1,
       nickname:"",
       profileUrl:"",
       position:"",
       projects:[],
-      portfolio:-1,
+      portfolioUrl:[],
     },],
 };
 
@@ -281,6 +282,11 @@ export const loadProjectsMainAPI = () => {
         .loadProjectsMain()
             .then((res)=>{
                 dispatch(setProjectsMain(res));
+                ReactGA.event({
+                  category: "Main",
+                  action: "Main",
+                  label: "Main",
+                });
             })
             .catch((err)=>{
                 window.alert("잠시 후 다시 시도해주세요!");
@@ -314,6 +320,11 @@ export const createProjectAPI = (data, callback) => {
         .createProjectAPI(data)
             .then((res)=>{
                 callback();
+                ReactGA.event({
+                  category: "Project",
+                  action: "createProject",
+                  label: "createProject",
+                });
                 //dispatch(setProjectsMain(res));
             })
             .catch((err)=>{
@@ -331,6 +342,11 @@ export const getProjectDetailAPI = (boardId, callback) => {
       .getProjectDetailAPI(boardId)
         .then((res) => {
           dispatch(setProjectDetail(res.data))
+          ReactGA.event({
+            category: "Project",
+            action: "projectDetailModal",
+            label: "projectDetailModal",
+          });
           callback();
         })
         .catch((err) => {

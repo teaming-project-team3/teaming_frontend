@@ -256,7 +256,11 @@ function SignUp() {
       profileUrl: "",
     };
 
-    uploadFile(imgFile, data);
+    if(imgFile!==""){
+      uploadFile(imgFile, data);
+    }else{
+      dispatch(userActions.signUp(data, () => {navigate('/login')}));
+    }
 
   };
 
@@ -270,7 +274,7 @@ function SignUp() {
       accessKeyId: process.env.REACT_APP_BASE_ACCESS_KEY,
       secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY
     });
-    
+
     const myBucket = new AWS.S3({
       params: { Bucket: S3_BUCKET},
       region: REGION,
@@ -301,7 +305,7 @@ function SignUp() {
   }
 
   return (
-    <div className="flex justify-center w-screen mt-3">
+    <div className="flex justify-center w-full mt-3">
       <div className="flex flex-col items-center justify-center w-1/2 gap-3">
         <Title>회원가입</Title>
 
@@ -399,3 +403,5 @@ function SignUp() {
 }
 
 export default SignUp;
+
+

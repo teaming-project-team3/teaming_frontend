@@ -36,6 +36,8 @@ function UserDetailModal(props) {
   const modalIsOpen = props.showUser;
   const data = useSelector((state)=>state.users.selectedUser);  
 
+  console.log("user Detail modal!", data);
+
   useEffect(() => {
   }, []);
 
@@ -51,7 +53,7 @@ function UserDetailModal(props) {
       >
         
         
-        <div className="flex justify-center w-screen mt-[2rem]">
+        <div className="flex justify-center w-full mt-[2rem]">
           <Image shape="circle" src={data.userInfo.userId.profileUrl} size={"130"}></Image>
         </div>
 
@@ -70,7 +72,7 @@ function UserDetailModal(props) {
         </div>
 
         <div className="flex justify-center w-full">
-        <StatFamily stats={data.userInfo} GitHubLogo={GitHubLogo}/>
+          <StatFamily stats={data.userInfo} GitHubLogo={GitHubLogo}/>
         </div>
         
           

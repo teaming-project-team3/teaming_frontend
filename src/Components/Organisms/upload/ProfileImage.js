@@ -31,7 +31,7 @@ export const ProfileImage = (props) => {
   // X버튼 클릭 시 이미지 삭제
   const handleDeleteProfileImage = (id) => {
     props.setProfileUrl("");
-    setShowImage("");
+    setShowImage([]);
   };
 
   return (
