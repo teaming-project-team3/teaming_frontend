@@ -1,7 +1,5 @@
 ![readme](https://user-images.githubusercontent.com/46555489/161640050-44a6df10-0338-498b-8cb2-17ba3dd5ff58.png)
 
-<!-- 서비스 간략설명  -->
-
 # 🌠TEAMING
 
 - [티밍 바로가기](https://teaming.link)
