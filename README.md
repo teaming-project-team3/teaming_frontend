@@ -96,7 +96,7 @@
 <details>
     <summary>
         <b>일명 이미지 엑박 문제</b>
-        <p>SPA인 리액트 그리고 우리 웹 사이트의 특성상, 각 컴포넌트에서 불러오는 이미지의 양이 많습니다. 따라서 간헐적으로 특정이미지가 엑박으로 뜨는 문제가 발생</p>
+        <br><blockquote>SPA인 리액트 그리고 우리 웹 사이트의 특성상, 각 컴포넌트에서 불러오는 이미지의 양이 많습니다. 따라서 간헐적으로 특정이미지가 엑박으로 뜨는 문제가 발생</blockquote></br>
     </summary>
     <br>해결 : CSR 데이터의 부하를 처리해준다면 해결될 것이라는 가설을 세우고, 
   
@@ -111,12 +111,20 @@ Loadable을 적용한 결과, 260개 중, 5(2%)개로 유실율이 눈에 띄게
 </details>
 <details>
     <summary>
-        <b>순환 참조(임포트) 문제
-개별 파이썬 파일 작업으로 blueprint를 사용하였는데
-ex) app.py <- detail.py
-이때 detail에서도 app.py를 임포트 할 경우 에러가 발생하였다. </b>
+        <b>영상채팅 과정에서 오디오 하울링 발생</b>
     </summary>
-    <br>해결 : 전역으로 임포트 하지 않고 함수내에서 임포트 하는 방법으로 해결
+    <br>해결 : 본인의 오디오도 함께 송출되기 때문에 발생한다는 가설을 세웠고,
+               본인의 오디오는 송출되지 않도록 코드를 수정함으로써 서비스의 편의성을 높였습니다.
+</details>
+<details>
+    <summary>
+        <b>영상채팅 videoView 동적 추가, 제거</b>
+    </summary>
+    <br>해결 : React에서 document.querySelector를 사용하게되면, 실제 DOM의 요소를 가져오게 됩니다.
+
+하지만 React는 Virtual DOM을 통해 Real DOM을 그리기 때문에, React가 제어하고있는 Virtual DOM 안에 있는 요소에 접접근하 처리하는 것이 더 적합하다고 판단했습니다.
+
+이에 우리는 useRef를 이용하여 가상돔에 접근해 뷰를 동적으로 생성하였습니다.
 </details>
 
 ---
@@ -136,121 +144,3 @@ ex) app.py <- detail.py
 ![projectAPI](https://user-images.githubusercontent.com/46555489/161772564-1c7fab5c-c080-47df-be08-84f916930106.PNG)
 
 </div>
-
-
-<h3><b>💻 Now Working On.. 💻</b></h3>
-
-<br>
-
-회원가입 -> 로그인 -> 설문조사 -> 메인 -> 메인(실시간 인기 프로젝트 카드) -> 프로젝트상세모달->프로젝트룸->userB상세정보
-
-<br>
-<h4><b>📰 Login Page 📰</b></h4>
-
-
-
-<br>
-<h4><b>📰 SignUp Page 📰</b></h4>
-
-
-<br>
-<h4><b>📰 Survey Page 📰</b></h4>
-
-
-<br>
-<h4><b>📰 Main Page 📰</b></h4>
-
-
-<br>
-<h4><b>📰 Category Main Page 📰</b></h4>
-
-<table width="100%">
-    <tr>
-        <!-- <td width="50%"><img src="https://user-images.githubusercontent.com/55970155/155251199-671a7011-385b-40d1-8700-5a01f088952b.PNG" /></td> -->
-        <td width="50%">
-            <h5>Fulfilled</h5>
-            <ul>
-                <li>init view</li>
-                <li>api link with min-su zzang</li>
-                <li>Infinity Scroll</li>
-            </ul>
-            <h5>Pending</h5>
-            <ul>
-                <li>apply design</li>
-            </ul>
-            <h5>rejected</h5>
-            <ul>
-                <li>null</li>
-            </ul>
-        </td>
-    </tr>
-</table>
-
-<br>
-<h4><b>📰 Create Project Page 📰</b></h4>
-
-
-<br>
-<h4><b>📰 Project Detail Page 📰</b></h4>
-
-<table width="100%">
-    <tr>
-        <!-- <td width="50%"><img src="https://user-images.githubusercontent.com/55970155/155251199-671a7011-385b-40d1-8700-5a01f088952b.PNG" /></td> -->
-        <td width="50%">
-            <h5>Fulfilled</h5>
-            <ul>
-                <li>init view</li>
-                <li>apply Markdown viewer</li>
-                <li>button to enter-room, using socket</li>
-                <li>api link to min-su-zzing</li>
-            </ul>
-            <h5>Pending</h5>
-            <ul>
-                <li>apply design</li>
-            </ul>
-            <h5>rejected</h5>
-            <ul>
-                <li>null</li>
-            </ul>
-        </td>
-    </tr>
-</table>
-
-<br>
-<h4><b>📰 Project Room Page 📰</b></h4>
-
-<table width="100%">
-    <tr>
-        <!-- <td width="50%"><img src="https://user-images.githubusercontent.com/55970155/155251199-671a7011-385b-40d1-8700-5a01f088952b.PNG" /></td> -->
-        <td width="50%">
-            <h5>Fulfilled</h5>
-            <ul>
-                <li>init view</li>
-                <li>apply Radar Chart, Chart.js</li>
-                <li>Other users info view, Radar chart Mouse Hover Event</li>
-                <li>slider, react-slick</li>
-                <li>socket.io only or socket.io with webRTC data channel N:N chat</li>
-                <li>webRTC N:N Video call</li>
-                <li>realtime users video status change, using socket</li>
-                <li>Audio fixed</li>
-            </ul>
-            <h5>Pending</h5>
-            <ul>
-                <li>apply design</li>
-                <li>start project button, change the chatting to saving data</li>
-            </ul>
-            <h5>rejected</h5>
-            <ul>
-                <li>null</li>
-            </ul>
-        </td>
-    </tr>
-</table>
-
-<br>
-<h4><b>📰 Personal Detail Page 📰</b></h4>
-
-<br>
-<h4><b>📰 My Page 📰</b></h4>
-
-
