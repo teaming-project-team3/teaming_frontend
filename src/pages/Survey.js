@@ -44,6 +44,19 @@ function Survey(props) {
       return;
     }
 
+    let temp = [];
+
+    if (url1!==""){
+      temp.push(url1);
+    }
+    if (url2!==""){
+      temp.push(url2);
+    }
+    if (url3!==""){
+      temp.push(url3);
+    }
+
+
     const data={
       position : position,
       front : {
@@ -58,7 +71,7 @@ function Survey(props) {
       ability: abilityDesigner,
       skills : skillsDesigner,
       },
-      portfolioUrl : [url1,url2,url3],
+      portfolioUrl : temp,
       url: url,
       }
 

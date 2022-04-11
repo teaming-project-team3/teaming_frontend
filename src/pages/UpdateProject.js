@@ -112,7 +112,7 @@ function UpdateProject(props) {
 
   //dev
   return (
-    <div className="flex justify-center w-screen bg-[#F2F3F7] h-fit">
+    <div className="flex justify-center w-full bg-[#F2F3F7] h-fit">
       <div className="flex flex-col items-center justify-center p-10">
         <div className="w-full text-[2.5rem] text-black font-notoB">
           프로젝트 수정

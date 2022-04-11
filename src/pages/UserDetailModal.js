@@ -53,7 +53,7 @@ function UserDetailModal(props) {
       >
         
         
-        <div className="flex justify-center w-screen mt-[2rem]">
+        <div className="flex justify-center w-full mt-[2rem]">
           <Image shape="circle" src={data.userInfo.userId.profileUrl} size={"130"}></Image>
         </div>
 
