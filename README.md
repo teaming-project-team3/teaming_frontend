@@ -41,15 +41,15 @@
 ### Links
 - [Home Page](https://teaming.link)
 - [Team Notion](https://www.notion.so/Teaming-c266b86faf844358af8b7c1b46c83a1e)
-- [Presentation Link](https://www.youtube.com/watch?v=Jh_xhXWulCY) 10:33
 - [Demonstration Video](https://www.youtube.com/watch?v=SSLpx3gzMSg) 1:30
+- [Presentation Link](https://www.youtube.com/watch?v=Jh_xhXWulCY) 10:33
 <br>
 
 ---
 
 ## 💎Service Architecture
 
-![아키텍처](https://user-images.githubusercontent.com/46555489/161765373-608e48f5-784f-49eb-a5b5-9fad788aab62.png)
+![프론트엔드 서비스아키텍쳐](https://user-images.githubusercontent.com/55970155/162741204-196a765f-be1e-4e3f-a937-0a581b7bb8c9.png)
 
 
 ---
@@ -68,48 +68,11 @@
 <img src="https://img.shields.io/badge/WebRTC-333333?style=for-the-badge&logo=WebRTC&logoColor=white">
 <img src="https://img.shields.io/badge/socket.io-ffffff?style=for-the-badge&logo=socket.io&logoColor=black">
 <img src="https://img.shields.io/badge/CloudFront-D05C4B?style=for-the-badge&logo=Amazon AWS&logoColor=white">
+<img src="https://img.shields.io/badge/Route53-4A154B?style=for-the-badge&logo=Amazon AWS&logoColor=white">
 <img src="https://img.shields.io/badge/Amazon S3-569A31?style=for-the-badge&logo=Amazon S3&logoColor=white">
+<img src="https://img.shields.io/badge/GithubAction-181717?style=for-the-badge&logo=GithubAction&logoColor=white">
 <br>
 </p>
-
-### **Back-end**
-<p>
-<img src="https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white">
-<img src="https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=NestJS&logoColor=white">
-<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
-<img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white"/>
-<img src="https://img.shields.io/badge/WebRTC-333333?style=for-the-badge&logo=WebRTC&logoColor=white">
-<br>
-<img src="https://img.shields.io/badge/socket.io-ffffff?style=for-the-badge&logo=socket.io&logoColor=black">
-<img src="https://img.shields.io/badge/mongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=white">  
-<img src="https://img.shields.io/badge/AWS Ec2-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white"> 
-<img src="https://img.shields.io/badge/NGINX-009639?style=for-the-badge&logo=NGINX&logoColor=white">
-<img src="https://img.shields.io/badge/passport-33D875?style=for-the-badge&logo=passport&logoColor=white">
-<br>
-</p>
-
-### **Design**
-<p>
-<img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=Figma&logoColor=white"/>
-<img src="https://img.shields.io/badge/Sketch-F7B500?style=for-the-badge&logo=Sketch&logoColor=white"/>
-<img src="https://img.shields.io/badge/Adobe XD-FF61F6?style=for-the-badge&logo=Adobe XD&logoColor=white"/>
-<img src="https://img.shields.io/badge/Adobe Illustrator-FF9A00?style=for-the-badge&logo=Adobe Illustrator&logoColor=white"/>
-<br>
-<img src="https://img.shields.io/badge/Adobe Photoshop-31A8FF?style=for-the-badge&logo=Adobe Photoshop&logoColor=white"/>
-<img src="https://img.shields.io/badge/Adobe Premiere-9999FF?style=for-the-badge&logo=Adobe Premiere Pro&logoColor=white"/>
-<img src="https://img.shields.io/badge/Adobe After Effects-9999FF?style=for-the-badge&logo=Adobe After Effects&logoColor=white"/>
-<br>
-</p>
-
-### **Tools**
-<p>
-  <img src="https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=Visual Studio Code&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=Slack&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=white"/>
-<img src="https://img.shields.io/badge/Github-181717?style=for-the-badge&logo=github&logoColor=white">
-<br>
-  </p>
-
 
 ---
 
@@ -117,22 +80,36 @@
 
 | 라이브러리    | 설명                                    |  
 | ------------- | --------------------------------------- |
-| mongoose     |     TypeORD                             |
-| socket.io <br>@nestjs/websockets         | 실시간 양방향 통신            |     
-| class-validator    | 유효성 검사                            |
-| dotenv        | 환경변수 설정                          |
-|bcryptjs | Passward 암호화                        |
-| Swagger       | API 문서화                             |
-| helmet       |     XSS(Cross-site scripting) 필터 적용             |
-| @nestjs/throttler   | 무차별 대입 공격에 대한 속도제한        |   
-| @nestjs/passport    | 인증 미들웨어                             |
-| @nestjs/jwt       |    Access Token                                  |
+| redux       | 전역 상태관리                             |
+| tailwindcss       | CSS framework                             |
+| socket.io         | 실시간 양방향 통신(webRTC)            |     
+| axios    | API 통신                            |
+| react-loadable       |  코드 스플리팅             |
+| react-intersection-observer   | lazy-loading(무한스크롤)        |
+| react-ga | Goole Analytics                        |
 
-[자세한 내용은 여기서 확인해주세요](https://www.notion.so/750cce1827ab4b4b9ba28fcc7aace3c2)
-
+---
 
 ## 🔥이슈 및 트러블슈팅
 
+<h3 align="center"><b>✏ Trouble Shooting ✏</b></h3>
+<br>
+<details>
+    <summary>
+        <b>ajax로 데이터를 받아오고 화면으로 뿌려줄 때, 비동기로 작동하기 때문에 
+요소들이 생성되기전에 dom에 접근하게 되어 UI를 다루기가 쉽지 않았습니다. </b>
+    </summary>
+    <br>해결 : 순차적으로 실행되 접근할 수 있게끔 ajax메서드 안에서 작성해서 해결했습니다.
+</details>
+<details>
+    <summary>
+        <b>순환 참조(임포트) 문제
+개별 파이썬 파일 작업으로 blueprint를 사용하였는데
+ex) app.py <- detail.py
+이때 detail에서도 app.py를 임포트 할 경우 에러가 발생하였다. </b>
+    </summary>
+    <br>해결 : 전역으로 임포트 하지 않고 함수내에서 임포트 하는 방법으로 해결
+</details>
 
 ---
 
@@ -151,31 +128,6 @@
 ![projectAPI](https://user-images.githubusercontent.com/46555489/161772564-1c7fab5c-c080-47df-be08-84f916930106.PNG)
 
 </div>
-</details>
-
-<details>
-<summary>DB ERD</summary>
-<div markdown="1">
-
-![ERD](https://user-images.githubusercontent.com/46555489/161620583-918d8dae-76dd-45fc-8467-2439647ebdd2.PNG)
-
-</div>
-</details>
-
-<!-- 와이어프레임  -->
-<details>
-<summary>WireFrame</summary>
-<div markdown="1">
-
-![wireframe PNG](https://user-images.githubusercontent.com/46555489/161588493-c7a60eb6-8759-4e94-a019-b999cf6c963c.png)
-
-</div>
-</details>
-
-
-
-
-
 
 
 <h3><b>💻 Now Working On.. 💻</b></h3>
