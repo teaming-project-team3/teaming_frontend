@@ -50,7 +50,7 @@ export default function UserEdit() {
 
       <div className="h-[30vh] bg-[#121414]" />
       
-      <div className="flex justify-center w-screen mt-[4.313rem] mb-10">
+      <div className="flex justify-center w-full mt-[4.313rem] mb-10">
           
           <div className="bg-white h-fit w-[12.813rem] mr-7 p-4 box-border rounded-[0.625rem]">
             <div onClick={() => { navigate('/userStats'); } } className="bg-slate-200 rounded-[0.625rem] p-2.5 font-notoB text-gray-900 text-sm mb-3">

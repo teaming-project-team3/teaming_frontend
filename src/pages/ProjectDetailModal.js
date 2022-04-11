@@ -90,7 +90,7 @@ function ProjectDetailModal(props) {
   return (
     <>
       {modalIsOpen && (
-        <div className="fixed top-0 left-0 z-10 flex flex-col items-center w-screen h-screen bg-black justify center bg-opacity-70">
+        <div className="fixed top-0 left-0 z-10 flex flex-col items-center w-full h-screen bg-black justify center bg-opacity-70">
           <ProjectDetailModalCustom
             checker={modalIsOpen}
             callback={props.callBackSetShowFalse}
@@ -149,7 +149,7 @@ function ProjectDetailModal(props) {
 
             <div className="flex flex-wrap justify-center m-10 bg-[#E5E5E5]">
               {/* 모집내용 블럭 */}
-              <div className="w-[50vw] bg-white box-border rounded-[0.625rem]">
+              <div className="w-full bg-white box-border rounded-[0.625rem]">
                 <div className="text-xl font-bold font-noto2 mt-7 pl-[3.6rem] pb-6 border-b-2">
                   프로젝트 소개
                 </div>
@@ -162,7 +162,7 @@ function ProjectDetailModal(props) {
 
             <div className="flex flex-wrap justify-center p-10 bg-[#E5E5E5]">
               {/* 모집요건 블럭 */}
-              <div className="w-[50vw] justify-center bg-white box-border rounded-[0.625rem]">
+              <div className="w-full justify-center bg-white box-border rounded-[0.625rem]">
                 <div className="text-xl font-bold font-noto2 mt-7 pl-[3.6rem] pb-6 border-b-2">
                   모집요건
                 </div>
@@ -171,9 +171,9 @@ function ProjectDetailModal(props) {
               </div>
             </div>
 
-            <div className="flex justify-center bg-[#E5E5E5] mb-10">
-              <div className="flex justify-center w-[25vw]">
-                <div className="w-full bg-white box-border rounded-[0.625rem] mr-2">
+            <div className="flex justify-center bg-[#E5E5E5] mb-10 p-10 gap-x-4">
+              <div className="flex justify-center w-full">
+                <div className="w-full bg-white box-border rounded-[0.625rem]">
                   <div className="text-xl font-bold font-noto2 mt-7 pl-[3.6rem] pb-6 border-b-2">
                     사용기술
                   </div>
@@ -187,8 +187,8 @@ function ProjectDetailModal(props) {
                 </div>
               </div>
 
-              <div className="flex justify-start w-[25vw]">
-                <div className="bg-white box-border rounded-[0.625rem] w-full ml-2 pb-10">
+              <div className="flex justify-start w-full">
+                <div className="bg-white box-border rounded-[0.625rem] w-full">
                   <div className="text-xl font-bold font-noto2 mt-7 pl-[3.6rem] pb-6 border-b-2">
                     URL
                   </div>

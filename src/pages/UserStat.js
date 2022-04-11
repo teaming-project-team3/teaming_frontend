@@ -106,7 +106,7 @@ export default function UserStat() {
       <div className="bg-[#E5E5E5]">
         <div className="h-[30vh] bg-[#121414]" />
 
-        <div className="flex justify-center w-screen mt-[-4.063rem]">
+        <div className="flex justify-center w-full mt-[-4.063rem]">
           <Image shape="circle" src={profileUrl} size={"130"}></Image>
         </div>
         <text className="flex justify-center mt-8 text-4xl font-notoB text-[#121414]">
@@ -122,7 +122,7 @@ export default function UserStat() {
           </text>
         </div>
 
-        <div className="flex justify-center w-screen mt-[4.313rem]">
+        <div className="flex justify-center w-full mt-[4.313rem]">
           <div className="bg-white h-fit w-[12.813rem] mr-7 p-4 box-border rounded-[0.625rem]">
             <CategoryBtn $isChecked={check===1} onClick={()=>{setIsChecked(1)}}>
               마이페이지

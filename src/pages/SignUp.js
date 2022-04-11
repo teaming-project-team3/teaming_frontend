@@ -305,7 +305,7 @@ function SignUp() {
   }
 
   return (
-    <div className="flex justify-center w-screen mt-3">
+    <div className="flex justify-center w-full mt-3">
       <div className="flex flex-col items-center justify-center w-1/2 gap-3">
         <Title>회원가입</Title>
 
