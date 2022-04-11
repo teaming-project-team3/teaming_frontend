@@ -39,11 +39,14 @@ function Main(props) {
 
   let isLoading = useSelector((state) => state.projects.isLoading);
 
+    console.log("main modalIsOpen", modalIsOpen);
+
   useEffect(() => {
     setModalIsOpen(props.blocker);
   }, [props.blocker]);
 
   useEffect(() => {
+    console.log("check main surveyCheck", surveyCheck)
     setModalIsOpen(surveyCheck);
   }, [surveyCheck]);
 

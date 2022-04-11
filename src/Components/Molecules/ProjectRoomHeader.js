@@ -47,7 +47,7 @@ function ProjectRoomHeader(props) {
 
 
   return (
-    <div className="flex h-[10vh] w-screen items-center">
+    <div className="flex h-[10vh] w-full items-center">
       <div
         className="flex items-center justify-center h-full cursor-pointer aspect-square"
         onClick={() => {

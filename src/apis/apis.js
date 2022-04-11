@@ -2,11 +2,11 @@ import axios from "axios";
 import { getCookie } from "../shared/Cookie";
 
 export const api = axios.create({
-  baseURL: process.env.REACT_APP_BASE_URL_WJ
+  baseURL: "https://wonjinlee.shop"
 });
 
 export const apiMS = axios.create({
-  baseURL: process.env.REACT_APP_BASE_URL_MS
+  baseURL: "http://175.204.78.166:5000"
 })
 
 api.interceptors.request.use(function (config) {

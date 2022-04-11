@@ -17,11 +17,12 @@ function App() {
   const surveyChecker = useSelector((state) => state.users.surveyCheck);
 
   const [blocker, setBlocker] = useState(surveyChecker);
+  console.log("check app blocker", blocker)
 
   const dispatch = useDispatch();
 
   useEffect(()=>{
-
+    console.log("check app surveyCheck", surveyChecker)
     setBlocker(surveyChecker);
 
   },[surveyChecker])
@@ -48,7 +49,7 @@ function App() {
           <Route path="/projectFind" element={<ProjectSearch blocker={blocker} setBlocker={setBlocker}/>} />
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/auth/kakao/redirect" element={<KakaoRedirect />} />
+          <Route path="/auth/kakao/redirect" element={<KakaoRedirect setBlocker={setBlocker} />} />
           <Route path="/privacy" element={<Privacy/>} />
         </Routes>
     </BrowserRouter>

@@ -69,7 +69,7 @@ export default function ProjectRoom() {
         <ProjectRoomHeader title={title} goBack={goBack} projectId={room} 
         involved={involved} involvedToggle={involvedToggle} isLeader={isLeader}></ProjectRoomHeader>
 
-        <div className="flex w-screen">
+        <div className="flex w-full">
           
           <UserSlider userDetailShow={userDetailShow} statusCallBack={statusCallBack} myStatusCallBack={myStatusCallBack} name={name} room={room} 
           exUser={exUser} _onMouseOut={mouseOutCurr} _onMouseOver={mouseOverCurr}></UserSlider>
