@@ -1,6 +1,7 @@
 // 리다이렉트될 화면
 
 import React, {useEffect} from "react";
+import ReactGA from "react-ga";
 import {apis} from "../apis/apis"
 import { useNavigate } from "react-router";
 import { setCookie } from "../shared/Cookie";
@@ -22,12 +23,19 @@ const KakaoRedirect = (props) => {
     apis
     .kakaoSend(code)
       .then((res) => {
-        console.log("kakao",res);
-        localStorage.setItem("userId", res.data.nickname);
-        setCookie("token", res.data.Authorization, 1);
-        
-        dispatch(setIsLogIn());
-        navigate("/")
+        if(res.data.success){
+          console.log("kakao",res);
+          localStorage.setItem("userId", res.data.nickname);
+          setCookie("token", res.data.Authorization, 1);
+          dispatch(setIsLogIn(res.data.profileUrl, !res.data.suveyCheck));
+          ReactGA.event({
+            category: "User",
+            action: "User Login",
+            label: "Login",
+          });
+          props.setBlocker(true);
+          navigate("/")
+      }
       })
       .catch((err) => {
         console.log("kakao err : " , err);

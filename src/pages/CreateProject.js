@@ -112,7 +112,7 @@ function CreateProject() {
 
   //dev
   return (
-    <div className="flex justify-center w-screen bg-[#F2F3F7] h-fit">
+    <div className="flex justify-center w-full bg-[#F2F3F7] h-fit">
       <div className="flex flex-col items-center justify-center p-10">
         <div className="w-full text-[2.5rem] text-black font-notoB">
           프로젝트 등록
@@ -169,6 +169,7 @@ function CreateProject() {
               placeholder="마크다운으로 내용을 입력하세요."
               ref={editorRef}
               onChange={onChangeMD}
+              autofocus={false}
             ></Editor>
           </div>
         </div>

@@ -9,8 +9,17 @@ export const Specialization = (props) => {
 
     const navigate = useNavigate();
 
-    const { stats, position, positions, abilityFront, abilityBack, abilityDesigner, skillsFront, 
+    const { stats, position, abilityFront, abilityBack, abilityDesigner, skillsFront, 
         skillsBack, skillsDesigner, type_num, checkType } = props;
+
+    const positions = React.useMemo(
+      () => [
+        { value: "front", label: "Dev/FrontEnd" },
+        { value: "back", label: "Dev/BackEnd" },
+        { value: "design", label: "Designer" },
+      ],
+      []
+    );
 
     const [userPosition, setUserPosition] = React.useState("");
     const dispatch = useDispatch();
@@ -50,6 +59,7 @@ export const Specialization = (props) => {
               options={positions}
               placeholder={position}
               onChange={(e) => {
+                console.log("e",e)
                 setUserPosition(e.value);
               }}
             />
