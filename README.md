@@ -6,7 +6,7 @@
 
 ## FrontEnd 핵심 기능
 
-- `webRTC`
+- `webRTC` - <a href="https://github.com/teaming-project-team3/teaming_frontend/wiki/%EA%B7%B8%EB%9E%98%EC%84%9C-webRTC-%EA%B0%80-%EB%AD%90..-%EC%95%BC%3F">WIKI</a>
   - 프로젝트 방에서 socket.io를 이용한 webRTC 환경 구축, 화상회의와 채팅 기능
 - `socket.io`
   - 실시간 채팅 기능 구현
