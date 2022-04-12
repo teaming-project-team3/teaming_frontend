@@ -90,8 +90,6 @@
 
 ## 🔥이슈 및 트러블슈팅
 
-<br>
-
  #### 일명 이미지 엑박 문제 - <a href="https://github.com/teaming-project-team3/teaming_frontend/wiki/Code-Splitting%EC%9D%84-%ED%86%B5%ED%95%9C-%EC%84%B1%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94">WIKI</a>
 
 #### 영상채팅 과정에서 오디오 하울링 발생 - <a href="https://github.com/teaming-project-team3/teaming_frontend/wiki/webRTC-%EC%98%81%EC%83%81%EC%B1%84%ED%8C%85-audio-%ED%95%98%EC%9A%B8%EB%A7%81-%EB%AC%B8%EC%A0%9C">WIKI</a>
