@@ -96,16 +96,8 @@
 
 #### 영상채팅 과정에서 오디오 하울링 발생 - <a href="https://github.com/teaming-project-team3/teaming_frontend/wiki/webRTC-%EC%98%81%EC%83%81%EC%B1%84%ED%8C%85-audio-%ED%95%98%EC%9A%B8%EB%A7%81-%EB%AC%B8%EC%A0%9C">WIKI</a>
 
-<details>
-    <summary>
-        <b>영상채팅 videoView 동적 추가, 제거</b>
-    </summary>
-    <br>해결 : React에서 document.querySelector를 사용하게되면, 실제 DOM의 요소를 가져오게 됩니다.
+#### 영상채팅 videoView 동적 추가, 제거 - <a href="https://github.com/teaming-project-team3/teaming_frontend/wiki/%EC%98%81%EC%83%81%EC%B1%84%ED%8C%85-videoView-%EB%8F%99%EC%A0%81-%EC%B6%94%EA%B0%80,-%EC%A0%9C%EA%B1%B0">WIKI</a>
 
-하지만 React는 Virtual DOM을 통해 Real DOM을 그리기 때문에, React가 제어하고있는 Virtual DOM 안에 있는 요소에 접접근하 처리하는 것이 더 적합하다고 판단했습니다.
-
-이에 우리는 useRef를 이용하여 가상돔에 접근해 뷰를 동적으로 생성하였습니다.
-</details>
 
 ---
 
