@@ -91,22 +91,9 @@
 ## 🔥이슈 및 트러블슈팅
 
 <br>
-<details>
-    <summary>
-        <b>일명 이미지 엑박 문제</b>
-        <br><blockquote>SPA인 리액트 그리고 우리 웹 사이트의 특성상, 각 컴포넌트에서 불러오는 이미지의 양이 많습니다. 따라서 간헐적으로 특정이미지가 엑박으로 뜨는 문제가 발생</blockquote></br>
-    </summary>
-    <br>해결 : CSR 데이터의 부하를 처리해준다면 해결될 것이라는 가설을 세우고, 
-  
-Loadable 라이브러리를 이용하여 컴포넌트를 렌더링 시점에 비동기적으로 불러오도록 효율적으로 코드를 수정하였습니다. 
-  
-이후, 
-실제 자체 테스트 결과 
-3대의 컴퓨터로 10회의 자체 테스트를 진행하였습니다
-그 결과 총 260개의 이미지중, 42(16%)개의 이미지 유실율이 발생하였고, 
-Loadable을 적용한 결과, 260개 중, 5(2%)개로 유실율이 눈에 띄게 줄어듦을 확인할 수 있었습니다. 
 
-</details>
+ #### 일명 이미지 엑박 문제 - <a href="https://github.com/teaming-project-team3/teaming_frontend/wiki/Code-Splitting%EC%9D%84-%ED%86%B5%ED%95%9C-%EC%84%B1%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94">WIKI</a>
+
 <details>
     <summary>
         <b>영상채팅 과정에서 오디오 하울링 발생</b>
